@@ -1,0 +1,1780 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>CheckpointHandlers &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.checkpoint_handlers';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CheckpointArgs" href="checkpoint.args.html" />
+    <link rel="prev" title="Checkpointers" href="checkpoint.checkpointers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.checkpoint_handlers", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.checkpoint_handlers.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CheckpointHandlers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointhandler">CheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynccheckpointhandler">AsyncCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.AsyncCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.AsyncCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler.async_save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardcheckpointhandler">StandardCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytreecheckpointhandler">PyTreeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compositecheckpointhandler">CompositeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsoncheckpointhandler">JsonCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arraycheckpointhandler">ArrayCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocheckpointhandler">ProtoCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxrandomkeycheckpointhandler">JaxRandomKeyCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.restore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyrandomkeycheckpointhandler">NumpyRandomKeyCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.restore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint">
+<span id="checkpointhandlers"></span><h1>CheckpointHandlers<a class="headerlink" href="#module-orbax.checkpoint" title="Permalink to this heading">#</a></h1>
+<p>Defines exported symbols for the namespace package <cite>orbax.checkpoint</cite>.</p>
+<section id="checkpointhandler">
+<h2>CheckpointHandler<a class="headerlink" href="#checkpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">CheckpointHandler</span></span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L22#L82"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>An interface providing save/restore methods used on a savable item.</p>
+<p>Item may be a PyTree, Dataset, or any other supported object.</p>
+<p>NOTE: Users should avoid using CheckpointHandler independently. Use
+Checkpointer or CheckpointManager.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler.save">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L31#L40"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the provided item synchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory to save to.</p></li>
+<li><p><strong>*args</strong> – additional arguments for save.</p></li>
+<li><p><strong>**kwargs</strong> – additional arguments for save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler.restore">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L42#L54"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores the provided item synchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory to restore from.</p></li>
+<li><p><strong>*args</strong> – additional arguments for restore.</p></li>
+<li><p><strong>**kwargs</strong> – additional arguments for restore.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The restored item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L56#L68"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns metadata about the saved item.</p>
+<p>Ideally, this is a cheap way to collect information about the checkpoint
+without requiring a full restoration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>item metadata</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L70#L78"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Optional, custom checkpoint finalization callback.</p>
+<p>Will be called on a single worker after all workers have finished writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_handler.py#L80#L82"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_handler.html#CheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the CheckpointHandler.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="asynccheckpointhandler">
+<h2>AsyncCheckpointHandler<a class="headerlink" href="#asynccheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.AsyncCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">AsyncCheckpointHandler</span></span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/async_checkpoint_handler.py#L25#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/async_checkpoint_handler.html#AsyncCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.AsyncCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>An interface providing async methods that can be used with CheckpointHandler.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.AsyncCheckpointHandler.async_save">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/async_checkpoint_handler.py#L28#L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/async_checkpoint_handler.html#AsyncCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.AsyncCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs a save operation.</p>
+<p>Synchronously awaits a copy of the item, before returning commit futures
+necessary to save the item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory to save to.</p></li>
+<li><p><strong>*args</strong> – additional arguments for save.</p></li>
+<li><p><strong>**kwargs</strong> – additional arguments for save.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="standardcheckpointhandler">
+<h2>StandardCheckpointHandler<a class="headerlink" href="#standardcheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">StandardCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concurrent_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L37#L214"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>A CheckpointHandler implementation for any PyTree structure.</p>
+<p>See JAX documentation for more information on what constitutes a “PyTree”.
+This handler is capable of saving and restoring PyTrees with leaves of type
+Python scalar, np.ndarray, and jax.Array</p>
+<p>As with all <cite>CheckpointHandler</cite> subclasses, <cite>StandardCheckpointHandler</cite> should
+only be used in conjunction with a <cite>Checkpointer</cite> (or subclass). By itself,
+the <cite>CheckpointHandler</cite> is non-atomic.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">StandardCheckpointHandler</span><span class="p">())</span>
+<span class="c1"># OR</span>
+<span class="n">ckptr</span> <span class="o">=</span> <span class="n">StandardCheckpointer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you find that your use case is not covered by <cite>StandardCheckpointHandler</cite>,
+consider using the parent class directly, or explore a custom implementation
+of <cite>CheckpointHandler</cite>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concurrent_gb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">96</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L61#L76"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates StandardCheckpointHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>concurrent_gb</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – max concurrent GB that are allowed to be read. Can help to
+reduce the possibility of OOM’s when large checkpoints are restored.</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the host id of the primary host.  Default to 0.  If it’s set
+to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L106#L129"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a PyTree of array-like objects. See PyTreeCheckpointHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L131#L142"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the provided item synchronously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L144#L204"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores a PyTree. See PyTreeCheckpointHandler.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">StandardCheckpointer</span><span class="p">()</span>
+<span class="n">item</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;layer0&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">StandardSaveArgs</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;layer0&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">StandardRestoreArgs</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – path from which to restore.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">StandardRestoreArgs</span></code>]) – <cite>StandardRestoreArgs</cite> (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a restored PyTree.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L206#L208"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns metadata about the saved item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L210#L211"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Optional, custom checkpoint finalization callback.</p>
+<p>Will be called on a single worker after all workers have finished writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.StandardCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/standard_checkpoint_handler.py#L213#L214"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/standard_checkpoint_handler.html#StandardCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.StandardCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the CheckpointHandler.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pytreecheckpointhandler">
+<h2>PyTreeCheckpointHandler<a class="headerlink" href="#pytreecheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">PyTreeCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate_filename=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrent_gb=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ocdbt=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_zarr3=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_handler_registry=&lt;orbax.checkpoint.type_handlers._TypeHandlerRegistryImpl</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler_impl=None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L437#L1002"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>A CheckpointHandler implementation for any PyTree structure.</p>
+<p>See JAX documentation for more information on what consistutes a “PyTree”.
+This handler is capable of saving and restoring any leaf object for which a
+<cite>TypeHandler</cite> (see documentation) is registered. By default, <cite>TypeHandler`s
+for standard types like `np.ndarray</cite>, <cite>jax.Array</cite>, Python scalars, and others
+are registered.</p>
+<p>As with all <cite>CheckpointHandler</cite> subclasses, <cite>PyTreeCheckpointHandler</cite> should
+only be used in conjunction with a <cite>Checkpointer</cite> (or subclass). By itself,
+the <cite>CheckpointHandler</cite> is non-atomic.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+</pre></div>
+</div>
+<p># TODO(cpgaffney) Cut down on the protected methods accessed by this class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate_filename=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrent_gb=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ocdbt=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_zarr3=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_handler_registry=&lt;orbax.checkpoint.type_handlers._TypeHandlerRegistryImpl</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler_impl=None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L457#L503"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates PyTreeCheckpointHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aggregate_filename</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – name that the aggregated checkpoint should be saved
+as.</p></li>
+<li><p><strong>concurrent_gb</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – max concurrent GB that are allowed to be read. Can help to
+reduce the possibility of OOM’s when large checkpoints are restored.</p></li>
+<li><p><strong>use_ocdbt</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – enables Tensorstore OCDBT driver. This option allows using a
+different checkpoint format which is faster to read and write, as well
+as more space efficient.</p></li>
+<li><p><strong>use_zarr3</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If True, use Zarr ver3 otherwise Zarr ver2</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the host id of the primary host.  Default to 0.  If it’s set
+to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p></li>
+<li><p><strong>type_handler_registry</strong> (<a class="reference internal" href="checkpoint.type_handlers.html#orbax.checkpoint.type_handlers.TypeHandlerRegistry" title="orbax.checkpoint.type_handlers.TypeHandlerRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeHandlerRegistry</span></code></a>) – a type_handlers.TypeHandlerRegistry. If not
+specified, the global type handler registry will be used.</p></li>
+<li><p><strong>handler_impl</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BasePyTreeCheckpointHandler</span></code>]) – Allows overriding the internal implementation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L505#L561"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a PyTree to a given directory.</p>
+<p>This operation is compatible with a multi-host, multi-device setting. Tree
+leaf values must be supported by the type_handler_registry given in the
+constructor. Standard supported types include Python scalars, <cite>np.ndarray</cite>,
+<cite>jax.Array</cite>, and strings.</p>
+<p>After saving, all files will be located in “directory/”. The exact files
+that are saved depend on the specific combination of options, including
+<cite>use_ocdbt</cite>. A JSON metadata file will be present to store the
+tree structure.
+In addition, a msgpack file may be present, allowing users to store
+aggregated values (see below).</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+<span class="n">item</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;layer0&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;layer1&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="c1"># Note: save_args may be None if no customization is desired for saved</span>
+<span class="c1"># parameters.</span>
+<span class="c1"># In this case, we &quot;aggregate&quot; small parameters into a single file to</span>
+<span class="c1"># allow for greater file read/write efficiency (and potentially less)</span>
+<span class="c1"># wasted space). With OCDBT format active, this parameter is obsolete.</span>
+<span class="n">save_args</span> <span class="o">=</span>
+  <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+      <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">SaveArgs</span><span class="p">(</span><span class="n">aggregate</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">some_size</span><span class="p">),</span> <span class="n">item</span><span class="p">)</span>
+<span class="c1"># Eventually calls through to `async_save`.</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – save location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – Deprecated, use <a href="#id1"><span class="problematic" id="id2">`</span></a>args.</p></li>
+<li><p><strong>save_args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">PyTreeSaveArgs</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">PyTreeSaveArgs</span></code>]) – <cite>PyTreeSaveArgs</cite> (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Future that will commit the data to <cite>directory</cite> when awaited. Copying
+the data from its source will be awaited in this function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L563#L572"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the provided item. See async_save.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restore_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms_default_to_original</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legacy_transform_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L622#L841"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores a PyTree from the checkpoint directory at the given path.</p>
+<p>In the most basic case, only <cite>directory</cite> is required. The tree will be
+restored exactly as saved, and all leaves will be restored as the correct
+types (assuming the tree metadata is present).</p>
+<p>However, <cite>restore_args</cite> is often required as well. This PyTree gives a
+<cite>RestoreArgs</cite> object (or subclass) for every leaf in the tree. Many types,
+such as string or <cite>np.ndarray</cite> do not require any special options for
+restoration. When restoring an individual leaf as <cite>jax.Array</cite>, however,
+some properties may be required.</p>
+<p>One example is <cite>sharding</cite>, which defines how a <cite>jax.Array</cite> in the restored
+tree should be partitioned. <cite>mesh</cite> and <cite>mesh_axes</cite> can also be used to
+specify <cite>sharding</cite>, but <cite>sharding</cite> is the preferred way of specifying this
+partition since <cite>mesh</cite> and <cite>mesh_axes</cite> only constructs
+<cite>jax.sharding.NamedSharding</cite>. For more information, see <cite>ArrayTypeHandler</cite>
+documentation and JAX sharding documentation.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+<span class="n">restore_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;layer0&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">RestoreArgs</span><span class="p">(),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">RestoreArgs</span><span class="p">(),</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;layer1&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">ArrayRestoreArgs</span><span class="p">(</span>
+            <span class="c1"># Restores as jax.Array, regardless of how it was saved.</span>
+            <span class="n">restore_type</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span>
+            <span class="n">sharding</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">Sharding</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+            <span class="c1"># Warning: may truncate or pad!</span>
+            <span class="n">global_shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+          <span class="p">),</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">ArrayRestoreArgs</span><span class="p">(</span>
+            <span class="n">restore_type</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span>
+            <span class="n">sharding</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">Sharding</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>
+            <span class="n">global_shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+          <span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">restore_args</span><span class="o">=</span><span class="n">restore_args</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Providing <cite>item</cite> is typically only necessary when restoring a custom PyTree
+class (or when using transformations). In this case, the restored object
+will take on the same structure as <cite>item</cite>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@flax</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">TrainState</span><span class="p">:</span>
+  <span class="n">layer0</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">]</span>
+  <span class="n">layer1</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">]</span>
+
+<span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+<span class="n">train_state</span> <span class="o">=</span> <span class="n">TrainState</span><span class="p">(</span>
+    <span class="n">layer0</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>  <span class="c1"># zeros</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>  <span class="c1"># zeros</span>
+    <span class="p">},</span>
+    <span class="n">layer1</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>  <span class="c1"># zeros</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">(</span><span class="o">...</span><span class="p">),</span>  <span class="c1"># zeros</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">restore_args</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_make_restore_args</span><span class="p">,</span> <span class="n">train_state</span><span class="p">)</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">item</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span> <span class="n">restore_args</span><span class="o">=</span><span class="n">restore_args</span><span class="p">)</span>
+<span class="c1"># restored tree is of type `TrainState`.</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – saved checkpoint location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>restore_args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>transforms</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>transforms_default_to_original</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – See transform_utils.apply_transformations.</p></li>
+<li><p><strong>legacy_transform_fn</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">PyTreeRestoreArgs</span></code>]) – <cite>PyTreeRestoreArgs</cite> (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A PyTree matching the structure of <cite>item</cite>.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – <cite>directory</cite> does not exist or is missing required files</p></li>
+<li><p><strong>ValueError</strong> – <cite>transforms</cite> is provided without <cite>item</cite>.</p></li>
+<li><p><strong>ValueError</strong> – <cite>transforms</cite> contains elements with <cite>multi_value_fn</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L960#L986"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns tree metadata.</p>
+<p>The result will be a PyTree matching the structure of the saved checkpoint.
+Note that if the item saved was a custom class, the restored metadata will
+be returned as a nested dictionary representation.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;layer0&#39;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">&#39;w&#39;</span><span class="p">:</span> <span class="n">ArrayMetadata</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">shards</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+      <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">ArrayMetadata</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,),</span> <span class="n">shards</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,)),</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">ScalarMetadata</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the required metadata file is not present, this method will raise an
+error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – checkpoint location.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tree containing metadata.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L988#L998"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Finalization step.</p>
+<p>Called automatically by the Checkpointer/AsyncCheckpointer just before the
+checkpoint is considered “finalized” in the sense of ensuring atomicity. See
+documentation for <cite>type_handlers.merge_ocdbt_per_process_files</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Path where the checkpoint is located.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.PyTreeCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/pytree_checkpoint_handler.py#L1000#L1002"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/pytree_checkpoint_handler.html#PyTreeCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.PyTreeCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the handler. Called automatically by Checkpointer.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="compositecheckpointhandler">
+<h2>CompositeCheckpointHandler<a class="headerlink" href="#compositecheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">CompositeCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">item_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composite_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CompositeOptions(primary_host=0,</span> <span class="pre">active_processes=None,</span> <span class="pre">barrier_sync_key_prefix=None,</span> <span class="pre">temporary_path_class=None)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">items_and_handlers</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L190#L540"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>CheckpointHandler for saving multiple items.</p>
+<p>As with all <cite>CheckpointHandler</cite> implementations, use only in conjunction with
+an instance of <cite>AbstractCheckpointer</cite>.</p>
+<p><cite>CompositeCheckpointHandler</cite> allows dealing with multiple items of different
+types or logical distinctness, such as training state (PyTree), dataset
+iterator, JSON metadata, or anything else. The items managed by the
+<cite>CompositeCheckpointHandler</cite> must be specified at initialization.</p>
+<p>For an individual item, <cite>CompositeCheckpointHandler</cite> provides two mechanisms
+for ensuring that the object gets saved and restored as the correct type and
+with the correct logic. The item-specific handler can either be (1) specified
+when the <cite>CompositeCheckpointHandler</cite> is created, or (2) it can be deferred
+(you just need to give the item name up-front). When deferred, the handler
+will be determined from which <cite>CheckpointArgs</cite> are provided during the first
+call to <cite>save</cite> or <cite>restore</cite>.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">(</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">CompositeCheckpointHandler</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;metadata&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+        <span class="c1"># The handler now knows `state` uses `StandardCheckpointHandler`</span>
+        <span class="c1"># and `metadata` uses `JsonCheckpointHandler`. Any subsequent calls</span>
+        <span class="c1"># will have to conform to this assumption.</span>
+        <span class="n">state</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">pytree</span><span class="p">),</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">JsonSave</span><span class="p">(</span><span class="n">metadata</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">restored</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span> <span class="o">=</span> <span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">abstract_pytree</span><span class="p">),</span>
+        <span class="c1"># Only provide the restoration arguments you actually need.</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">JsonRestore</span><span class="p">(),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">state</span> <span class="o">...</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">metadata</span> <span class="o">...</span>
+
+<span class="c1"># Skip restoring `metadata` (you can save a subset of items too, in a</span>
+<span class="c1"># similar fashion).</span>
+<span class="n">restored</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span> <span class="o">=</span> <span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">StandardRestore</span><span class="p">(</span><span class="n">abstract_pytree</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">state</span> <span class="o">...</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">metadata</span> <span class="o">...</span> <span class="c1"># Error</span>
+
+<span class="c1"># If the per-item handler doesn&#39;t require any extra information in order to</span>
+<span class="c1"># restore, in many cases you can use the following pattern if you just want</span>
+<span class="c1"># to restore everything:</span>
+<span class="n">restored</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span> <span class="o">=</span> <span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">state</span> <span class="o">...</span>
+<span class="n">restored</span><span class="o">.</span><span class="n">metadata</span> <span class="o">...</span>
+
+<span class="n">ckptr</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">(</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">CompositeCheckpointHandler</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">JsonCheckpointHandler</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">pytree</span><span class="p">),</span>
+        <span class="c1"># Error because `metadata` was specified to use JSON save/restore</span>
+        <span class="c1"># logic, not `StandardCheckpointHandler`.</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">metadata</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">item_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composite_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">CompositeOptions(primary_host=0,</span> <span class="pre">active_processes=None,</span> <span class="pre">barrier_sync_key_prefix=None,</span> <span class="pre">temporary_path_class=None)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">items_and_handlers</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L270#L309"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructor.</p>
+<p>All items must be provided up-front, at initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*item_names</strong> – A list of string item names that this handler will manage.</p></li>
+<li><p><strong>composite_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CompositeOptions</span></code>) – Options.</p></li>
+<li><p><strong>**items_and_handlers</strong> – A mapping of item name to <cite>CheckpointHandler</cite>
+instance, which will be used as the handler for objects of the
+corresponding name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L372#L407"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves multiple items to individual subdirectories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L409#L421"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves synchronously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L441#L508"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores the provided item synchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Path to restore from.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">CompositeArgs</span></code>]) – CompositeArgs object used to restore individual sub-items. May be
+None or “empty” (<cite>CompositeArgs()</cite>), which is used to indicate that the
+handler should restore everything. If an individual item was not
+specified during the save, <cite>None</cite> will be returned for that item’s
+entry.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CompositeArgs</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A CompositeResults object with keys matching <cite>CompositeArgs</cite>, or with keys
+for all known items as specified at creation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L510#L523"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns metadata about the saved item.</p>
+<p>Ideally, this is a cheap way to collect information about the checkpoint
+without requiring a full restoration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CompositeArgs</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>item metadata</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L525#L534"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Optional, custom checkpoint finalization callback.</p>
+<p>Will be called on a single worker after all workers have finished writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.CompositeCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/composite_checkpoint_handler.py#L536#L540"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/composite_checkpoint_handler.html#CompositeCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.CompositeCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the CheckpointHandler.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="jsoncheckpointhandler">
+<h2>JsonCheckpointHandler<a class="headerlink" href="#jsoncheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">JsonCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L36#L131"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves nested dictionary using json.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L39#L53"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Initializes JsonCheckpointHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – optional file name given to the written file; defaults to
+‘metadata’</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the host id of the primary host.  Default to 0.  If it’s set
+to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L61#L86"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the given item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – save location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – Deprecated, use <cite>args</cite> instead.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">JsonSaveArgs</span></code>]) – JsonSaveArgs (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of commit futures.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L88#L100"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the provided item synchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory to save to.</p></li>
+<li><p><strong>*args</strong> – additional arguments for save.</p></li>
+<li><p><strong>**kwargs</strong> – additional arguments for save.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L102#L128"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores json mapping from directory.</p>
+<p><cite>item</cite> is unused.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – restore location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – unused</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">JsonRestoreArgs</span></code>]) – unused</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON dict.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FileNotFoundError</strong> – if the file does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JsonCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/json_checkpoint_handler.py#L130#L131"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/json_checkpoint_handler.html#JsonCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JsonCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the CheckpointHandler.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="arraycheckpointhandler">
+<h2>ArrayCheckpointHandler<a class="headerlink" href="#arraycheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">ArrayCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L39#L179"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Handles saving and restoring individual arrays and scalars.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L42#L52"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Initializes the handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>checkpoint_name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Provides a name for the directory under which Tensorstore
+files will be saved. Defaults to ‘checkpoint’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L57#L100"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves an object asynchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Folder in which to save.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.number.html#jax.numpy.number" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>save_args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="checkpoint.type_handlers.html#orbax.checkpoint.type_handlers.SaveArgs" title="orbax.checkpoint.type_handlers.SaveArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">SaveArgs</span></code></a>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ArraySaveArgs</span></code>]) – An ocp.array_checkpoint_handler.ArraySaveArgs (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of commit futures which can be run to complete the save.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L102#L112"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves an array synchronously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restore_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L114#L169"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – folder from which to read.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.number.html#jax.numpy.number" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>restore_args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="checkpoint.type_handlers.html#orbax.checkpoint.type_handlers.RestoreArgs" title="orbax.checkpoint.type_handlers.RestoreArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayRestoreArgs</span></code>]) – An ocp.array_checkpoint_handler.ArrayRestoreArgs object (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.number.html#jax.numpy.number" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The restored object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L171#L175"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Optional, custom checkpoint finalization callback.</p>
+<p>Will be called on a single worker after all workers have finished writing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – the directory where the checkpoint is located.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ArrayCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/array_checkpoint_handler.py#L177#L179"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/array_checkpoint_handler.html#ArrayCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ArrayCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="protocheckpointhandler">
+<h2>ProtoCheckpointHandler<a class="headerlink" href="#protocheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">ProtoCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L39#L118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Serializes/deserializes protocol buffers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L42#L51"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Initializes ProtoCheckpointHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – file name given to the written file.</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – primary host to write on. If None, writes on all hosts.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L53#L78"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler.async_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the given proto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – save location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ProtoSaveArgs</span></code>]) – ProtoSaveArgs (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A commit future.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L80#L89"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves the provided item.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L91#L115"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores the proto from directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – restore location directory.</p></li>
+<li><p><strong>item</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>]]) – Deprecated, use <cite>args</cite>.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ProtoRestoreArgs</span></code>]) – ProtoRestoreArgs (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The deserialized proto read from <cite>directory</cite> if item is not None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.ProtoCheckpointHandler.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/proto_checkpoint_handler.py#L117#L118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/proto_checkpoint_handler.html#ProtoCheckpointHandler.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.ProtoCheckpointHandler.close" title="Permalink to this definition">#</a></dt>
+<dd><p>Closes the CheckpointHandler.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="jaxrandomkeycheckpointhandler">
+<h2>JaxRandomKeyCheckpointHandler<a class="headerlink" href="#jaxrandomkeycheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.JaxRandomKeyCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">JaxRandomKeyCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L172#L211"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/random_key_checkpoint_handler.html#JaxRandomKeyCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Handles saving and restoring individual Jax random key in both typed and untyped format.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JaxRandomKeyCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L126#L136"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a random key synchronously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JaxRandomKeyCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L103#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a random key asynchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Folder in which to save.</p></li>
+<li><p><strong>args</strong> (<a class="reference internal" href="checkpoint.args.html#id0" title="orbax.checkpoint.checkpoint_args.CheckpointArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointArgs</span></code></a>) – An ocp.checkpoint_args.CheckpointArgs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of commit futures which can be run to complete the save.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.JaxRandomKeyCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L138#L163"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores a random key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – folder from which to read.</p></li>
+<li><p><strong>args</strong> (<a class="reference internal" href="checkpoint.args.html#id0" title="orbax.checkpoint.checkpoint_args.CheckpointArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointArgs</span></code></a>) – An ocp.checkpoint_args.CheckpointArgs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The restored object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="numpyrandomkeycheckpointhandler">
+<h2>NumpyRandomKeyCheckpointHandler<a class="headerlink" href="#numpyrandomkeycheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.NumpyRandomKeyCheckpointHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.</span></span><span class="sig-name descname"><span class="pre">NumpyRandomKeyCheckpointHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L241#L276"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/random_key_checkpoint_handler.html#NumpyRandomKeyCheckpointHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves Nnumpy random key in legacy or non-lagacy format.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.NumpyRandomKeyCheckpointHandler.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L126#L136"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a random key synchronously.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.NumpyRandomKeyCheckpointHandler.async_save">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">async_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L103#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.async_save" title="Permalink to this definition">#</a></dt>
+<dd><p>Saves a random key asynchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – Folder in which to save.</p></li>
+<li><p><strong>args</strong> (<a class="reference internal" href="checkpoint.args.html#id0" title="orbax.checkpoint.checkpoint_args.CheckpointArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointArgs</span></code></a>) – An ocp.checkpoint_args.CheckpointArgs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of commit futures which can be run to complete the save.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.NumpyRandomKeyCheckpointHandler.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/random_key_checkpoint_handler.py#L138#L163"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>Restores a random key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – folder from which to read.</p></li>
+<li><p><strong>args</strong> (<a class="reference internal" href="checkpoint.args.html#id0" title="orbax.checkpoint.checkpoint_args.CheckpointArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointArgs</span></code></a>) – An ocp.checkpoint_args.CheckpointArgs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The restored object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.checkpointers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Checkpointers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.args.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CheckpointArgs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointhandler">CheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">CheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynccheckpointhandler">AsyncCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.AsyncCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.AsyncCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler.async_save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standardcheckpointhandler">StandardCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.StandardCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">StandardCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytreecheckpointhandler">PyTreeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.PyTreeCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compositecheckpointhandler">CompositeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.metadata"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.CompositeCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">CompositeCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsoncheckpointhandler">JsonCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JsonCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">JsonCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arraycheckpointhandler">ArrayCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.finalize"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ArrayCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">ArrayCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocheckpointhandler">ProtoCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.ProtoCheckpointHandler.close"><code class="docutils literal notranslate"><span class="pre">ProtoCheckpointHandler.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxrandomkeycheckpointhandler">JaxRandomKeyCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.JaxRandomKeyCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">JaxRandomKeyCheckpointHandler.restore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyrandomkeycheckpointhandler">NumpyRandomKeyCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.save"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.async_save"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.async_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.NumpyRandomKeyCheckpointHandler.restore"><code class="docutils literal notranslate"><span class="pre">NumpyRandomKeyCheckpointHandler.restore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:13 GMT -->
+</html>

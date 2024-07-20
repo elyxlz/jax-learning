@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/standard_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.standard_checkpoint_handler &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/standard_checkpoint_handler';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/standard_checkpoint_handler", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.standard_checkpoint_handler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;StandardCheckpointHandler class.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">async_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_args</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_utils</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">future</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">pytree_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">tree</span> <span class="k">as</span> <span class="n">tree_utils</span>
+
+
+<span class="n">PyTree</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">CheckpointArgs</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">CheckpointArgs</span>
+<span class="n">register_with_handler</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">register_with_handler</span>
+
+
+<div class="viewcode-block" id="StandardCheckpointHandler"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler">[docs]</a><span class="k">class</span> <span class="nc">StandardCheckpointHandler</span><span class="p">(</span>
+    <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;A CheckpointHandler implementation for any PyTree structure.</span>
+
+<span class="sd">  See JAX documentation for more information on what constitutes a &quot;PyTree&quot;.</span>
+<span class="sd">  This handler is capable of saving and restoring PyTrees with leaves of type</span>
+<span class="sd">  Python scalar, np.ndarray, and jax.Array</span>
+
+<span class="sd">  As with all `CheckpointHandler` subclasses, `StandardCheckpointHandler` should</span>
+<span class="sd">  only be used in conjunction with a `Checkpointer` (or subclass). By itself,</span>
+<span class="sd">  the `CheckpointHandler` is non-atomic.</span>
+
+<span class="sd">  Example::</span>
+
+<span class="sd">    ckptr = Checkpointer(StandardCheckpointHandler())</span>
+<span class="sd">    # OR</span>
+<span class="sd">    ckptr = StandardCheckpointer()</span>
+
+<span class="sd">  If you find that your use case is not covered by `StandardCheckpointHandler`,</span>
+<span class="sd">  consider using the parent class directly, or explore a custom implementation</span>
+<span class="sd">  of `CheckpointHandler`.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.__init__"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concurrent_gb</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">96</span><span class="p">,</span> <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates StandardCheckpointHandler.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      concurrent_gb: max concurrent GB that are allowed to be read. Can help to</span>
+<span class="sd">        reduce the possibility of OOM&#39;s when large checkpoints are restored.</span>
+<span class="sd">      primary_host: the host id of the primary host.  Default to 0.  If it&#39;s set</span>
+<span class="sd">        to None, then all hosts will be considered as primary.  It&#39;s useful in</span>
+<span class="sd">        the case that all hosts are only working with local storage.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_supported_types</span> <span class="o">=</span> <span class="n">checkpoint_utils</span><span class="o">.</span><span class="n">STANDARD_ARRAY_TYPES</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_concurrent_gb</span> <span class="o">=</span> <span class="n">concurrent_gb</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span> <span class="o">=</span> <span class="n">pytree_checkpoint_handler</span><span class="o">.</span><span class="n">PyTreeCheckpointHandler</span><span class="p">(</span>
+        <span class="n">concurrent_gb</span><span class="o">=</span><span class="n">concurrent_gb</span><span class="p">,</span>
+        <span class="n">primary_host</span><span class="o">=</span><span class="n">primary_host</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+  <span class="k">def</span> <span class="nf">_validate_save_state</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="p">):</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Must provide item to save.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">save_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">save_args</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_input</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">aggregate</span><span class="p">:</span>
+          <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unsupported option `aggregate` for key: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supported_types</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">tuple_path_from_keypath</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unsupported type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1"> for key: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+    <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map_with_path</span><span class="p">(</span><span class="n">_check_input</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_validate_restore_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_check_input</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_supported_types</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span>
+          <span class="n">x</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span>
+      <span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">tuple_path_from_keypath</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unsupported type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1"> for key: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+    <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map_with_path</span><span class="p">(</span><span class="n">_check_input</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.async_save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.async_save">[docs]</a>  <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;StandardSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">future</span><span class="o">.</span><span class="n">Future</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves a PyTree of array-like objects. See PyTreeCheckpointHandler.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;Make sure to specify kwarg name `args=` when providing&#39;</span>
+          <span class="s1">&#39; `StandardSaveArgs`.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">item</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">item</span>
+      <span class="n">save_args</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">save_args</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_save_state</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="o">=</span><span class="n">save_args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">pytree_checkpoint_handler</span><span class="o">.</span><span class="n">PyTreeSaveArgs</span><span class="p">(</span>
+            <span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="o">=</span><span class="n">save_args</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.save">[docs]</a>  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves the provided item synchronously.&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="n">commit_futures</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># pytype: disable=bad-return-type</span>
+      <span class="c1"># Futures are already running, so sequential waiting is equivalent to</span>
+      <span class="c1"># concurrent waiting.</span>
+      <span class="k">if</span> <span class="n">commit_futures</span><span class="p">:</span>  <span class="c1"># May be None.</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">commit_futures</span><span class="p">:</span>
+          <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>  <span class="c1"># Block on result.</span>
+
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">async_save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.restore"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.restore">[docs]</a>  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;StandardRestoreArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restores a PyTree. See PyTreeCheckpointHandler.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">      ckptr = StandardCheckpointer()</span>
+<span class="sd">      item = {</span>
+<span class="sd">          &#39;layer0&#39;: {</span>
+<span class="sd">              &#39;w&#39;: jax.Array(...),</span>
+<span class="sd">              &#39;b&#39;: np.ndarray(...),</span>
+<span class="sd">          },</span>
+<span class="sd">      }</span>
+<span class="sd">      ckptr.save(dir, StandardSaveArgs(item))</span>
+
+<span class="sd">      target = {</span>
+<span class="sd">          &#39;layer0&#39;: {</span>
+<span class="sd">              &#39;w&#39;: jax.ShapeDtypeStruct(...),</span>
+<span class="sd">              &#39;b&#39;: jax.Array(...),</span>
+<span class="sd">          },</span>
+<span class="sd">      }</span>
+<span class="sd">      ckptr.restore(dir, StandardRestoreArgs(target))</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: path from which to restore.</span>
+<span class="sd">      item: Deprecated, use `args`.</span>
+<span class="sd">      args: `StandardRestoreArgs` (see below).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a restored PyTree.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;Make sure to specify kwarg name `args=` when providing&#39;</span>
+          <span class="s1">&#39; `StandardRestoreArgs`.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
+      <span class="n">args</span> <span class="o">=</span> <span class="n">StandardRestoreArgs</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_validate_restore_state</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+      <span class="n">restore_args</span> <span class="o">=</span> <span class="n">checkpoint_utils</span><span class="o">.</span><span class="n">construct_restore_args</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+          <span class="s1">&#39;`StandardCheckpointHandler` expects a target tree to be provided for&#39;</span>
+          <span class="s1">&#39; restore. Not doing so is generally UNSAFE unless you know the&#39;</span>
+          <span class="s1">&#39; present topology to be the same one as the checkpoint was saved&#39;</span>
+          <span class="s1">&#39; under.&#39;</span>
+      <span class="p">)</span>
+      <span class="n">restore_args</span> <span class="o">=</span> <span class="n">checkpoint_utils</span><span class="o">.</span><span class="n">construct_restore_args</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">pytree_checkpoint_handler</span><span class="o">.</span><span class="n">PyTreeRestoreArgs</span><span class="p">(</span>
+            <span class="n">item</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="p">,</span> <span class="n">restore_args</span><span class="o">=</span><span class="n">restore_args</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.metadata"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.metadata">[docs]</a>  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata about the saved item.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.finalize"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.finalize">[docs]</a>  <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StandardCheckpointHandler.close"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.StandardCheckpointHandler.close">[docs]</a>  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_impl</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span><span class="n">StandardCheckpointHandler</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">StandardSaveArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Parameters for saving a standard PyTree.</span>
+
+<span class="sd">  Also see `PyTreeSave` for additional options.</span>
+
+<span class="sd">  Attributes:</span>
+<span class="sd">    item (required): a PyTree to be saved.</span>
+<span class="sd">    save_args: a PyTree with the same structure of `item`, which consists of</span>
+<span class="sd">      `ocp.SaveArgs` objects as values. `None` can be used for values where no</span>
+<span class="sd">      `SaveArgs` are specified.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span>
+  <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span><span class="n">StandardCheckpointHandler</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">StandardRestoreArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Parameters for restoring a standard PyTree.</span>
+
+<span class="sd">  Also see `PyTreeRestore` for additional options.</span>
+
+<span class="sd">  Attributes (all optional):</span>
+<span class="sd">    item: target PyTree. Currently non-optional. Values may be either real</span>
+<span class="sd">        array or scalar values, or they may be jax.ShapeDtypeStruct. If real</span>
+<span class="sd">        values are provided, that value will be restored as the given type, with</span>
+<span class="sd">        the given properties. If jax.ShapeDtypeStruct is provided, the value</span>
+<span class="sd">        will be restored as np.ndarray, unless `sharding` is specified. If</span>
+<span class="sd">        `item` is a custom PyTree class, the tree will be restored with the</span>
+<span class="sd">        same structure as provided. If not provided, restores as a serialized</span>
+<span class="sd">        nested dict representation of the custom class.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/standard_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

@@ -1,0 +1,1209 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/custom_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Customizing Checkpointing Logic &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'custom_handlers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Transformations" href="transformations.html" />
+    <link rel="prev" title="Optimized Checkpointing with Tensorstore" href="optimized_checkpointing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "custom_handlers", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".ipynb", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/custom_handlers.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Customizing Checkpointing Logic</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler">TypeHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-serialization-deserialization">Custom serialization / deserialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointhandler">CheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before">Before</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after">After</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#async-vs-non-async">Async vs Non-Async</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asynccheckpointhandler">AsyncCheckpointHandler</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="customizing-checkpointing-logic">
+<h1>Customizing Checkpointing Logic<a class="headerlink" href="#customizing-checkpointing-logic" title="Permalink to this heading">#</a></h1>
+<p>This page is relevant if your model state contains custom leaves in a <a class="reference external" href="https://jax.readthedocs.io/en/latest/pytrees.html">PyTree</a>, or doesn’t use PyTree at all.</p>
+<p>If your model uses PyTree but has custom leaves, read the <strong><code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code></strong> section to see how register the custom type with <code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code>.</p>
+<p>If your model doesn’t use PyTree or if you want to implement different serialization/deserialization logic, skip to the <strong><code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code></strong> section.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
+<p>If you’re running this guide in a notebook, make sure to run this cell first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
+
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">orbax.checkpoint</span> <span class="k">as</span> <span class="nn">ocp</span>
+
+<span class="n">ParamInfo</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">pytree_checkpoint_handler</span><span class="o">.</span><span class="n">ParamInfo</span>
+<span class="n">Metadata</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="typehandler">
+<h2>TypeHandler<a class="headerlink" href="#typehandler" title="Permalink to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code> walks through the input PyTree and uses registered <code class="docutils literal notranslate"><span class="pre">TypeHandlers</span></code> to serialize/deserialize the leaves. If your custom model state is stored within the leaves of a PyTree, implement a <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> and use it with <code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code>.</p>
+<p><strong>Standard TypeHandlers</strong></p>
+<p>Orbax includes pre-defined <code class="docutils literal notranslate"><span class="pre">TypeHandlers</span></code> for saving certain types:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ArrayHandler</span></code>: jax.Array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumpyHandler</span></code>: np.ndarray</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ScalarHandler</span></code>: int, float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">StringHandler</span></code>: str</p></li>
+</ul>
+<p>These default implementations all use Tensorstore to serialize and deserialize data except for <code class="docutils literal notranslate"><span class="pre">StringHandler</span></code> which serializes to JSON.</p>
+<section id="custom-serialization-deserialization">
+<h3>Custom serialization / deserialization<a class="headerlink" href="#custom-serialization-deserialization" title="Permalink to this heading">#</a></h3>
+<p>To implement a custom <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code>, we must define the async serialize and deserialize methods (the section “Async vs Non-Async” lists reasons why these methods should be asynchronous). The new <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> is then registered so that the <code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code> knows to use this handler when there is a <code class="docutils literal notranslate"><span class="pre">MyState</span></code> leaf in the PyTree.</p>
+<p>The inputs to the <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> are batched to allow for performance optimizations in certain cases. <code class="docutils literal notranslate"><span class="pre">PyTreeCheckpointHandler</span></code> groups all leaves of the same type and dispatches them all in one-per-type batch.</p>
+<p>The example below defines a <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> for a custom dataclass that stores multiple numpy arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyState</span><span class="p">:</span>
+  <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span>
+  <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span>
+
+
+<span class="c1"># Make sure to only run this cell once, otherwise a new `MyState` dataclass will</span>
+<span class="c1"># be created which could mess up Python issubclass/isinstance checks.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is a possible <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> implementation for <code class="docutils literal notranslate"><span class="pre">MyState</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyStateHandler</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">pytree_checkpoint_handler</span><span class="o">.</span><span class="n">TypeHandler</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Serializes MyState to the numpy npz format.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">typestr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s1">&#39;MyState&#39;</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">values</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">MyState</span><span class="p">],</span>
+      <span class="n">infos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ParamInfo</span><span class="p">],</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ocp</span><span class="o">.</span><span class="n">SaveArgs</span><span class="p">]],</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">futures</span><span class="o">.</span><span class="n">Future</span><span class="p">]:</span>
+    <span class="k">del</span> <span class="n">args</span>  <span class="c1"># Unused in this example.</span>
+    <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">infos</span><span class="p">):</span>
+      <span class="c1"># make sure the per-key directory is present as OCDBT doesn&#39;t create one</span>
+      <span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+              <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_write_state</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+          <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="n">futures</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">infos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ParamInfo</span><span class="p">],</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">ocp</span><span class="o">.</span><span class="n">RestoreArgs</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MyState</span><span class="p">:</span>
+    <span class="k">del</span> <span class="n">args</span>  <span class="c1"># Unused in this example.</span>
+    <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">:</span>
+      <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_from_state</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+          <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">futures</span><span class="p">)</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">infos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ParamInfo</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+    <span class="c1"># This method is explained in a separate section.</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">Metadata</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_write_state</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">MyState</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span>
+  <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">path</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">_from_state</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MyState</span><span class="p">:</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">MyState</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">register_type_handler</span><span class="p">(</span>
+    <span class="n">MyState</span><span class="p">,</span> <span class="n">MyStateHandler</span><span class="p">(),</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">ocp</span><span class="o">.</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">has_type_handler</span><span class="p">(</span><span class="n">MyState</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is <code class="docutils literal notranslate"><span class="pre">MyStateHandler</span></code> in action:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])},</span>
+    <span class="s1">&#39;my_state&#39;</span><span class="p">:</span> <span class="n">MyState</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]),</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">])),</span>
+<span class="p">}</span>
+
+
+<span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">(</span>
+    <span class="n">ocp</span><span class="o">.</span><span class="n">PyTreeCheckpointHandler</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/tmp/my_checkpoints/&#39;</span><span class="p">)</span>
+
+<span class="c1"># Clear older checkpoints from directory.</span>
+<span class="c1"># Checkpointer.save will fail if path already exists, unless `force=True`</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+  <span class="n">path</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>
+<span class="n">path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+<span class="n">checkpointer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_tree&#39;</span><span class="p">,</span> <span class="n">my_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in path:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/my_checkpoints<span class="k">)</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in &#39;my_tree&#39;:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/my_checkpoints/my_tree<span class="k">)</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in &#39;my_tree/my_state&#39;:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/my_checkpoints/my_tree/my_state<span class="k">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/docs/.asdf/installs/python/3.9.19/lib/python3.9/pty.py:85: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  pid, fd = os.forkpty()
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in path: my_tree
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in &#39;my_tree&#39;: _CHECKPOINT_METADATA _METADATA d manifest.ocdbt my_state ocdbt.process_0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in &#39;my_tree/my_state&#39;: my_state.npz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_tree&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;my_state&#39;: MyState(a=array([10, 20, 30]), b=array([40, 50, 60])),
+ &#39;state&#39;: {&#39;a&#39;: array([1, 2, 3]), &#39;b&#39;: array([4, 5, 6])}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="metadata">
+<h3>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">metadata()</span></code> method is used for inspecting existing checkpoints and is generally implemented to be less costly than a full restore. Some example use cases are determining whether the restored values can fit in the available memory, getting the checkpointed PyTree structure to extract specific subtrees, or validating whether the shapes and dtypes of the values match with your model data.</p>
+<p>In the previous example, <code class="docutils literal notranslate"><span class="pre">MyStateHandler</span></code> returned the default <code class="docutils literal notranslate"><span class="pre">Metadata()</span></code> object since the <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> interface requires it. However, we recommend completing this implementation especially if the custom type targets general users.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;my_state&#39; returns a default Metadata object.</span>
+<span class="n">checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_tree&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;my_state&#39;: Metadata(name=&#39;my_state&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree/my_state&#39;)),
+ &#39;state&#39;: {&#39;a&#39;: ArrayMetadata(name=&#39;state.a&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree&#39;), shape=(3,), sharding=None, dtype=dtype(&#39;int64&#39;)),
+  &#39;b&#39;: ArrayMetadata(name=&#39;state.b&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree&#39;), shape=(3,), sharding=None, dtype=dtype(&#39;int64&#39;))}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Example implementation of <code class="docutils literal notranslate"><span class="pre">MyStateHandler.metadata:</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a metadata class.</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyStateMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="p">):</span>
+  <span class="n">a_shape</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span>
+  <span class="n">b_shape</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span>
+  <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;my_state&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">MyStateHandlerWithMetdata</span><span class="p">(</span><span class="n">MyStateHandler</span><span class="p">):</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">infos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ParamInfo</span><span class="p">]</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ocp</span><span class="o">.</span><span class="n">value_metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">:</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">:</span>
+      <span class="n">metadata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">_read_metadata</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+          <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">metadata</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">_read_metadata</span><span class="p">(</span><span class="n">info</span><span class="p">:</span> <span class="n">ParamInfo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MyStateMetadata</span><span class="p">:</span>
+  <span class="c1"># This function reads the entire state, but can be more optimally defined</span>
+  <span class="c1"># by reading the header from the npz file. Another option is collectively</span>
+  <span class="c1"># gathering all of the metadata info during serialization, and writing it to</span>
+  <span class="c1"># a file. Since metadata is generally pretty small, it&#39;s better to write</span>
+  <span class="c1"># to a single file rather than one for each value.</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_from_state</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">MyStateMetadata</span><span class="p">(</span>
+      <span class="n">a_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+      <span class="n">b_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+      <span class="n">directory</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+  <span class="p">)</span>
+
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">register_type_handler</span><span class="p">(</span>
+    <span class="n">MyState</span><span class="p">,</span> <span class="n">MyStateHandlerWithMetdata</span><span class="p">(),</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_940</span><span class="o">/</span><span class="mf">1325065468.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Define a metadata class.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@dataclass</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="k">class</span> <span class="nc">MyStateMetadata</span><span class="p">(</span><span class="n">Metadata</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>   <span class="n">a_shape</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>   <span class="n">b_shape</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="nn">~/.asdf/installs/python/3.9.19/lib/python3.9/dataclasses.py</span> in <span class="ni">dataclass</span><span class="nt">(cls, init, repr, eq, order, unsafe_hash, frozen)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1019</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1020</span>     <span class="c1"># We&#39;re called as @dataclass without parens.</span>
+<span class="ne">-&gt; </span><span class="mi">1021</span>     <span class="k">return</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> 
+
+<span class="nn">~/.asdf/installs/python/3.9.19/lib/python3.9/dataclasses.py</span> in <span class="ni">wrap</span><span class="nt">(cls)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1011</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1012</span>     <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1013</span>         <span class="k">return</span> <span class="n">_process_class</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="nb">repr</span><span class="p">,</span> <span class="n">eq</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="p">,</span> <span class="n">frozen</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="c1"># See if we&#39;re being called as @dataclass or @dataclass().</span>
+
+<span class="nn">~/.asdf/installs/python/3.9.19/lib/python3.9/dataclasses.py</span> in <span class="ni">_process_class</span><span class="nt">(cls, init, repr, eq, order, unsafe_hash, frozen)</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>                 <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">_field_type</span> <span class="ow">in</span> <span class="p">(</span><span class="n">_FIELD</span><span class="p">,</span> <span class="n">_FIELD_INITVAR</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">926</span>         <span class="n">_set_new_attribute</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;__init__&#39;</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">927</span>                            <span class="n">_init_fn</span><span class="p">(</span><span class="n">flds</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span>                                     <span class="n">frozen</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">929</span>                                     <span class="n">has_post_init</span><span class="p">,</span>
+
+<span class="nn">~/.asdf/installs/python/3.9.19/lib/python3.9/dataclasses.py</span> in <span class="ni">_init_fn</span><span class="nt">(fields, frozen, has_post_init, self_name, globals)</span>
+<span class="g g-Whitespace">    </span><span class="mi">502</span>                 <span class="n">seen_default</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="k">elif</span> <span class="n">seen_default</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">504</span>                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;non-default argument </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s1"> &#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>                                 <span class="s1">&#39;follows default argument&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span> 
+
+<span class="ne">TypeError</span>: non-default argument &#39;directory&#39; follows default argument
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now check the metadata, the PyTree should now contain <code class="docutils literal notranslate"><span class="pre">MyStateMetadata</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">PyTreeCheckpointer</span><span class="p">()</span>
+<span class="n">checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;my_tree&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;my_state&#39;: Metadata(name=&#39;my_state&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree/my_state&#39;)),
+ &#39;state&#39;: {&#39;a&#39;: ArrayMetadata(name=&#39;state.a&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree&#39;), shape=(3,), sharding=None, dtype=dtype(&#39;int64&#39;)),
+  &#39;b&#39;: ArrayMetadata(name=&#39;state.b&#39;, directory=PosixGPath(&#39;/tmp/my_checkpoints/my_tree&#39;), shape=(3,), sharding=None, dtype=dtype(&#39;int64&#39;))}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we didn’t need to re-save the checkpoint using the newly registered <code class="docutils literal notranslate"><span class="pre">MyStateHandlerWithMetdata</span></code> TypeHandler, because the class doesn’t write new files into the checkpoint.</p>
+</section>
+</section>
+<section id="checkpointhandler">
+<h2>CheckpointHandler<a class="headerlink" href="#checkpointhandler" title="Permalink to this heading">#</a></h2>
+<p>If your state is not stored within a PyTree, or if you’d like to customize more aspects of checkpointing, implement <code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code>. <code class="docutils literal notranslate"><span class="pre">CheckpointHandlers</span></code> operate on the entire object so you have a lot of flexibility on how to save and restore the object.</p>
+<p>As of <code class="docutils literal notranslate"><span class="pre">orbax-checkpoint-0.5.0</span></code>, CheckpointHandler API has changed. This page shows a side-by-side comparison of the old and new APIs.</p>
+<p><strong>The legacy APIs are deprecated and will stop working after May 1st, 2024. Please ensure you are using the new style by then.</strong></p>
+<p><strong>Example</strong></p>
+<p>Serializing the same dataclass used in the <code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyState</span><span class="p">:</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">MyState</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]),</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="before">
+<h3>Before<a class="headerlink" href="#before" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">class</span> <span class="nc">LegacyMyStateCheckpointHandler</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">MyState</span><span class="p">,</span>
+      <span class="c1"># You can define any argument here:</span>
+      <span class="n">use_npz</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+  <span class="p">):</span>
+    <span class="k">if</span> <span class="n">use_npz</span><span class="p">:</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;my_state.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">b</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tolist</span><span class="p">())))</span>
+
+  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="c1"># You can define any argument here as well.</span>
+      <span class="n">restore_as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+      <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="n">state_file</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;*.*&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">state_file</span> <span class="o">==</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">:</span>
+      <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">restore_as_dict</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">MyState</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+
+  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata about the saved item.&quot;&quot;&quot;</span>
+    <span class="c1"># In this example, the State is restored entirely, but this can be</span>
+    <span class="c1"># optimized. For example, but writing a `metadata` file in `self.save()`,</span>
+    <span class="c1"># and reading the file in this method.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">MyStateMetadata</span><span class="p">(</span>
+        <span class="n">a_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+        <span class="n">b_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+        <span class="n">directory</span><span class="o">=</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="after">
+<h3>After<a class="headerlink" href="#after" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">class</span> <span class="nc">MyStateCheckpointHandler</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;MyStateSave&#39;</span><span class="p">,</span>
+  <span class="p">):</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">use_npz</span><span class="p">:</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="s1">&#39;my_state.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">b</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+        <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;MyStateRestore&#39;</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+    <span class="n">state_file</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;*.*&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">state_file</span> <span class="o">==</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">:</span>
+      <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state.npz&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">state_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">restore_as_dict</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">MyState</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
+
+  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata about the saved item.&quot;&quot;&quot;</span>
+    <span class="c1"># In this example, the State is restored entirely, but this can be</span>
+    <span class="c1"># optimized. For example, but writing a `metadata` file in `self.save()`,</span>
+    <span class="c1"># and reading the file in this method.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">MyStateMetadata</span><span class="p">(</span>
+        <span class="n">a_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+        <span class="n">b_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+        <span class="n">directory</span><span class="o">=</span><span class="n">directory</span> <span class="o">/</span> <span class="s1">&#39;my_state&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="nd">@ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">register_with_handler</span><span class="p">(</span><span class="n">MyStateCheckpointHandler</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyStateSave</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+  <span class="n">item</span><span class="p">:</span> <span class="n">MyState</span>
+  <span class="n">use_npz</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="nd">@ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">register_with_handler</span><span class="p">(</span><span class="n">MyStateCheckpointHandler</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MyStateRestore</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+  <span class="n">restore_as_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These classes can be passed to create a new <code class="docutils literal notranslate"><span class="pre">Checkpointer</span></code>, which can be used to save or restore a new checkpoint.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">legacy_path2</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/tmp/legacy-checkpoint-handler-example/&#39;</span><span class="p">)</span>
+<span class="n">legacy_checkpointer</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">(</span><span class="n">LegacyMyStateCheckpointHandler</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">legacy_path2</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+  <span class="n">legacy_path2</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>
+<span class="n">legacy_path2</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+<span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">use_npz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in legacy checkpoint path:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/legacy-checkpoint-handler-example/<span class="k">)</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in legacy &#39;state&#39; directory:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/legacy-checkpoint-handler-example/state<span class="k">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state: &#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state as dict: &#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">restore_as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;metadata:&#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:No registered CheckpointArgs found for handler type: &lt;class &#39;__main__.LegacyMyStateCheckpointHandler&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in legacy checkpoint path: state
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in legacy &#39;state&#39; directory: _CHECKPOINT_METADATA my_state.json
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>restored state:  MyState(a=array([1. , 1.5]), b=array([3, 4, 5]))
+restored state as dict:  {&#39;a&#39;: array([1. , 1.5]), &#39;b&#39;: array([3, 4, 5])}
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_940</span><span class="o">/</span><span class="mf">3432597007.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state: &#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state as dict: &#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">restore_as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;metadata:&#39;</span><span class="p">,</span> <span class="n">legacy_checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">legacy_path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+
+<span class="nn">~/checkouts/readthedocs.org/user_builds/orbax/envs/latest/lib/python3.9/site-packages/orbax/checkpoint/checkpointer.py</span> in <span class="ni">metadata</span><span class="nt">(self, directory)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;See superclass documentation.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>     <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">244</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span> 
+<span class="g g-Whitespace">    </span><span class="mi">246</span>   <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/checkouts/readthedocs.org/user_builds/orbax/envs/latest/lib/python3.9/site-packages/orbax/checkpoint/composite_checkpoint_handler.py</span> in <span class="ni">metadata</span><span class="nt">(self, directory)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> 
+<span class="g g-Whitespace">     </span><span class="mi">95</span>   <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span> 
+<span class="g g-Whitespace">     </span><span class="mi">98</span>   <span class="k">def</span> <span class="nf">structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+
+<span class="nn">/tmp/ipykernel_940/560276776.py</span> in <span class="ni">metadata</span><span class="nt">(self, directory)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>     <span class="c1"># and reading the file in this method.</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">47</span>     <span class="k">return</span> <span class="n">MyStateMetadata</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="n">a_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>         <span class="n">b_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+
+<span class="ne">NameError</span>: name &#39;MyStateMetadata&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path2</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/tmp/checkpoint-handler-example/&#39;</span><span class="p">)</span>
+<span class="n">checkpointer</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">(</span><span class="n">MyStateCheckpointHandler</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">path2</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+  <span class="n">path2</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>
+<span class="n">path2</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+<span class="n">checkpointer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateSave</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> <span class="n">use_npz</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in checkpoint path:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/checkpoint-handler-example/<span class="k">)</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Files in &#39;state&#39; directory:&quot;</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/tmp/checkpoint-handler-example/state<span class="k">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state: &#39;</span><span class="p">,</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state as dict: &#39;</span><span class="p">,</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">(</span><span class="n">restore_as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;metadata:&#39;</span><span class="p">,</span><span class="n">checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in checkpoint path: state
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Files in &#39;state&#39; directory: _CHECKPOINT_METADATA my_state.json
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>restored state:  MyState(a=array([1. , 1.5]), b=array([3, 4, 5]))
+restored state as dict:  {&#39;a&#39;: array([1. , 1.5]), &#39;b&#39;: array([3, 4, 5])}
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_940</span><span class="o">/</span><span class="mf">2863598327.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state: &#39;</span><span class="p">,</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">()))</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;restored state as dict: &#39;</span><span class="p">,</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">(</span><span class="n">restore_as_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;metadata:&#39;</span><span class="p">,</span><span class="n">checkpointer</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">path2</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">))</span>
+
+<span class="nn">~/checkouts/readthedocs.org/user_builds/orbax/envs/latest/lib/python3.9/site-packages/orbax/checkpoint/checkpointer.py</span> in <span class="ni">metadata</span><span class="nt">(self, directory)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;See superclass documentation.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>     <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">244</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span> 
+<span class="g g-Whitespace">    </span><span class="mi">246</span>   <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/tmp/ipykernel_940/3120497307.py</span> in <span class="ni">metadata</span><span class="nt">(self, directory)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="c1"># and reading the file in this method.</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateRestore</span><span class="p">())</span>
+<span class="ne">---&gt; </span><span class="mi">43</span>     <span class="k">return</span> <span class="n">MyStateMetadata</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="n">a_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>         <span class="n">b_shape</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+
+<span class="ne">NameError</span>: name &#39;MyStateMetadata&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="async-vs-non-async">
+<h2>Async vs Non-Async<a class="headerlink" href="#async-vs-non-async" title="Permalink to this heading">#</a></h2>
+<p>Asynchronous checkpointing allows training to proceed during the I/O, which prevents expensive computational resources from stalling during the CPU writes. When possible, we highly recommend implementing async handlers.</p>
+<p>Async saving can be implemented by copying data to the corresponding worker CPU (if necessary), then parallelizing the writing tasks (e.g. by using the await keyword).</p>
+<p><code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code> deserialization should be defined using async to allow multiple objects to be deserialized at a time.</p>
+<section id="asynccheckpointhandler">
+<h3>AsyncCheckpointHandler<a class="headerlink" href="#asynccheckpointhandler" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler</span></code> interface adds a new <code class="docutils literal notranslate"><span class="pre">async_save</span></code> abstract method, and should be used with <code class="docutils literal notranslate"><span class="pre">AsyncCheckpointer</span></code> to write checkpoints asynchronously.</p>
+<p>Note that in the new style, <code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler</span></code>’s <code class="docutils literal notranslate"><span class="pre">save()</span></code> and <code class="docutils literal notranslate"><span class="pre">async_save()</span></code> methods work on <code class="docutils literal notranslate"><span class="pre">args</span></code> instead of the legacy <code class="docutils literal notranslate"><span class="pre">item</span></code> etc arguments. Also, the <code class="docutils literal notranslate"><span class="pre">args</span></code> type needs to be registered against the <code class="docutils literal notranslate"><span class="pre">AsyncCheckpointHandler</span></code> concrete class.</p>
+<p><strong>Example</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyStateAsyncCheckpointHandler</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">,</span> <span class="n">MyStateCheckpointHandler</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">MyStateSave</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>  <span class="c1"># Artificially inflate the time spent in this method.</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">MyStateSave</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="p">))]</span>
+
+  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_executor</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+<span class="c1"># Register MyStateAsyncCheckpointHandler for MyStateSave and MyStateRestore.</span>
+<span class="c1"># NOTE: This registration will overwrite the previous one with MyStateCheckpointHandler.</span>
+<span class="c1"># It is just for illustrating this example and should be avoided in real world systems.</span>
+<span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">register_with_handler</span><span class="p">(</span><span class="n">MyStateAsyncCheckpointHandler</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">MyStateSave</span><span class="p">)</span>
+<span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">register_with_handler</span><span class="p">(</span><span class="n">MyStateAsyncCheckpointHandler</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">MyStateRestore</span><span class="p">)</span>
+
+<span class="n">path3</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/tmp/checkpoint-handler-async/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">path3</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+  <span class="n">path3</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>
+<span class="n">path3</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+<span class="n">async_checkpointer</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">AsyncCheckpointer</span><span class="p">(</span><span class="n">MyStateAsyncCheckpointHandler</span><span class="p">())</span>
+<span class="n">async_checkpointer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path3</span> <span class="o">/</span> <span class="s1">&#39;async-state&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">MyStateSave</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="n">state</span><span class="p">))</span>
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;directory contents: &quot;</span><span class="p">;</span><span class="w"> </span>ls<span class="w"> </span>/tmp/checkpoint-handler-async/
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>directory contents: 
+async-state
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the write is complete, the tmp folder is renamed to just <code class="docutils literal notranslate"><span class="pre">async_state</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">async_checkpointer</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span>
+<span class="n">async_checkpointer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="o">!</span>ls<span class="w"> </span>/tmp/checkpoint-handler-async/
+<span class="o">!</span>ls<span class="w"> </span>/tmp/checkpoint-handler-async/async-state
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>async-state
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_CHECKPOINT_METADATA  my_state.npz
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="optimized_checkpointing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Optimized Checkpointing with Tensorstore</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="transformations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Transformations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler">TypeHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-serialization-deserialization">Custom serialization / deserialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointhandler">CheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before">Before</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after">After</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#async-vs-non-async">Async vs Non-Async</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asynccheckpointhandler">AsyncCheckpointHandler</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/custom_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:48 GMT -->
+</html>

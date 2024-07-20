@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Checkpointing Utilities &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.checkpoint_utils';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General Utilities" href="checkpoint.utils.html" />
+    <link rel="prev" title="Checkpoint Deleter" href="checkpoint.path.deleter.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.checkpoint_utils", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.checkpoint_utils.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Checkpointing Utilities</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.wait_for_new_checkpoint"><code class="docutils literal notranslate"><span class="pre">wait_for_new_checkpoint()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.unlock_existing_checkpoints"><code class="docutils literal notranslate"><span class="pre">unlock_existing_checkpoints()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.checkpoints_iterator"><code class="docutils literal notranslate"><span class="pre">checkpoints_iterator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.construct_restore_args"><code class="docutils literal notranslate"><span class="pre">construct_restore_args()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint.checkpoint_utils">
+<span id="checkpointing-utilities"></span><h1>Checkpointing Utilities<a class="headerlink" href="#module-orbax.checkpoint.checkpoint_utils" title="Permalink to this heading">#</a></h1>
+<p>High-level checkpoint utils provided for user convenience.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_utils.wait_for_new_checkpoint">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_utils.</span></span><span class="sig-name descname"><span class="pre">wait_for_new_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">until_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_to_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_utils.py#L185#L243"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_utils.html#wait_for_new_checkpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_utils.wait_for_new_checkpoint" title="Permalink to this definition">#</a></dt>
+<dd><p>Waits until a new checkpoint file is found.</p>
+<p>Automatically locks any checkpoint that is returned, and unlocks the
+checkpoint when execution returns to this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>checkpoint_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – The directory in which checkpoints are saved.</p></li>
+<li><p><strong>until_step</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – If specified, waits until a step greater than or equal to
+<cite>until_step</cite> has been found. If set to None (default), returns the first
+step found.</p></li>
+<li><p><strong>seconds_to_sleep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The number of seconds to sleep for before looking for a
+new checkpoint.</p></li>
+<li><p><strong>timeout</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – The maximum number of seconds to wait. If left as <cite>None</cite>, then the
+process will wait indefinitely.</p></li>
+<li><p><strong>timeout_fn</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[], <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]]) – Optional function to call after a timeout.  If the function
+returns True, then it means that no new checkpoints will be generated and
+the iterator will exit.  The function is called with no arguments.</p></li>
+<li><p><strong>step_prefix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – A prefix applied to step numbers (e.g. &lt;prefix&gt;_42).</p></li>
+<li><p><strong>step_format_fixed_length</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Expects to find checkpoint step directories with
+exactly this number of digits (leading zeros if necessary).</p></li>
+<li><p><strong>step_name_format</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]]) – Step NameFormat used to find step under given root
+directory. If provided, <cite>step_prefix</cite> and <cite>step_format_fixed_length</cite> are
+ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>a new checkpoint step, or -1 if the timeout was reached.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_utils.unlock_existing_checkpoints">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_utils.</span></span><span class="sig-name descname"><span class="pre">unlock_existing_checkpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_utils.py#L83#L109"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_utils.html#unlock_existing_checkpoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_utils.unlock_existing_checkpoints" title="Permalink to this definition">#</a></dt>
+<dd><p>Removes LOCKED file for all existing steps, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>checkpoint_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – The directory containing StepDirs.</p></li>
+<li><p><strong>step_prefix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – A prefix applied to step numbers (e.g. &lt;prefix&gt;_42).</p></li>
+<li><p><strong>step_format_fixed_length</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Expects to find checkpoint step directories with
+exactly this number of digits (leading zeros if necessary).</p></li>
+<li><p><strong>step_name_format</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]]) – Step NameFormat used to find step under given root
+directory. If provided, <cite>step_prefix</cite> and <cite>step_format_fixed_length</cite> are
+ignored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_utils.checkpoints_iterator">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_utils.</span></span><span class="sig-name descname"><span class="pre">checkpoints_iterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_interval_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_to_sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_utils.py#L246#L359"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_utils.html#checkpoints_iterator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_utils.checkpoints_iterator" title="Permalink to this definition">#</a></dt>
+<dd><p>Continuously yield new checkpoint files as they appear.</p>
+<p>Based on the equivalent TF method.</p>
+<p>The iterator only checks for new checkpoints when control flow has been
+reverted to it. This means it can miss checkpoints if your code takes longer
+to run between iterations than <cite>min_interval_secs</cite> or the interval at which
+new checkpoints are written.</p>
+<p>Warning: If CheckpointManager is running in a different process for training
+and is cleaning up old checkpoints (via the <cite>max_to_keep</cite> argument), steps
+returned by this function may not be valid after being clean up by another
+process. In this case, <cite>max_to_keep</cite> should be increased (suggested value: 5)</p>
+<p>The <cite>timeout</cite> argument is the maximum number of seconds to block waiting for
+a new checkpoint.  It is used in combination with the <cite>timeout_fn</cite> as
+follows:</p>
+<ul class="simple">
+<li><p>If the timeout expires and no <cite>timeout_fn</cite> was specified, the iterator
+stops yielding.</p></li>
+<li><p>If a <cite>timeout_fn</cite> was specified, that function is called and if it returns
+a true boolean value the iterator stops yielding.</p></li>
+<li><p>If the function returns a false boolean value then the iterator resumes the
+wait for new checkpoints.  At this point the timeout logic applies again.</p></li>
+</ul>
+<p>This behavior gives control to callers on what to do if checkpoints do not
+come fast enough or stop being generated.  For example, if callers have a way
+to detect that the training has stopped and know that no new checkpoints
+will be generated, they can provide a <cite>timeout_fn</cite> that returns <cite>True</cite> when
+the training has stopped.  If they know that the training is still going on
+they return <cite>False</cite> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>checkpoint_dir</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – The directory in which checkpoints are saved.</p></li>
+<li><p><strong>min_interval_secs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The minimum number of seconds between yielding
+checkpoints.</p></li>
+<li><p><strong>seconds_to_sleep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Seconds to sleep if a checkpoint is not found. Note the
+difference with min_interval_secs, which puts a lower bound on how when a
+new checkpoint will be looked for after yielding one checkpoint.
+seconds_to_sleep instead specifies how we should sleep for if no new
+checkpoints are found. Note that the timeout is only checked when not
+sleeping, so a <cite>seconds_to_sleep</cite> longer than the timeout would result in
+timing out after <cite>seconds_to_sleep</cite> seconds rather than <cite>timeout</cite> seconds.</p></li>
+<li><p><strong>timeout</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – The maximum number of seconds to wait between checkpoints. The
+function will time out if <cite>timeout</cite> seconds have passed since a new
+checkpoint step was found. If left as <cite>None</cite>, then the process will wait
+indefinitely.</p></li>
+<li><p><strong>timeout_fn</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[], <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]]) – Optional function called after a timeout. If the function
+returns True, then it means that no new checkpoints will be generated and
+the iterator will exit. The function is called with no arguments.</p></li>
+<li><p><strong>step_prefix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – A prefix applied to step numbers (e.g. &lt;prefix&gt;_42).</p></li>
+<li><p><strong>step_format_fixed_length</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Expects to find checkpoint step directories with
+exactly this number of digits (leading zeros if necessary).</p></li>
+<li><p><strong>step_name_format</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="checkpoint.path.step.html#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]]) – Step NameFormat used to find step under given root
+directory. If provided, <cite>step_prefix</cite> and <cite>step_format_fixed_length</cite> are
+ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>Integer step numbers of the latest checkpoints as they arrive.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_utils.construct_restore_args">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_utils.</span></span><span class="sig-name descname"><span class="pre">construct_restore_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharding_tree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_global_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_utils.py#L369#L469"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_utils.html#construct_restore_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_utils.construct_restore_args" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates restore_args given a target PyTree.</p>
+<p>This method should be used in conjunction with a CheckpointManager or
+Checkpointer that wraps a PyTreeCheckpointHandler.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mngr</span> <span class="o">=</span> <span class="n">CheckpointManager</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">()))</span>
+<span class="n">restore_args</span> <span class="o">=</span> <span class="n">construct_restore_args</span><span class="p">(</span><span class="n">train_state</span><span class="p">,</span> <span class="n">train_state_sharding</span><span class="p">)</span>
+<span class="n">restore_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;restore_args&#39;</span><span class="p">:</span> <span class="n">restore_args</span><span class="p">}</span>
+<span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">restore_kwargs</span><span class="o">=</span><span class="n">restore_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>OR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mngr</span> <span class="o">=</span> <span class="n">CheckpointManager</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">&#39;train_state&#39;</span><span class="p">:</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+<span class="p">})</span>
+<span class="n">restore_args</span> <span class="o">=</span> <span class="n">construct_restore_args</span><span class="p">(</span><span class="n">train_state</span><span class="p">,</span> <span class="n">train_state_sharding</span><span class="p">)</span>
+<span class="n">restore_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train_state&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;restore_args&#39;</span><span class="p">:</span> <span class="n">restore_args</span><span class="p">}</span> <span class="p">}</span>
+<span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">restore_kwargs</span><span class="o">=</span><span class="n">restore_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>OR:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ckptr</span> <span class="o">=</span> <span class="n">Checkpointer</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">())</span>
+<span class="n">restore_args</span> <span class="o">=</span> <span class="n">construct_restore_args</span><span class="p">(</span><span class="n">train_state</span><span class="p">,</span> <span class="n">train_state_sharding</span><span class="p">)</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">restore_args</span><span class="o">=</span><span class="n">restore_args</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a leaf in target is a np.ndarray, or int, or string, for example, a
+corresponding value for that leaf must be provided in axes_tree, but will be
+ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>) – The returned PyTree will match the structure of <cite>target</cite>. <cite>target</cite>
+may contain <cite>value_metadata.Metadata</cite>, real scalar or array values, or may
+contain jax.ShapeDtypeStruct.</p></li>
+<li><p><strong>sharding_tree</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – A PyTree matching <cite>target</cite> which will be used to set the
+restoration sharding. If not provided, sharding will default to the
+shardings specified by <cite>target</cite>.</p></li>
+<li><p><strong>set_global_shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If true, set the <cite>global_shape</cite> field of ArrayRestoreArgs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A PyTree matching target of RestoreArgs (or ArrayRestoreArgs) objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.path.deleter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Checkpoint Deleter</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">General Utilities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.wait_for_new_checkpoint"><code class="docutils literal notranslate"><span class="pre">wait_for_new_checkpoint()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.unlock_existing_checkpoints"><code class="docutils literal notranslate"><span class="pre">unlock_existing_checkpoints()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.checkpoints_iterator"><code class="docutils literal notranslate"><span class="pre">checkpoints_iterator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_utils.construct_restore_args"><code class="docutils literal notranslate"><span class="pre">construct_restore_args()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:26 GMT -->
+</html>

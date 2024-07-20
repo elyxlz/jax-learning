@@ -1,0 +1,851 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/checkpoint_format.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Checkpoint Format Guide &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'checkpoint_format';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Optimized Checkpointing with Tensorstore" href="optimized_checkpointing.html" />
+    <link rel="prev" title="Checkpointing PyTrees of Arrays" href="checkpointing_pytrees.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "checkpoint_format", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".ipynb", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/checkpoint_format.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Checkpoint Format Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#root-directory">Root Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-checkpoint">Sequential Checkpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoint-items">Checkpoint Items</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytree-checkpoints">PyTree Checkpoints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tensorstore">Working with TensorStore</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="checkpoint-format-guide">
+<h1>Checkpoint Format Guide<a class="headerlink" href="#checkpoint-format-guide" title="Permalink to this heading">#</a></h1>
+<p>It is important to have an understanding of how Orbax structures checkpoints on
+disk, particularly if you ever need to debug at the checkpoint level, or if you
+wish to work with specific pieces of a larger checkpoint.</p>
+<p>First, some setup:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">orbax.checkpoint</span> <span class="k">as</span> <span class="nn">ocp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sharding</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">NamedSharding</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(),</span> <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,)),</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">(</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">create_sharded_array</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">create_sharded_array</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<span class="n">abstract_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">ocp</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_shape_dtype_struct</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<span class="n">state</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">state</span><span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">state</span><span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+<span class="n">state</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: Array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15],      dtype=int32),
+ &#39;b&#39;: Array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],      dtype=float32),
+ &#39;c&#39;: array([0, 1, 2, 3]),
+ &#39;d&#39;: 5,
+ &#39;e&#39;: &#39;foo&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Prints a directory tree for debugging purposes.&quot;&quot;&quot;</span>
+  <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+  <span class="k">assert</span> <span class="n">directory</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+  <span class="n">level_str</span> <span class="o">=</span> <span class="s1">&#39;..&#39;</span> <span class="o">*</span> <span class="n">level</span>
+  <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Printing directory tree: </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">level_str</span><span class="si">}{</span><span class="n">directory</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">)</span>
+
+  <span class="n">level_str</span> <span class="o">=</span> <span class="s1">&#39;..&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">directory</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+      <span class="n">print_directory</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">level_str</span><span class="si">}{</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will start by creating a checkpoint for step <code class="docutils literal notranslate"><span class="pre">0</span></code>, consisting of two items:
+<code class="docutils literal notranslate"><span class="pre">state</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">test_utils</span><span class="o">.</span><span class="n">erase_and_create_empty</span><span class="p">(</span><span class="s1">&#39;/tmp/checkpoint&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;global_property&#39;</span><span class="p">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">}</span>
+<span class="k">with</span> <span class="n">ocp</span><span class="o">.</span><span class="n">CheckpointManager</span><span class="p">(</span>
+    <span class="n">path</span><span class="p">,</span> <span class="n">item_names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_data&#39;</span><span class="p">),</span> <span class="n">metadata</span><span class="o">=</span><span class="n">global_metadata</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">mngr</span><span class="p">:</span>
+  <span class="n">mngr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+      <span class="mi">0</span><span class="p">,</span>
+      <span class="n">args</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+          <span class="n">state</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">PyTreeSave</span><span class="p">(</span><span class="n">state</span><span class="p">),</span>
+          <span class="n">custom_data</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">JsonSave</span><span class="p">({</span><span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">}),</span>
+      <span class="p">),</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_directory</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Printing directory tree: /tmp/checkpoint/
+..metadata/
+...._CHECKPOINT_METADATA
+....metadata
+..0/
+....state/
+......_strings.json
+......ocdbt.process_0/
+........manifest.ocdbt
+........d/
+..........8e172779b2c1d0e83ca9a2cc1a0dc55d
+..........697e69ecab1aa3bea377b2ef277892af
+..........de776f8ac0adda96122b34430d046a60
+..........7c381fd96c90fe944fde271d08ed0ac2
+..........d64623d715b03a65cf3427a25d21e58e
+......manifest.ocdbt
+......_sharding
+......_METADATA
+......d/
+........3ad5287cb85d6e22345d73ea05201c47
+...._CHECKPOINT_METADATA
+....custom_data/
+......metadata
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s understand each of these pieces separately.</p>
+<section id="root-directory">
+<h2>Root Directory<a class="headerlink" href="#root-directory" title="Permalink to this heading">#</a></h2>
+<p>The “root directory” is understood to be the directory provided when creating a
+<code class="docutils literal notranslate"><span class="pre">CheckpointManager</span></code>. It represents the parent directory where all “sequential”
+checkpoints will reside (see below). In the above example, this corresponds to
+<code class="docutils literal notranslate"><span class="pre">/tmp/checkpoint/</span></code>.</p>
+<p>Within the root directory, aside from the sequential checkpoints, there may also
+be a <code class="docutils literal notranslate"><span class="pre">metadata</span></code> subdirectory (if <code class="docutils literal notranslate"><span class="pre">metadata</span></code> was provided when configuring the
+<code class="docutils literal notranslate"><span class="pre">CheckpointManager</span></code>).</p>
+</section>
+<section id="sequential-checkpoint">
+<h2>Sequential Checkpoint<a class="headerlink" href="#sequential-checkpoint" title="Permalink to this heading">#</a></h2>
+<p>With the term “sequential checkpoint”, we refer to a checkpoint that represents
+a particular step in a longer sequence. Typically, in Orbax, this is simply
+denote with a directory named with an integer value (<code class="docutils literal notranslate"><span class="pre">0/</span></code> in the above example).
+However, options are available to
+<a class="reference external" href="api_reference/checkpoint.path.step.html">customize</a>
+the default format.</p>
+<p>The sequential checkpoint has a top-level <code class="docutils literal notranslate"><span class="pre">_CHECKPOINT_METADATA</span></code> file that
+stores basic information like the creation timestamp, and other fields.</p>
+</section>
+<section id="checkpoint-items">
+<h2>Checkpoint Items<a class="headerlink" href="#checkpoint-items" title="Permalink to this heading">#</a></h2>
+<p>Within a sequential checkpoint directory, we have subdirectories corresponding
+to “items”. An “item” represents a logically distinct unit of a larger
+checkpoint, so these are naturally represented in separate subdirectories. In
+the above example, the items are <code class="docutils literal notranslate"><span class="pre">state</span></code> and <code class="docutils literal notranslate"><span class="pre">custom_data</span></code>.</p>
+<p>This representation makes compositition easier if you want to combine the
+dataset from one checkpoint with the state from another, for instance. It also
+prevents collisions if you use the same <code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code> to save both state
+and embeddings, for instance.</p>
+<p>Below this level, the format is no longer universally standard, because each
+<code class="docutils literal notranslate"><span class="pre">CheckpointHandler</span></code> customizes its own file format.</p>
+</section>
+<section id="pytree-checkpoints">
+<h2>PyTree Checkpoints<a class="headerlink" href="#pytree-checkpoints" title="Permalink to this heading">#</a></h2>
+<p>Because the <code class="docutils literal notranslate"><span class="pre">state</span></code> item was saved with <code class="docutils literal notranslate"><span class="pre">ocp.args.PyTreeSave</span></code> (the same would
+apply if saved with <code class="docutils literal notranslate"><span class="pre">ocp.args.StandardSave</span></code>), it takes the following form:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_directory</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;0&#39;</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Printing directory tree: /tmp/checkpoint/0/state/
+.._strings.json
+..ocdbt.process_0/
+....manifest.ocdbt
+....d/
+......8e172779b2c1d0e83ca9a2cc1a0dc55d
+......697e69ecab1aa3bea377b2ef277892af
+......de776f8ac0adda96122b34430d046a60
+......7c381fd96c90fe944fde271d08ed0ac2
+......d64623d715b03a65cf3427a25d21e58e
+..manifest.ocdbt
+.._sharding
+.._METADATA
+..d/
+....3ad5287cb85d6e22345d73ea05201c47
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">_METADATA</span></code> file provides a complete description of the PyTree structure,
+including custom and empty nodes.</p>
+<p>The tree is represented as a flattened dictionary, where each key is represented
+as a tuple, where successive elements denote successive levels of nesting. For
+example, for the dict <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">{'b':</span> <span class="pre">[1,</span> <span class="pre">2]}}</span></code> the metadata file would contain two
+entries with keys <code class="docutils literal notranslate"><span class="pre">('a',</span> <span class="pre">'b',</span> <span class="pre">'0')</span></code> and <code class="docutils literal notranslate"><span class="pre">('a',</span> <span class="pre">'b',</span> <span class="pre">'1')</span></code>.</p>
+<p>Keys at each level of nesting also encode what type they are: i.e. whether they
+are a dict key or a sequential key.</p>
+<p>Finally, metadata about the value type is stored (e.g. <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>,
+<code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>, etc.) in order to allow for later reconstruction without
+explicitly requiring the object type to be provided.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;0&#39;</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span> <span class="o">/</span> <span class="s1">&#39;_METADATA&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;tree_metadata&#39;: {&quot;(&#39;a&#39;,)&quot;: {&#39;key_metadata&#39;: [{&#39;key&#39;: &#39;a&#39;, &#39;key_type&#39;: 2}],
+   &#39;value_metadata&#39;: {&#39;value_type&#39;: &#39;jax.Array&#39;, &#39;skip_deserialize&#39;: False}},
+  &quot;(&#39;b&#39;,)&quot;: {&#39;key_metadata&#39;: [{&#39;key&#39;: &#39;b&#39;, &#39;key_type&#39;: 2}],
+   &#39;value_metadata&#39;: {&#39;value_type&#39;: &#39;jax.Array&#39;, &#39;skip_deserialize&#39;: False}},
+  &quot;(&#39;c&#39;,)&quot;: {&#39;key_metadata&#39;: [{&#39;key&#39;: &#39;c&#39;, &#39;key_type&#39;: 2}],
+   &#39;value_metadata&#39;: {&#39;value_type&#39;: &#39;np.ndarray&#39;, &#39;skip_deserialize&#39;: False}},
+  &quot;(&#39;d&#39;,)&quot;: {&#39;key_metadata&#39;: [{&#39;key&#39;: &#39;d&#39;, &#39;key_type&#39;: 2}],
+   &#39;value_metadata&#39;: {&#39;value_type&#39;: &#39;scalar&#39;, &#39;skip_deserialize&#39;: False}},
+  &quot;(&#39;e&#39;,)&quot;: {&#39;key_metadata&#39;: [{&#39;key&#39;: &#39;e&#39;, &#39;key_type&#39;: 2}],
+   &#39;value_metadata&#39;: {&#39;value_type&#39;: &#39;string&#39;, &#39;skip_deserialize&#39;: False}}},
+ &#39;use_zarr3&#39;: False}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">_sharding</span></code> file stores information about the shardings originally used when
+saving <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>s in the tree. It isn’t really human-readable though. To get
+information about shardings, use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> APIs.</p>
+<p>Beyond these metadata files, which are directly managed by Orbax, we also have a
+<code class="docutils literal notranslate"><span class="pre">manifest.ocdbt</span></code> file managed by the TensorStore library. Actual array data is
+stored within the <code class="docutils literal notranslate"><span class="pre">d/</span></code> subdirectory. Since these files are opaque to human
+readers, we will not go into detail on their structure.</p>
+<p>Finally, you’ll notice the presence of the directory <code class="docutils literal notranslate"><span class="pre">ocdbt.process_0/</span></code>, which
+also has a <code class="docutils literal notranslate"><span class="pre">manifest.ocdbt</span></code> and its own <code class="docutils literal notranslate"><span class="pre">d/</span></code> subdirectory. One such folder
+exists for every process on which the checkpoint was saved. This exists because
+each process first writes its own data independently to its corresponding
+subdirectory.</p>
+<p>When all processes have finished, Orbax runs a finalization pass to cheaply
+merge the metadatas from all per-process subdirectories into a global view (note
+that this still references data in the original subdirectories).</p>
+</section>
+<section id="working-with-tensorstore">
+<h2>Working with TensorStore<a class="headerlink" href="#working-with-tensorstore" title="Permalink to this heading">#</a></h2>
+<p>Sometimes, it is helpful to work directly with the <a class="reference external" href="https://google.github.io/tensorstore/">TensorStore</a> API to debug individual parameters in a checkpoint.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">tensorstore</span> <span class="k">as</span> <span class="nn">ts</span>
+
+<span class="n">ts_context</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="c1"># Provide cache pool for B-tree nodes to avoid repeated reads.</span>
+        <span class="c1"># 100MB limit.</span>
+        <span class="s1">&#39;cache_pool#ocdbt&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;total_bytes_limit&#39;</span><span class="p">:</span> <span class="mi">100000000</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">parent</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">array_serialization</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">TS_CONTEXT</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To read using TensorStore, we need to construct a TensorStore Spec. For this, we can use Orbax APIs. The spec points to a base path, as well as a particular parameter name (<code class="docutils literal notranslate"><span class="pre">a</span></code> in this case). It contains further options related to the checkpoint format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ParamInfo</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">ParamInfo</span>
+<span class="n">state_dir</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s1">&#39;0&#39;</span> <span class="o">/</span> <span class="s1">&#39;state&#39;</span>
+<span class="n">param_name</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
+<span class="n">param_path</span> <span class="o">=</span> <span class="n">state_dir</span> <span class="o">/</span> <span class="n">param_name</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">ParamInfo</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">parent_dir</span><span class="o">=</span><span class="n">state_dir</span><span class="p">,</span> <span class="n">is_ocdbt_checkpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_zarr3</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tspec</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">get_json_tspec_read</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">use_ocdbt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tspec</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;driver&#39;: &#39;zarr3&#39;,
+ &#39;kvstore&#39;: {&#39;driver&#39;: &#39;ocdbt&#39;,
+  &#39;base&#39;: {&#39;driver&#39;: &#39;file&#39;, &#39;path&#39;: &#39;/tmp/checkpoint/0/state&#39;},
+  &#39;path&#39;: &#39;a&#39;,
+  &#39;experimental_read_coalescing_threshold_bytes&#39;: 1000000,
+  &#39;experimental_read_coalescing_merged_bytes&#39;: 500000000000,
+  &#39;experimental_read_coalescing_interval&#39;: &#39;1ms&#39;,
+  &#39;cache_pool&#39;: &#39;cache_pool#ocdbt&#39;},
+ &#39;recheck_cached_data&#39;: False,
+ &#39;recheck_cached_metadata&#39;: False}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can verify which keys are present in the checkpoint, which matches information we gathered earlier from the Orbax <code class="docutils literal notranslate"><span class="pre">metadata</span></code> API.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="o">.</span><span class="n">KvStore</span><span class="o">.</span><span class="n">open</span><span class="p">({</span><span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="s2">&quot;ocdbt&quot;</span><span class="p">,</span> <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;file:///tmp/checkpoint/0/state/&quot;</span><span class="p">})</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">list</span><span class="p">()</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[b&#39;a/.zarray&#39;,
+ b&#39;a/0&#39;,
+ b&#39;b/.zarray&#39;,
+ b&#39;b/0&#39;,
+ b&#39;c/.zarray&#39;,
+ b&#39;c/0&#39;,
+ b&#39;d/.zarray&#39;,
+ b&#39;d/0&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can directly restore the array using TensorStore.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tspec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="s1">&#39;zarr&#39;</span><span class="p">,</span> <span class="s1">&#39;kvstore&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;driver&#39;</span><span class="p">:</span> <span class="s1">&#39;ocdbt&#39;</span><span class="p">,</span> <span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="s1">&#39;file:///tmp/checkpoint/0/state/&#39;</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}}</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">Spec</span><span class="p">(</span><span class="n">tspec</span><span class="p">),</span> <span class="nb">open</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">ts_context</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15],
+      dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpointing_pytrees.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Checkpointing PyTrees of Arrays</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="optimized_checkpointing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Optimized Checkpointing with Tensorstore</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#root-directory">Root Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-checkpoint">Sequential Checkpoint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoint-items">Checkpoint Items</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytree-checkpoints">PyTree Checkpoints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tensorstore">Working with TensorStore</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/checkpoint_format.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:44 GMT -->
+</html>

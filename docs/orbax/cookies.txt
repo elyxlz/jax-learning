@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.readthedocs.io	TRUE	/	FALSE	1999999999	_cfuvid	74APS3mQvZtNwaz_pCFP5cMukBHSA9e.Mk3bwuk5yjA-1721390960685-0.0.1.1-604800000
+orbax.readthedocs.io	TRUE	/	FALSE	1999999999	SameSite	None
+

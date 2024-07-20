@@ -1,0 +1,696 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/multihost/utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.multihost.utils &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../../_static/katex.min.js"></script>
+    <script src="../../../../_static/auto-render.min.js"></script>
+    <script src="../../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/multihost/utils';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/multihost/utils", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.multihost.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Orbax utils related to multihost functionality.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">flags</span>
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">multihost_utils</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Default timeout in seconds.</span>
+<span class="n">_DEFAULT_BARRIER_TIMEOUT</span> <span class="o">=</span> <span class="mi">1200</span>
+
+<span class="n">DIRECTORY_CREATION_TIMEOUT</span> <span class="o">=</span> <span class="mi">360</span>
+<span class="n">DIRECTORY_DELETION_TIMEOUT</span> <span class="o">=</span> <span class="mi">360</span>
+
+<span class="c1"># Used in unit tests with multiple parallel test cases.</span>
+<span class="n">_TEST_CASE_INDEX</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Map from runtime process index to distributed process index.</span>
+<span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">EXPERIMENTAL_ORBAX_USE_DISTRIBUTED_PROCESS_ID</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_bool</span><span class="p">(</span>
+    <span class="s1">&#39;experimental_orbax_use_distributed_process_id&#39;</span><span class="p">,</span>
+    <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;If True, uses jax._src.distributed.global_state.process_id instead of&#39;</span>
+    <span class="s1">&#39; jax.process_index().&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">is_runtime_to_distributed_ids_initialized</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+  <span class="k">return</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">initialize_runtime_to_distributed_ids</span><span class="p">():</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Initializes the process index mapping.</span>
+
+<span class="sd">  Note that this function is for experimental purposes only. It is intended to</span>
+<span class="sd">  be called exactly once per processes.</span>
+
+<span class="sd">  TODO(b/325293150): Remove once the bug is resolved.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">global</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span>
+  <span class="n">client</span> <span class="o">=</span> <span class="n">_get_jax_distributed_client</span><span class="p">()</span>
+
+  <span class="c1"># Index is distributed id.</span>
+  <span class="c1"># Value is runtime id.</span>
+  <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">process_count</span><span class="p">())]</span>
+  <span class="n">own_runtime_id</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">process_index</span><span class="p">()</span>
+  <span class="n">own_distributed_id</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">_src</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">global_state</span><span class="o">.</span><span class="n">process_id</span>  <span class="c1"># pylint: disable=protected-access</span>
+  <span class="n">dir_key</span> <span class="o">=</span> <span class="s1">&#39;jax/process_id/&#39;</span>
+  <span class="n">key</span> <span class="o">=</span> <span class="n">dir_key</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">own_runtime_id</span><span class="p">)</span>
+  <span class="n">client</span><span class="o">.</span><span class="n">key_value_set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">own_distributed_id</span><span class="p">))</span>
+  <span class="n">client</span><span class="o">.</span><span class="n">wait_at_barrier</span><span class="p">(</span><span class="s1">&#39;orbax_global_discovery&#39;</span><span class="p">,</span> <span class="n">timeout_in_ms</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+  <span class="n">ids</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">key_value_dir_get</span><span class="p">(</span><span class="n">dir_key</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">distributed_id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+    <span class="n">runtime_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span><span class="p">[</span><span class="n">runtime_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">distributed_id</span><span class="p">)</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;runtime_to_distributed_id: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">runtime_to_distributed_ids</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+  <span class="k">if</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Please call initialize_runtime_to_distributed_ids().&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span>
+
+
+<span class="k">def</span> <span class="nf">runtime_to_distributed_process_id</span><span class="p">(</span><span class="n">pid</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Converts a distributed process index to a runtime process index.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Please call initialize_runtime_to_distributed_ids().&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">_RUNTIME_TO_DISTRIBUTED_ID</span><span class="p">[</span><span class="n">pid</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="broadcast_one_to_all"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.broadcast_one_to_all">[docs]</a><span class="k">def</span> <span class="nf">broadcast_one_to_all</span><span class="p">(</span><span class="n">in_tree</span><span class="p">,</span> <span class="n">is_source</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Broadcast data from a source host to all other hosts.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">is_source</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">is_source</span> <span class="o">=</span> <span class="n">process_index</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+  <span class="k">return</span> <span class="n">multihost_utils</span><span class="o">.</span><span class="n">broadcast_one_to_all</span><span class="p">(</span><span class="n">in_tree</span><span class="p">,</span> <span class="n">is_source</span><span class="o">=</span><span class="n">is_source</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">should_skip_process_sync</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">jax</span><span class="o">.</span><span class="n">process_count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">_get_jax_distributed_client</span><span class="p">():</span>
+  <span class="n">client</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">_src</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">global_state</span><span class="o">.</span><span class="n">client</span>  <span class="c1"># pylint: disable=protected-access</span>
+  <span class="k">if</span> <span class="n">client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="s1">&#39;Distributed system is not available; please initialize it via &#39;</span>
+        <span class="s1">&#39;`jax.distributed.initialize()` at the start of your program.&#39;</span>
+    <span class="p">)</span>
+  <span class="k">return</span> <span class="n">client</span>
+
+
+<div class="viewcode-block" id="BarrierSyncFn"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.BarrierSyncFn">[docs]</a><span class="k">class</span> <span class="nc">BarrierSyncFn</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Protocol for a barrier synchronization callable.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BarrierSyncFn.__call__"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.BarrierSyncFn.__call__">[docs]</a>  <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Blocks on a barrier identified by key with the given timeout.&quot;&quot;&quot;</span>
+    <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="get_barrier_sync_fn"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.get_barrier_sync_fn">[docs]</a><span class="k">def</span> <span class="nf">get_barrier_sync_fn</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BarrierSyncFn</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Provides a barrier synchronization function for JAX processes.</span>
+
+<span class="sd">  Barriers with different sync keys are safe to use from independent background</span>
+<span class="sd">  threads.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    processes: If None, expects to wait across all processes and devices.</span>
+<span class="sd">      Otherwise, creates a barrier only across devices associated with the given</span>
+<span class="sd">      processes.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    None if there is a single JAX process.</span>
+<span class="sd">    A barrier synchronization callable which accepts two arguments:</span>
+<span class="sd">      - &quot;key&quot;: [str] unique barrier id;</span>
+<span class="sd">      - &quot;timeout_ms&quot;: [int] timeout to use for waiting on the barrier.</span>
+<span class="sd">    Should be called from all JAX processes with the same sync key and will</span>
+<span class="sd">    block until either 1) all processes have reached the barrier or</span>
+<span class="sd">    2) the timeout is exceeded.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">jax</span><span class="o">.</span><span class="n">process_count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="kc">None</span>
+
+  <span class="n">client</span> <span class="o">=</span> <span class="n">_get_jax_distributed_client</span><span class="p">()</span>
+  <span class="n">barrier_processes</span> <span class="o">=</span> <span class="n">processes</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">process_count</span><span class="p">()))</span>
+  <span class="k">if</span> <span class="n">process_index</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">barrier_processes</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="s1">&#39;Attempted to create a barrier across a subset of processes, but the&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39; current process: </span><span class="si">{</span><span class="n">process_index</span><span class="p">()</span><span class="si">}</span><span class="s1"> was not present in the provided&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39; list of processes: </span><span class="si">{</span><span class="n">barrier_processes</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
+
+  <span class="c1"># Use distributed ids.</span>
+  <span class="k">if</span> <span class="n">processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">barrier_processes</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Don&#39;t map ids anymore if we are using distributed ids.</span>
+    <span class="n">barrier_processes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">barrier_processes</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_fn</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">_unique_barrier_key</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Waiting at barrier: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">client</span><span class="o">.</span><span class="n">wait_at_barrier</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Current process: </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">process_index</span><span class="p">())</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Barrier processes: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">barrier_processes</span><span class="p">)</span>
+      <span class="n">client</span><span class="o">.</span><span class="n">wait_at_barrier</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="p">,</span> <span class="n">process_ids</span><span class="o">=</span><span class="n">barrier_processes</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Done waiting at barrier: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">_fn</span></div>
+
+
+<span class="k">def</span> <span class="nf">_unique_barrier_key</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that can be overridden for testing purposes.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">key</span>
+
+
+<div class="viewcode-block" id="unique_barrier_key"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.unique_barrier_key">[docs]</a><span class="k">def</span> <span class="nf">unique_barrier_key</span><span class="p">(</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Constructs a key given an optional prefix and suffix.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
+  <span class="k">if</span> <span class="n">suffix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s1">&#39;</span>
+  <span class="k">return</span> <span class="n">key</span></div>
+
+
+<div class="viewcode-block" id="sync_global_processes"><a class="viewcode-back" href="../../../../api_reference/checkpoint.multihost.html#orbax.checkpoint.multihost.sync_global_processes">[docs]</a><span class="k">def</span> <span class="nf">sync_global_processes</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">barrier_sync_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BarrierSyncFn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Barrier to sync concurrent processes.</span>
+
+<span class="sd">  NOTE: The barrier name must be unique, i.e. no process should wait on the</span>
+<span class="sd">  same barrier name multiple times.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    name: barrier name. Must be unique.</span>
+<span class="sd">    timeout: timeout in seconds.</span>
+<span class="sd">    processes: If None, expects to wait across all processes and devices.</span>
+<span class="sd">      Otherwise, creates a barrier only across devices associated with the given</span>
+<span class="sd">      processes.</span>
+<span class="sd">    barrier_sync_fn: Used as the implementation for the synchronization. If not</span>
+<span class="sd">      provided, a default implementation is used.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">should_skip_process_sync</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Skipping global process sync, barrier name: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span>
+  <span class="n">timeout</span> <span class="o">=</span> <span class="n">timeout</span> <span class="ow">or</span> <span class="n">_DEFAULT_BARRIER_TIMEOUT</span>
+  <span class="n">sync_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+  <span class="c1"># Temporarily default to existing behavior to minimize risk of breakage.</span>
+  <span class="k">if</span> <span class="n">processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">multihost_utils</span><span class="o">.</span><span class="n">sync_global_devices</span><span class="p">(</span><span class="n">_unique_barrier_key</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">barrier_sync_fn</span> <span class="o">=</span> <span class="n">barrier_sync_fn</span> <span class="ow">or</span> <span class="n">get_barrier_sync_fn</span><span class="p">(</span>
+        <span class="n">processes</span><span class="o">=</span><span class="n">processes</span>
+    <span class="p">)</span>
+    <span class="n">barrier_sync_fn</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="c1"># This may end up just being too noisy given how many barriers there are, but</span>
+  <span class="c1"># it does represent how long different processes waited around waiting for</span>
+  <span class="c1"># other processes to reach a barrier.</span>
+  <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+      <span class="s1">&#39;/jax/checkpoint/sync_global_devices_duration_sec&#39;</span><span class="p">,</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">sync_start_time</span><span class="p">,</span>
+  <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">reached_preemption</span><span class="p">(</span><span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns True if a preemption sync point has been reached.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">multihost_utils</span><span class="o">.</span><span class="n">reached_preemption_sync_point</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">is_primary_host</span><span class="p">(</span><span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+  <span class="k">if</span> <span class="n">primary_host</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">primary_host</span> <span class="o">==</span> <span class="n">process_index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">process_index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Customized logic for obtaining JAX process index.&quot;&quot;&quot;</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">experimental_orbax_use_distributed_process_id</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">EXPERIMENTAL_ORBAX_USE_DISTRIBUTED_PROCESS_ID</span><span class="o">.</span><span class="n">value</span>
+    <span class="p">)</span>
+  <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-exception-caught</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">log_every_n_seconds</span><span class="p">(</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+        <span class="s1">&#39;Failed to get flag value for&#39;</span>
+        <span class="s1">&#39; EXPERIMENTAL_ORBAX_USE_DISTRIBUTED_PROCESS_ID.&#39;</span><span class="p">,</span>
+        <span class="mi">120</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">experimental_orbax_use_distributed_process_id</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="k">if</span> <span class="n">experimental_orbax_use_distributed_process_id</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">log_every_n_seconds</span><span class="p">(</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s1">&#39;Using distributed process id.&#39;</span><span class="p">,</span> <span class="mi">120</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">_src</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">global_state</span><span class="o">.</span><span class="n">process_id</span>  <span class="c1"># pylint: disable=protected-access</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">process_index</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">unique_processes_from_devices</span><span class="p">(</span><span class="n">device_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+  <span class="n">pid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span>
+      <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">runtime_to_distributed_process_id</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">process_index</span><span class="p">)</span>
+  <span class="p">)</span>
+  <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">pid</span><span class="p">(</span><span class="n">device_array</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/multihost/utils.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

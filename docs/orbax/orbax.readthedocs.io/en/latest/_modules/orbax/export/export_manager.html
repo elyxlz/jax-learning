@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/export/export_manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.export.export_manager &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/export/export_manager';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/export/export_manager", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.export.export_manager</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Manage the exporting of a JAXModule.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">etils.epy.reraise_utils</span> <span class="kn">import</span> <span class="n">maybe_reraise</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">dtensor_utils</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">jax_module</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">orbax.export.export_manager_base</span> <span class="kn">import</span> <span class="n">ExportManagerBase</span>
+<span class="kn">from</span> <span class="nn">orbax.export.serving_config</span> <span class="kn">import</span> <span class="n">ServingConfig</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.experimental</span> <span class="kn">import</span> <span class="n">dtensor</span>
+
+
+<div class="viewcode-block" id="ExportManager"><a class="viewcode-back" href="../../../api_reference/export.export_manager.html#orbax.export.export_manager.ExportManager">[docs]</a><span class="k">class</span> <span class="nc">ExportManager</span><span class="p">(</span><span class="n">ExportManagerBase</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Exports a JAXModule with pre- and post-processors.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ExportManager.__init__"><a class="viewcode-back" href="../../../api_reference/export.export_manager.html#orbax.export.export_manager.ExportManager.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">module</span><span class="p">:</span> <span class="n">jax_module</span><span class="o">.</span><span class="n">JaxModule</span><span class="p">,</span>
+      <span class="n">serving_configs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ServingConfig</span><span class="p">],</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ExportManager constructor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      module: the `JaxModule` to be exported.</span>
+<span class="sd">      serving_configs: a sequence of which each element is a `ServingConfig`</span>
+<span class="sd">        cooresponding to a serving signature of the exported SavedModel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Creates a new tf.Module wrapping the JaxModule and extra trackable</span>
+    <span class="c1"># resources.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_module</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_module</span><span class="o">.</span><span class="n">computation_module</span> <span class="o">=</span> <span class="n">module</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_serving_signatures</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">tf_trackable_resources</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">obx_export_tf_preprocess_only</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">jax_module</span><span class="o">.</span><span class="n">get_obx_export_tf_preprocess_only</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">serving_configs</span><span class="p">:</span>
+      <span class="k">with</span> <span class="n">maybe_reraise</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Failed exporting signature_key=</span><span class="si">{</span><span class="n">sc</span><span class="o">.</span><span class="n">signature_key</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">obx_export_tf_preprocess_only</span><span class="p">:</span>
+          <span class="k">if</span> <span class="ow">not</span> <span class="n">sc</span><span class="o">.</span><span class="n">tf_preprocessor</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;serving_config.tf_preprocessor must be provided when&#39;</span>
+                <span class="s1">&#39; in `obx_export_tf_preprocess_only` mode.&#39;</span>
+            <span class="p">)</span>
+
+          <span class="k">def</span> <span class="nf">tf_preprocessor</span><span class="p">(</span><span class="o">*</span><span class="n">inputs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">tf_preprocessor</span><span class="p">(</span><span class="o">*</span><span class="n">inputs</span><span class="p">))</span>  <span class="c1"># pylint: disable=cell-var-from-loop</span>
+
+          <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">with_default_args</span><span class="p">(</span>
+              <span class="n">tf_preprocessor</span><span class="p">,</span> <span class="n">sc</span><span class="o">.</span><span class="n">get_input_signature</span><span class="p">()</span>
+          <span class="p">)</span>
+          <span class="n">inference_fn</span> <span class="o">=</span> <span class="n">preprocessor</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="n">method</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">get_infer_step</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span>
+          <span class="n">inference_fn</span> <span class="o">=</span> <span class="n">make_e2e_inference_fn</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">signature_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+          <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="o">.</span><span class="n">signature_key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="n">keys</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">signature_key</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+          <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serving_signatures</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Duplicated key &quot;</span><span class="si">{</span><span class="n">sc</span><span class="o">.</span><span class="n">signature_key</span><span class="si">}</span><span class="s1">&quot; in `serving_configs`.&#39;</span>
+            <span class="p">)</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">_serving_signatures</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">inference_fn</span>
+
+        <span class="k">if</span> <span class="n">sc</span><span class="o">.</span><span class="n">extra_trackable_resources</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+          <span class="n">tf_trackable_resources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">extra_trackable_resources</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serving_configs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Make this module callable. Once exported, it can be loaded back in</span>
+        <span class="c1"># python and the nested input structure will be preservered. In</span>
+        <span class="c1"># contrast, signatures will flatten the TensorSpecs of the to kwargs.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tf_module</span><span class="o">.</span><span class="fm">__call__</span> <span class="o">=</span> <span class="n">inference_fn</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_module</span><span class="o">.</span><span class="n">tf_trackable_resources</span> <span class="o">=</span> <span class="n">tf_trackable_resources</span></div>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">tf_module</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the tf.module maintained by the export manager.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_module</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">serving_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a map of signature keys to serving functions.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serving_signatures</span>
+
+<div class="viewcode-block" id="ExportManager.save"><a class="viewcode-back" href="../../../api_reference/export.export_manager.html#orbax.export.export_manager.ExportManager.save">[docs]</a>  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">save_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SaveOptions</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">signature_overrides</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves the JAX model to a Savemodel.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      model_path: a directory in which to write the SavedModel.</span>
+<span class="sd">      save_options: an optional tf.saved_model.SaveOptions for configuring save</span>
+<span class="sd">        options.</span>
+<span class="sd">      signature_overrides: signatures to override the self-maintained ones, or</span>
+<span class="sd">        additional signatures to export.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">save_options</span> <span class="o">=</span> <span class="n">save_options</span> <span class="ow">or</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">SaveOptions</span><span class="p">()</span>
+    <span class="n">save_options</span><span class="o">.</span><span class="n">experimental_custom_gradients</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_module</span><span class="o">.</span><span class="n">computation_module</span><span class="o">.</span><span class="n">with_gradient</span>
+    <span class="p">)</span>
+
+    <span class="n">serving_signatures</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serving_signatures</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">signature_overrides</span><span class="p">:</span>
+      <span class="n">serving_signatures</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">signature_overrides</span><span class="p">)</span>
+
+    <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tf_module</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">serving_signatures</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">save_options</span>
+    <span class="p">)</span>
+
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">dtensor_utils</span><span class="o">.</span><span class="n">get_current_mesh</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">mesh</span><span class="p">:</span>
+      <span class="c1"># TODO(b/261191533): we can remove this once tf.saved_model.save is aware</span>
+      <span class="c1"># of SPMD saving.</span>
+      <span class="n">dtensor</span><span class="o">.</span><span class="n">barrier</span><span class="p">(</span><span class="n">mesh</span><span class="o">.</span><span class="n">dtensor_mesh</span><span class="p">,</span> <span class="s1">&#39;export done&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ExportManager.load"><a class="viewcode-back" href="../../../api_reference/export.export_manager.html#orbax.export.export_manager.ExportManager.load">[docs]</a>  <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="n">loaded</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loaded</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">make_e2e_inference_fn</span><span class="p">(</span>
+    <span class="n">model_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">serving_config</span><span class="p">:</span> <span class="n">ServingConfig</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Creates an concrete end-to-end inference tf.function.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    model_fn: a callable in TF context for the numeric computation.</span>
+<span class="sd">    serving_config: a ServingConfig that defines the input sigature,</span>
+<span class="sd">      pre-processor and post-processor of the inference function.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A tf.function for end-to-end inference.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">infer_step_func_map</span> <span class="o">=</span> <span class="n">serving_config</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">model_fn</span><span class="p">,</span> <span class="n">require_numpy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">signature_key</span> <span class="o">=</span> <span class="n">serving_config</span><span class="o">.</span><span class="n">get_signature_keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">with_default_args</span><span class="p">(</span>
+      <span class="n">infer_step_func_map</span><span class="p">[</span><span class="n">signature_key</span><span class="p">],</span> <span class="n">serving_config</span><span class="o">.</span><span class="n">get_input_signature</span><span class="p">()</span>
+  <span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/export/export_manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

@@ -1,0 +1,1524 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.type_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>TypeHandlers &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.type_handlers';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Atomicity" href="checkpoint.path.atomicity.html" />
+    <link rel="prev" title="CheckpointArgs" href="checkpoint.args.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.type_handlers", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.type_handlers.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TypeHandlers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arguments-for-pytreecheckpointhandler">Arguments for PyTreeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs"><code class="docutils literal notranslate"><span class="pre">SaveArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__init__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs"><code class="docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__init__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.restore_type"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.restore_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler">TypeHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler"><code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.typestr"><code class="docutils literal notranslate"><span class="pre">TypeHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.metadata"><code class="docutils literal notranslate"><span class="pre">TypeHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.serialize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.deserialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.finalize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.finalize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyhandler">NumpyHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler"><code class="docutils literal notranslate"><span class="pre">NumpyHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.__init__"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.typestr"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.metadata"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.serialize"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalarhandler">ScalarHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler"><code class="docutils literal notranslate"><span class="pre">ScalarHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.typestr"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.metadata"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.serialize"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrayhandler">ArrayHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler"><code class="docutils literal notranslate"><span class="pre">ArrayHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.typestr"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.metadata"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.serialize"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singleslicearrayhandler">SingleSliceArrayHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">ArrayHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stringhandler">StringHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler"><code class="docutils literal notranslate"><span class="pre">StringHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.__init__"><code class="docutils literal notranslate"><span class="pre">StringHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.typestr"><code class="docutils literal notranslate"><span class="pre">StringHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.metadata"><code class="docutils literal notranslate"><span class="pre">StringHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.serialize"><code class="docutils literal notranslate"><span class="pre">StringHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">StringHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorstore-functions">Tensorstore functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.is_ocdbt_checkpoint"><code class="docutils literal notranslate"><span class="pre">is_ocdbt_checkpoint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.merge_ocdbt_per_process_files"><code class="docutils literal notranslate"><span class="pre">merge_ocdbt_per_process_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_json_tspec_write"><code class="docutils literal notranslate"><span class="pre">get_json_tspec_write()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_json_tspec_read"><code class="docutils literal notranslate"><span class="pre">get_json_tspec_read()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_ts_context"><code class="docutils literal notranslate"><span class="pre">get_ts_context()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_cast_tspec_serialize"><code class="docutils literal notranslate"><span class="pre">get_cast_tspec_serialize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_cast_tspec_deserialize"><code class="docutils literal notranslate"><span class="pre">get_cast_tspec_deserialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler-registry">TypeHandler registry</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandlerRegistry"><code class="docutils literal notranslate"><span class="pre">TypeHandlerRegistry</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.create_type_handler_registry"><code class="docutils literal notranslate"><span class="pre">create_type_handler_registry()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.register_type_handler"><code class="docutils literal notranslate"><span class="pre">register_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_type_handler"><code class="docutils literal notranslate"><span class="pre">get_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.has_type_handler"><code class="docutils literal notranslate"><span class="pre">has_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.register_standard_handlers_with_options"><code class="docutils literal notranslate"><span class="pre">register_standard_handlers_with_options()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint.type_handlers">
+<span id="typehandlers"></span><h1>TypeHandlers<a class="headerlink" href="#module-orbax.checkpoint.type_handlers" title="Permalink to this heading">#</a></h1>
+<p>Provides utils for PytreeCheckpointHandler.</p>
+<section id="arguments-for-pytreecheckpointhandler">
+<h2>Arguments for PyTreeCheckpointHandler<a class="headerlink" href="#arguments-for-pytreecheckpointhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.SaveArgs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">SaveArgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_chunk_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_chunk_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_byte_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L201#L248"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#SaveArgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.SaveArgs" title="Permalink to this definition">#</a></dt>
+<dd><p>Extra arguments that can be provided for saving.</p>
+<dl class="simple">
+<dt>aggregate:</dt><dd><p>Deprecated, please use custom TypeHandler
+(<a class="reference external" href="../custom_handlers.html#typehandler">https://orbax.readthedocs.io/en/latest/custom_handlers.html#typehandler</a>) or
+contact Orbax team to migrate before August 1st, 2024. If true, saves the
+given
+parameter in an aggregated tree format rather than individually. See
+AggregateHandler.</p>
+</dd>
+<dt>dtype:</dt><dd><p>If provided, casts the parameter to the given dtype before saving.
+Note that the parameter must be compatible with the given type (e.g.
+jnp.bfloat16 is not compatible with np.ndarray).</p>
+</dd>
+<dt>write_chunk_shape:</dt><dd><p>This only applies to Zarr version 3.  This specifies the shape of a shard
+used in writing.  The default(None) is set to equal to the array shard size,
+so there are equal number of write chunks and shards. The write_chunk_shape
+needs to be a divisor of the array shape.</p>
+</dd>
+<dt>read_chunk_shape:</dt><dd><p>This only applies to Zarr version 3.  This specifies the chunk sizes within
+a write chunk. Default is set to equal to the write_chunk_shape. The
+read_chunk_shape is required to be a divisor of the write_chunk_shape.</p>
+</dd>
+<dt>chunk_byte_size:</dt><dd><p>This is an experimental feature that automatically chooses the largest chunk
+shape possible, while keeping the chunk byte size less than or equal to the
+specified chunk_byte_size. Both the write_chunk_shape and read_chunk_shape
+are automatically set to the chosen shape. This uses a greedy algorithm that
+prioritizes splitting the largest dimensions first. In order to enable this
+feature, both write_chunk_shape and read_chunk_shape must be set to None.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.SaveArgs.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.SaveArgs.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.SaveArgs.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.type_handlers.SaveArgs.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.SaveArgs.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_chunk_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_chunk_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_byte_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.SaveArgs.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.RestoreArgs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">RestoreArgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">restore_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L251#L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#RestoreArgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.RestoreArgs" title="Permalink to this definition">#</a></dt>
+<dd><p>Extra arguments that can be provided for restoration.</p>
+<dl class="simple">
+<dt>restore_type:</dt><dd><p>Specifies the object type of the restored parameter. The type
+must have a corresponding TypeHandler for restoration. Ignored if the
+parameter is restored from an aggregated checkpoint file.</p>
+</dd>
+<dt>dtype:</dt><dd><p>If provided, casts the parameter to the given dtype after restoring.
+Note that the parameter must be compatible with the given type (e.g.
+jnp.bfloat16 is not compatible with np.ndarray).</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.RestoreArgs.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.RestoreArgs.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.RestoreArgs.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.type_handlers.RestoreArgs.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.RestoreArgs.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">restore_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.RestoreArgs.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayRestoreArgs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">ArrayRestoreArgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">restore_type=&lt;class</span> <span class="pre">'jax.Array'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_axes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharding=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_shape=None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1114#L1144"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayRestoreArgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs" title="Permalink to this definition">#</a></dt>
+<dd><p>Arguments used when restoring with ArrayHandler.</p>
+<dl class="simple">
+<dt>restore_type:</dt><dd><p>See parent class.</p>
+</dd>
+<dt>mesh:</dt><dd><p>The device mesh that the array should be restored as. Cannot be None.</p>
+</dd>
+<dt>mesh_axes:</dt><dd><p>The mesh_axes that the array should be restored as. Cannot be None.</p>
+</dd>
+<dt>sharding:</dt><dd><dl class="simple">
+<dt><cite>jax.sharding.Sharding</cite> object which takes precedence over mesh and</dt><dd><p>mesh_axes if provided. Otherwise, mesh and mesh_axes will be used to
+construct a NamedSharding object OR <cite>ShardingMetadata</cite> which is an orbax
+representation of <cite>jax.sharding.Sharding</cite> that stores the same properties
+but does not require accessing real devices.</p>
+</dd>
+</dl>
+</dd>
+<dt>global_shape:</dt><dd><p>The global shape that the array should be restored into. If not
+provided, the shape will be restored as written. Presently, arbitrary shape
+transformations are not supported (for example, reshaping to different
+dimensions). Padding and truncating are supported. When the global_shape is
+greater than that of the saved array, 0’s will be appended. If the
+global_shape is shorter than that of the saved array, excess elements will
+be dropped from the end of the array.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayRestoreArgs.restore_type">
+<span class="sig-name descname"><span class="pre">restore_type</span></span><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.restore_type" title="Permalink to this definition">#</a></dt>
+<dd><p>alias of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayRestoreArgs.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayRestoreArgs.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayRestoreArgs.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">restore_type=&lt;class</span> <span class="pre">'jax.Array'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_axes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharding=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_shape=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="typehandler">
+<h2>TypeHandler<a class="headerlink" href="#typehandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">TypeHandler</span></span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L537#L619"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Interface for reading and writing a PyTree leaf.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler.typestr">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L540#L549"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler.typestr" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler.metadata">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L551#L561"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.Metadata" title="orbax.checkpoint.metadata.value.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler.serialize">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L563#L591"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler.serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Writes the parameter to a storage location.</p>
+<p>This method is responsible for copying the parameter from a remote device in
+a synchronous fashion (if applicable). It should then return a list of
+futures which can be later awaited to complete the final commit operation
+to a storage location.</p>
+<p>The function can be used in a multihost setting, but should not implement
+extra logic to ensure atomicity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – a sequence of parameters to save.</p></li>
+<li><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – a sequence of ParamInfo containing relevant information for
+serialization of each value.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="#orbax.checkpoint.type_handlers.SaveArgs" title="orbax.checkpoint.type_handlers.SaveArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">SaveArgs</span></code></a>]]) – a sequnece of additional arguments for serialization, provided by
+the user.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of commit futures which can be awaited to complete the save
+operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler.deserialize">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L593#L608"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Reads the parameter from a storage location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – Sequnece of ParamInfo for deserialization.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="#orbax.checkpoint.type_handlers.RestoreArgs" title="orbax.checkpoint.type_handlers.RestoreArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a>]]) – Sequence of user-provided restoration information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The deserialized parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandler.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L610#L619"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandler.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandler.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs any logic to finalize parameter files written by this class.</p>
+<p>By default, does nothing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – A path to the location of the checkpoint. This corresponds to
+<cite>param_info.parent_dir</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="numpyhandler">
+<h2>NumpyHandler<a class="headerlink" href="#numpyhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">NumpyHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L905#L1058"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>Provides an implementation of TypeHandler for replicated numpy arrays.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L908#L917"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadata_key</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – name to give to Tensorstore metadata files.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler.typestr">
+<span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L949#L950"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler.typestr" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler.metadata">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L952#L968"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.ArrayMetadata" title="orbax.checkpoint.metadata.value.ArrayMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayMetadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler.serialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L970#L1017"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler.serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Uses Tensorstore to serialize a numpy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.NumpyHandler.deserialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1019#L1058"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#NumpyHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.NumpyHandler.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Deserializes the array using Tensorstore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="scalarhandler">
+<h2>ScalarHandler<a class="headerlink" href="#scalarhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ScalarHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">ScalarHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1061#L1096"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ScalarHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ScalarHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>A wrapper around NumpyHandler to deal with scalar types (int, float, etc.).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ScalarHandler.typestr">
+<span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1064#L1065"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ScalarHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ScalarHandler.typestr" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ScalarHandler.metadata">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1067#L1074"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ScalarHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ScalarHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.ScalarMetadata" title="orbax.checkpoint.metadata.value.ScalarMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarMetadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ScalarHandler.serialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1076#L1084"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ScalarHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ScalarHandler.serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ScalarHandler.deserialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1086#L1096"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ScalarHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ScalarHandler.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.number.html#jax.numpy.number" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">number</span></code></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="arrayhandler">
+<h2>ArrayHandler<a class="headerlink" href="#arrayhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">ArrayHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replica_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1165#L1509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>An implementation of TypeHandler for jax.Array.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replica_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1168#L1198"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata_key</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – name to give to Tensorstore metadata files.</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the host id of the primary host.  Default to 0.  If it’s set
+to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p></li>
+<li><p><strong>replica_id</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the replica id to be used for saving.  Default to 0.  If it’s
+set to None, each shards will pick first replica_id to be used.  It’s
+useful in the case that all hosts are only working with local storage.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler.typestr">
+<span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1231#L1232"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler.typestr" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler.metadata">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1234#L1288"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.ArrayMetadata" title="orbax.checkpoint.metadata.value.ArrayMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayMetadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler.serialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1290#L1398"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler.serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.ArrayHandler.deserialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1400#L1509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.ArrayHandler.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – ParamInfo.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="#orbax.checkpoint.type_handlers.RestoreArgs" title="orbax.checkpoint.type_handlers.RestoreArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a>]]) – must be of type <cite>ArrayRestoreArgs</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The deserialized parameter.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError if args is not provided.</strong> – </p></li>
+<li><p><strong>ValueError if args.sharding is not provided</strong><strong> or </strong><strong>args.mesh and</strong> – </p></li>
+<li><p><strong>args.mesh_axes</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="singleslicearrayhandler">
+<h2>SingleSliceArrayHandler<a class="headerlink" href="#singleslicearrayhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">ArrayHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replica_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1165#L1509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Permalink to this definition">#</a></dt>
+<dd><p>An implementation of TypeHandler for jax.Array.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replica_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1168#L1198"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metadata_key</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – name to give to Tensorstore metadata files.</p></li>
+<li><p><strong>primary_host</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the host id of the primary host.  Default to 0.  If it’s set
+to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p></li>
+<li><p><strong>replica_id</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the replica id to be used for saving.  Default to 0.  If it’s
+set to None, each shards will pick first replica_id to be used.  It’s
+useful in the case that all hosts are only working with local storage.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1231#L1232"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1234#L1288"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.ArrayMetadata" title="orbax.checkpoint.metadata.value.ArrayMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayMetadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1290#L1398"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1400#L1509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#ArrayHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – ParamInfo.</p></li>
+<li><p><strong>args</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="#orbax.checkpoint.type_handlers.RestoreArgs" title="orbax.checkpoint.type_handlers.RestoreArgs"><code class="xref py py-class docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a>]]) – must be of type <cite>ArrayRestoreArgs</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The deserialized parameter.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError if args is not provided.</strong> – </p></li>
+<li><p><strong>ValueError if args.sharding is not provided</strong><strong> or </strong><strong>args.mesh and</strong> – </p></li>
+<li><p><strong>args.mesh_axes</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="stringhandler">
+<h2>StringHandler<a class="headerlink" href="#stringhandler" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">StringHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1727#L1817"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler" title="Permalink to this definition">#</a></dt>
+<dd><p>TypeHandler for strings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1730#L1735"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler.typestr">
+<span class="sig-name descname"><span class="pre">typestr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1753#L1754"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler.typestr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler.typestr" title="Permalink to this definition">#</a></dt>
+<dd><p>A string representation of the type.</p>
+<p>Cannot conflict with other types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The type as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler.metadata">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1756#L1762"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs object metadata from a stored parameter location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>infos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ParamInfo</span></code>]) – sequence of ParamInfo</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="checkpoint.metadata.html#orbax.checkpoint.metadata.StringMetadata" title="orbax.checkpoint.metadata.value.StringMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringMetadata</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sequence of Metadata for each provided ParamInfo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler.serialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1768#L1795"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler.serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler.serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Future</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.StringHandler.deserialize">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1797#L1817"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#StringHandler.deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.StringHandler.deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="tensorstore-functions">
+<h2>Tensorstore functions<a class="headerlink" href="#tensorstore-functions" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.is_ocdbt_checkpoint">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">is_ocdbt_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L633#L636"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#is_ocdbt_checkpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.is_ocdbt_checkpoint" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines whether a checkpoint uses OCDBT format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.merge_ocdbt_per_process_files">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">merge_ocdbt_per_process_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts_context</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L639#L691"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#merge_ocdbt_per_process_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.merge_ocdbt_per_process_files" title="Permalink to this definition">#</a></dt>
+<dd><p>Merges OCDBT files written to per-process subdirectories.</p>
+<p>With Tensorstore’s OCDBT format, arrays are initially written to per-process
+subdirectories, depending on which host is doing the writing. This function
+can be called to merge the per-process files into a global key-value store.</p>
+<p>The original per-process subdirectories are not and should not be deleted -
+the global kvstore continues to reference them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>) – checkpoint location.</p></li>
+<li><p><strong>ts_context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code>) – Tensorstore context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_json_tspec_write">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_json_tspec_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ocdbt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L403#L436"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_json_tspec_write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_json_tspec_write" title="Permalink to this definition">#</a></dt>
+<dd><p>Gets Tensorstore spec for writing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_json_tspec_read">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_json_tspec_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ocdbt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L390#L400"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_json_tspec_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_json_tspec_read" title="Permalink to this definition">#</a></dt>
+<dd><p>Gets Tensorstore spec for reading.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_ts_context">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_ts_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_ocdbt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L830#L832"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_ts_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_ts_context" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_cast_tspec_serialize">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_cast_tspec_serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tspec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L835#L848"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_cast_tspec_serialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_cast_tspec_serialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a Tensorstore spec for casting a param during serialize.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_cast_tspec_deserialize">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_cast_tspec_deserialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tspec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L851#L859"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_cast_tspec_deserialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_cast_tspec_deserialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a Tensorstore spec for casting a param during deserialize.</p>
+</dd></dl>
+
+</section>
+<section id="typehandler-registry">
+<h2>TypeHandler registry<a class="headerlink" href="#typehandler-registry" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.TypeHandlerRegistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">TypeHandlerRegistry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1820#L1878"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#TypeHandlerRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.TypeHandlerRegistry" title="Permalink to this definition">#</a></dt>
+<dd><p>A registry for TypeHandlers.</p>
+<p>This internal base class is used for the global registry which serves as a
+default for any type not found in a local registry. It is also accessed
+through the module function get/set/has_type_handler.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.create_type_handler_registry">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">create_type_handler_registry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">handlers</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1972#L1984"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#create_type_handler_registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.create_type_handler_registry" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a type registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*handlers</strong> – optional pairs of <cite>(&lt;type&gt;, &lt;handler&gt;)</cite> to initialize the
+registry with.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#orbax.checkpoint.type_handlers.TypeHandlerRegistry" title="orbax.checkpoint.type_handlers.TypeHandlerRegistry"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeHandlerRegistry</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A TypeHandlerRegistry instance with only the specified handlers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.register_type_handler">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">register_type_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L1987#L2011"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#register_type_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.register_type_handler" title="Permalink to this definition">#</a></dt>
+<dd><p>Registers a type for serialization/deserialization with a given handler.</p>
+<p>Note that it is possible for a type to match multiple different entries in
+the registry, each with a different handler. In this case, only the first
+match is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ty</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>) – A type to register.</p></li>
+<li><p><strong>handler</strong> (<a class="reference internal" href="#orbax.checkpoint.type_handlers.TypeHandler" title="orbax.checkpoint.type_handlers.TypeHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeHandler</span></code></a>) – a TypeHandler capable of reading and writing parameters of type
+<cite>ty</cite>.</p></li>
+<li><p><strong>func</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]]) – A function that accepts a type and returns True if the type should be
+handled by the provided TypeHandler. If this parameter is not specified,
+defaults to <cite>lambda t: issubclass(t, ty)</cite>.</p></li>
+<li><p><strong>override</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – if True, will override an existing mapping of type to handler.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError if a type is already registered and override is False.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.get_type_handler">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">get_type_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L2014#L2016"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#get_type_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.get_type_handler" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the handler registered for a given type, if available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#orbax.checkpoint.type_handlers.TypeHandler" title="orbax.checkpoint.type_handlers.TypeHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeHandler</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.has_type_handler">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">has_type_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L2019#L2021"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#has_type_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.has_type_handler" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns if there is a handler registered for a given type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.type_handlers.register_standard_handlers_with_options">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.type_handlers.</span></span><span class="sig-name descname"><span class="pre">register_standard_handlers_with_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/type_handlers.py#L2024#L2051"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/type_handlers.html#register_standard_handlers_with_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.type_handlers.register_standard_handlers_with_options" title="Permalink to this definition">#</a></dt>
+<dd><p>Re-registers a select set of handlers with the given options.</p>
+<p>This is intended to override options en masse for the standard numeric
+TypeHandlers and their corresponding types (scalars, numpy arrays and
+jax.Arrays).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments to pass to each of the standard handlers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.args.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CheckpointArgs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.path.atomicity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Atomicity</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arguments-for-pytreecheckpointhandler">Arguments for PyTreeCheckpointHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs"><code class="docutils literal notranslate"><span class="pre">SaveArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.SaveArgs.__init__"><code class="docutils literal notranslate"><span class="pre">SaveArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs"><code class="docutils literal notranslate"><span class="pre">RestoreArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.RestoreArgs.__init__"><code class="docutils literal notranslate"><span class="pre">RestoreArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.restore_type"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.restore_type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__eq__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__hash__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayRestoreArgs.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayRestoreArgs.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler">TypeHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler"><code class="docutils literal notranslate"><span class="pre">TypeHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.typestr"><code class="docutils literal notranslate"><span class="pre">TypeHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.metadata"><code class="docutils literal notranslate"><span class="pre">TypeHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.serialize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.deserialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandler.finalize"><code class="docutils literal notranslate"><span class="pre">TypeHandler.finalize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyhandler">NumpyHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler"><code class="docutils literal notranslate"><span class="pre">NumpyHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.__init__"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.typestr"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.metadata"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.serialize"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.NumpyHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">NumpyHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scalarhandler">ScalarHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler"><code class="docutils literal notranslate"><span class="pre">ScalarHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.typestr"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.metadata"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.serialize"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ScalarHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">ScalarHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrayhandler">ArrayHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler"><code class="docutils literal notranslate"><span class="pre">ArrayHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.__init__"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.typestr"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.metadata"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.serialize"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.ArrayHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#singleslicearrayhandler">SingleSliceArrayHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">ArrayHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><code class="docutils literal notranslate"><span class="pre">ArrayHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stringhandler">StringHandler</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler"><code class="docutils literal notranslate"><span class="pre">StringHandler</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.__init__"><code class="docutils literal notranslate"><span class="pre">StringHandler.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.typestr"><code class="docutils literal notranslate"><span class="pre">StringHandler.typestr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.metadata"><code class="docutils literal notranslate"><span class="pre">StringHandler.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.serialize"><code class="docutils literal notranslate"><span class="pre">StringHandler.serialize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.StringHandler.deserialize"><code class="docutils literal notranslate"><span class="pre">StringHandler.deserialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorstore-functions">Tensorstore functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.is_ocdbt_checkpoint"><code class="docutils literal notranslate"><span class="pre">is_ocdbt_checkpoint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.merge_ocdbt_per_process_files"><code class="docutils literal notranslate"><span class="pre">merge_ocdbt_per_process_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_json_tspec_write"><code class="docutils literal notranslate"><span class="pre">get_json_tspec_write()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_json_tspec_read"><code class="docutils literal notranslate"><span class="pre">get_json_tspec_read()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_ts_context"><code class="docutils literal notranslate"><span class="pre">get_ts_context()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_cast_tspec_serialize"><code class="docutils literal notranslate"><span class="pre">get_cast_tspec_serialize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_cast_tspec_deserialize"><code class="docutils literal notranslate"><span class="pre">get_cast_tspec_deserialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typehandler-registry">TypeHandler registry</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.TypeHandlerRegistry"><code class="docutils literal notranslate"><span class="pre">TypeHandlerRegistry</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.create_type_handler_registry"><code class="docutils literal notranslate"><span class="pre">create_type_handler_registry()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.register_type_handler"><code class="docutils literal notranslate"><span class="pre">register_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.get_type_handler"><code class="docutils literal notranslate"><span class="pre">get_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.has_type_handler"><code class="docutils literal notranslate"><span class="pre">has_type_handler()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.type_handlers.register_standard_handlers_with_options"><code class="docutils literal notranslate"><span class="pre">register_standard_handlers_with_options()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.type_handlers.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:17 GMT -->
+</html>

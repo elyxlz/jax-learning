@@ -1,0 +1,1109 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.path.step.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Step entities &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.path.html';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Checkpoint Deleter" href="checkpoint.path.deleter.html" />
+    <link rel="prev" title="Atomicity" href="checkpoint.path.atomicity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.path.step", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.path.step.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Step entities</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.step"><code class="docutils literal notranslate"><span class="pre">Metadata.step</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.path"><code class="docutils literal notranslate"><span class="pre">Metadata.path</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.init_timestamp_nsecs"><code class="docutils literal notranslate"><span class="pre">Metadata.init_timestamp_nsecs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp_nsecs"><code class="docutils literal notranslate"><span class="pre">Metadata.commit_timestamp_nsecs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp"><code class="docutils literal notranslate"><span class="pre">Metadata.commit_timestamp</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__delattr__"><code class="docutils literal notranslate"><span class="pre">Metadata.__delattr__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__eq__"><code class="docutils literal notranslate"><span class="pre">Metadata.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__hash__"><code class="docutils literal notranslate"><span class="pre">Metadata.__hash__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__init__"><code class="docutils literal notranslate"><span class="pre">Metadata.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__setattr__"><code class="docutils literal notranslate"><span class="pre">Metadata.__setattr__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nameformat">NameFormat</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat"><code class="docutils literal notranslate"><span class="pre">NameFormat</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.build_name"><code class="docutils literal notranslate"><span class="pre">NameFormat.build_name()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.find_all"><code class="docutils literal notranslate"><span class="pre">NameFormat.find_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.find_step"><code class="docutils literal notranslate"><span class="pre">NameFormat.find_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.__init__"><code class="docutils literal notranslate"><span class="pre">NameFormat.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">NameFormat.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factories-for-various-nameformats">Factories for various NameFormats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.standard_name_format"><code class="docutils literal notranslate"><span class="pre">standard_name_format()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.composite_name_format"><code class="docutils literal notranslate"><span class="pre">composite_name_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.build_step_path"><code class="docutils literal notranslate"><span class="pre">build_step_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.checkpoint_steps_paths"><code class="docutils literal notranslate"><span class="pre">checkpoint_steps_paths()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.checkpoint_steps"><code class="docutils literal notranslate"><span class="pre">checkpoint_steps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.any_checkpoint_step"><code class="docutils literal notranslate"><span class="pre">any_checkpoint_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.latest_step_metadata"><code class="docutils literal notranslate"><span class="pre">latest_step_metadata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_metadata_of_checkpoint_path"><code class="docutils literal notranslate"><span class="pre">step_metadata_of_checkpoint_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions-experimental">Helper functions (experimental)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.find_step_path"><code class="docutils literal notranslate"><span class="pre">find_step_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_gcs_path"><code class="docutils literal notranslate"><span class="pre">is_gcs_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.get_save_directory"><code class="docutils literal notranslate"><span class="pre">get_save_directory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_tmp_checkpoint"><code class="docutils literal notranslate"><span class="pre">is_tmp_checkpoint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_checkpoint_finalized"><code class="docutils literal notranslate"><span class="pre">is_checkpoint_finalized()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.tmp_checkpoints"><code class="docutils literal notranslate"><span class="pre">tmp_checkpoints()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.cleanup_tmp_directories"><code class="docutils literal notranslate"><span class="pre">cleanup_tmp_directories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_from_checkpoint_name"><code class="docutils literal notranslate"><span class="pre">step_from_checkpoint_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions-to-implement-nameformat-classes">Helper functions to implement NameFormat classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.build_step_metadatas"><code class="docutils literal notranslate"><span class="pre">build_step_metadatas()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_prefix_with_underscore"><code class="docutils literal notranslate"><span class="pre">step_prefix_with_underscore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint.path.step">
+<span id="step-entities"></span><h1>Step entities<a class="headerlink" href="#module-orbax.checkpoint.path.step" title="Permalink to this heading">#</a></h1>
+<p>Orbax step storage entities.</p>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">Metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L50#L103"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#Metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Metadata of a step.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.step">
+<span class="sig-name descname"><span class="pre">step</span></span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.step" title="Permalink to this definition">#</a></dt>
+<dd><p>step number of the checkpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.path">
+<span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.path" title="Permalink to this definition">#</a></dt>
+<dd><p>path to the checkpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>etils.epath.abstract_path.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.init_timestamp_nsecs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_timestamp_nsecs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.init_timestamp_nsecs" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns init timestamp of uncommitted checkpoint of this step.</p>
+<p>It is specified as nano seconds since epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.commit_timestamp_nsecs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commit_timestamp_nsecs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp_nsecs" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns commit timestamp of the checkpoint of this step.</p>
+<p>It is specified as nano seconds since epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.commit_timestamp">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commit_timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns commit timestamp of the checkpoint of this step.</p>
+<p>It is specified as datetime in UTC timezone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.__delattr__">
+<span class="sig-name descname"><span class="pre">__delattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.__delattr__" title="Permalink to this definition">#</a></dt>
+<dd><p>Implement delattr(self, name).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.__hash__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return hash(self).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.Metadata.__setattr__">
+<span class="sig-name descname"><span class="pre">__setattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.path.step.Metadata.__setattr__" title="Permalink to this definition">#</a></dt>
+<dd><p>Implement setattr(self, name, value).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nameformat">
+<h2>NameFormat<a class="headerlink" href="#nameformat" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">NameFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L106#L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#NameFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat" title="Permalink to this definition">#</a></dt>
+<dd><p>Protocol responsible for naming and querying steps.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat.build_name">
+<span class="sig-name descname"><span class="pre">build_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L109#L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#NameFormat.build_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat.build_name" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>step</cite> name.</p>
+<p><em>Implementation hint:</em> Implement it to build a name for the given step using
+the class’s custom formatting attributes. Since it is mainly meant for
+building names to save checkpoints, it can raise error if this NameFormat is
+just meant for finding already existing step paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>step</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Step number.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat.find_all">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L122#L136"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#NameFormat.find_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat.find_all" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns metadata of all steps.</p>
+<p>NOTE: Ignores uncommitted checkpoints.</p>
+<p><em>Implementation hint:</em> Implement it to find all step folders under
+<cite>base_path</cite> performing IO operations if needed. Use
+<cite>build_step_metadatas(…)</cite> helper function to build all the <cite>MetadataT</cite>
+using the found step paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base_path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – <em>root</em> Path under which Step folders are placed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code>[~MetadataT]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat.find_step">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L138#L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#NameFormat.find_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat.find_step" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the metadata for <cite>step</cite> or raises ValueError.</p>
+<p>NOTE: Ignores uncommitted checkpoints.</p>
+<p><em>Implementation hint:</em> Implement it to find the step folder under
+<cite>base_path</cite> performing IO operations if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – <em>root</em> Path under which Step folders are placed.</p></li>
+<li><p><strong>step</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Step number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>~MetadataT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1087#L1113"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.NameFormat.__subclasshook__">
+<span class="sig-name descname"><span class="pre">__subclasshook__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1200#L1236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.NameFormat.__subclasshook__" title="Permalink to this definition">#</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="factories-for-various-nameformats">
+<h2>Factories for various NameFormats<a class="headerlink" href="#factories-for-various-nameformats" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.standard_name_format">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">standard_name_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L344#L367"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#standard_name_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.standard_name_format" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns NameFormat for ‘standard’ steps for common Orbax use cases.</p>
+<p>NOTE: Ignores uncommitted checkpoints.</p>
+<dl class="simple">
+<dt>Naming examples:</dt><dd><ul class="simple">
+<li><p>step_prefix=None    step_format_fixed_length=None  -&gt;  23</p></li>
+<li><p>step_prefix=None    step_format_fixed_length=4     -&gt;  0023</p></li>
+<li><p>step_prefix=step    step_format_fixed_length=None  -&gt;  step_23</p></li>
+<li><p>step_prefix=step    step_format_fixed_length=4     -&gt;  step_0023</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_prefix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Optional fixed string prefixed to step. Note an <em>underscore</em> is
+appended before applying it.</p></li>
+<li><p><strong>step_format_fixed_length</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Optional length of the zero padded step. e.g. 6
+for 000123.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.composite_name_format">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">composite_name_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_name_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_name_formats</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L427#L443"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#composite_name_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.composite_name_format" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <em>composite</em> NameFormat supporting multiple read/single write formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>write_name_format</strong> (<a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]) – NameFormat used to build step names meant for writing
+checkpoints. Must be present in <cite>read_name_formats</cite> at a preferred
+priority position.</p></li>
+<li><p><strong>read_name_formats</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]]) – Sequence (ordered) of NameFormats used to find steps for
+reading checkpoints. Please note that to resolve conflicts (and avoid
+raising errors) in case of multiple NameFormats matching a given step, the
+sequence should be provided in highest to lowest priority order:
+NameFormat appearing earlier in the sequence is preferred.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.build_step_path">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">build_step_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L154#L158"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#build_step_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.build_step_path" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>step</cite> path under <cite>base_path</cite> for step <cite>name_format</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.checkpoint_steps_paths">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">checkpoint_steps_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L638#L663"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#checkpoint_steps_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.checkpoint_steps_paths" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a list of finalized checkpoint paths in the directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.checkpoint_steps">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">checkpoint_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_host_load_and_broadcast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L666#L688"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#checkpoint_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.checkpoint_steps" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a list of finalized checkpoint steps in the directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.any_checkpoint_step">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">any_checkpoint_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L691#L706"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#any_checkpoint_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.any_checkpoint_step" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns any finalized checkpoint step in the directory or None.</p>
+<p>This avoids iterating over the entire directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>checkpoint_dir</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – Checkpoint directory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any finalized checkpoint step in the directory or None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.latest_step_metadata">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">latest_step_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L185#L194"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#latest_step_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.latest_step_metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns step.MetadataT of the latest step in <cite>root_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[~MetadataT]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.step_metadata_of_checkpoint_path">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">step_metadata_of_checkpoint_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_format</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L197#L212"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#step_metadata_of_checkpoint_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.step_metadata_of_checkpoint_path" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns step.MetadataT of given <cite>checkpoint_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>~MetadataT</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="helper-functions-experimental">
+<h2>Helper functions (experimental)<a class="headerlink" href="#helper-functions-experimental" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.find_step_path">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">find_step_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_format</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_uncommitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L217#L255"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#find_step_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.find_step_path" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>step</cite> path under <cite>base_path</cite> for step <cite>name_format</cite>.</p>
+<p>NOTE: Experimental function, subject to change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – directory path containing step subdirs.</p></li>
+<li><p><strong>name_format</strong> (<a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]) – NameFormat of the target <cite>step</cite>.</p></li>
+<li><p><strong>step</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – target step number.</p></li>
+<li><p><strong>include_uncommitted</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – if True then uncommitted steps are considered in search
+too, otherwise only committed steps are looked up.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError if the target step path does not exist.</strong> – </p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.is_gcs_path">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">is_gcs_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L448#L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#is_gcs_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.is_gcs_path" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.get_save_directory">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">get_save_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override_directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L454#L494"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#get_save_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.get_save_directory" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the standardized path to a save directory for a single item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Step number.</p></li>
+<li><p><strong>directory</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – Top level checkpoint directory.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Item name (‘params’, ‘state’, ‘dataset’, etc.).</p></li>
+<li><p><strong>step_prefix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Prefix applied to <cite>step</cite> (e.g. ‘checkpoint’).</p></li>
+<li><p><strong>override_directory</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – If provided, step, directory, and step_prefix are
+ignored.</p></li>
+<li><p><strong>step_format_fixed_length</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Uses a fixed number of digits with leading zeros
+to represent the step number. If None, there are no leading zeros.</p></li>
+<li><p><strong>step_name_format</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#orbax.checkpoint.path.step.NameFormat" title="orbax.checkpoint.path.step.NameFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameFormat</span></code></a>[<a class="reference internal" href="#orbax.checkpoint.path.step.Metadata" title="orbax.checkpoint.path.step.Metadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metadata</span></code></a>]]) – NameFormat used to define step name for step and under
+given root directory. If provided, <cite>step_prefix</cite> and
+<cite>step_format_fixed_length</cite> are ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.is_tmp_checkpoint">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">is_tmp_checkpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L497#L508"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#is_tmp_checkpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.is_tmp_checkpoint" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines whether a directory is a tmp checkpoint path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.is_checkpoint_finalized">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">is_checkpoint_finalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L511#L546"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#is_checkpoint_finalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.is_checkpoint_finalized" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines if the given path represents a finalized checkpoint.</p>
+<p>Path takes the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="nb">dir</span><span class="o">/&lt;</span><span class="n">name</span><span class="o">&gt;.</span><span class="n">orbax</span><span class="o">-</span><span class="n">checkpoint</span><span class="o">-</span><span class="n">tmp</span><span class="o">-&lt;</span><span class="n">timestamp</span><span class="o">&gt;/</span>  <span class="c1"># not finalized</span>
+<span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="nb">dir</span><span class="o">/&lt;</span><span class="n">name</span><span class="o">&gt;/</span>  <span class="c1"># finalized</span>
+</pre></div>
+</div>
+<p>Alternatively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="nb">dir</span><span class="o">/&lt;</span><span class="n">name</span><span class="o">&gt;/</span>  <span class="c1"># finalized</span>
+  <span class="n">commit_success</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">...</span>
+<span class="n">gs</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="nb">dir</span><span class="o">/&lt;</span><span class="n">name</span><span class="o">&gt;/</span>  <span class="c1"># not finalized</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – Directory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the checkpoint is finalized.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError if the provided path is not a directory. Valid checkpoint paths</strong> – </p></li>
+<li><p><strong>must be a directory.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.tmp_checkpoints">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">tmp_checkpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L549#L552"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#tmp_checkpoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.tmp_checkpoints" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a list of tmp checkpoint dir names in <cite>checkpoint_dir</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.cleanup_tmp_directories">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">cleanup_tmp_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barrier_sync_key_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L555#L576"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#cleanup_tmp_directories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.cleanup_tmp_directories" title="Permalink to this definition">#</a></dt>
+<dd><p>Cleanup steps in <cite>directory</cite> with tmp files, as these are not finalized.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.step_from_checkpoint_name">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">step_from_checkpoint_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L625#L635"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#step_from_checkpoint_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.step_from_checkpoint_name" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the step from a checkpoint name. Also works for tmp checkpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="helper-functions-to-implement-nameformat-classes">
+<h2>Helper functions to implement NameFormat classes<a class="headerlink" href="#helper-functions-to-implement-nameformat-classes" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.build_step_metadatas">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">build_step_metadatas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_paths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_metadata</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L161#L177"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#build_step_metadatas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.build_step_metadatas" title="Permalink to this definition">#</a></dt>
+<dd><p>Yields filtered metadata mapped with <cite>step_paths</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step_paths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]) – Iterator of step paths.</p></li>
+<li><p><strong>build_metadata</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[~MetadataT]]) – Callable to match and build step metadata from <cite>step_paths</cite>
+elements. If a <cite>step_paths</cite> element doesn’t match then it returns None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>Step metadata.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code>[~MetadataT]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.step.step_prefix_with_underscore">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.step.</span></span><span class="sig-name descname"><span class="pre">step_prefix_with_underscore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_prefix</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/step.py#L180#L182"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/step.html#step_prefix_with_underscore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.step.step_prefix_with_underscore" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns <cite>step_prefix</cite> appended with <cite>underscore</cite> or &lt;empty&gt; if None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.path.atomicity.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Atomicity</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.path.deleter.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Checkpoint Deleter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata">Metadata</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata"><code class="docutils literal notranslate"><span class="pre">Metadata</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.step"><code class="docutils literal notranslate"><span class="pre">Metadata.step</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.path"><code class="docutils literal notranslate"><span class="pre">Metadata.path</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.init_timestamp_nsecs"><code class="docutils literal notranslate"><span class="pre">Metadata.init_timestamp_nsecs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp_nsecs"><code class="docutils literal notranslate"><span class="pre">Metadata.commit_timestamp_nsecs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.commit_timestamp"><code class="docutils literal notranslate"><span class="pre">Metadata.commit_timestamp</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__delattr__"><code class="docutils literal notranslate"><span class="pre">Metadata.__delattr__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__eq__"><code class="docutils literal notranslate"><span class="pre">Metadata.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__hash__"><code class="docutils literal notranslate"><span class="pre">Metadata.__hash__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__init__"><code class="docutils literal notranslate"><span class="pre">Metadata.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.Metadata.__setattr__"><code class="docutils literal notranslate"><span class="pre">Metadata.__setattr__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nameformat">NameFormat</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat"><code class="docutils literal notranslate"><span class="pre">NameFormat</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.build_name"><code class="docutils literal notranslate"><span class="pre">NameFormat.build_name()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.find_all"><code class="docutils literal notranslate"><span class="pre">NameFormat.find_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.find_step"><code class="docutils literal notranslate"><span class="pre">NameFormat.find_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.__init__"><code class="docutils literal notranslate"><span class="pre">NameFormat.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.NameFormat.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">NameFormat.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factories-for-various-nameformats">Factories for various NameFormats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.standard_name_format"><code class="docutils literal notranslate"><span class="pre">standard_name_format()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.composite_name_format"><code class="docutils literal notranslate"><span class="pre">composite_name_format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.build_step_path"><code class="docutils literal notranslate"><span class="pre">build_step_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.checkpoint_steps_paths"><code class="docutils literal notranslate"><span class="pre">checkpoint_steps_paths()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.checkpoint_steps"><code class="docutils literal notranslate"><span class="pre">checkpoint_steps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.any_checkpoint_step"><code class="docutils literal notranslate"><span class="pre">any_checkpoint_step()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.latest_step_metadata"><code class="docutils literal notranslate"><span class="pre">latest_step_metadata()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_metadata_of_checkpoint_path"><code class="docutils literal notranslate"><span class="pre">step_metadata_of_checkpoint_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions-experimental">Helper functions (experimental)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.find_step_path"><code class="docutils literal notranslate"><span class="pre">find_step_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_gcs_path"><code class="docutils literal notranslate"><span class="pre">is_gcs_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.get_save_directory"><code class="docutils literal notranslate"><span class="pre">get_save_directory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_tmp_checkpoint"><code class="docutils literal notranslate"><span class="pre">is_tmp_checkpoint()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.is_checkpoint_finalized"><code class="docutils literal notranslate"><span class="pre">is_checkpoint_finalized()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.tmp_checkpoints"><code class="docutils literal notranslate"><span class="pre">tmp_checkpoints()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.cleanup_tmp_directories"><code class="docutils literal notranslate"><span class="pre">cleanup_tmp_directories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_from_checkpoint_name"><code class="docutils literal notranslate"><span class="pre">step_from_checkpoint_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions-to-implement-nameformat-classes">Helper functions to implement NameFormat classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.build_step_metadatas"><code class="docutils literal notranslate"><span class="pre">build_step_metadatas()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.step.step_prefix_with_underscore"><code class="docutils literal notranslate"><span class="pre">step_prefix_with_underscore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.path.step.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:22 GMT -->
+</html>

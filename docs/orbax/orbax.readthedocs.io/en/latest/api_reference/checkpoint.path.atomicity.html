@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.path.atomicity.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Atomicity &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.path.atomicity';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Step entities" href="checkpoint.path.step.html" />
+    <link rel="prev" title="TypeHandlers" href="checkpoint.type_handlers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.path.atomicity", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.path.atomicity.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Atomicity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporarypath">TemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath"><code class="docutils literal notranslate"><span class="pre">TemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atomicrenametemporarypath">AtomicRenameTemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commitfiletemporarypath">CommitFileTemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.get_default_temporary_path_class"><code class="docutils literal notranslate"><span class="pre">get_default_temporary_path_class()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.on_commit_callback"><code class="docutils literal notranslate"><span class="pre">on_commit_callback()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint.path.atomicity">
+<span id="atomicity"></span><h1>Atomicity<a class="headerlink" href="#module-orbax.checkpoint.path.atomicity" title="Permalink to this heading">#</a></h1>
+<p>Utils for creating and finalizing temporary paths.</p>
+<p>TODO(b/326119183): Note that the configurability provided by this feature does
+not leave users free to define their own temporary path structure. The current
+implementation is mainly a refactoring of old logic that separately created
+temp directories and finalized them. It does not touch other logic that detects
+temp checkpoints and cleans them up (primarily located in
+orbax.checkpoint.path.step and CheckpointManager).</p>
+<p>Ordinarily, atomic logic defaults to <cite>AtomicRenameTemporaryPath</cite>, which uses an
+atomic rename to indicate checkpoint completion. However, not all filesystems
+support atomic rename, so <cite>CommitFileTemporaryPath</cite> is provided as an
+alternative, which uses a “commit_success” file to indicate completion.</p>
+<p>Ideally, we would standardize on a single behavior, but it is difficult, largely
+for legacy reasons, to achieve this. Furthermore, there are many other
+alternative ways of ensuring save atomicity. As such, we have opted to provide
+a more flexible approach that allows users to configure the behavior they want.</p>
+<p>Configuration can be done in the following way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AsyncCheckpointer</span><span class="p">(</span>
+    <span class="n">StandardCheckpointHandler</span><span class="p">(),</span>
+    <span class="n">temporary_path_class</span><span class="o">=</span><span class="n">CommitFileTemporaryPath</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># OR</span>
+
+<span class="n">CheckpointManager</span><span class="p">(</span>
+    <span class="n">directory</span><span class="p">,</span>
+    <span class="n">item_names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,),</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">CheckpointManagerOptions</span><span class="p">(</span>
+        <span class="n">temporary_path_class</span><span class="o">=</span><span class="n">atomicity</span><span class="o">.</span><span class="n">CommitFileTemporaryPath</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="temporarypath">
+<h2>TemporaryPath<a class="headerlink" href="#temporarypath" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.atomicity.</span></span><span class="sig-name descname"><span class="pre">TemporaryPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L67#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath" title="Permalink to this definition">#</a></dt>
+<dd><p>Class that represents a temporary path.</p>
+<p>Importantly, the temporary path always has a corresponding finalized path, and
+is primarily constructed from this path. The class contains logic to create
+the temporary path, and to finalize it into the final path.</p>
+<p>NOTE: All methods are intended to be called across all active processes,
+except for <cite>finalize</cite>, which is only called on the primary host.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.from_final">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L78#L92"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.from_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.from_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a TemporaryPath from a final path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#orbax.checkpoint.path.atomicity.TemporaryPath" title="orbax.checkpoint.path.atomicity.TemporaryPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemporaryPath</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.match">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L94#L97"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.match" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines if <cite>temporary_path</cite> could correspond to <cite>final_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L99#L101"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs the temporary path without actually creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.get_final">
+<span class="sig-name descname"><span class="pre">get_final</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L103#L105"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.get_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the final path without creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FileOptions(path_permission_mode=None)</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L107#L113"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates the temporary path on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L115#L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#TemporaryPath.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Finalizes the temporary path into the final path.</p>
+<p>NOTE: This method is only called on the primary host. This is in contrast
+with all other methods in this class, which are called across all active
+processes.</p>
+<p>This function is called from a background thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1087#L1113"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.TemporaryPath.__subclasshook__">
+<span class="sig-name descname"><span class="pre">__subclasshook__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1200#L1236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__subclasshook__" title="Permalink to this definition">#</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="atomicrenametemporarypath">
+<h2>AtomicRenameTemporaryPath<a class="headerlink" href="#atomicrenametemporarypath" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.atomicity.</span></span><span class="sig-name descname"><span class="pre">AtomicRenameTemporaryPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L231#L351"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath" title="Permalink to this definition">#</a></dt>
+<dd><p>TemporaryPath implementation that uses atomic rename.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L234#L260"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.from_final">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L262#L281"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.from_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.from_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a TemporaryPath from a final path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath" title="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.match">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L283#L290"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.match" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines if <cite>temporary_path</cite> could correspond to <cite>final_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L292#L293"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs the temporary path without actually creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get_final">
+<span class="sig-name descname"><span class="pre">get_final</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L295#L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.get_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the final path without creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FileOptions(path_permission_mode=None)</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L298#L329"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a non-deterministic tmp directory for saving for given <cite>final_dir</cite>.</p>
+<p>Also writes checkpoint metadata in the tmp directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">FileOptions</span></code>) – FileOptions object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The tmp directory.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – if tmp directory already exists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L331#L344"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#AtomicRenameTemporaryPath.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Finalizes atomic save by renaming tmp_dir or writing a success file.</p>
+<p>Updates checkpoint metadata with commit_timestamp_nsecs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__subclasshook__">
+<span class="sig-name descname"><span class="pre">__subclasshook__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1200#L1236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__subclasshook__" title="Permalink to this definition">#</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="commitfiletemporarypath">
+<h2>CommitFileTemporaryPath<a class="headerlink" href="#commitfiletemporarypath" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.atomicity.</span></span><span class="sig-name descname"><span class="pre">CommitFileTemporaryPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L354#L467"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath" title="Permalink to this definition">#</a></dt>
+<dd><p>TemporaryPath implementation that uses a commit file.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L357#L383"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.from_final">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_final</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_metadata_store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L385#L404"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.from_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.from_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a TemporaryPath from a final path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath" title="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommitFileTemporaryPath</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.match">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L406#L411"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.match" title="Permalink to this definition">#</a></dt>
+<dd><p>Determines if <cite>temporary_path</cite> could correspond to <cite>final_path</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L413#L414"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get" title="Permalink to this definition">#</a></dt>
+<dd><p>Constructs the temporary path without actually creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get_final">
+<span class="sig-name descname"><span class="pre">get_final</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L416#L417"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.get_final"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get_final" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the final path without creating it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FileOptions(path_permission_mode=None)</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L419#L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.create" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a non-deterministic tmp directory for saving for given <cite>final_dir</cite>.</p>
+<p>Also writes checkpoint metadata in the tmp directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">FileOptions</span></code>) – FileOptions object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The tmp directory.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FileExistsError</strong> – if tmp directory already exists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.finalize">
+<span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L451#L467"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#CommitFileTemporaryPath.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.finalize" title="Permalink to this definition">#</a></dt>
+<dd><p>Finalizes atomic save by renaming tmp_dir or writing a success file.</p>
+<p>Updates checkpoint metadata with commit_timestamp_nsecs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__subclasshook__">
+<span class="sig-name descname"><span class="pre">__subclasshook__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1200#L1236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__subclasshook__" title="Permalink to this definition">#</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.get_default_temporary_path_class">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.atomicity.</span></span><span class="sig-name descname"><span class="pre">get_default_temporary_path_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L470#L476"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#get_default_temporary_path_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.get_default_temporary_path_class" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code>[<a class="reference internal" href="#orbax.checkpoint.path.atomicity.TemporaryPath" title="orbax.checkpoint.path.atomicity.TemporaryPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemporaryPath</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.path.atomicity.on_commit_callback">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.path.atomicity.</span></span><span class="sig-name descname"><span class="pre">on_commit_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmp_dir</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_start_time</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/path/atomicity.py#L479#L495"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/path/atomicity.html#on_commit_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.path.atomicity.on_commit_callback" title="Permalink to this definition">#</a></dt>
+<dd><p>To commit save operation, atomically finalizes step dir.</p>
+<p>Records save duration and lineage-logs step dir.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tmp_dir</strong> (<a class="reference internal" href="#orbax.checkpoint.path.atomicity.TemporaryPath" title="orbax.checkpoint.path.atomicity.TemporaryPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">TemporaryPath</span></code></a>) – A temporary checkpoint directory, where the checkpoint data is
+currently saved.</p></li>
+<li><p><strong>checkpoint_start_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The time at which checkpoint saving began.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.type_handlers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">TypeHandlers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.path.step.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Step entities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporarypath">TemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath"><code class="docutils literal notranslate"><span class="pre">TemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.TemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">TemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atomicrenametemporarypath">AtomicRenameTemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.AtomicRenameTemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">AtomicRenameTemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commitfiletemporarypath">CommitFileTemporaryPath</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__init__"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.from_final"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.from_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.match"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.match()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.get_final"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.get_final()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.create"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.create()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.finalize"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.finalize()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.CommitFileTemporaryPath.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">CommitFileTemporaryPath.__subclasshook__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.get_default_temporary_path_class"><code class="docutils literal notranslate"><span class="pre">get_default_temporary_path_class()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.path.atomicity.on_commit_callback"><code class="docutils literal notranslate"><span class="pre">on_commit_callback()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.path.atomicity.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:19 GMT -->
+</html>

@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/async_checkpointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.async_checkpointer &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/async_checkpointer';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/async_checkpointer", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.async_checkpointer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;AsyncCheckpointer.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">async_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_args</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpointer</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">future</span> <span class="k">as</span> <span class="n">future_lib</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">multihost</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint.metadata</span> <span class="kn">import</span> <span class="n">checkpoint</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint.path</span> <span class="kn">import</span> <span class="n">atomicity</span>
+
+
+<span class="n">BarrierSyncFn</span> <span class="o">=</span> <span class="n">multihost</span><span class="o">.</span><span class="n">BarrierSyncFn</span>
+
+
+<span class="k">def</span> <span class="nf">_on_commit_callback</span><span class="p">(</span>
+    <span class="n">tmpdir</span><span class="p">:</span> <span class="n">atomicity</span><span class="o">.</span><span class="n">TemporaryPath</span><span class="p">,</span>
+    <span class="n">checkpoint_start_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Finalize atomic save and record checkpoint save metrics.&quot;&quot;&quot;</span>
+  <span class="n">atomicity</span><span class="o">.</span><span class="n">on_commit_callback</span><span class="p">(</span>
+      <span class="n">tmpdir</span><span class="p">,</span> <span class="n">checkpoint_start_time</span><span class="o">=</span><span class="n">checkpoint_start_time</span>
+  <span class="p">)</span>
+  <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+      <span class="s1">&#39;/jax/checkpoint/write/async/total_duration_secs&#39;</span><span class="p">,</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkpoint_start_time</span><span class="p">,</span>
+  <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_AsyncManager</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Helper class for background checkpoint saving work orchestration.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="o">*</span><span class="p">,</span>
+      <span class="n">barrier_sync_fn</span><span class="p">:</span> <span class="n">multihost</span><span class="o">.</span><span class="n">BarrierSyncFn</span><span class="p">,</span>
+      <span class="n">timeout_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+      <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">barrier_sync_key_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s1">&#39;Using timeout: </span><span class="si">%d</span><span class="s1"> secs and primary_host=</span><span class="si">%s</span><span class="s1"> for async checkpoint&#39;</span>
+        <span class="s1">&#39; writes&#39;</span><span class="p">,</span>
+        <span class="n">timeout_secs</span><span class="p">,</span>
+        <span class="n">primary_host</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_secs</span> <span class="o">=</span> <span class="n">timeout_secs</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span> <span class="o">=</span> <span class="n">primary_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span> <span class="o">=</span> <span class="n">barrier_sync_key_prefix</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">timeout_in_ms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_secs</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_sync_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">barrier_sync_fn</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="n">timeout_in_ms</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+          <span class="s1">&#39;Please add `.wait_until_finished()` in the main thread &#39;</span>
+          <span class="s1">&#39;before your program finishes because there is a &#39;</span>
+          <span class="s1">&#39;possibility of losing errors raised if the &#39;</span>
+          <span class="s1">&#39;this class is deleted before writing is completed.&#39;</span>
+      <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_thread_func</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">commit_futures</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">future_lib</span><span class="o">.</span><span class="n">Future</span><span class="p">],</span>
+      <span class="n">on_commit_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="kc">None</span><span class="p">],</span>
+      <span class="n">unique_operation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Awaits on commit futures and finalizes the checkpoint.&quot;&quot;&quot;</span>
+    <span class="c1"># The unique_operation_id allows pre-selecting an identifier to use for the</span>
+    <span class="c1"># barriers in this background thread. If we have multiple background</span>
+    <span class="c1"># threads running concurrently, relying on _module_unique_count can result</span>
+    <span class="c1"># in deadlocks when threads on different processes arrive at the barriers</span>
+    <span class="c1"># in a certain order.</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">current_process</span> <span class="o">=</span> <span class="n">multihost</span><span class="o">.</span><span class="n">process_index</span><span class="p">()</span>
+      <span class="n">process_count</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">process_count</span><span class="p">()</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+          <span class="s1">&#39;Starting commit to storage layer by process: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">current_process</span>
+      <span class="p">)</span>
+      <span class="n">thread_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+      <span class="c1"># Wait for commit operations to complete.</span>
+      <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">commit_futures</span><span class="p">:</span>
+        <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+          <span class="s1">&#39;Finished committing to storage layer by process: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">current_process</span>
+      <span class="p">)</span>
+      <span class="c1"># Log the number of async writes that are in flight. Abuses a duration</span>
+      <span class="c1"># metric as a counter since jax.monitoring only has events and durations.</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+          <span class="s1">&#39;/jax/checkpoint/write/async/commit_future_count&#39;</span><span class="p">,</span>
+          <span class="nb">len</span><span class="p">(</span><span class="n">commit_futures</span><span class="p">),</span>
+      <span class="p">)</span>
+
+      <span class="c1"># Log the per process storage commit latency excluding the barrier time.</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+          <span class="s1">&#39;/jax/checkpoint/write/async/commit_duration_sec&#39;</span><span class="p">,</span>
+          <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">thread_start_time</span><span class="p">,</span>
+      <span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">process_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># All processes will wait at the barrier. When all processes are at the</span>
+        <span class="c1"># barrier, the barrier will be satisfied. If not, then it will timeout.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sync_fn</span><span class="p">(</span>
+            <span class="n">multihost</span><span class="o">.</span><span class="n">unique_barrier_key</span><span class="p">(</span>
+                <span class="s1">&#39;async_write_complete&#39;</span><span class="p">,</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span><span class="p">,</span>
+                <span class="n">suffix</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">directory</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">unique_operation_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_primary_host</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span><span class="p">):</span>
+        <span class="n">on_commit_callback</span><span class="p">()</span>
+      <span class="k">if</span> <span class="n">process_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Block until process 0 completes on_commit_callback.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sync_fn</span><span class="p">(</span>
+            <span class="n">multihost</span><span class="o">.</span><span class="n">unique_barrier_key</span><span class="p">(</span>
+                <span class="s1">&#39;async_commit_complete&#39;</span><span class="p">,</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span><span class="p">,</span>
+                <span class="n">suffix</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">directory</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">unique_operation_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+      <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+          <span class="s1">&#39;/jax/checkpoint/write/async/thread_duration_sec&#39;</span><span class="p">,</span>
+          <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">thread_start_time</span><span class="p">,</span>
+      <span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-exception-caught</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="n">e</span>
+
+  <span class="k">def</span> <span class="nf">start_async_commit</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">commit_futures</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">future_lib</span><span class="o">.</span><span class="n">Future</span><span class="p">],</span>
+      <span class="n">on_commit_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="kc">None</span><span class="p">],</span>
+      <span class="n">unique_operation_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Completes checkpoint save in a background thread.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span>
+        <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_thread_func</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span>
+            <span class="n">directory</span><span class="p">,</span>
+            <span class="n">commit_futures</span><span class="p">,</span>
+            <span class="n">on_commit_callback</span><span class="p">,</span>
+            <span class="n">unique_operation_id</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">check_for_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Surfaces any errors from the background commit operations.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="c1"># Clears self._exception so it is only raised once.</span>
+      <span class="n">exception</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="k">raise</span> <span class="n">exception</span>  <span class="c1"># pylint: disable=raising-bad-type</span>
+
+  <span class="k">def</span> <span class="nf">wait_until_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Waits for any outstanding operations to complete.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Commit thread joined successfully&#39;</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">check_for_errors</span><span class="p">()</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Commit thread error check finished successfully&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AsyncCheckpointer"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer">[docs]</a><span class="k">class</span> <span class="nc">AsyncCheckpointer</span><span class="p">(</span><span class="n">checkpointer</span><span class="o">.</span><span class="n">Checkpointer</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;An asynchronous implementation of Checkpointer.</span>
+
+<span class="sd">  Save operations take place in a background thread (this functionality is</span>
+<span class="sd">  provided by AsyncManager). Users should call `wait_until_finished` to block</span>
+<span class="sd">  until a save operation running in the background is complete.</span>
+
+<span class="sd">  Like its parent, AsyncCheckpointer also makes use of an underlying</span>
+<span class="sd">  CheckpointHandler to deal with type-specific logic.</span>
+
+<span class="sd">  Please see `Checkpointer` documentation for more generic usage instructions.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">_handler</span><span class="p">:</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span>
+
+  <span class="c1"># Options mirror checkpoint_manager.AsyncOptions.</span>
+<div class="viewcode-block" id="AsyncCheckpointer.__init__"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">handler</span><span class="p">:</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">,</span>
+      <span class="n">timeout_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span>
+      <span class="o">*</span><span class="p">,</span>
+      <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">active_processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">barrier_sync_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">multihost</span><span class="o">.</span><span class="n">BarrierSyncFn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">barrier_sync_key_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">post_finalization_callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">path_permission_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">checkpoint_metadata_store</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
+          <span class="n">checkpoint</span><span class="o">.</span><span class="n">CheckpointMetadataStore</span>
+      <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">temporary_path_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">atomicity</span><span class="o">.</span><span class="n">TemporaryPath</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">):</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event</span><span class="p">(</span><span class="s1">&#39;/jax/orbax/async_checkpointer/init&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">has_registered_args</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+          <span class="s1">&#39;No registered CheckpointArgs found for handler type: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+          <span class="nb">type</span><span class="p">(</span><span class="n">handler</span><span class="p">),</span>
+      <span class="p">)</span>
+      <span class="n">handler</span> <span class="o">=</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">get_legacy_handler_wrapper</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+      <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+          <span class="n">handler</span><span class="p">,</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span>
+      <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">handler</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span> <span class="o">=</span> <span class="n">primary_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_active_processes</span> <span class="o">=</span> <span class="n">active_processes</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_post_finalization_callback</span> <span class="o">=</span> <span class="n">post_finalization_callback</span>
+    <span class="n">unique_class_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unique_operation_id</span><span class="p">()</span>
+    <span class="n">barrier_sync_key_prefix</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">unique_class_id</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">barrier_sync_key_prefix</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">barrier_sync_key_prefix</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">unique_class_id</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span> <span class="o">=</span> <span class="n">barrier_sync_key_prefix</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_path_permission_mode</span> <span class="o">=</span> <span class="n">path_permission_mode</span>  <span class="c1"># e.g. 0o750</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata_store</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">checkpoint_metadata_store</span>
+        <span class="ow">or</span> <span class="n">checkpoint</span><span class="o">.</span><span class="n">checkpoint_metadata_store</span><span class="p">(</span><span class="n">enable_write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_temporary_path_class</span> <span class="o">=</span> <span class="n">temporary_path_class</span>
+
+    <span class="c1"># TODO(dicentra): consider folding into AsyncCheckpointer directly.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_async_manager</span> <span class="o">=</span> <span class="n">_AsyncManager</span><span class="p">(</span>
+        <span class="n">barrier_sync_fn</span><span class="o">=</span><span class="n">barrier_sync_fn</span>
+        <span class="ow">or</span> <span class="n">multihost</span><span class="o">.</span><span class="n">get_barrier_sync_fn</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">active_processes</span><span class="p">),</span>
+        <span class="n">timeout_secs</span><span class="o">=</span><span class="n">timeout_secs</span><span class="p">,</span>
+        <span class="n">primary_host</span><span class="o">=</span><span class="n">primary_host</span><span class="p">,</span>
+        <span class="n">barrier_sync_key_prefix</span><span class="o">=</span><span class="n">barrier_sync_key_prefix</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+  <span class="k">def</span> <span class="nf">_unique_operation_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">multihost</span><span class="o">.</span><span class="n">counters</span><span class="o">.</span><span class="n">async_save_counter</span><span class="p">()</span>
+
+<div class="viewcode-block" id="AsyncCheckpointer.save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.save">[docs]</a>  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves the given item to the provided directory.</span>
+
+<span class="sd">    Delegates to the underlying CheckpointHandler. Ensures save operation</span>
+<span class="sd">    atomicity. Must first block until any previous save operations running in</span>
+<span class="sd">    the background are completed.</span>
+
+<span class="sd">    This method should be called by all hosts - process synchronization and</span>
+<span class="sd">    actions that need to be performed on only one host are managed internally.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: a path to which to save.</span>
+<span class="sd">      *args: additional args to provide to the CheckpointHandler&#39;s save method.</span>
+<span class="sd">      force: if True, allows overwriting an existing directory. May add overhead</span>
+<span class="sd">        due to the need to delete any existing files.</span>
+<span class="sd">      **kwargs: additional keyword args to provide to the CheckpointHandler&#39;s</span>
+<span class="sd">        save method.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">      ValueError if the provided directory already exists.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">checkpoint_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">directory</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">force</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_primary_host</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span><span class="p">):</span>
+          <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Specified `force`: removing existing directory.&#39;</span><span class="p">)</span>
+          <span class="n">directory</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>  <span class="c1"># Post-sync handled by create_tmp_directory.</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Destination </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1"> already exists.&#39;</span><span class="p">)</span>
+    <span class="n">tmpdir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_temporary_path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Async saving checkpoint to </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
+    <span class="c1"># Run copy ops.</span>
+    <span class="c1"># Try to save using new CheckpointArgs API if supported by the handler.</span>
+    <span class="n">ckpt_args</span> <span class="o">=</span> <span class="n">checkpointer</span><span class="o">.</span><span class="n">construct_checkpoint_args</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span>
+    <span class="n">commit_ops</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">args</span><span class="o">=</span><span class="n">ckpt_args</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">commit_ops</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">commit_ops</span><span class="p">)</span>
+    <span class="n">commit_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">op</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">commit_ops</span> <span class="k">if</span> <span class="n">op</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># Directory is the final directory.</span>
+    <span class="k">def</span> <span class="nf">_callback</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_finalization_callback</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_post_finalization_callback</span><span class="p">()</span>
+      <span class="n">_on_commit_callback</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="n">checkpoint_start_time</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_async_manager</span><span class="o">.</span><span class="n">start_async_commit</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span>
+        <span class="n">commit_futures</span><span class="o">=</span><span class="n">commit_ops</span><span class="p">,</span>
+        <span class="n">on_commit_callback</span><span class="o">=</span><span class="n">_callback</span><span class="p">,</span>
+        <span class="n">unique_operation_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_unique_operation_id</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+        <span class="s1">&#39;/jax/checkpoint/write/async/blocking_duration_secs&#39;</span><span class="p">,</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">checkpoint_start_time</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsyncCheckpointer.restore"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.restore">[docs]</a>  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;See superclass documentation.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsyncCheckpointer.check_for_errors"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.check_for_errors">[docs]</a>  <span class="k">def</span> <span class="nf">check_for_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Surfaces any errors from the background commit operations.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_async_manager</span><span class="o">.</span><span class="n">check_for_errors</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata_store</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AsyncCheckpointer.wait_until_finished"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.wait_until_finished">[docs]</a>  <span class="k">def</span> <span class="nf">wait_until_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Waits for any outstanding operations to finish.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_async_manager</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata_store</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AsyncCheckpointer.close"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpointers.html#orbax.checkpoint.AsyncCheckpointer.close">[docs]</a>  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Waits to finish any outstanding operations before closing.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">()</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata_store</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/async_checkpointer.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

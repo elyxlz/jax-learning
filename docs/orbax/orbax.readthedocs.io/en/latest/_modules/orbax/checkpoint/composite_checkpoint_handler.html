@@ -1,0 +1,1063 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/composite_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.composite_checkpoint_handler &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/composite_checkpoint_handler';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/composite_checkpoint_handler", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.composite_checkpoint_handler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Handler that combines other handlers.</span>
+
+<span class="sd">Usage example:</span>
+
+<span class="sd">```</span>
+<span class="sd">import orbax.checkpoint as ocp</span>
+
+<span class="sd"># A PyTree of jax.Arrays</span>
+<span class="sd">my_state = ...</span>
+<span class="sd"># A dictionary to be serialized as JSON</span>
+<span class="sd">json_dict = ...</span>
+
+<span class="sd">ckptr = ocp.Checkpointer(</span>
+<span class="sd">    ocp.CompositeCheckpointHandler(&#39;state&#39;, &#39;metadata&#39;)</span>
+<span class="sd">)</span>
+<span class="sd">ckptr.save(</span>
+<span class="sd">    path,</span>
+<span class="sd">    args=ocp.args.Composite(</span>
+<span class="sd">        state=ocp.args.StandardSave(my_state),</span>
+<span class="sd">        metadata=ocp.args.JsonSave(json_dict)</span>
+<span class="sd">    )</span>
+<span class="sd">)</span>
+
+<span class="sd">restored = ckptr.restore(</span>
+<span class="sd">    path,</span>
+<span class="sd">    args=ocp.args.Composite(</span>
+<span class="sd">        state=ocp.args.StandardRestore(),</span>
+<span class="sd">        metadata=ocp.args.JsonRestore()</span>
+<span class="sd">    )</span>
+<span class="sd">)</span>
+<span class="sd">my_state = restored.state</span>
+<span class="sd">json_dict = restored.metadata</span>
+<span class="sd">```</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">KeysView</span>
+<span class="kn">import</span> <span class="nn">concurrent.futures</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">AbstractSet</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">nest_asyncio</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">async_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_args</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">future</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">options</span> <span class="k">as</span> <span class="n">options_lib</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">proto_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint.path</span> <span class="kn">import</span> <span class="n">atomicity</span>
+
+<span class="n">CheckpointArgs</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">CheckpointArgs</span>
+<span class="n">Future</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">Future</span>
+<span class="n">CheckpointArgs</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">CheckpointArgs</span>
+<span class="n">CheckpointHandler</span> <span class="o">=</span> <span class="n">checkpoint_handler</span><span class="o">.</span><span class="n">CheckpointHandler</span>
+<span class="n">AsyncCheckpointHandler</span> <span class="o">=</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span>
+<span class="n">register_with_handler</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">register_with_handler</span>
+<span class="n">ProtoCheckpointHandler</span> <span class="o">=</span> <span class="n">proto_checkpoint_handler</span><span class="o">.</span><span class="n">ProtoCheckpointHandler</span>
+<span class="n">ProtoSaveArgs</span> <span class="o">=</span> <span class="n">proto_checkpoint_handler</span><span class="o">.</span><span class="n">ProtoSaveArgs</span>
+
+<span class="n">_CONCURRENT_WORKERS</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">RESERVED_ITEM_NAMES</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+
+<span class="c1"># TODO(b/295899152) Clean up when users are all registering `CheckpointArgs`.</span>
+<span class="k">class</span> <span class="nc">_LegacyCheckpointHandlerWrapper</span><span class="p">(</span><span class="n">checkpoint_handler</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Wrapper for `CheckpointHandler`s without registered `CheckpointArgs`.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">checkpoint_handler</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">handler</span>
+
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;_WrapperArgs&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;_WrapperArgs&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">structure</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;CheckpointHandler of type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">)</span><span class="si">}</span><span class="s1"> has no method&#39;</span>
+        <span class="s1">&#39; `structure`.&#39;</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span>
+    <span class="n">_LegacyCheckpointHandlerWrapper</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">class</span> <span class="nc">_WrapperArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+
+<span class="c1"># TODO(b/295899152) Clean up when users are all registering `CheckpointArgs`.</span>
+<span class="k">class</span> <span class="nc">_AsyncLegacyCheckpointHandlerWrapper</span><span class="p">(</span>
+    <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Wrapper for `CheckpointHandler`s without registered `CheckpointArgs`.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span> <span class="o">=</span> <span class="n">handler</span>
+
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;_AsyncWrapperArgs&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;_AsyncWrapperArgs&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;_AsyncWrapperArgs&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">structure</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;CheckpointHandler of type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="p">)</span><span class="si">}</span><span class="s1"> has no method&#39;</span>
+        <span class="s1">&#39; `structure`.&#39;</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span>
+    <span class="n">_AsyncLegacyCheckpointHandlerWrapper</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">class</span> <span class="nc">_AsyncWrapperArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+
+<span class="k">def</span> <span class="nf">get_legacy_handler_wrapper</span><span class="p">(</span>
+    <span class="n">handler</span><span class="p">:</span> <span class="n">checkpoint_handler</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">checkpoint_handler</span><span class="o">.</span><span class="n">CheckpointHandler</span><span class="p">:</span>
+  <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_AsyncLegacyCheckpointHandlerWrapper</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">_LegacyCheckpointHandlerWrapper</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_maybe_raise_reserved_item_error</span><span class="p">(</span><span class="n">item_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="n">RESERVED_ITEM_NAMES</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cannot specify reserved item name: &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot;.&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">CompositeOptions</span><span class="p">:</span>
+  <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">active_processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">barrier_sync_key_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">temporary_path_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">atomicity</span><span class="o">.</span><span class="n">TemporaryPath</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="CompositeCheckpointHandler"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler">[docs]</a><span class="k">class</span> <span class="nc">CompositeCheckpointHandler</span><span class="p">(</span><span class="n">AsyncCheckpointHandler</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;CheckpointHandler for saving multiple items.</span>
+
+<span class="sd">  As with all `CheckpointHandler` implementations, use only in conjunction with</span>
+<span class="sd">  an instance of `AbstractCheckpointer`.</span>
+
+<span class="sd">  `CompositeCheckpointHandler` allows dealing with multiple items of different</span>
+<span class="sd">  types or logical distinctness, such as training state (PyTree), dataset</span>
+<span class="sd">  iterator, JSON metadata, or anything else. The items managed by the</span>
+<span class="sd">  `CompositeCheckpointHandler` must be specified at initialization.</span>
+
+<span class="sd">  For an individual item, `CompositeCheckpointHandler` provides two mechanisms</span>
+<span class="sd">  for ensuring that the object gets saved and restored as the correct type and</span>
+<span class="sd">  with the correct logic. The item-specific handler can either be (1) specified</span>
+<span class="sd">  when the `CompositeCheckpointHandler` is created, or (2) it can be deferred</span>
+<span class="sd">  (you just need to give the item name up-front). When deferred, the handler</span>
+<span class="sd">  will be determined from which `CheckpointArgs` are provided during the first</span>
+<span class="sd">  call to `save` or `restore`.</span>
+
+<span class="sd">  Usage::</span>
+
+<span class="sd">    ckptr = ocp.Checkpointer(</span>
+<span class="sd">        ocp.CompositeCheckpointHandler(&#39;state&#39;, &#39;metadata&#39;)</span>
+<span class="sd">    )</span>
+<span class="sd">    ckptr.save(directory,</span>
+<span class="sd">        ocp.args.Composite(</span>
+<span class="sd">            # The handler now knows `state` uses `StandardCheckpointHandler`</span>
+<span class="sd">            # and `metadata` uses `JsonCheckpointHandler`. Any subsequent calls</span>
+<span class="sd">            # will have to conform to this assumption.</span>
+<span class="sd">            state=ocp.args.StandardSave(pytree),</span>
+<span class="sd">            metadata=ocp.args.JsonSave(metadata),</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+
+<span class="sd">    restored: ocp.args.Composite = ckptr.restore(directory,</span>
+<span class="sd">        ocp.args.Composite(</span>
+<span class="sd">            state=ocp.args.StandardSave(abstract_pytree),</span>
+<span class="sd">            # Only provide the restoration arguments you actually need.</span>
+<span class="sd">            metadata=ocp.args.JsonRestore(),</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+<span class="sd">    restored.state ...</span>
+<span class="sd">    restored.metadata ...</span>
+
+<span class="sd">    # Skip restoring `metadata` (you can save a subset of items too, in a</span>
+<span class="sd">    # similar fashion).</span>
+<span class="sd">    restored: ocp.args.Composite = ckptr.restore(directory,</span>
+<span class="sd">        ocp.args.Composite(</span>
+<span class="sd">            state=ocp.args.StandardRestore(abstract_pytree),</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+<span class="sd">    restored.state ...</span>
+<span class="sd">    restored.metadata ... # Error</span>
+
+<span class="sd">    # If the per-item handler doesn&#39;t require any extra information in order to</span>
+<span class="sd">    # restore, in many cases you can use the following pattern if you just want</span>
+<span class="sd">    # to restore everything:</span>
+<span class="sd">    restored: ocp.args.Composite = ckptr.restore(directory)</span>
+<span class="sd">    restored.state ...</span>
+<span class="sd">    restored.metadata ...</span>
+
+<span class="sd">    ckptr = ocp.Checkpointer(</span>
+<span class="sd">        ocp.CompositeCheckpointHandler(</span>
+<span class="sd">            &#39;state&#39;,</span>
+<span class="sd">            metadata=ocp.JsonCheckpointHandler()</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+<span class="sd">    ckptr.save(directory,</span>
+<span class="sd">        ocp.args.Composite(</span>
+<span class="sd">            state=ocp.args.StandardSave(pytree),</span>
+<span class="sd">            # Error because `metadata` was specified to use JSON save/restore</span>
+<span class="sd">            # logic, not `StandardCheckpointHandler`.</span>
+<span class="sd">            metadata=ocp.args.StandardSave(metadata),</span>
+<span class="sd">        )</span>
+<span class="sd">    )</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">_known_handlers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CheckpointHandler</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">_current_temporary_paths</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">atomicity</span><span class="o">.</span><span class="n">TemporaryPath</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.__init__"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="o">*</span><span class="n">item_names</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">composite_options</span><span class="p">:</span> <span class="n">CompositeOptions</span> <span class="o">=</span> <span class="n">CompositeOptions</span><span class="p">(),</span>
+      <span class="o">**</span><span class="n">items_and_handlers</span><span class="p">:</span> <span class="n">CheckpointHandler</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
+
+<span class="sd">    All items must be provided up-front, at initialization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      *item_names: A list of string item names that this handler will manage.</span>
+<span class="sd">      composite_options: Options.</span>
+<span class="sd">      **items_and_handlers: A mapping of item name to `CheckpointHandler`</span>
+<span class="sd">        instance, which will be used as the handler for objects of the</span>
+<span class="sd">        corresponding name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CheckpointHandler</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">items_and_handlers</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">item_names</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">_maybe_raise_reserved_item_error</span><span class="p">(</span><span class="n">item_name</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">handler</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">has_registered_args</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s1">&#39;No registered CheckpointArgs found for handler type: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="p">(</span><span class="n">handler</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_legacy_handler_wrapper</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span> <span class="o">=</span> <span class="n">composite_options</span><span class="o">.</span><span class="n">primary_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_active_processes</span> <span class="o">=</span> <span class="n">composite_options</span><span class="o">.</span><span class="n">active_processes</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span> <span class="o">=</span> <span class="n">composite_options</span><span class="o">.</span><span class="n">barrier_sync_key_prefix</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_temporary_path_class</span> <span class="o">=</span> <span class="n">composite_options</span><span class="o">.</span><span class="n">temporary_path_class</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s1">&#39;Initialized item_names=</span><span class="si">%s</span><span class="s1">, _known_handlers=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="n">item_names</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+  <span class="k">def</span> <span class="nf">_get_or_set_handler</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">item_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CheckpointArgs</span><span class="p">],</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CheckpointHandler</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Unknown key &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot;. Please make sure that this key was&#39;</span>
+          <span class="s1">&#39; specified during initialization.&#39;</span>
+      <span class="p">)</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;Provided `None` for `CheckpointArgs`, and the `CheckpointHandler`&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39; for item &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot; was not configured. If saving, this&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39; indicates that &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot; was saved with `None` (an instance&#39;</span>
+            <span class="s1">&#39; of `CheckpointArgs` was expected). If restoring, providing&#39;</span>
+            <span class="s1">&#39; `None` for the item is valid, but only if the `CheckpointHandler&#39;</span>
+            <span class="s1">&#39; was already configured. Provide a `CheckpointArgs` subclass so&#39;</span>
+            <span class="s1">&#39; that `CompositeCheckpointHandler` will know how to restore the&#39;</span>
+            <span class="s1">&#39; item.&#39;</span>
+        <span class="p">)</span>
+      <span class="k">return</span> <span class="n">handler</span>
+
+    <span class="n">registered_handler_cls_for_args</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">get_registered_handler_cls</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">handler</span> <span class="o">=</span> <span class="n">registered_handler_cls_for_args</span><span class="p">()</span>  <span class="c1"># pytype: disable=not-instantiable</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">registered_handler_cls_for_args</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;For item, &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot;, CheckpointHandler </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span><span class="si">}</span><span class="s1"> does not&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39; match with registered handler </span><span class="si">{</span><span class="n">registered_handler_cls_for_args</span><span class="si">}</span><span class="s1">&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39; for provided args of type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="n">handler</span>
+
+  <span class="k">def</span> <span class="nf">_get_item_directory</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">item_name</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">directory</span> <span class="o">/</span> <span class="n">item_name</span>
+
+  <span class="k">def</span> <span class="nf">_get_item_temporary_directory</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">item_name</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">atomicity</span><span class="o">.</span><span class="n">TemporaryPath</span><span class="p">:</span>
+    <span class="n">temporary_path_class</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temporary_path_class</span>
+        <span class="ow">or</span> <span class="n">atomicity</span><span class="o">.</span><span class="n">get_default_temporary_path_class</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">tmp_item_dir</span> <span class="o">=</span> <span class="n">temporary_path_class</span><span class="o">.</span><span class="n">from_final</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">item_name</span><span class="p">),</span>
+        <span class="n">multiprocessing_options</span><span class="o">=</span><span class="n">options_lib</span><span class="o">.</span><span class="n">MultiprocessingOptions</span><span class="p">(</span>
+            <span class="n">primary_host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span><span class="p">,</span>
+            <span class="n">active_processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_active_processes</span><span class="p">,</span>
+            <span class="n">barrier_sync_key_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_barrier_sync_key_prefix</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">tmp_item_dir</span>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.async_save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.async_save">[docs]</a>  <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="s1">&#39;CompositeArgs&#39;</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Future</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves multiple items to individual subdirectories.&quot;&quot;&quot;</span>
+    <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Sort keys to maintain consistent ordering across processes, otherwise</span>
+    <span class="c1"># we may hit timeouts if processes wait at different barriers in per-item</span>
+    <span class="c1"># handlers.</span>
+    <span class="c1"># TODO(b/295899152): Find a less brittle solution or support</span>
+    <span class="c1"># async-compatible barrier function within handlers.</span>
+    <span class="c1"># The main blocker here is that many users with custom CheckpointHandlers</span>
+    <span class="c1"># use barriers in their implementations, which are usually not actually</span>
+    <span class="c1"># needed.</span>
+    <span class="n">item_names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">item_temporary_paths</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_temporary_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="n">item_names</span>
+    <span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_current_temporary_paths</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">item_name</span><span class="p">:</span> <span class="n">item_directory</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">item_directory</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">item_names</span><span class="p">,</span> <span class="n">item_temporary_paths</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_temporary_paths</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+      <span class="n">path</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">item_directory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_temporary_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span>
+      <span class="n">_maybe_raise_reserved_item_error</span><span class="p">(</span><span class="n">item_name</span><span class="p">)</span>
+      <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_or_set_handler</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">AsyncCheckpointHandler</span><span class="p">):</span>
+        <span class="n">futures</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="k">await</span> <span class="n">handler</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="n">item_directory</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">args</span><span class="o">=</span><span class="n">arg</span><span class="p">))</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">item_directory</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">args</span><span class="o">=</span><span class="n">arg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">futures</span></div>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.save">[docs]</a>  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves synchronously.&quot;&quot;&quot;</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">():</span>
+      <span class="c1"># Needed for item handlers that also call `asyncio.run`.</span>
+      <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+      <span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+      <span class="n">commit_futures</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">commit_futures</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">commit_futures</span><span class="p">:</span>
+          <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">async_save</span><span class="p">())</span></div>
+
+  <span class="k">def</span> <span class="nf">_items_exist</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+    <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span>
+        <span class="n">max_workers</span><span class="o">=</span><span class="n">_CONCURRENT_WORKERS</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+      <span class="n">items_exist</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+          <span class="k">lambda</span> <span class="n">item_name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_directory</span><span class="p">(</span>
+              <span class="n">directory</span><span class="p">,</span> <span class="n">item_name</span>
+          <span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span>
+          <span class="n">item_names</span><span class="p">,</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">item_name</span><span class="p">:</span> <span class="n">exists</span> <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">exists</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">item_names</span><span class="p">,</span> <span class="n">items_exist</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.restore"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.restore">[docs]</a>  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;CompositeArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CompositeResults&#39;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restores the provided item synchronously.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: Path to restore from.</span>
+<span class="sd">      args: CompositeArgs object used to restore individual sub-items. May be</span>
+<span class="sd">        None or &quot;empty&quot; (`CompositeArgs()`), which is used to indicate that the</span>
+<span class="sd">        handler should restore everything. If an individual item was not</span>
+<span class="sd">        specified during the save, `None` will be returned for that item&#39;s</span>
+<span class="sd">        entry.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      A CompositeResults object with keys matching `CompositeArgs`, or with keys</span>
+<span class="sd">      for all known items as specified at creation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items_exist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items_exist</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">composite_args_items</span> <span class="o">=</span> <span class="p">{}</span>
+      <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">items_exist</span><span class="p">[</span><span class="n">item_name</span><span class="p">]:</span>
+          <span class="n">composite_args_items</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+          <span class="k">continue</span>
+        <span class="c1"># Skip reserved items unless specifically requested.</span>
+        <span class="k">if</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="n">RESERVED_ITEM_NAMES</span><span class="p">:</span>
+          <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+          <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+              <span class="sa">f</span><span class="s1">&#39;Item with name: &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot; had an undetermined&#39;</span>
+              <span class="s1">&#39; `CheckpointHandler` when restoring. Please ensure the handler&#39;</span>
+              <span class="s1">&#39; was specified during initialization, or use the appropriate&#39;</span>
+              <span class="s1">&#39; `CheckpointArgs` subclass to indicate the item type.&#39;</span>
+          <span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">restore_ckpt_args_cls</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">get_registered_args_cls</span><span class="p">(</span>
+            <span class="n">handler</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+          <span class="n">composite_args_items</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">restore_ckpt_args_cls</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+          <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+              <span class="s1">&#39;Attempted to construct default restoration arguments for item&#39;</span>
+              <span class="sa">f</span><span class="s1">&#39; &quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s1">&quot;, but the `CheckpointArgs` class of type&#39;</span>
+              <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">restore_ckpt_args_cls</span><span class="si">}</span><span class="s1"> is not default constructible. Original&#39;</span>
+              <span class="sa">f</span><span class="s1">&#39; error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">.&#39;</span>
+          <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+      <span class="n">args</span> <span class="o">=</span> <span class="n">CompositeArgs</span><span class="p">(</span><span class="o">**</span><span class="n">composite_args_items</span><span class="p">)</span>
+
+    <span class="n">restored</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Sort keys to maintain consistent ordering across processes, otherwise</span>
+    <span class="c1"># we may hit timeouts if processes wait at different barriers in per-item</span>
+    <span class="c1"># handlers.</span>
+    <span class="c1"># TODO(b/295899152): Find a less brittle solution or support</span>
+    <span class="c1"># async-compatible barrier function.</span>
+    <span class="k">for</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+      <span class="n">arg</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">items_exist</span><span class="p">[</span><span class="n">item_name</span><span class="p">]:</span>
+        <span class="n">restored</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">continue</span>
+      <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_or_set_handler</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+      <span class="n">restored</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">item_name</span><span class="p">),</span> <span class="n">args</span><span class="o">=</span><span class="n">arg</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="n">CompositeResults</span><span class="p">(</span><span class="o">**</span><span class="n">restored</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.metadata"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.metadata">[docs]</a>  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CompositeResults&#39;</span><span class="p">:</span>
+    <span class="n">items_exist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items_exist</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">items_exist</span><span class="p">[</span><span class="n">item_name</span><span class="p">]:</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">continue</span>
+      <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_directory</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">CompositeResults</span><span class="p">(</span><span class="o">**</span><span class="n">metadata</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.finalize"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.finalize">[docs]</a>  <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_temporary_paths</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;finalize() called before any items were saved.&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">tmp_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_temporary_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">tmp_dir</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">handler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Not an error, as some items may not have been saved.</span>
+        <span class="k">continue</span>
+      <span class="n">handler</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">tmp_dir</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+      <span class="n">tmp_dir</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CompositeCheckpointHandler.close"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.CompositeCheckpointHandler.close">[docs]</a>  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_known_handlers</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div></div>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span>
+    <span class="n">CompositeCheckpointHandler</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">class</span> <span class="nc">CompositeArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Args for wrapping multiple checkpoint items together.</span>
+
+<span class="sd">  For simplicity, this object is immutable (although objects attached to it</span>
+<span class="sd">  may be mutable).</span>
+
+<span class="sd">  Generally, this object can be treated as a key-value store similar to a dict.</span>
+
+<span class="sd">  Usage examples::</span>
+
+<span class="sd">    CompositeArgs(</span>
+<span class="sd">        state=my_train_state,</span>
+<span class="sd">        dataset=my_dataset,</span>
+<span class="sd">        metadata=json_metadata,</span>
+<span class="sd">    )</span>
+
+<span class="sd">    CompositeArgs(</span>
+<span class="sd">        **{</span>
+<span class="sd">            &#39;state&#39;: my_train_state,</span>
+<span class="sd">            &#39;dataset&#39;: my_dataset,</span>
+<span class="sd">            &#39;metadata&#39;: json_metadata,</span>
+<span class="sd">          }</span>
+<span class="sd">    )</span>
+
+<span class="sd">    args = CompositeArgs(...)</span>
+<span class="sd">    args.state</span>
+<span class="sd">    args[&#39;state&#39;]</span>
+<span class="sd">    &#39;state&#39; in args</span>
+
+<span class="sd">    for key, value in args.items():</span>
+<span class="sd">      ...</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">__items__</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">items</span><span class="p">:</span> <span class="n">CheckpointArgs</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;__items__&#39;</span><span class="p">,</span> <span class="n">items</span><span class="p">)</span>
+
+    <span class="n">reserved_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="c1"># Reserve and prevent users from setting keys that start with &#39;__&#39;. These</span>
+      <span class="c1"># may be used later to define options for CompositeCheckpointManager.</span>
+      <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Composite keys cannot start with &quot;__&quot;. Got: </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">reserved_keys</span><span class="p">:</span>
+        <span class="c1"># We do not raise an error if the user specifies a key that matches an</span>
+        <span class="c1"># existing attribute (like &#39;keys&#39;, &#39;values&#39;, &#39;items&#39;). These can be</span>
+        <span class="c1"># accessed through self[key], but not self.key.</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CheckpointArgs</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Unknown key: </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">. Available keys: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span>
+
+  <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+    <span class="k">del</span> <span class="n">key</span>
+    <span class="k">del</span> <span class="n">value</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;CompositeArgs is immutable after initialization.&#39;</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeysView</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Collection</span><span class="p">[</span><span class="n">CheckpointArgs</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AbstractSet</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">]]:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CheckpointArgs</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">default</span>
+
+  <span class="k">def</span> <span class="fm">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;CompositeArgs&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CompositeArgs&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+      <span class="n">other</span> <span class="o">=</span> <span class="n">CompositeArgs</span><span class="p">(</span><span class="o">**</span><span class="n">other</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">CompositeArgs</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items__</span> <span class="o">&amp;</span> <span class="n">other</span><span class="o">.</span><span class="n">__items__</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;CompositeArgs&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CompositeArgs&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+      <span class="n">other</span> <span class="o">=</span> <span class="n">CompositeArgs</span><span class="p">(</span><span class="o">**</span><span class="n">other</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">CompositeArgs</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items__</span> <span class="o">|</span> <span class="n">other</span><span class="o">.</span><span class="n">__items__</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;CompositeArgs(</span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items__</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span>
+
+
+<span class="c1"># Returned object of CompositeCheckpointHandler is an alias of CompositeArgs.</span>
+<span class="n">CompositeResults</span> <span class="o">=</span> <span class="n">CompositeArgs</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/composite_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

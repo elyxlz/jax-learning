@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/orbax_export_101.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Exporting with Orbax &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'orbax_export_101';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="orbax.export API Reference" href="api_reference/export.html" />
+    <link rel="prev" title="Checkpoint logging" href="api_reference/checkpoint.logging.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "orbax_export_101", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".ipynb", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/orbax_export_101.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exporting with Orbax</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting">Exporting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-overview">API Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-usage">Simple Example Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation">Limitation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxmodule-only-take-single-arg-as-the-input">“JaxModule only take single arg as the input”.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating">Validating</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Simple Example Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Limitation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="exporting-with-orbax">
+<h1>Exporting with Orbax<a class="headerlink" href="#exporting-with-orbax" title="Permalink to this heading">#</a></h1>
+<p>Orbax Export is a library for exporting JAX models to TensorFlow
+<a class="reference external" href="https://www.tensorflow.org/guide/saved_model">SavedModel</a> format.</p>
+<section id="exporting">
+<h2>Exporting<a class="headerlink" href="#exporting" title="Permalink to this heading">#</a></h2>
+<section id="api-overview">
+<h3>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this heading">#</a></h3>
+<p>Orbax Export provides three classes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JaxModule</span></code>
+wraps a JAX function and its parameters to an exportable and callable
+closure.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ServingConfig</span></code>
+defines a serving configuration for a <code class="docutils literal notranslate"><span class="pre">JaxModule</span></code>, including
+<a class="reference external" href="https://www.tensorflow.org/guide/saved_model#specifying_signatures_during_export">a signature key and an input signature</a>, and optionally pre- and
+post-processing functions and extra <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/saved_model/experimental/TrackableResource">TrackableResources</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ExportManager</span></code>
+builds the actual <a class="reference external" href="https://www.tensorflow.org/guide/saved_model#specifying_signatures_during_export">serving signatures</a> based on a <code class="docutils literal notranslate"><span class="pre">JaxModule</span></code> and a list
+of <code class="docutils literal notranslate"><span class="pre">ServingConfig</span></code>s, and saves them to the SavedModel format. It is for CPU.
+Users can inherit <code class="docutils literal notranslate"><span class="pre">ExportManager</span></code> class and create their own “ExportManager”
+for different hardwares.</p></li>
+</ul>
+</section>
+<section id="simple-example-usage">
+<h3>Simple Example Usage<a class="headerlink" href="#simple-example-usage" title="Permalink to this heading">#</a></h3>
+<section id="setup">
+<h4>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h4>
+<p>Before start model exporting, users should have the JAX model and its model params, preprocess, postprocess function ready.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Orbax Export classes.</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">ExportManager</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">JaxModule</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">ServingConfig</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1"># Prepare the parameters and model function to export.</span>
+<span class="n">example1_params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">5.0</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">1.1</span><span class="p">),</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">0.55</span><span class="p">)}</span> <span class="c1"># A pytree of the JAX model parameters.</span>
+
+<span class="c1"># model f(x) = a * sin(x) + b * x + c, here (a, b, c) are model parameters</span>
+<span class="k">def</span> <span class="nf">example1_model_fn</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>  <span class="c1"># The JAX model function to export.</span>
+  <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">inputs</span> <span class="o">+</span> <span class="n">c</span>
+
+<span class="k">def</span> <span class="nf">example1_preprocess</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>  <span class="c1"># Optional: preprocessor in TF.</span>
+  <span class="n">norm_inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">map_structure</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">/</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">reduce_max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">inputs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">norm_inputs</span>
+
+<span class="k">def</span> <span class="nf">example1_postprocess</span><span class="p">(</span><span class="n">model_fn_outputs</span><span class="p">):</span>  <span class="c1"># Optional: post-processor in TF.</span>
+  <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;outputs&#39;</span><span class="p">:</span> <span class="n">model_fn_outputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-07-18 22:33:31.277557: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-07-18 22:33:31.296776: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8454] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-07-18 22:33:31.302305: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1452] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-07-18 22:33:32.293931: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="mi">16</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">model_outputs</span> <span class="o">=</span> <span class="n">example1_postprocess</span><span class="p">(</span><span class="n">example1_model_fn</span><span class="p">(</span><span class="n">example1_params</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">example1_preprocess</span><span class="p">(</span><span class="n">inputs</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model output: &quot;</span><span class="p">,</span> <span class="n">model_outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model output:  {&#39;outputs&#39;: Array([ 3.2497077 ,  0.71577436,  5.2752213 ,  1.7577755 , -0.14171076,
+        2.3438435 ,  0.38742545,  3.5236475 , -6.2990017 ,  2.8615575 ,
+        3.301152  , -1.3622999 , -1.3470116 , -0.14385182,  0.9656446 ,
+        5.8573546 ], dtype=float32)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Exporting a JAX model to a CPU SavedModel</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1"># Construct a JaxModule where JAX-&gt;TF conversion happens.</span>
+<span class="n">jax_module</span> <span class="o">=</span> <span class="n">JaxModule</span><span class="p">(</span><span class="n">example1_params</span><span class="p">,</span> <span class="n">example1_model_fn</span><span class="p">)</span>
+<span class="c1"># Export the JaxModule along with one or more serving configs.</span>
+<span class="n">export_mgr</span> <span class="o">=</span> <span class="n">ExportManager</span><span class="p">(</span>
+  <span class="n">jax_module</span><span class="p">,</span> <span class="p">[</span>
+    <span class="n">ServingConfig</span><span class="p">(</span>
+      <span class="s1">&#39;serving_default&#39;</span><span class="p">,</span>
+      <span class="n">input_signature</span><span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)],</span>
+      <span class="n">tf_preprocessor</span><span class="o">=</span><span class="n">example1_preprocess</span><span class="p">,</span>
+      <span class="n">tf_postprocessor</span><span class="o">=</span><span class="n">example1_postprocess</span>
+    <span class="p">),</span>
+<span class="p">])</span>
+<span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/example1_output_dir&#39;</span>
+<span class="n">export_mgr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Assets written to: /tmp/example1_output_dir/assets
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Assets written to: /tmp/example1_output_dir/assets
+</pre></div>
+</div>
+</div>
+</div>
+<p>Load the TF saved_model model back and run it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loaded_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">loaded_model_outputs</span> <span class="o">=</span> <span class="n">loaded_model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loaded model output: &quot;</span><span class="p">,</span> <span class="n">loaded_model_outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaded model output:  {&#39;outputs&#39;: &lt;tf.Tensor: shape=(16,), dtype=float32, numpy=
+array([ 3.2497075 ,  0.71577436,  5.2752213 ,  1.7577755 , -0.14171076,
+        2.3438435 ,  0.38742545,  3.5236478 , -6.2990017 ,  2.8615575 ,
+        3.301152  , -1.3622999 , -1.3470116 , -0.14385182,  0.9656446 ,
+        5.857355  ], dtype=float32)&gt;}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1721342013.875786    1226 service.cc:146] XLA service 0x7fab9c008320 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1721342013.875832    1226 service.cc:154]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1721342013.900130    1226 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">model_outputs</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">],</span> <span class="n">loaded_model_outputs</span><span class="p">[</span><span class="s1">&#39;outputs&#39;</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="limitation">
+<h3>Limitation<a class="headerlink" href="#limitation" title="Permalink to this heading">#</a></h3>
+<section id="jaxmodule-only-take-single-arg-as-the-input">
+<h4>“JaxModule only take single arg as the input”.<a class="headerlink" href="#jaxmodule-only-take-single-arg-as-the-input" title="Permalink to this heading">#</a></h4>
+<p>This error message means the JAX funtion <code class="docutils literal notranslate"><span class="pre">model_fn</span></code> only can take single arg as the input.
+Orbax is designed to take a JAX Module in the format of a Callable with
+parameters of type PyTree and model inputs of type PyTree. If your JAX function
+takes multiple inputs, you must pack them into a single JAX PyTree. Otherwise,
+you will encounter this error message.</p>
+<p>To solve this problem, you can update the <code class="docutils literal notranslate"><span class="pre">ServingConfig.tf_preprocessor</span></code>
+function to pack the inputs into a single JAX PyTree. For example, our model
+takes two inputs <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. You can define the <code class="docutils literal notranslate"><span class="pre">ServingConfig.tf_preprocessor</span></code>
+pack them into a list <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example2_params</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># A pytree of the JAX model parameters.</span>
+
+<span class="k">def</span> <span class="nf">example2_model_fn</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">inputs</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">example2_preprocessor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="c1"># put the normal tf_preprocessor codes here.</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="c1"># pack it into a single list for jax model_func.</span>
+
+<span class="n">jax_module</span> <span class="o">=</span> <span class="n">JaxModule</span><span class="p">(</span><span class="n">example2_params</span><span class="p">,</span> <span class="n">example2_model_fn</span><span class="p">)</span>
+<span class="n">export_mgr</span> <span class="o">=</span> <span class="n">ExportManager</span><span class="p">(</span>
+  <span class="n">jax_module</span><span class="p">,</span>
+  <span class="p">[</span>
+      <span class="n">ServingConfig</span><span class="p">(</span>
+          <span class="s1">&#39;serving_default&#39;</span><span class="p">,</span>
+          <span class="n">input_signature</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">([</span><span class="mi">16</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">([</span><span class="mi">16</span><span class="p">])],</span>
+          <span class="n">tf_preprocessor</span><span class="o">=</span><span class="n">example2_preprocessor</span><span class="p">,</span>
+      <span class="p">)</span>
+  <span class="p">],</span>
+<span class="p">)</span>
+<span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;/tmp/example2_output_dir&#39;</span>
+<span class="n">export_mgr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="n">loaded_model_outputs</span> <span class="o">=</span> <span class="n">loaded_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="mi">16</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="mi">16</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loaded model output: &quot;</span><span class="p">,</span> <span class="n">loaded_model_outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Assets written to: /tmp/example2_output_dir/assets
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:tensorflow:Assets written to: /tmp/example2_output_dir/assets
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaded model output:  tf.Tensor(
+[ 1.4540081   0.7459334   2.4337778  -1.7292558  -0.13133897 -0.22628856
+ -1.3348992   1.727082    1.9575605  -0.02830961  0.7293793   1.8874733
+  1.8366392   0.9934858   0.2853003   1.5893724 ], shape=(16,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="validating">
+<h2>Validating<a class="headerlink" href="#validating" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>API Overview<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Orbax.export.validate is library that can be used to validate the JAX model and
+its exported TF <a class="reference external" href="https://www.tensorflow.org/guide/saved_model">SavedModel</a>
+format.</p>
+<p>Users must finish the JAX model exporting first. Users can export the model by
+orbax.export or manually.</p>
+<p>Orbax.export.validate provides those classes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ValidationJob</span></code>
+take the model and data as input, then output the result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValidationReport</span></code>
+compare the JAX model and TF SavedModel results, then generate the formatted
+report.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValidationManager</span></code>
+take <code class="docutils literal notranslate"><span class="pre">JaxModule</span></code> as inputs and wrap the validation e2e flow.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Simple Example Usage<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>Here we same example as ExportManager.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">orbax.export.validate</span> <span class="kn">import</span> <span class="n">ValidationManager</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">JaxModule</span>
+<span class="kn">from</span> <span class="nn">orbax.export</span> <span class="kn">import</span> <span class="n">ServingConfig</span>
+
+<span class="n">jax_module</span> <span class="o">=</span> <span class="n">JaxModule</span><span class="p">(</span><span class="n">example1_params</span><span class="p">,</span> <span class="n">example1_model_fn</span><span class="p">)</span>
+<span class="n">batch_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputs</span><span class="p">]</span> <span class="o">*</span> <span class="mi">16</span>
+
+<span class="n">serving_configs</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="n">ServingConfig</span><span class="p">(</span>
+      <span class="s1">&#39;serving_default&#39;</span><span class="p">,</span>
+      <span class="n">input_signature</span><span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)],</span>
+      <span class="n">tf_preprocessor</span><span class="o">=</span><span class="n">example1_preprocess</span><span class="p">,</span>
+      <span class="n">tf_postprocessor</span><span class="o">=</span><span class="n">example1_postprocess</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+<span class="c1"># Provide computation method for the baseline.</span>
+<span class="n">validation_mgr</span> <span class="o">=</span> <span class="n">ValidationManager</span><span class="p">(</span><span class="n">jax_module</span><span class="p">,</span> <span class="n">serving_configs</span><span class="p">,</span>
+                                       <span class="n">batch_inputs</span><span class="p">)</span>
+
+<span class="n">tf_saved_model_path</span> <span class="o">=</span> <span class="s2">&quot;/tmp/example1_output_dir&quot;</span>
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">tf_saved_model_path</span><span class="p">)</span>
+
+<span class="c1"># Provide the computation method for the candidate.</span>
+<span class="n">validation_reports</span> <span class="o">=</span> <span class="n">validation_mgr</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">loaded_model</span><span class="p">)</span>
+
+<span class="c1"># `validation_reports` is a python dict and the key is TF SavedModel serving_key.</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">validation_reports</span><span class="p">:</span>
+  <span class="k">assert</span><span class="p">(</span><span class="n">validation_reports</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Pass&#39;</span><span class="p">)</span>
+  <span class="c1"># Users can also save the converted json to file.</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">validation_reports</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:Recommend Orbax validate inputs format as flat_dict or flat_list, so it can generate the consistent tf.SavedModel signature. For arbitrary format, we assume it as atomic data type, it may fail. Got inputs format &lt;class &#39;tensorflow.python.framework.ops.EagerTensor&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;outputs&quot;: {
+    &quot;FloatingPointDiffReport&quot;: {
+      &quot;total&quot;: 256,
+      &quot;max_diff&quot;: 4.76837158203125e-07,
+      &quot;max_rel_diff&quot;: 8.140828100522413e-08,
+      &quot;all_close&quot;: true,
+      &quot;all_close_absolute_tolerance&quot;: 1e-07,
+      &quot;all_close_relative_tolerance&quot;: 1e-07
+    },
+    &quot;NonFloatingPointDiffReport&quot;: {
+      &quot;total_flattened_tensors&quot;: 0,
+      &quot;mismatches&quot;: 0,
+      &quot;mismatch_ratio&quot;: 0.0,
+      &quot;max_non_floating_mismatch_ratio&quot;: 0.01
+    }
+  },
+  &quot;latency&quot;: {
+    &quot;baseline&quot;: {
+      &quot;num_batches&quot;: 16,
+      &quot;avg_in_ms&quot;: 1.0320097208023071,
+      &quot;p90_in_ms&quot;: 1.0459423065185547,
+      &quot;p99_in_ms&quot;: 1.1519670486450195
+    },
+    &quot;candidate&quot;: {
+      &quot;num_batches&quot;: 16,
+      &quot;avg_in_ms&quot;: 1.989424228668213,
+      &quot;p90_in_ms&quot;: 2.201676368713379,
+      &quot;p99_in_ms&quot;: 2.532589435577392
+    }
+  },
+  &quot;xprof_url&quot;: {
+    &quot;baseline&quot;: &quot;N/A&quot;,
+    &quot;candidate&quot;: &quot;N/A&quot;
+  },
+  &quot;metadata&quot;: {
+    &quot;baseline&quot;: {},
+    &quot;candidate&quot;: {}
+  },
+  &quot;status&quot;: 1
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Limitation<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>Here we list those limitation of Orbax.export validate module.</p>
+<ul class="simple">
+<li><p>Because the TF SavedModel the returned object is always a map. If the jax
+model output is a sequence, TF SavedModel will convert it to map. The tensor
+names are fairly generic, like output_0. To help <code class="docutils literal notranslate"><span class="pre">ValidationReport</span></code> module
+can do apple-to-apple comparison between JAX model and TF model result, we
+suggest users modify the model output as a dictionary.</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<p>Check-out the
+<a class="reference external" href="https://github.com/google/orbax/tree/main/export/orbax/export/examples">examples</a>
+directory for a number of examples using Orbax Export.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api_reference/checkpoint.logging.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Checkpoint logging</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api_reference/export.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">orbax.export API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting">Exporting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-overview">API Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-example-usage">Simple Example Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation">Limitation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxmodule-only-take-single-arg-as-the-input">“JaxModule only take single arg as the input”.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating">Validating</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">API Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Simple Example Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Limitation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/orbax_export_101.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:11:42 GMT -->
+</html>

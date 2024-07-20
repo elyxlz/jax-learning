@@ -1,0 +1,1105 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>CheckpointManager &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../_static/katex.min.js"></script>
+    <script src="../_static/auto-render.min.js"></script>
+    <script src="../_static/katex_autorenderer.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/checkpoint.checkpoint_manager';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Checkpointers" href="checkpoint.checkpointers.html" />
+    <link rel="prev" title="AbstractCheckpointManager" href="checkpoint.abstract_checkpoint_manager.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "api_reference/checkpoint.checkpoint_manager", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="checkpoint.html">orbax.checkpoint API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_reference/checkpoint.checkpoint_manager.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CheckpointManager</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">CheckpointManager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager"><code class="docutils literal notranslate"><span class="pre">CheckpointManager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__init__"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.directory"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.directory</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.all_steps"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.all_steps()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.latest_step"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.latest_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.best_step"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.best_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reload"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.reload()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reached_preemption"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.reached_preemption()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.should_save"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.should_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.delete"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.delete()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.save"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.restore"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.item_metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.item_metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metrics"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.wait_until_finished"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.wait_until_finished()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.is_saving_in_progress"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.is_saving_in_progress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.check_for_errors"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.check_for_errors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.__subclasshook__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.close"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointmanageroptions">CheckpointManagerOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__init__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncoptions">AsyncOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions"><code class="docutils literal notranslate"><span class="pre">AsyncOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__init__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessingoptions">MultiprocessingOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__init__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.is_async_checkpointer"><code class="docutils literal notranslate"><span class="pre">is_async_checkpointer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-orbax.checkpoint.checkpoint_manager">
+<span id="checkpointmanager"></span><h1>CheckpointManager<a class="headerlink" href="#module-orbax.checkpoint.checkpoint_manager" title="Permalink to this heading">#</a></h1>
+<p>A class providing functionalities for managing a series of checkpoints.</p>
+<section id="id1">
+<h2>CheckpointManager<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_manager.</span></span><span class="sig-name descname"><span class="pre">CheckpointManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpointers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_handlers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L380#L1586"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager" title="Permalink to this definition">#</a></dt>
+<dd><p>A generic, synchronous AbstractCheckpointManager implementation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpointers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item_handlers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L383#L615"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>CheckpointManager constructor.</p>
+<p>IMPORTANT: <cite>CheckpointManager</cite> has been refactored to provide a new API.
+Please ensure you have migrated all existing use cases to the newer style by
+August 1st, 2024. Please see
+<a class="reference external" href="../api_refactor.html">https://orbax.readthedocs.io/en/latest/api_refactor.html</a>
+for technical details.</p>
+<p>The <cite>CheckpointManager</cite> is ultimately backed by a single <cite>Checkpointer</cite>, to
+which saving and restoring is delegated. Behind step management options,
+metrics-related logic, and other frills, saving and restoring with
+<cite>CheckpointManager</cite> is quite similar to using
+<cite>Checkpointer(CompositeCheckpointHandler)</cite>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">CheckpointManager</span><span class="p">(</span>
+  <span class="s1">&#39;path/to/dir/&#39;</span><span class="p">,</span>
+  <span class="c1"># Multiple items.</span>
+  <span class="n">item_names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;train_state&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_metadata&#39;</span><span class="p">),</span>
+  <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mf">1.1</span><span class="p">,</span> <span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span><span class="p">},</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">mngr</span><span class="p">:</span>
+  <span class="n">mngr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+      <span class="n">train_state</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">train_state</span><span class="p">),</span>
+      <span class="n">custom_metadata</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">JsonSave</span><span class="p">(</span><span class="n">custom_metadata</span><span class="p">),</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="n">restored</span> <span class="o">=</span> <span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">restored</span><span class="o">.</span><span class="n">train_state</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">restored</span><span class="o">.</span><span class="n">custom_metadata</span><span class="p">)</span>
+  <span class="n">restored</span> <span class="o">=</span> <span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">Composite</span><span class="p">(</span>
+      <span class="n">train_state</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">StandardRestore</span><span class="p">(</span><span class="n">abstract_train_state</span><span class="p">),</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">restored</span><span class="o">.</span><span class="n">train_state</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">restored</span><span class="o">.</span><span class="n">custom_metadata</span><span class="p">)</span>  <span class="c1"># Error, not restored</span>
+
+<span class="c1"># Single item, no need to specify `item_names`.</span>
+<span class="k">with</span> <span class="n">CheckpointManager</span><span class="p">(</span>
+    <span class="s1">&#39;path/to/dir/&#39;</span><span class="p">,</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">CheckpointManagerOptions</span><span class="p">(</span><span class="n">max_to_keep</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>
+  <span class="p">)</span> <span class="k">as</span> <span class="n">mngr</span><span class="p">:</span>
+  <span class="n">mngr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">StandardSave</span><span class="p">(</span><span class="n">train_state</span><span class="p">))</span>
+  <span class="n">train_state</span> <span class="o">=</span> <span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">train_state</span> <span class="o">=</span> <span class="n">mngr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+  <span class="n">args</span><span class="o">=</span><span class="n">StandardRestore</span><span class="p">(</span><span class="n">abstract_train_state</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>IMPORTANT: Don’t forget to use the keyword <cite>args=…</cite> for save and restore!
+Otherwise you will get the legacy API. This will not be necessary forever,
+but only until the legacy API is removed.</p>
+<p>IMPORTANT: The CheckpointManager is designed to be used as a context
+manager. Use <cite>with CheckpointManager</cite> schematic for automatic cleanup. If
+you can’t use a context manager, always call <cite>close()</cite> to release resources
+properly.  Otherwise, background operations such as deleting old checkpoints
+might not finish before your program exits.</p>
+<dl class="simple">
+<dt>CheckpointManager:</dt><dd><ul class="simple">
+<li><p>is NOT thread-safe.</p></li>
+<li><p>IS multi-process-safe.</p></li>
+<li><p>is NOT multi-job-safe.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This means that CheckpointManager is intended to be created and called
+across all processes within a single job, where each process is
+single-threaded, but is not safe to use when multiple jobs each have
+CheckpointManager instances pointing to the same root directory. Concretely,
+this means that if you have a trainer job and one or more evaluator jobs,
+the CheckpointManager should be created and called across all processes
+in the trainer, but a CheckpointManager cannot be used in the evaluators.
+Instead, utilities used during evaluation can be found in
+<cite>checkpoint_utils</cite> (see
+<a class="reference external" href="checkpoint.checkpoint_utils.html">https://orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_utils.html</a>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PathLike</span></code>]) – the top level directory in which to save all files.</p></li>
+<li><p><strong>checkpointers</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="checkpoint.checkpointers.html#orbax.checkpoint.AbstractCheckpointer" title="orbax.checkpoint.abstract_checkpointer.AbstractCheckpointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractCheckpointer</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="checkpoint.checkpointers.html#orbax.checkpoint.AbstractCheckpointer" title="orbax.checkpoint.abstract_checkpointer.AbstractCheckpointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractCheckpointer</span></code></a>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – a mapping of object name to Checkpointer object. For
+example, <cite>items</cite> provided to <cite>save</cite> below should have keys matching the
+keys in this argument. Alternatively, a single Checkpointer may be
+provided, in which case <cite>save</cite> and <cite>restore</cite> should always be called
+with a single item rather than a dictionary of items. See below for more
+details. <cite>item_names</cite> and <cite>checkpointers</cite> are mutually exclusive - do
+not use together. Also, please don’t use <cite>checkpointers</cite> and
+<cite>item_handlers</cite> together.</p></li>
+<li><p><strong>options</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions" title="orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointManagerOptions</span></code></a>]) – CheckpointManagerOptions. May be provided to specify additional
+arguments. If None, uses default values of CheckpointManagerOptions.</p></li>
+<li><p><strong>metadata</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – High-level metadata that does not depend on step number. If
+<cite>directory</cite> is write enabled then given metadata is saved only once. A
+new CheckpointManager instance with that <cite>directory</cite> does not overwrite
+the existing metadata and ignores the current given metadata. If
+<cite>directory</cite> is read-only then the current given metadata is not saved as
+expected. A CheckpointManager instance with a read-only <cite>directory</cite> uses
+the metadata if already present, otherwise always uses the current given
+metadata.</p></li>
+<li><p><strong>item_names</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – Names of distinct items that may be saved/restored with this
+<cite>CheckpointManager</cite>. <cite>item_names</cite> and <cite>checkpointers</cite> are mutually
+exclusive - do not use together. Also see <cite>item_handlers</cite> below.</p></li>
+<li><p><strong>item_handlers</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="checkpoint.checkpoint_handlers.html#orbax.checkpoint.CheckpointHandler" title="orbax.checkpoint.checkpoint_handler.CheckpointHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointHandler</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="checkpoint.checkpoint_handlers.html#orbax.checkpoint.CheckpointHandler" title="orbax.checkpoint.checkpoint_handler.CheckpointHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CheckpointHandler</span></code></a>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – A mapping of item name to <cite>CheckpointHandler</cite>. The mapped
+CheckpointHandler must be registered against the <cite>CheckpointArgs</cite> input
+in save/restore operations. Please don’t use <cite>checkpointers</cite> and
+<cite>item_handlers</cite> together. It can be used with or without <cite>item_names</cite>.
+The item name key may or may not be present in <cite>item_names</cite>.
+Alternatively, a single CheckpointHandler may be provided, in which case
+<cite>save</cite> and <cite>restore</cite> should always be called in a single item context.</p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractLogger</span></code>]) – A logger to log checkpointing events.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.directory">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.directory" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.all_steps">
+<span class="sig-name descname"><span class="pre">all_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L814#L823"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.all_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.all_steps" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.latest_step">
+<span class="sig-name descname"><span class="pre">latest_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L825#L827"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.latest_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.latest_step" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.best_step">
+<span class="sig-name descname"><span class="pre">best_step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L829#L838"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.best_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.best_step" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.reload">
+<span class="sig-name descname"><span class="pre">reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L840#L846"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.reload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reload" title="Permalink to this definition">#</a></dt>
+<dd><p>Reloads internal properties.</p>
+<p>Resets internal cache of checkpoint steps, in case the directory managed
+by this object has been updated externally.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.reached_preemption">
+<span class="sig-name descname"><span class="pre">reached_preemption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L848#L850"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.reached_preemption"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reached_preemption" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.should_save">
+<span class="sig-name descname"><span class="pre">should_save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L852#L881"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.should_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.should_save" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L905#L931"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.delete" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<p>Delete can be run asynchronously if
+CheckpointManagerOptions.enable_background_delete is set to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>step</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The step to delete.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L962#L1134"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.save" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.restore">
+<span class="sig-name descname"><span class="pre">restore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restore_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1136#L1198"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.restore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.restore" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.item_metadata">
+<span class="sig-name descname"><span class="pre">item_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1200#L1224"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.item_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.item_metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CompositeArgs</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1226#L1240"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metrics" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns metrics for step, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1331#L1339"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metadata" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.wait_until_finished">
+<span class="sig-name descname"><span class="pre">wait_until_finished</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1484#L1509"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.wait_until_finished"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.wait_until_finished" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.is_saving_in_progress">
+<span class="sig-name descname"><span class="pre">is_saving_in_progress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1511#L1513"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.is_saving_in_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.is_saving_in_progress" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns whether a checkpoint save is in progress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.check_for_errors">
+<span class="sig-name descname"><span class="pre">check_for_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1515#L1518"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.check_for_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.check_for_errors" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.__subclasshook__">
+<span class="sig-name descname"><span class="pre">__subclasshook__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main//orbax//home/docs/.asdf/installs/python/3.9.19/lib/python3.9/typing.py#L1200#L1236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__subclasshook__" title="Permalink to this definition">#</a></dt>
+<dd><p>Abstract classes can override this to customize issubclass().</p>
+<p>This is invoked early on by abc.ABCMeta.__subclasscheck__().
+It should return True, False or NotImplemented.  If it returns
+NotImplemented, the normal algorithm is used.  Otherwise, it
+overrides the normal algorithm (and the outcome is cached).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManager.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L1571#L1578"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManager.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.close" title="Permalink to this definition">#</a></dt>
+<dd><p>See superclass documentation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="checkpointmanageroptions">
+<h2>CheckpointManagerOptions<a class="headerlink" href="#checkpointmanageroptions" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_manager.</span></span><span class="sig-name descname"><span class="pre">CheckpointManagerOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_interval_steps=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_to_keep=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_time_interval=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_period=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_fn=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_mode='max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_checkpoints_without_metrics=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_tmp_directories=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_on_steps=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_host_load_and_broadcast=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">todelete_subdir=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_background_delete=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_only=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_async_checkpointing=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_options=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">should_save_fn=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporary_path_class=None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L138#L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#CheckpointManagerOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions" title="Permalink to this definition">#</a></dt>
+<dd><p>Optional arguments for CheckpointManager.</p>
+<dl class="simple">
+<dt>save_interval_steps:</dt><dd><p>The interval at which checkpoints should be saved.
+Ensures checkpoints will only be saved every n steps. Defaults to 1.</p>
+</dd>
+<dt>max_to_keep:</dt><dd><p>If provided, specifies the maximum number of checkpoints to
+keep. Older checkpoints are removed. By default, does not remove any old
+checkpoints. Must be None or non-negative. When set, checkpoints
+may be considered for deletion when there are more than <cite>max_to_keep</cite>
+checkpoints present. Checkpoints are kept if they meet any of the conditions
+below, such as <cite>keep_time_interval</cite>, <cite>keep_period</cite>, etc. Any remaining
+checkpoints that do not meet these conditions are garbage-collected.</p>
+</dd>
+<dt>keep_time_interval:</dt><dd><p>When more than max_to_keep checkpoints are present,
+an older checkpoint that would ordinarily be deleted will be preserved if it
+has been at least <cite>keep_time_interval</cite> since the previous preserved
+checkpoint. The default setting of <cite>None</cite> does not preserve any checkpoints
+in this way. For example, this may be used to ensure checkpoints are
+retained at a frequency of approximately than one per hour.</p>
+</dd>
+<dt>keep_period:</dt><dd><p>If set, any existing checkpoints matching checkpoint_step % keep_period == 0
+will not be deleted.</p>
+</dd>
+<dt>best_fn:</dt><dd><p>If set, maintains checkpoints based on the quality of given
+metrics rather than recency. The function should accept a PyTree of metrics,
+and return a scalar value that can be used to determine the quality score
+of the checkpoint. If <cite>max_to_keep</cite> is also set, then the retained
+checkpoints will be kept based on their quality, as measured by this
+function.</p>
+</dd>
+<dt>best_mode:</dt><dd><p>One of [‘max’, ‘min’]. The best metric is determine on the basis of this
+value.</p>
+</dd>
+<dt>keep_checkpoints_without_metrics:</dt><dd><p>If False, checkpoints without metrics present
+are eligible for cleanup. Otherwise, they will never be deleted.</p>
+</dd>
+<dt>step_prefix:</dt><dd><p>If provided, step directories will take the form
+f’{step_prefix}_&lt;step&gt;’. Otherwise, they will simply be an integer &lt;step&gt;.</p>
+</dd>
+<dt>step_format_fixed_length:</dt><dd><p>If set, formats step with n digits (leading zeros).
+This makes sorting steps easier. Otherwise, step has no leading zeros.</p>
+</dd>
+<dt>step_name_format:</dt><dd><p>NameFormat to build or find steps under input root directory. If provided,
+<cite>step_prefix</cite>, <cite>step_format_fixed_length</cite> are ignored.</p>
+</dd>
+<dt>create:</dt><dd><p>If True, creates the top-level directory if it does not already exist.</p>
+</dd>
+<dt>cleanup_tmp_directories:</dt><dd><p>If True, cleans up any existing temporary directories
+on CheckpointManager creation.</p>
+</dd>
+<dt>save_on_steps:</dt><dd><p>Optional set of steps at which checkpoints should be saved.
+Useful to save checkpoints on a fixed set of steps that are not multiple of
+<cite>save_interval_steps</cite>.</p>
+</dd>
+<dt>single_host_load_and_broadcast:</dt><dd><p>If True, calling <cite>all_steps(read=True)</cite> will load on only a single host, and
+will then be broadcast to other hosts. Otherwise, I/O will be performed on
+every host. This can be helpful to reduce QPS to the filesystem if there
+are a large number of hosts.</p>
+</dd>
+<dt>todelete_subdir: If set, checkpoints to be deleted will be only renamed into a</dt><dd><p>subdirectory with the provided string. Otherwise, they will be directly
+deleted from the file system. Useful if checkpoint deletion is time
+consuming. By default, delete the checkpoint assets. Ignored if file system
+is Google Cloud Storage (directory is prefixed with gs://)</p>
+</dd>
+<dt>enable_background_delete: If True, old checkpoint deletions will be done in a</dt><dd><p>background thread, otherwise, it will be done at the end of each save.  When
+it’s enabled, make sure to call CheckpointManager.close() or use context to
+make sure all old steps are deleted before exit.</p>
+</dd>
+<dt>read_only: If True, then checkpoints save and delete are skipped. However,</dt><dd><p>checkpoints restore works as usual.</p>
+</dd>
+<dt>enable_async_checkpointing:</dt><dd><p>If True, enables async checkpointing.</p>
+</dd>
+<dt>async_options:</dt><dd><p>Used to configure properties of async behavior. See above.</p>
+</dd>
+<dt>multiprocessing_options: MultiprocessingOptions instance to configure</dt><dd><p>multiprocessing behavior.</p>
+</dd>
+<dt>should_save_fn:</dt><dd><p>Predicate callable to check if given step can be saved. This callable
+accepts step number and optional latest step number as param and returns
+bool. If present then <cite>save_interval_steps</cite> and <cite>save_on_steps</cite> options are
+ignored.</p>
+</dd>
+<dt>file_options: Options to configure checkpoint directories and files.</dt><dd><p>default=FileOptions().</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_interval_steps=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_to_keep=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_time_interval=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_period=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_fn=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_mode='max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_checkpoints_without_metrics=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_format_fixed_length=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_name_format=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_tmp_directories=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_on_steps=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">single_host_load_and_broadcast=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">todelete_subdir=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_background_delete=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_only=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_async_checkpointing=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_options=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocessing_options=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">should_save_fn=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_options=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporary_path_class=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="asyncoptions">
+<h2>AsyncOptions<a class="headerlink" href="#asyncoptions" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.AsyncOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_manager.</span></span><span class="sig-name descname"><span class="pre">AsyncOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barrier_sync_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_finalization_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/options.py#L23#L32"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/options.html#AsyncOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions" title="Permalink to this definition">#</a></dt>
+<dd><p>Options used to configure async behavior.</p>
+<p>See <cite>AsyncCheckpointer</cite> for details.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.AsyncOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.AsyncOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.AsyncOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barrier_sync_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_finalization_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="multiprocessingoptions">
+<h2>MultiprocessingOptions<a class="headerlink" href="#multiprocessingoptions" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.MultiprocessingOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_manager.</span></span><span class="sig-name descname"><span class="pre">MultiprocessingOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barrier_sync_key_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/options.py#L35#L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/options.html#MultiprocessingOptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions" title="Permalink to this definition">#</a></dt>
+<dd><p>Options used to configure multiprocessing behavior.</p>
+<dl class="simple">
+<dt>primary_host: the host id of the primary host.  Default to 0.  If it’s set</dt><dd><p>to None, then all hosts will be considered as primary.  It’s useful in
+the case that all hosts are only working with local storage.</p>
+</dd>
+<dt>active_processes: A set of process indices (corresponding to</dt><dd><p><cite>multihost.process_index()</cite>) over which <cite>CheckpointManager</cite> is expected to
+be called. This makes it possible to have a <cite>CheckpointManager</cite> instance
+that runs over a subset of processes, rather than all processes as it is
+normally expected to do. If specified, <cite>primary_host</cite> must belong to
+<cite>active_processes</cite>.</p>
+</dd>
+<dt>barrier_sync_key_prefix: A string to be prepended to the barrier sync key</dt><dd><p>used to synchronize processes. This is useful to avoid collisions with
+other barrier syncs if another CheckpointManager is being used concurrently.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__eq__">
+<span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__eq__" title="Permalink to this definition">#</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__hash__">
+<span class="sig-name descname"><span class="pre">__hash__</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__hash__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary_host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active_processes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barrier_sync_key_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="utility-functions">
+<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="orbax.checkpoint.checkpoint_manager.is_async_checkpointer">
+<span class="sig-prename descclassname"><span class="pre">orbax.checkpoint.checkpoint_manager.</span></span><span class="sig-name descname"><span class="pre">is_async_checkpointer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checkpointer</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/google/orbax/tree/main/checkpoint/orbax/checkpoint/checkpoint_manager.py#L128#L134"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference internal" href="../_modules/orbax/checkpoint/checkpoint_manager.html#is_async_checkpointer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#orbax.checkpoint.checkpoint_manager.is_async_checkpointer" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="checkpoint.abstract_checkpoint_manager.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AbstractCheckpointManager</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="checkpoint.checkpointers.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Checkpointers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">CheckpointManager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager"><code class="docutils literal notranslate"><span class="pre">CheckpointManager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__init__"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.directory"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.directory</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.all_steps"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.all_steps()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.latest_step"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.latest_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.best_step"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.best_step()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reload"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.reload()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.reached_preemption"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.reached_preemption()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.should_save"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.should_save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.delete"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.delete()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.save"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.restore"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.restore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.item_metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.item_metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metrics"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.metrics()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.metadata"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.metadata()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.wait_until_finished"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.wait_until_finished()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.is_saving_in_progress"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.is_saving_in_progress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.check_for_errors"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.check_for_errors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.__subclasshook__"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.__subclasshook__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManager.close"><code class="docutils literal notranslate"><span class="pre">CheckpointManager.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpointmanageroptions">CheckpointManagerOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.CheckpointManagerOptions.__init__"><code class="docutils literal notranslate"><span class="pre">CheckpointManagerOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asyncoptions">AsyncOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions"><code class="docutils literal notranslate"><span class="pre">AsyncOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.AsyncOptions.__init__"><code class="docutils literal notranslate"><span class="pre">AsyncOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiprocessingoptions">MultiprocessingOptions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__eq__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__eq__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__hash__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__hash__</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.MultiprocessingOptions.__init__"><code class="docutils literal notranslate"><span class="pre">MultiprocessingOptions.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utility-functions">Utility functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orbax.checkpoint.checkpoint_manager.is_async_checkpointer"><code class="docutils literal notranslate"><span class="pre">is_async_checkpointer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/api_reference/checkpoint.checkpoint_manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:57 GMT -->
+</html>

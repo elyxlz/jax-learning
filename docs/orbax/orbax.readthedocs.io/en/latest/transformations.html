@@ -1,0 +1,1076 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/transformations.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Transformations &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/katex.min.js"></script>
+    <script src="_static/auto-render.min.js"></script>
+    <script src="_static/katex_autorenderer.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transformations';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Preemption Tolerance" href="preemption_checkpointing.html" />
+    <link rel="prev" title="Customizing Checkpointing Logic" href="custom_handlers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "transformations", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".ipynb", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/transformations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-transformations">apply_transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">Transform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fallbacks">Fallbacks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-keys">Renaming keys</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-value">Updating the value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restructuring-pytrees">Restructuring PyTrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-value-transformations">Multi-value transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real world example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restoring-a-checkpoint">Restoring a Checkpoint</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-and-tricks">Tips and Tricks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regex-group-names">Regex group names</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transformations">
+<h1>Transformations<a class="headerlink" href="#transformations" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>The transform_utils library provides functions to perform structural PyTree transformations, which can facilitate model surgery for finetuning, migrations between different checkpoint versions, etc.</p>
+<p>The API consists of a <code class="docutils literal notranslate"><span class="pre">Transform</span></code> class and an <code class="docutils literal notranslate"><span class="pre">apply_transformations</span></code> function.</p>
+<section id="apply-transformations">
+<h3>apply_transformations<a class="headerlink" href="#apply-transformations" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">apply_transformations</span></code> function accepts an original PyTree, a PyTree of <code class="docutils literal notranslate"><span class="pre">Transform</span></code> objects and the desired structure of the returned Pytree. The function returns a newly generated PyTree.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_transformations</span><span class="p">(</span>
+    <span class="n">original_tree</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">transformations</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">new_tree</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">default_to_original</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+</pre></div>
+</div>
+</section>
+<section id="transform">
+<h3><code class="docutils literal notranslate"><span class="pre">Transform</span></code><a class="headerlink" href="#transform" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Transform</span></code> consists of the following elements:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">original_key</span></code>: Denotes the original name of the key. Represented as a
+string with ‘/’ denoting successive levels of nesting. If the key
+corresponding to this Transform is a regex, backreferences (such as \1) will
+be replaced with the appropriate matched group in the regex. Note: not
+needed if multi_value_fn is provided.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_fallback</span></code>: if True, takes the value from the fallback tree. If
+<code class="docutils literal notranslate"><span class="pre">default_to_original=True</span></code> in <code class="docutils literal notranslate"><span class="pre">apply_transformations</span></code>, the fallback tree is
+<code class="docutils literal notranslate"><span class="pre">new_tree</span></code>. If <code class="docutils literal notranslate"><span class="pre">default_to_original=False</span></code> in <code class="docutils literal notranslate"><span class="pre">apply_transformations</span></code>, the
+fallback tree is <code class="docutils literal notranslate"><span class="pre">original_tree</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_fn</span></code>: A function accepting a single value and returning a single
+value. The value provided as an argument is the value of the transformation
+key in the original PyTree.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multi_value_fn</span></code>: A function accepting a PyTree and returning any value. The
+PyTree argument will be the original PyTree, and the function should return
+the value of the key in the new PyTree.</p></li>
+</ul>
+</section>
+<section id="fallbacks">
+<h3>Fallbacks<a class="headerlink" href="#fallbacks" title="Permalink to this heading">#</a></h3>
+<p>Note that there is an additional option for <code class="docutils literal notranslate"><span class="pre">apply_transformations</span></code>, which is
+<code class="docutils literal notranslate"><span class="pre">default_to_original</span></code> (True by default). This means that the values keys
+unspecified in <code class="docutils literal notranslate"><span class="pre">transformations</span></code> but present in <em>both</em> trees will be taken from
+the <em>original</em> tree. If False, such values will be taken from the <em>new</em> tree.</p>
+<p>Remember that if a key is present in the new tree, but not in the old, the value
+will simply be taken from the new tree. If a key is present in the original tree
+but not in the new, it will be dropped in the result.</p>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup</span>
+<span class="kn">import</span> <span class="nn">orbax.checkpoint</span> <span class="k">as</span> <span class="nn">ocp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="renaming-keys">
+<h3>Renaming keys<a class="headerlink" href="#renaming-keys" title="Permalink to this heading">#</a></h3>
+<p>Key renames are common for reusing existing checkpointed state between different models or same model at different versions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Migrate original tree into the new_tree, which has the same</span>
+<span class="c1"># nested structure but different keys.</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a2&#39;: 1, &#39;b2&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Renaming with regex</span>
+
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;b5&#39;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z])_([0-9])&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1\2&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a_1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b_5&#39;</span><span class="p">:</span> <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a_1&#39;: 1, &#39;b_5&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: Renaming nested trees</span>
+
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+    <span class="s1">&#39;dense_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Nested keys can be represented by a single string by separating each level</span>
+<span class="c1"># with &#39;/&#39;.</span>
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)_NEW&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1&#39;</span><span class="p">),</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)_([0-9])_NEW/([a-z]+)_1&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1_\2/\3&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># This is equivalent to:</span>
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)_NEW&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1&#39;</span><span class="p">),</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)_([0-9])_NEW&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;([a-z]+)_1&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1_\2/\3&#39;</span><span class="p">),}</span>
+<span class="p">}</span>
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a_NEW&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1_NEW&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel_1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;bias_1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+    <span class="s1">&#39;dense_2_NEW&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel_1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;bias_1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a_NEW&#39;: 1,
+ &#39;dense_1_NEW&#39;: {&#39;bias_1&#39;: 3, &#39;kernel_1&#39;: 2},
+ &#39;dense_2_NEW&#39;: {&#39;bias_1&#39;: 5, &#39;kernel_1&#39;: 4}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="updating-the-value">
+<h3>Updating the value<a class="headerlink" href="#updating-the-value" title="Permalink to this heading">#</a></h3>
+<p>To change a leaf node in the Pytree, define a <code class="docutils literal notranslate"><span class="pre">Transform</span></code> with a <code class="docutils literal notranslate"><span class="pre">value_fn</span></code>. This transformation could be used for quantization, modifying hyperparameters, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Transform the values in a tree.</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">original_key</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b2&#39;</span><span class="p">:</span> <span class="o">...</span>  <span class="c1"># Output different key</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 2, &#39;b2&#39;: 6}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Transform values in a tree with regex (multiply all &#39;a&#39; keys by 2</span>
+<span class="c1"># all &#39;b&#39; keys by 3).</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;a([0-9]?)\*2&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                                     <span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;a\1&#39;</span><span class="p">),</span>
+    <span class="sa">r</span><span class="s1">&#39;b([0-9]?)\*3&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+                                     <span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;b\1&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a1*2&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;a2*2&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b*3&#39;</span><span class="p">:</span> <span class="o">...</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a1*2&#39;: 2, &#39;a2*2&#39;: 4, &#39;b*3&#39;: 9}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="restructuring-pytrees">
+<h3>Restructuring PyTrees<a class="headerlink" href="#restructuring-pytrees" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Flatten nested structure</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+    <span class="s1">&#39;dense_2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1&#39;</span><span class="p">),</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)_([0-9])_([a-z]+)&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1_\2/\3&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1_kernel&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1_bias&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_2_kernel&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_2_bias&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 1,
+ &#39;dense_1_bias&#39;: 3,
+ &#39;dense_1_kernel&#39;: 2,
+ &#39;dense_2_bias&#39;: 5,
+ &#39;dense_2_kernel&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multi-value-transformations">
+<h3>Multi-value transformations<a class="headerlink" href="#multi-value-transformations" title="Permalink to this heading">#</a></h3>
+<p>Multi-value transformations can be used to combine multiple values from the original tree into the new tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: various multi_value_fn usage</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])},</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">multi_value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">multi_value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">kv</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">][</span><span class="s1">&#39;c&#39;</span><span class="p">])},</span>
+<span class="p">}</span>
+
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 4, &#39;b&#39;: {&#39;c&#39;: array([ 6,  8, 10, 12])}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Average the weights</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a_1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a_2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b_1&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;b_2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;b_3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;([a-z]+)&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span>
+        <span class="n">multi_value_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">kv</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">kv</span><span class="p">[</span><span class="n">k</span><span class="p">])),</span>
+<span class="p">}</span>
+
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 1.5, &#39;b&#39;: 4.0}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="real-world-example">
+<h3>Real world example<a class="headerlink" href="#real-world-example" title="Permalink to this heading">#</a></h3>
+<p>Let’s consider a real-world example. In this scenario, we have a saved
+checkpoint with parameters <code class="docutils literal notranslate"><span class="pre">Dense_0</span></code>, <code class="docutils literal notranslate"><span class="pre">Dense_1</span></code>. We want to restore this
+checkpoint, with modifications, into a model for training with layers <code class="docutils literal notranslate"><span class="pre">Dense_0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Dense_1</span></code>, <code class="docutils literal notranslate"><span class="pre">Dense_2</span></code>, <code class="docutils literal notranslate"><span class="pre">Dense_3</span></code>.</p>
+<p>In this example, we will map original layers 0 and 1 onto the new layers 1 and
+2, respectively. We want the new layers 0 and 3 to be initialized randomly, or
+with some new values.</p>
+<p>The new model may be initialized as a Flax
+<a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.training.html#train-state">TrainState</a>,
+for example.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">input_size</span><span class="p">]))</span>
+<span class="n">new_state</span> <span class="o">=</span> <span class="n">TrainState</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">apply_fn</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">tx</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+<span class="c1"># Restore original state.</span>
+<span class="n">original_state</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span> <span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="c1"># NewModel layer 0 is a newly inserted layer, thus use_fallback=True.</span>
+      <span class="sa">r</span><span class="s1">&#39;(.*)Dense_0(.*)&#39;</span><span class="p">:</span> <span class="n">Transform</span><span class="p">(</span><span class="n">use_fallback</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+      <span class="c1"># OriginalModel layer 0 maps to NewModel layer 1</span>
+      <span class="sa">r</span><span class="s1">&#39;(.*)Dense_1(.*)&#39;</span><span class="p">:</span> <span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1Dense_0\2&#39;</span><span class="p">),</span>
+      <span class="c1"># OriginalModel layer 1 maps to NewModel layer 2</span>
+      <span class="sa">r</span><span class="s1">&#39;(.*)Dense_2(.*)&#39;</span><span class="p">:</span> <span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1Dense_1\2&#39;</span><span class="p">)</span>
+  <span class="p">}</span>  <span class="c1"># Note: NewModel layer 3 is newly added.</span>
+  <span class="n">restored_state</span> <span class="o">=</span> <span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_state</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s unpack what’s happening with these transformations.</p>
+<p>For layer 0, we want to instruct the function to ignore what’s in
+<code class="docutils literal notranslate"><span class="pre">original_state</span></code>, and to instead use the value from <code class="docutils literal notranslate"><span class="pre">new_state</span></code>. For this, we
+set <code class="docutils literal notranslate"><span class="pre">use_fallback=True</span></code>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">Dense_1</span></code> and <code class="docutils literal notranslate"><span class="pre">Dense_2</span></code>, we simple provide a regex mapping the original name
+of the key (<code class="docutils literal notranslate"><span class="pre">Dense_0</span></code> and <code class="docutils literal notranslate"><span class="pre">Dense_1</span></code>, respectively) to their new values using the
+<code class="docutils literal notranslate"><span class="pre">original_key</span></code> field. Note that we can use a regex to match any key containing
+the desired pattern, since a PyTree checkpoint will typically represent a single
+layer with multiple different arrays, each containing the pattern.</p>
+<p>Finally, we can simply omit <code class="docutils literal notranslate"><span class="pre">Dense_3</span></code> from <code class="docutils literal notranslate"><span class="pre">transformations</span></code>, as the <code class="docutils literal notranslate"><span class="pre">Dense_3</span></code>
+was provided as a key in <code class="docutils literal notranslate"><span class="pre">new_state</span></code> and the function will simply take the value
+from <code class="docutils literal notranslate"><span class="pre">new_state</span></code> and put it in the result.</p>
+</section>
+<section id="restoring-a-checkpoint">
+<h3>Restoring a Checkpoint<a class="headerlink" href="#restoring-a-checkpoint" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flax.struct</span>
+
+<span class="nd">@flax</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Small</span><span class="p">:</span>
+    <span class="n">key1</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="nd">@flax</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Big</span><span class="p">:</span>
+    <span class="n">key1</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">key2</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">to_save</span> <span class="o">=</span> <span class="n">Big</span><span class="p">(</span><span class="n">key1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">to_restore</span> <span class="o">=</span> <span class="n">Small</span><span class="p">(</span><span class="n">key1</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/tmp/my-checkpoints/&#39;</span>
+<span class="n">ckptr</span> <span class="o">=</span> <span class="n">ocp</span><span class="o">.</span><span class="n">PyTreeCheckpointer</span><span class="p">()</span>
+<span class="n">ckptr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">to_save</span><span class="p">)</span>
+
+<span class="n">restored1</span> <span class="o">=</span> <span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span>
+  <span class="n">path</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">PyTreeRestore</span><span class="p">(</span>
+    <span class="n">to_restore</span><span class="p">,</span>
+    <span class="n">restore_args</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">checkpoint_utils</span><span class="o">.</span><span class="n">construct_restore_args</span><span class="p">(</span><span class="n">to_restore</span><span class="p">),</span>
+    <span class="n">transforms</span><span class="o">=</span><span class="p">{}</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">restored2</span> <span class="o">=</span> <span class="n">ckptr</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span>
+  <span class="n">path</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">PyTreeRestore</span><span class="p">(</span>
+    <span class="n">to_restore</span><span class="p">,</span>
+    <span class="n">restore_args</span><span class="o">=</span><span class="n">ocp</span><span class="o">.</span><span class="n">checkpoint_utils</span><span class="o">.</span><span class="n">construct_restore_args</span><span class="p">(</span><span class="n">to_restore</span><span class="p">),</span>
+    <span class="n">transforms</span><span class="o">=</span><span class="p">{</span>
+        <span class="sa">r</span><span class="s1">&#39;(.*)key1(.*)&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\1key2\2&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1455</span><span class="o">/</span><span class="mf">1688818069.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">flax.struct</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nd">@flax</span><span class="o">.</span><span class="n">struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">class</span> <span class="nc">Small</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">key1</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;flax&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restored1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1455</span><span class="o">/</span><span class="mf">3477447246.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">restored1</span>
+
+<span class="ne">NameError</span>: name &#39;restored1&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restored2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1455</span><span class="o">/</span><span class="mf">3102324940.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">restored2</span>
+
+<span class="ne">NameError</span>: name &#39;restored2&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tips-and-tricks">
+<h2>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this heading">#</a></h2>
+<section id="regex-group-names">
+<h3>Regex group names<a class="headerlink" href="#regex-group-names" title="Permalink to this heading">#</a></h3>
+<p>If your regex is getting complicated, you can set group names using <code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;...)</span></code>. This group can be referenced using the standard <code class="docutils literal notranslate"><span class="pre">\N</span></code>, where N is the numeric backreference, or <code class="docutils literal notranslate"><span class="pre">\g&lt;name&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">name</span></code> is the named backreference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example:</span>
+<span class="n">original_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;dense_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sa">r</span><span class="s1">&#39;(?P&lt;layer&gt;[a-z]+)_(?P&lt;num&gt;[0-9])_(?P&lt;weight&gt;[a-z]+)&#39;</span><span class="p">:</span> <span class="n">ocp</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span>
+        <span class="n">original_key</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\g&lt;layer&gt;_\g&lt;num&gt;/\g&lt;weight&gt;&#39;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="n">new_tree</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;dense_1_kernel&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+    <span class="s1">&#39;dense_1_bias&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">ocp</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span><span class="n">original_tree</span><span class="p">,</span> <span class="n">transformations</span><span class="p">,</span> <span class="n">new_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:The transformations API will eventually be replaced by an upgraded design. The current API will not be removed until this point, but it will no longer be actively worked on.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;dense_1_bias&#39;: 3, &#39;dense_1_kernel&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="custom_handlers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Customizing Checkpointing Logic</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="preemption_checkpointing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Preemption Tolerance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-transformations">apply_transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform"><code class="docutils literal notranslate"><span class="pre">Transform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fallbacks">Fallbacks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-keys">Renaming keys</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-value">Updating the value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restructuring-pytrees">Restructuring PyTrees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-value-transformations">Multi-value transformations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-world-example">Real world example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restoring-a-checkpoint">Restoring a Checkpoint</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-and-tricks">Tips and Tricks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regex-group-names">Regex group names</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/transformations.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:10:49 GMT -->
+</html>

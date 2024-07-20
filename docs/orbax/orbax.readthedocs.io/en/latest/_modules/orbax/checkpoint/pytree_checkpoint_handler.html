@@ -1,0 +1,1481 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/pytree_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.pytree_checkpoint_handler &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../_static/katex.min.js"></script>
+    <script src="../../../_static/auto-render.min.js"></script>
+    <script src="../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/pytree_checkpoint_handler';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/pytree_checkpoint_handler", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.pytree_checkpoint_handler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;PyTreeCheckpointHandler class.</span>
+
+<span class="sd">Implementation of `CheckpointHandler` interface dealing with JAX PyTrees. Much</span>
+<span class="sd">of the underlying reading/writing logic for individual leaf types can be</span>
+<span class="sd">customized, and is delegated to the `TypeHandler` class.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">aggregate_handlers</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">async_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">base_pytree_checkpoint_handler</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_args</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">future</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">transform_utils</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">tree</span> <span class="k">as</span> <span class="n">tree_utils</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">type_handlers</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint.metadata</span> <span class="kn">import</span> <span class="n">tree</span> <span class="k">as</span> <span class="n">tree_metadata</span>
+<span class="kn">import</span> <span class="nn">tensorstore</span> <span class="k">as</span> <span class="nn">ts</span>
+
+<span class="n">PyTree</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">TupleKey</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">RestoreArgs</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">RestoreArgs</span>
+<span class="n">ArrayRestoreArgs</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">ArrayRestoreArgs</span>
+<span class="n">SaveArgs</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">SaveArgs</span>
+<span class="n">ParamInfo</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">ParamInfo</span>
+<span class="n">TypeHandler</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">TypeHandler</span>
+<span class="n">TypeHandlerRegistry</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">TypeHandlerRegistry</span>
+<span class="n">AggregateHandler</span> <span class="o">=</span> <span class="n">aggregate_handlers</span><span class="o">.</span><span class="n">AggregateHandler</span>
+<span class="n">MsgpackHandler</span> <span class="o">=</span> <span class="n">aggregate_handlers</span><span class="o">.</span><span class="n">MsgpackHandler</span>
+<span class="n">LegacyTransformFn</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PyTree</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PyTree</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">]]</span>
+<span class="n">Transform</span> <span class="o">=</span> <span class="n">transform_utils</span><span class="o">.</span><span class="n">Transform</span>
+<span class="n">RestoreTransform</span> <span class="o">=</span> <span class="n">transform_utils</span><span class="o">.</span><span class="n">RestoreTransform</span>
+<span class="n">CheckpointArgs</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">CheckpointArgs</span>
+<span class="n">register_with_handler</span> <span class="o">=</span> <span class="n">checkpoint_args</span><span class="o">.</span><span class="n">register_with_handler</span>
+
+<span class="n">BasePyTreeCheckpointHandler</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">BasePyTreeCheckpointHandler</span>
+<span class="p">)</span>
+<span class="n">BasePyTreeSaveArgs</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">BasePyTreeSaveArgs</span>
+<span class="n">BasePyTreeRestoreArgs</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">BasePyTreeRestoreArgs</span>
+<span class="n">get_byte_limiter</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">get_byte_limiter</span>
+<span class="n">LimitInFlightBytes</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">LimitInFlightBytes</span>
+<span class="n">get_param_names</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">get_param_names</span>
+
+<span class="n">_CHECKPOINT_FILE</span> <span class="o">=</span> <span class="s1">&#39;checkpoint&#39;</span>
+<span class="n">_METADATA_FILE</span> <span class="o">=</span> <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">METADATA_FILE</span>
+<span class="n">_DEFAULT_CONCURRENT_GB</span> <span class="o">=</span> <span class="mi">96</span>
+
+
+<span class="k">def</span> <span class="nf">_maybe_set_default_restore_args</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+  <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">RestoreArgs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">args</span>
+  <span class="k">return</span> <span class="n">RestoreArgs</span><span class="p">(</span><span class="n">restore_type</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_try_array_cast</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">utils</span><span class="o">.</span><span class="n">is_scalar</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+      <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="s1">&#39;astype&#39;</span><span class="p">):</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">arr</span>
+
+
+<span class="k">def</span> <span class="nf">_maybe_shard_array</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+  <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;reshape&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">ArrayRestoreArgs</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">global_shape</span><span class="p">)</span>
+    <span class="n">sharding</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">sharding</span> <span class="ow">or</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">NamedSharding</span><span class="p">(</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">mesh</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">mesh_axes</span>
+    <span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_array_from_callback</span><span class="p">(</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">sharding</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">idx</span><span class="p">:</span> <span class="n">value</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="p">)</span>
+  <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">def</span> <span class="nf">_keystr</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+  <span class="k">return</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_find_matching_input_args</span><span class="p">(</span>
+    <span class="n">input_key</span><span class="p">:</span> <span class="n">TupleKey</span><span class="p">,</span>
+    <span class="n">flat_item</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TupleKey</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">flat_transforms</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TupleKey</span><span class="p">,</span> <span class="n">Transform</span><span class="p">],</span>
+    <span class="n">flat_restore_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TupleKey</span><span class="p">,</span> <span class="n">RestoreArgs</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RestoreArgs</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Given an input_key, tries to find matching RestoreArgs for the input.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    input_key: A key in the input tree.</span>
+<span class="sd">    flat_item: The flattened, user-provided item.</span>
+<span class="sd">    flat_transforms: Flattened transformations dict.</span>
+<span class="sd">    flat_restore_args: Flattened tree of RestoreArgs, relative to item.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    RestoreArgs that match the given input_key, according to the</span>
+<span class="sd">    transformations, or None if no match is found.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">transform_key</span><span class="p">,</span> <span class="n">transform</span> <span class="ow">in</span> <span class="n">flat_transforms</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">transform</span><span class="o">.</span><span class="n">multi_value_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">RestoreTransform</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;Must use RestoreTransform in order to use multi_value_fn&#39;</span>
+            <span class="s1">&#39; during restore.&#39;</span>
+        <span class="p">)</span>
+      <span class="k">if</span> <span class="n">transform</span><span class="o">.</span><span class="n">multi_value_fn_input_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;`multi_value_fn` was specified, but&#39;</span>
+            <span class="s1">&#39; `multi_value_fn_input_args` were not. The latter must be&#39;</span>
+            <span class="s1">&#39; specified to identify inputs for the function.&#39;</span>
+        <span class="p">)</span>
+      <span class="k">for</span> <span class="p">(</span>
+          <span class="n">input_key_regex</span><span class="p">,</span>
+          <span class="n">input_args</span><span class="p">,</span>
+      <span class="p">)</span> <span class="ow">in</span> <span class="n">transform</span><span class="o">.</span><span class="n">multi_value_fn_input_args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">input_key_regex</span><span class="p">,</span> <span class="n">_keystr</span><span class="p">(</span><span class="n">input_key</span><span class="p">)):</span>
+          <span class="k">return</span> <span class="n">input_args</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">transform</span><span class="o">.</span><span class="n">use_fallback</span><span class="p">:</span>
+      <span class="c1"># The following is done to reverse-engineer the regex for the key in</span>
+      <span class="c1"># the original tree.</span>
+      <span class="k">for</span> <span class="n">output_key</span> <span class="ow">in</span> <span class="n">flat_item</span><span class="p">:</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">_keystr</span><span class="p">(</span><span class="n">transform_key</span><span class="p">),</span> <span class="n">_keystr</span><span class="p">(</span><span class="n">output_key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+          <span class="k">if</span> <span class="n">transform</span><span class="o">.</span><span class="n">original_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If transform.original_key is not specified, this transform</span>
+            <span class="c1"># does not rename the original key. We can reuse the key from</span>
+            <span class="c1"># the item.</span>
+            <span class="n">input_key_pattern</span> <span class="o">=</span> <span class="n">_keystr</span><span class="p">(</span><span class="n">output_key</span><span class="p">)</span>
+          <span class="k">else</span><span class="p">:</span>
+            <span class="n">input_key_pattern</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">original_key</span><span class="p">)</span>
+          <span class="k">if</span> <span class="n">input_key_pattern</span> <span class="o">==</span> <span class="n">_keystr</span><span class="p">(</span><span class="n">input_key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">flat_restore_args</span><span class="p">[</span><span class="n">output_key</span><span class="p">]</span>
+  <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_has_use_fallback_transform</span><span class="p">(</span>
+    <span class="n">input_key</span><span class="p">:</span> <span class="n">TupleKey</span><span class="p">,</span> <span class="n">flat_transforms</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TupleKey</span><span class="p">,</span> <span class="n">Transform</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="k">for</span> <span class="n">transform_key</span><span class="p">,</span> <span class="n">transform</span> <span class="ow">in</span> <span class="n">flat_transforms</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">_keystr</span><span class="p">(</span><span class="n">transform_key</span><span class="p">),</span> <span class="n">_keystr</span><span class="p">(</span><span class="n">input_key</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">match</span> <span class="ow">and</span> <span class="n">transform</span><span class="o">.</span><span class="n">use_fallback</span><span class="p">:</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">_get_restore_parameters</span><span class="p">(</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">param_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">restore_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">byte_limiter</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LimitInFlightBytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">transforms_default_to_original</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_zarr3</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PyTree</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Construct parameters needed for restoration.</span>
+
+<span class="sd">  If transforms are not provided, the method is pretty simple: param_infos are</span>
+<span class="sd">  constructed from the structure of the original checkpoint, and restore_args</span>
+<span class="sd">  are serialized to a tree structure compatible with param_infos and structure.</span>
+
+<span class="sd">  If transforms are provided, things become more complicated because we must</span>
+<span class="sd">  determine exactly which parameters the user desires to restore, and construct</span>
+<span class="sd">  param_infos and restore_args for these, while discarding unneeded parameters.</span>
+<span class="sd">  In essence, the process can be thought of as reversing the transformations.</span>
+<span class="sd">  This happens differently for different types of transforms.</span>
+<span class="sd">  1. Renamed key: Identify the original key name (in the checkpoint) and carry</span>
+<span class="sd">    over the provided restore args for the parameter.</span>
+<span class="sd">  2. multi_value_fn: Users are required to specify multi_value_fn_input_args.</span>
+<span class="sd">    Any keys named here must be loaded, and their restore args are also given</span>
+<span class="sd">    here.</span>
+<span class="sd">  3. Unspecified key: A key which is unspecified in the transforms but present</span>
+<span class="sd">    in the `item` is a key that is carried over from the checkpoint unchanged.</span>
+<span class="sd">  4. Fallback key: This is a key that is present in the `item` but not in the</span>
+<span class="sd">    original checkpoint. It does not need to be restored.</span>
+<span class="sd">  5. Keys present in the original checkpoint but not in the `item`/`transforms`</span>
+<span class="sd">    are implicitly ignored, and not restored.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    directory: Checkpoint directory.</span>
+<span class="sd">    item: Optional reference item.</span>
+<span class="sd">    structure: The structure of the original checkpoint.</span>
+<span class="sd">    param_names: Tree of parameter names.</span>
+<span class="sd">    transforms: User-provided transformations. If None, they were not provided.</span>
+<span class="sd">      Has the structure of the desired output tree.</span>
+<span class="sd">    restore_args: User-provided restoration arguments. If None, they were not</span>
+<span class="sd">      provided. Otherwise, the tree has the same structure as the desired output</span>
+<span class="sd">      tree.</span>
+<span class="sd">    byte_limiter: A LimitInFlightBytes object.</span>
+<span class="sd">    transforms_default_to_original: See transform_utils.apply_transformations.</span>
+<span class="sd">    use_zarr3: If True, use Zarr ver3 otherwise Zarr ver2</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    Tuple of param_infos, and restore_args.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">flat_structure</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">param_names</span> <span class="o">=</span> <span class="n">get_param_names</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+  <span class="n">flat_param_names</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span><span class="n">param_names</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">restore_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">restore_args</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">RestoreArgs</span><span class="p">(),</span> <span class="n">structure</span><span class="p">)</span>
+  <span class="n">flat_restore_args</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span>
+      <span class="n">restore_args</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span>
+  <span class="p">)</span>
+  <span class="n">flat_param_infos</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">flat_input_restore_args</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">is_ocdbt_checkpoint</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">is_ocdbt_checkpoint</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+  <span class="n">ts_context</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">get_ts_context</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">_get_param_info</span><span class="p">(</span>
+      <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">meta_or_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">tree_metadata</span><span class="o">.</span><span class="n">ValueMetadataEntry</span><span class="p">],</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ParamInfo</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">is_supported_empty_aggregation_type</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">):</span>
+      <span class="c1"># Empty node, ParamInfo should not be returned.</span>
+      <span class="k">return</span> <span class="n">meta_or_value</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">,</span> <span class="n">tree_metadata</span><span class="o">.</span><span class="n">ValueMetadataEntry</span><span class="p">):</span>
+      <span class="c1"># Aggregated value.</span>
+      <span class="n">skip_deserialize</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">skip_deserialize</span> <span class="o">=</span> <span class="n">meta_or_value</span><span class="o">.</span><span class="n">skip_deserialize</span>
+    <span class="k">return</span> <span class="n">ParamInfo</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">directory</span> <span class="o">/</span> <span class="n">name</span><span class="p">,</span>
+        <span class="n">parent_dir</span><span class="o">=</span><span class="n">directory</span><span class="p">,</span>
+        <span class="n">skip_deserialize</span><span class="o">=</span><span class="n">skip_deserialize</span><span class="p">,</span>
+        <span class="n">is_ocdbt_checkpoint</span><span class="o">=</span><span class="n">is_ocdbt_checkpoint</span><span class="p">,</span>
+        <span class="n">byte_limiter</span><span class="o">=</span><span class="n">byte_limiter</span><span class="p">,</span>
+        <span class="n">use_zarr3</span><span class="o">=</span><span class="n">use_zarr3</span><span class="p">,</span>
+        <span class="n">ts_context</span><span class="o">=</span><span class="n">ts_context</span><span class="p">,</span>
+    <span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">flat_structure</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_param_info</span><span class="p">(</span><span class="n">flat_param_names</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">meta</span><span class="p">)</span>
+    <span class="n">restore_args</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">serialize_tree</span><span class="p">(</span>
+        <span class="n">restore_args</span><span class="p">,</span>
+        <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;If providing `transforms`, must provide `item` matching structure&#39;</span>
+          <span class="s1">&#39; of expected result.&#39;</span>
+      <span class="p">)</span>
+    <span class="n">flat_item</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">flat_transforms</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">input_key</span><span class="p">,</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">flat_structure</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+      <span class="n">maybe_input_args</span> <span class="o">=</span> <span class="n">_find_matching_input_args</span><span class="p">(</span>
+          <span class="n">input_key</span><span class="p">,</span> <span class="n">flat_item</span><span class="p">,</span> <span class="n">flat_transforms</span><span class="p">,</span> <span class="n">flat_restore_args</span>
+      <span class="p">)</span>
+      <span class="k">if</span> <span class="n">maybe_input_args</span><span class="p">:</span>
+        <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_param_info</span><span class="p">(</span>
+            <span class="n">flat_param_names</span><span class="p">[</span><span class="n">input_key</span><span class="p">],</span> <span class="n">meta</span>
+        <span class="p">)</span>
+        <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">maybe_input_args</span>
+      <span class="k">elif</span> <span class="n">input_key</span> <span class="ow">in</span> <span class="n">flat_item</span> <span class="ow">and</span> <span class="n">input_key</span> <span class="ow">in</span> <span class="n">flat_structure</span><span class="p">:</span>
+        <span class="c1"># Key is present in both input and output.</span>
+        <span class="k">if</span> <span class="n">_has_use_fallback_transform</span><span class="p">(</span><span class="n">input_key</span><span class="p">,</span> <span class="n">flat_transforms</span><span class="p">):</span>
+          <span class="c1"># Indicates that a `use_fallback` transformation was specified.</span>
+          <span class="k">if</span> <span class="n">transforms_default_to_original</span><span class="p">:</span>
+            <span class="c1"># Specified `use_fallback`, but key was also present in the</span>
+            <span class="c1"># checkpoint. This means we should skip loading, since it will be</span>
+            <span class="c1"># overridden with a new value.</span>
+            <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParamInfo</span><span class="p">(</span><span class="n">skip_deserialize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RestoreArgs</span><span class="p">()</span>
+          <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Specified `use_fallback`, but `transforms_default_to_original`</span>
+            <span class="c1"># is False. This means we draw the value from the user-provided</span>
+            <span class="c1"># `item`.</span>
+            <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_param_info</span><span class="p">(</span>
+                <span class="n">flat_param_names</span><span class="p">[</span><span class="n">input_key</span><span class="p">],</span> <span class="n">meta</span>
+            <span class="p">)</span>
+            <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">flat_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="c1"># Transform not specified.</span>
+          <span class="k">if</span> <span class="n">transforms_default_to_original</span><span class="p">:</span>
+            <span class="c1"># Key/value is carried over from the original unchanged.</span>
+            <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_param_info</span><span class="p">(</span>
+                <span class="n">flat_param_names</span><span class="p">[</span><span class="n">input_key</span><span class="p">],</span> <span class="n">meta</span>
+            <span class="p">)</span>
+            <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">flat_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span>
+          <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Take the value from the user-provided `item`, ignoring any value</span>
+            <span class="c1"># in the checkpoint.</span>
+            <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParamInfo</span><span class="p">(</span><span class="n">skip_deserialize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RestoreArgs</span><span class="p">()</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># No match, restoration not required since it will be dropped from the</span>
+        <span class="c1"># output.</span>
+        <span class="n">flat_param_infos</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParamInfo</span><span class="p">(</span><span class="n">skip_deserialize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">flat_input_restore_args</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RestoreArgs</span><span class="p">()</span>
+
+    <span class="n">restore_args</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">from_flat_dict</span><span class="p">(</span>
+        <span class="n">flat_input_restore_args</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">structure</span>
+    <span class="p">)</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+      <span class="n">tree_utils</span><span class="o">.</span><span class="n">from_flat_dict</span><span class="p">(</span><span class="n">flat_param_infos</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">structure</span><span class="p">),</span>
+      <span class="n">restore_args</span><span class="p">,</span>
+  <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_multi_value_fns_with_args</span><span class="p">(</span>
+    <span class="n">transforms</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">restore_args</span><span class="p">:</span> <span class="n">PyTree</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Constructs a wrapper for multi_value_fn including RestoreArgs.&quot;&quot;&quot;</span>
+  <span class="n">flat_restore_args</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span><span class="n">restore_args</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_maybe_wrap_transform</span><span class="p">(</span><span class="n">transform</span><span class="p">:</span> <span class="n">Transform</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_multi_value_fn_with_args</span><span class="p">(</span><span class="n">transform_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tree</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+      <span class="k">nonlocal</span> <span class="n">transform</span>
+      <span class="n">transform</span> <span class="o">=</span> <span class="n">typing</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">RestoreTransform</span><span class="p">,</span> <span class="n">transform</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">transform</span><span class="o">.</span><span class="n">multi_value_fn</span><span class="p">(</span>
+          <span class="n">transform_key</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">flat_restore_args</span><span class="p">[</span><span class="n">transform_key</span><span class="p">]</span>
+      <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">transform</span><span class="o">.</span><span class="n">multi_value_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">Transform</span><span class="p">(</span><span class="n">multi_value_fn</span><span class="o">=</span><span class="n">_multi_value_fn_with_args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">transform</span>
+
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_maybe_wrap_transform</span><span class="p">,</span> <span class="n">transforms</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_transform_checkpoint</span><span class="p">(</span>
+    <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">restored</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+    <span class="n">restore_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">],</span>
+    <span class="n">transforms_default_to_original</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Optionally transforms the restored PyTree to the structure of `item`.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    item: a PyTree representing the result structure (&quot;new tree structure&quot;).</span>
+<span class="sd">    restored: a PyTree representing the original tree structure.</span>
+<span class="sd">    restore_args: tree of RestoreArgs, with the same structure as `item`.</span>
+<span class="sd">    transforms: provides instructions on how to transform the input trees. See</span>
+<span class="sd">      transform_utils.</span>
+<span class="sd">    transforms_default_to_original: See transform_utils.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A transformed PyTree.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+          <span class="s1">&#39;If providing `transforms`, must provide `item` matching structure&#39;</span>
+          <span class="s1">&#39; of expected result.&#39;</span>
+      <span class="p">)</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">restored</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">item</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">deserialize_tree</span><span class="p">(</span><span class="n">restored</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">restore_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s1">&#39;If providing `transforms`, must provide `restore_args` matching&#39;</span>
+            <span class="s1">&#39; structure of expected result.&#39;</span>
+        <span class="p">)</span>
+      <span class="n">transforms</span> <span class="o">=</span> <span class="n">_multi_value_fns_with_args</span><span class="p">(</span><span class="n">transforms</span><span class="p">,</span> <span class="n">restore_args</span><span class="p">)</span>
+      <span class="n">item</span> <span class="o">=</span> <span class="n">transform_utils</span><span class="o">.</span><span class="n">apply_transformations</span><span class="p">(</span>
+          <span class="n">restored</span><span class="p">,</span> <span class="n">transforms</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">transforms_default_to_original</span>
+      <span class="p">)</span>
+  <span class="k">return</span> <span class="n">item</span>
+
+
+<span class="k">def</span> <span class="nf">_get_impl_save_args</span><span class="p">(</span>
+    <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BasePyTreeSaveArgs</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Construct BasePyTreeSaveArgs.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="s1">&#39;Make sure to specify kwarg name `args=` when providing&#39;</span>
+        <span class="s1">&#39; `PyTreeSaveArgs`.&#39;</span>
+    <span class="p">)</span>
+  <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">PyTreeSaveArgs</span><span class="p">(</span>
+        <span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="p">,</span>
+        <span class="n">save_args</span><span class="o">=</span><span class="n">save_args</span><span class="p">,</span>
+    <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_overwrite_aggregate</span><span class="p">(</span><span class="n">sa</span><span class="p">:</span> <span class="n">SaveArgs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SaveArgs</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sa</span><span class="o">.</span><span class="n">aggregate</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">log_first_n</span><span class="p">(</span>
+          <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
+          <span class="s1">&#39;The `aggregate` option is deprecated and will be ignored.&#39;</span><span class="p">,</span>
+          <span class="mi">5</span><span class="p">,</span>
+      <span class="p">)</span>
+    <span class="n">sa</span><span class="o">.</span><span class="n">aggregate</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">sa</span>
+
+  <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">save_args</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span>
+        <span class="n">_overwrite_aggregate</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">save_args</span>
+    <span class="p">)</span>
+  <span class="k">return</span> <span class="n">BasePyTreeSaveArgs</span><span class="p">(</span>
+      <span class="n">item</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">item</span><span class="p">,</span>
+      <span class="n">save_args</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">save_args</span><span class="p">,</span>
+      <span class="n">ocdbt_target_data_file_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">ocdbt_target_data_file_size</span><span class="p">,</span>
+  <span class="p">)</span>
+
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler">[docs]</a><span class="k">class</span> <span class="nc">PyTreeCheckpointHandler</span><span class="p">(</span><span class="n">async_checkpoint_handler</span><span class="o">.</span><span class="n">AsyncCheckpointHandler</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;A CheckpointHandler implementation for any PyTree structure.</span>
+
+<span class="sd">  See JAX documentation for more information on what consistutes a &quot;PyTree&quot;.</span>
+<span class="sd">  This handler is capable of saving and restoring any leaf object for which a</span>
+<span class="sd">  `TypeHandler` (see documentation) is registered. By default, `TypeHandler`s</span>
+<span class="sd">  for standard types like `np.ndarray`, `jax.Array`, Python scalars, and others</span>
+<span class="sd">  are registered.</span>
+
+<span class="sd">  As with all `CheckpointHandler` subclasses, `PyTreeCheckpointHandler` should</span>
+<span class="sd">  only be used in conjunction with a `Checkpointer` (or subclass). By itself,</span>
+<span class="sd">  the `CheckpointHandler` is non-atomic.</span>
+
+<span class="sd">  Example::</span>
+
+<span class="sd">    ckptr = Checkpointer(PyTreeCheckpointHandler())</span>
+<span class="sd">    </span>
+<span class="sd">  # TODO(cpgaffney) Cut down on the protected methods accessed by this class.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.__init__"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">aggregate_filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">concurrent_gb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">use_ocdbt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="n">use_zarr3</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">type_handler_registry</span><span class="p">:</span> <span class="n">TypeHandlerRegistry</span> <span class="o">=</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">GLOBAL_TYPE_HANDLER_REGISTRY</span><span class="p">,</span>
+      <span class="n">handler_impl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BasePyTreeCheckpointHandler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates PyTreeCheckpointHandler.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      aggregate_filename: name that the aggregated checkpoint should be saved</span>
+<span class="sd">        as.</span>
+<span class="sd">      concurrent_gb: max concurrent GB that are allowed to be read. Can help to</span>
+<span class="sd">        reduce the possibility of OOM&#39;s when large checkpoints are restored.</span>
+<span class="sd">      use_ocdbt: enables Tensorstore OCDBT driver. This option allows using a</span>
+<span class="sd">        different checkpoint format which is faster to read and write, as well</span>
+<span class="sd">        as more space efficient.</span>
+<span class="sd">      use_zarr3: If True, use Zarr ver3 otherwise Zarr ver2</span>
+<span class="sd">      primary_host: the host id of the primary host.  Default to 0.  If it&#39;s set</span>
+<span class="sd">        to None, then all hosts will be considered as primary.  It&#39;s useful in</span>
+<span class="sd">        the case that all hosts are only working with local storage.</span>
+<span class="sd">      type_handler_registry: a type_handlers.TypeHandlerRegistry. If not</span>
+<span class="sd">        specified, the global type handler registry will be used.</span>
+<span class="sd">      handler_impl: Allows overriding the internal implementation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_handler</span> <span class="o">=</span> <span class="n">MsgpackHandler</span><span class="p">(</span><span class="n">primary_host</span><span class="o">=</span><span class="n">primary_host</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">aggregate_filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">aggregate_filename</span> <span class="o">=</span> <span class="n">_CHECKPOINT_FILE</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_filename</span> <span class="o">=</span> <span class="n">aggregate_filename</span>
+    <span class="k">if</span> <span class="n">concurrent_gb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">concurrent_gb</span> <span class="o">=</span> <span class="n">_DEFAULT_CONCURRENT_GB</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_concurrent_gb</span> <span class="o">=</span> <span class="n">concurrent_gb</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_use_ocdbt</span> <span class="o">=</span> <span class="n">use_ocdbt</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_use_zarr3</span> <span class="o">=</span> <span class="n">use_zarr3</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_primary_host</span> <span class="o">=</span> <span class="n">primary_host</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_type_handler_registry</span> <span class="o">=</span> <span class="n">type_handler_registry</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span> <span class="o">=</span> <span class="n">handler_impl</span> <span class="ow">or</span> <span class="n">BasePyTreeCheckpointHandler</span><span class="p">(</span>
+        <span class="n">concurrent_gb</span><span class="o">=</span><span class="n">concurrent_gb</span><span class="p">,</span>
+        <span class="n">use_ocdbt</span><span class="o">=</span><span class="n">use_ocdbt</span><span class="p">,</span>
+        <span class="n">use_zarr3</span><span class="o">=</span><span class="n">use_zarr3</span><span class="p">,</span>
+        <span class="n">primary_host</span><span class="o">=</span><span class="n">primary_host</span><span class="p">,</span>
+        <span class="n">type_handler_registry</span><span class="o">=</span><span class="n">type_handler_registry</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.async_save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.async_save">[docs]</a>  <span class="k">async</span> <span class="k">def</span> <span class="nf">async_save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">future</span><span class="o">.</span><span class="n">Future</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves a PyTree to a given directory.</span>
+
+<span class="sd">    This operation is compatible with a multi-host, multi-device setting. Tree</span>
+<span class="sd">    leaf values must be supported by the type_handler_registry given in the</span>
+<span class="sd">    constructor. Standard supported types include Python scalars, `np.ndarray`,</span>
+<span class="sd">    `jax.Array`, and strings.</span>
+
+<span class="sd">    After saving, all files will be located in &quot;directory/&quot;. The exact files</span>
+<span class="sd">    that are saved depend on the specific combination of options, including</span>
+<span class="sd">    `use_ocdbt`. A JSON metadata file will be present to store the</span>
+<span class="sd">    tree structure.</span>
+<span class="sd">    In addition, a msgpack file may be present, allowing users to store</span>
+<span class="sd">    aggregated values (see below).</span>
+
+<span class="sd">    Example usage::</span>
+
+<span class="sd">      ckptr = Checkpointer(PyTreeCheckpointHandler())</span>
+<span class="sd">      item = {</span>
+<span class="sd">          &#39;layer0&#39;: {</span>
+<span class="sd">              &#39;w&#39;: np.ndarray(...),</span>
+<span class="sd">              &#39;b&#39;: np.ndarray(...),</span>
+<span class="sd">          },</span>
+<span class="sd">          &#39;layer1&#39;: {</span>
+<span class="sd">              &#39;w&#39;: np.ndarray(...),</span>
+<span class="sd">              &#39;b&#39;: np.ndarray(...),</span>
+<span class="sd">          },</span>
+<span class="sd">      }</span>
+<span class="sd">      # Note: save_args may be None if no customization is desired for saved</span>
+<span class="sd">      # parameters.</span>
+<span class="sd">      # In this case, we &quot;aggregate&quot; small parameters into a single file to</span>
+<span class="sd">      # allow for greater file read/write efficiency (and potentially less)</span>
+<span class="sd">      # wasted space). With OCDBT format active, this parameter is obsolete.</span>
+<span class="sd">      save_args =</span>
+<span class="sd">        jax.tree.map(</span>
+<span class="sd">            lambda x: SaveArgs(aggregate=x.size &lt; some_size), item)</span>
+<span class="sd">      # Eventually calls through to `async_save`.</span>
+<span class="sd">      ckptr.save(path, item, save_args)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: save location directory.</span>
+<span class="sd">      item: Deprecated, use `args.</span>
+<span class="sd">      save_args: Deprecated, use `args`.</span>
+<span class="sd">      args: `PyTreeSaveArgs` (see below).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      A Future that will commit the data to `directory` when awaited. Copying</span>
+<span class="sd">      the data from its source will be awaited in this function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_get_impl_save_args</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">async_save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.save"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.save">[docs]</a>  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeSaveArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves the provided item. See async_save.&quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_get_impl_save_args</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">save_args</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span></div>
+
+  <span class="k">async</span> <span class="k">def</span> <span class="nf">_maybe_deserialize</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+      <span class="n">metadata</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+      <span class="n">param_infos</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+      <span class="n">restore_args</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Deserializes values or gets them from the aggregate file.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Handle parameters from aggregate file.</span>
+    <span class="k">def</span> <span class="nf">_process_aggregated_value</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">,</span> <span class="n">tree_metadata</span><span class="o">.</span><span class="n">ValueMetadataEntry</span><span class="p">):</span>
+        <span class="n">meta_or_value</span> <span class="o">=</span> <span class="n">_try_array_cast</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">meta_or_value</span> <span class="o">=</span> <span class="n">_maybe_shard_array</span><span class="p">(</span><span class="n">meta_or_value</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">meta_or_value</span>
+
+    <span class="n">flat_aggregate</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span>
+            <span class="n">_process_aggregated_value</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">restore_args</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">batch_requests</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">base_pytree_checkpoint_handler</span><span class="o">.</span><span class="n">batched_serialization_requests</span><span class="p">(</span>
+            <span class="n">metadata</span><span class="p">,</span>
+            <span class="n">param_infos</span><span class="p">,</span>
+            <span class="n">restore_args</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_type_handler_registry</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">deserialized_batches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">deserialized_batches_ops</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">request</span> <span class="ow">in</span> <span class="n">batch_requests</span><span class="p">:</span>
+      <span class="n">deserialized_batches_ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+          <span class="n">request</span><span class="o">.</span><span class="n">handler</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">infos</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="n">deserialized_batches</span> <span class="o">+=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">deserialized_batches_ops</span><span class="p">)</span>
+
+    <span class="n">flat_restored</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">request</span><span class="p">,</span> <span class="n">deserialized</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">,</span> <span class="n">deserialized_batches</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">deserialized</span><span class="p">):</span>
+        <span class="n">flat_restored</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="c1"># Add in any values which were not deserialized, coming from aggregate file.</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">flat_aggregate</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+      <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">flat_restored</span><span class="p">:</span>
+        <span class="n">flat_restored</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">flat_aggregate</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">from_flat_dict</span><span class="p">(</span><span class="n">flat_restored</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.restore"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.restore">[docs]</a>  <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+      <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">restore_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">transforms_default_to_original</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+      <span class="n">legacy_transform_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LegacyTransformFn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;PyTreeRestoreArgs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restores a PyTree from the checkpoint directory at the given path.</span>
+
+<span class="sd">    In the most basic case, only `directory` is required. The tree will be</span>
+<span class="sd">    restored exactly as saved, and all leaves will be restored as the correct</span>
+<span class="sd">    types (assuming the tree metadata is present).</span>
+
+<span class="sd">    However, `restore_args` is often required as well. This PyTree gives a</span>
+<span class="sd">    `RestoreArgs` object (or subclass) for every leaf in the tree. Many types,</span>
+<span class="sd">    such as string or `np.ndarray` do not require any special options for</span>
+<span class="sd">    restoration. When restoring an individual leaf as `jax.Array`, however,</span>
+<span class="sd">    some properties may be required.</span>
+
+<span class="sd">    One example is `sharding`, which defines how a `jax.Array` in the restored</span>
+<span class="sd">    tree should be partitioned. `mesh` and `mesh_axes` can also be used to</span>
+<span class="sd">    specify `sharding`, but `sharding` is the preferred way of specifying this</span>
+<span class="sd">    partition since `mesh` and `mesh_axes` only constructs</span>
+<span class="sd">    `jax.sharding.NamedSharding`. For more information, see `ArrayTypeHandler`</span>
+<span class="sd">    documentation and JAX sharding documentation.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">      ckptr = Checkpointer(PyTreeCheckpointHandler())</span>
+<span class="sd">      restore_args = {</span>
+<span class="sd">          &#39;layer0&#39;: {</span>
+<span class="sd">              &#39;w&#39;: RestoreArgs(),</span>
+<span class="sd">              &#39;b&#39;: RestoreArgs(),</span>
+<span class="sd">          },</span>
+<span class="sd">          &#39;layer1&#39;: {</span>
+<span class="sd">              &#39;w&#39;: ArrayRestoreArgs(</span>
+<span class="sd">                  # Restores as jax.Array, regardless of how it was saved.</span>
+<span class="sd">                  restore_type=jax.Array,</span>
+<span class="sd">                  sharding=jax.sharding.Sharding(...),</span>
+<span class="sd">                  # Warning: may truncate or pad!</span>
+<span class="sd">                  global_shape=(x, y),</span>
+<span class="sd">                ),</span>
+<span class="sd">              &#39;b&#39;: ArrayRestoreArgs(</span>
+<span class="sd">                  restore_type=jax.Array,</span>
+<span class="sd">                  sharding=jax.sharding.Sharding(...),</span>
+<span class="sd">                  global_shape=(x, y),</span>
+<span class="sd">                ),</span>
+<span class="sd">          },</span>
+<span class="sd">      }</span>
+<span class="sd">      ckptr.restore(path, restore_args=restore_args)</span>
+
+<span class="sd">    Providing `item` is typically only necessary when restoring a custom PyTree</span>
+<span class="sd">    class (or when using transformations). In this case, the restored object</span>
+<span class="sd">    will take on the same structure as `item`.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">      @flax.struct.dataclass</span>
+<span class="sd">      class TrainState:</span>
+<span class="sd">        layer0: dict[str, jax.Array]</span>
+<span class="sd">        layer1: dict[str, jax.Array]</span>
+
+<span class="sd">      ckptr = Checkpointer(PyTreeCheckpointHandler())</span>
+<span class="sd">      train_state = TrainState(</span>
+<span class="sd">          layer0={</span>
+<span class="sd">              &#39;w&#39;: jax.Array(...),  # zeros</span>
+<span class="sd">              &#39;b&#39;: jax.Array(...),  # zeros</span>
+<span class="sd">          },</span>
+<span class="sd">          layer1={</span>
+<span class="sd">              &#39;w&#39;: jax.Array(...),  # zeros</span>
+<span class="sd">              &#39;b&#39;: jax.Array(...),  # zeros</span>
+<span class="sd">          },</span>
+<span class="sd">      )</span>
+<span class="sd">      restore_args = jax.tree.map(_make_restore_args, train_state)</span>
+<span class="sd">      ckptr.restore(path, item=train_state, restore_args=restore_args)</span>
+<span class="sd">      # restored tree is of type `TrainState`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: saved checkpoint location directory.</span>
+<span class="sd">      item: Deprecated, use `args`.</span>
+<span class="sd">      restore_args: Deprecated, use `args`.</span>
+<span class="sd">      transforms: Deprecated, use `args`.</span>
+<span class="sd">      transforms_default_to_original: See transform_utils.apply_transformations.</span>
+<span class="sd">      legacy_transform_fn: Deprecated, use `args`.</span>
+<span class="sd">      args: `PyTreeRestoreArgs` (see below).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      A PyTree matching the structure of `item`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">      FileNotFoundError: `directory` does not exist or is missing required files</span>
+<span class="sd">      ValueError: `transforms` is provided without `item`.</span>
+<span class="sd">      ValueError: `transforms` contains elements with `multi_value_fn`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">directory</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+      <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Requested directory for restore does not exist at </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CheckpointArgs</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;Make sure to specify kwarg name `args=` when providing&#39;</span>
+          <span class="s1">&#39; `PyTreeRestoreArgs`.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">args</span> <span class="o">=</span> <span class="n">PyTreeRestoreArgs</span><span class="p">(</span>
+          <span class="n">item</span><span class="p">,</span>
+          <span class="n">restore_args</span><span class="p">,</span>
+          <span class="n">transforms</span><span class="p">,</span>
+          <span class="n">transforms_default_to_original</span><span class="p">,</span>
+          <span class="n">legacy_transform_fn</span><span class="p">,</span>
+      <span class="p">)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">item</span>
+    <span class="n">restore_args</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">restore_args</span>
+    <span class="n">transforms</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">transforms</span>
+    <span class="n">transforms_default_to_original</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">transforms_default_to_original</span>
+    <span class="n">legacy_transform_fn</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">legacy_transform_fn</span>
+
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">can_ignore_aggregate_file</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">all_leaves_are_placeholders</span><span class="p">(</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">_read_aggregate_file</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+      <span class="n">can_ignore_aggregate_file</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Delegate to `BasePyTreeCheckpointHandler` as long as transformation</span>
+    <span class="c1"># options are not specified and metadata file exists and we do not need to</span>
+    <span class="c1"># read from aggregate file.</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">_METADATA_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+        <span class="ow">and</span> <span class="n">can_ignore_aggregate_file</span>
+        <span class="ow">and</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="ow">and</span> <span class="n">legacy_transform_fn</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="p">):</span>
+      <span class="n">args</span> <span class="o">=</span> <span class="n">BasePyTreeRestoreArgs</span><span class="p">(</span>
+          <span class="n">item</span><span class="p">,</span>
+          <span class="n">restore_args</span><span class="o">=</span><span class="n">restore_args</span><span class="p">,</span>
+      <span class="p">)</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;directory=</span><span class="si">%s</span><span class="s1">, restore_args=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="n">restore_args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">directory</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+      <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Requested directory for restore does not exist at </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+    <span class="n">byte_limiter</span> <span class="o">=</span> <span class="n">get_byte_limiter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_concurrent_gb</span><span class="p">)</span>
+    <span class="n">structure</span><span class="p">,</span> <span class="n">use_zarr3_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_internal_metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="c1"># `checkpoint_restore_args` has a structure relative to the checkpoint,</span>
+    <span class="c1"># while `restore_args` remains structured relative to the output.</span>
+
+    <span class="n">param_infos</span><span class="p">,</span> <span class="n">checkpoint_restore_args</span> <span class="o">=</span> <span class="n">_get_restore_parameters</span><span class="p">(</span>
+        <span class="n">directory</span><span class="p">,</span>
+        <span class="n">item</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">get_param_names</span><span class="p">(</span><span class="n">structure</span><span class="p">),</span>
+        <span class="n">transforms</span><span class="p">,</span>
+        <span class="n">restore_args</span><span class="p">,</span>
+        <span class="n">byte_limiter</span><span class="o">=</span><span class="n">byte_limiter</span><span class="p">,</span>
+        <span class="n">transforms_default_to_original</span><span class="o">=</span><span class="n">transforms_default_to_original</span><span class="p">,</span>
+        <span class="n">use_zarr3</span><span class="o">=</span><span class="n">use_zarr3_metadata</span>
+        <span class="k">if</span> <span class="n">use_zarr3_metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_zarr3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">legacy_transform_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;Cannot provide both `transforms` and `legacy_transform_fn`.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="n">legacy_transform_fn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">structure</span><span class="p">,</span> <span class="n">param_infos</span> <span class="o">=</span> <span class="n">legacy_transform_fn</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">param_infos</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">restore_args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">restore_args</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">RestoreArgs</span><span class="p">(),</span> <span class="n">item</span><span class="p">)</span>
+      <span class="n">checkpoint_restore_args</span> <span class="o">=</span> <span class="n">restore_args</span>
+
+    <span class="k">def</span> <span class="nf">_maybe_set_default_restore_types</span><span class="p">(</span><span class="n">value_meta</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">RestoreArgs</span><span class="p">):</span>
+      <span class="k">if</span> <span class="p">(</span>
+          <span class="nb">isinstance</span><span class="p">(</span><span class="n">value_meta</span><span class="p">,</span> <span class="n">tree_metadata</span><span class="o">.</span><span class="n">ValueMetadataEntry</span><span class="p">)</span>
+          <span class="ow">and</span> <span class="ow">not</span> <span class="n">value_meta</span><span class="o">.</span><span class="n">skip_deserialize</span>
+          <span class="ow">and</span> <span class="n">value_meta</span><span class="o">.</span><span class="n">value_type</span> <span class="o">==</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">RESTORE_TYPE_UNKNOWN</span>
+      <span class="p">):</span>
+        <span class="k">return</span> <span class="n">dataclasses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="n">value_meta</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">default_restore_type</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="p">)</span>
+      <span class="k">return</span> <span class="n">value_meta</span>
+
+    <span class="c1"># If metadata file was missing in the checkpoint, we need to decide</span>
+    <span class="c1"># restore_type based on RestoreArgs.</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+        <span class="n">_maybe_set_default_restore_types</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">checkpoint_restore_args</span>
+    <span class="p">)</span>
+
+    <span class="n">restored_item</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_deserialize</span><span class="p">(</span>
+            <span class="n">structure</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">param_infos</span><span class="p">,</span> <span class="n">checkpoint_restore_args</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">legacy_transform_fn</span><span class="p">:</span>
+      <span class="n">restored_item</span> <span class="o">=</span> <span class="n">_transform_checkpoint</span><span class="p">(</span>
+          <span class="n">item</span><span class="p">,</span>
+          <span class="n">restored_item</span><span class="p">,</span>
+          <span class="n">restore_args</span><span class="p">,</span>
+          <span class="n">transforms</span><span class="p">,</span>
+          <span class="n">transforms_default_to_original</span><span class="p">,</span>
+      <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">logging</span><span class="o">.</span><span class="n">level_debug</span><span class="p">():</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;param_infos: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">param_infos</span><span class="p">)</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;checkpoint_restore_args: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">checkpoint_restore_args</span><span class="p">)</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+          <span class="s1">&#39;restored_item: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">structure</span><span class="p">(</span><span class="n">restored_item</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+          <span class="s1">&#39;ts_metrics: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+          <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">experimental_collect_matching_metrics</span><span class="p">(</span><span class="s1">&#39;/tensorstore/&#39;</span><span class="p">)),</span>
+      <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">restored_item</span></div>
+
+  <span class="k">def</span> <span class="nf">_read_aggregate_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restores the aggregate file representing PyTree structure.&quot;&quot;&quot;</span>
+    <span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_filename</span>
+    <span class="k">if</span> <span class="n">checkpoint_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_handler</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_ocdbt</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Checkpoint structure file does not exist at </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">pytree_structure</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_get_internal_metadata</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">PyTree</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets limited information needed to fully restore the checkpoint.</span>
+
+<span class="sd">    This information just consists of the restore type for each leaf, as well</span>
+<span class="sd">    as the aggregated value (from the msgpack file) if present, and determines</span>
+<span class="sd">    whether we need to deserialize the parameter using TypeHandler later.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: directory</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      A PyTree with leaves of ValueMetadataEntry or real values if restored from</span>
+<span class="sd">      the aggregate file (or if empty nodes).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">      FileNotFoundError: no structure could be identified for the checkpoint at</span>
+<span class="sd">      `directory`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Try reading metadata file.</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">_read_metadata_file</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
+      <span class="n">use_zarr3</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">use_zarr3</span>
+      <span class="n">metadata_tree</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">as_nested_tree</span><span class="p">(</span><span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="n">flat_metadata</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span>
+          <span class="n">metadata_tree</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span>
+      <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+      <span class="n">metadata_tree</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="n">flat_metadata</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="n">use_zarr3</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># Try reading aggregate file.</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">aggregate_tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_aggregate_file</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+      <span class="n">flat_aggregate</span> <span class="o">=</span> <span class="n">tree_utils</span><span class="o">.</span><span class="n">to_flat_dict</span><span class="p">(</span>
+          <span class="n">aggregate_tree</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span>
+      <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+      <span class="n">aggregate_tree</span> <span class="o">=</span> <span class="kc">None</span>
+      <span class="n">flat_aggregate</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_is_empty_aggregate_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">is_supported_empty_aggregation_type</span><span class="p">(</span>
+          <span class="n">value</span>
+      <span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">utils</span><span class="o">.</span><span class="n">leaf_is_placeholder</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_aggregate_leaf</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">_is_empty_aggregate_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+      <span class="k">return</span> <span class="n">tree_metadata</span><span class="o">.</span><span class="n">ValueMetadataEntry</span><span class="p">(</span>
+          <span class="n">value_type</span><span class="o">=</span><span class="n">type_handlers</span><span class="o">.</span><span class="n">RESTORE_TYPE_UNKNOWN</span><span class="p">,</span>
+          <span class="n">skip_deserialize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+      <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_metadata_and_aggregate_leaves</span><span class="p">(</span><span class="n">value_meta</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">_is_empty_aggregate_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+      <span class="k">if</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">is_empty_typestr</span><span class="p">(</span><span class="n">value_meta</span><span class="o">.</span><span class="n">value_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">get_empty_value_from_typestr</span><span class="p">(</span><span class="n">value_meta</span><span class="o">.</span><span class="n">value_type</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">value_meta</span>
+
+    <span class="c1"># Handle cases of missing metadata and/or aggregate files.</span>
+    <span class="n">structure_tree</span> <span class="o">=</span> <span class="n">metadata_tree</span> <span class="ow">or</span> <span class="n">aggregate_tree</span>
+    <span class="k">if</span> <span class="n">flat_metadata</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">flat_aggregate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;No structure could be identified for the checkpoint at </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">flat_metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="c1"># Metadata file is missing. This is an older checkpoint.</span>
+      <span class="c1"># TODO(b/353310784) Track usages.</span>
+      <span class="n">flat_structure</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span>
+          <span class="n">_process_aggregate_leaf</span><span class="p">,</span>
+          <span class="n">flat_aggregate</span><span class="p">,</span>
+          <span class="n">is_leaf</span><span class="o">=</span><span class="n">tree_utils</span><span class="o">.</span><span class="n">is_empty_or_leaf</span><span class="p">,</span>
+      <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">flat_aggregate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="c1"># Aggregate file is missing, so we can just use the metadata_tree as the</span>
+      <span class="c1"># structure. This is a newer checkpoint.</span>
+      <span class="k">return</span> <span class="n">metadata_tree</span><span class="p">,</span> <span class="n">use_zarr3</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># Avoid tree_map because input trees may be mismatched (due to empty</span>
+      <span class="c1"># values missing from msgpack structure).</span>
+      <span class="n">flat_structure</span> <span class="o">=</span> <span class="p">{}</span>
+      <span class="k">for</span> <span class="n">tuple_key</span> <span class="ow">in</span> <span class="n">flat_metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">value_meta</span> <span class="o">=</span> <span class="n">flat_metadata</span><span class="p">[</span><span class="n">tuple_key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">tuple_key</span> <span class="ow">in</span> <span class="n">flat_aggregate</span><span class="p">:</span>
+          <span class="n">flat_structure</span><span class="p">[</span><span class="n">tuple_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_process_metadata_and_aggregate_leaves</span><span class="p">(</span>
+              <span class="n">value_meta</span><span class="p">,</span> <span class="n">flat_aggregate</span><span class="p">[</span><span class="n">tuple_key</span><span class="p">]</span>
+          <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+          <span class="k">if</span> <span class="n">type_handlers</span><span class="o">.</span><span class="n">is_empty_typestr</span><span class="p">(</span><span class="n">value_meta</span><span class="o">.</span><span class="n">value_type</span><span class="p">):</span>
+            <span class="n">flat_structure</span><span class="p">[</span><span class="n">tuple_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">type_handlers</span><span class="o">.</span><span class="n">get_empty_value_from_typestr</span><span class="p">(</span>
+                    <span class="n">value_meta</span><span class="o">.</span><span class="n">value_type</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+          <span class="k">else</span><span class="p">:</span>
+            <span class="n">flat_structure</span><span class="p">[</span><span class="n">tuple_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value_meta</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">tree_utils</span><span class="o">.</span><span class="n">from_flat_dict</span><span class="p">(</span><span class="n">flat_structure</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">structure_tree</span><span class="p">),</span>
+        <span class="n">use_zarr3</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.metadata"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.metadata">[docs]</a>  <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns tree metadata.</span>
+
+<span class="sd">    The result will be a PyTree matching the structure of the saved checkpoint.</span>
+<span class="sd">    Note that if the item saved was a custom class, the restored metadata will</span>
+<span class="sd">    be returned as a nested dictionary representation.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">      {</span>
+<span class="sd">        &#39;layer0&#39;: {</span>
+<span class="sd">            &#39;w&#39;: ArrayMetadata(dtype=jnp.float32, shape=(8, 8), shards=(1, 2)),</span>
+<span class="sd">            &#39;b&#39;: ArrayMetadata(dtype=jnp.float32, shape=(8,), shards=(1,)),</span>
+<span class="sd">        },</span>
+<span class="sd">        &#39;step&#39;: ScalarMetadata(dtype=jnp.int64),</span>
+<span class="sd">      }</span>
+
+<span class="sd">    If the required metadata file is not present, this method will raise an</span>
+<span class="sd">    error.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: checkpoint location.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      tree containing metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.finalize"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.finalize">[docs]</a>  <span class="k">def</span> <span class="nf">finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Finalization step.</span>
+
+<span class="sd">    Called automatically by the Checkpointer/AsyncCheckpointer just before the</span>
+<span class="sd">    checkpoint is considered &quot;finalized&quot; in the sense of ensuring atomicity. See</span>
+<span class="sd">    documentation for `type_handlers.merge_ocdbt_per_process_files`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      directory: Path where the checkpoint is located.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PyTreeCheckpointHandler.close"><a class="viewcode-back" href="../../../api_reference/checkpoint.checkpoint_handlers.html#orbax.checkpoint.PyTreeCheckpointHandler.close">[docs]</a>  <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Closes the handler. Called automatically by Checkpointer.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handler_impl</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">,</span> <span class="n">for_save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">PyTreeSaveArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Parameters for saving a PyTree.</span>
+
+<span class="sd">  Attributes:</span>
+<span class="sd">    item (required): a PyTree to be saved.</span>
+<span class="sd">    save_args: a PyTree with the same structure of `item`, which consists of</span>
+<span class="sd">      `ocp.SaveArgs` objects as values. `None` can be used for values where no</span>
+<span class="sd">      `SaveArgs` are specified.</span>
+<span class="sd">    ocdbt_target_data_file_size: Specifies the target size (in bytes) of each</span>
+<span class="sd">      OCDBT data file.  It only applies when OCDBT is enabled and Zarr3 must be</span>
+<span class="sd">      turned on.  If left unspecified, default size is 2GB.  A value of 0</span>
+<span class="sd">      indicates no maximum file size limit.  For best results, ensure</span>
+<span class="sd">      chunk_byte_size is smaller than this value.  For more details, refer to</span>
+<span class="sd">      https://google.github.io/tensorstore/kvstore/ocdbt/index.html#json-kvstore/ocdbt.target_data_file_size</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">item</span><span class="p">:</span> <span class="n">PyTree</span>
+  <span class="n">save_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">ocdbt_target_data_file_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="nd">@register_with_handler</span><span class="p">(</span><span class="n">PyTreeCheckpointHandler</span><span class="p">,</span> <span class="n">for_restore</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">PyTreeRestoreArgs</span><span class="p">(</span><span class="n">CheckpointArgs</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Parameters for restoring a PyTree.</span>
+
+<span class="sd">  Attributes (all optional):</span>
+<span class="sd">    item: provides the tree structure for the restored item. If not provided,</span>
+<span class="sd">      will infer the structure from the saved checkpoint. Transformations will</span>
+<span class="sd">      not be run in this case. Necessary particularly in the case where the</span>
+<span class="sd">      caller needs to restore the tree as a custom object.</span>
+<span class="sd">    restore_args: optional object containing additional arguments for</span>
+<span class="sd">      restoration. It should be a PyTree matching the structure of `item`, or</span>
+<span class="sd">      if `item` is not provided, then it should match the structure of the</span>
+<span class="sd">      checkpoint. Each value in the tree should be a `RestoreArgs` object (OR</span>
+<span class="sd">      a subclass of `RestoreArgs`). Importantly, note that when restoring a</span>
+<span class="sd">      leaf as a certain type, a specific subclass of `RestoreArgs` may be</span>
+<span class="sd">      required. `RestoreArgs` also provides the option to customize the</span>
+<span class="sd">      restore type of an individual leaf.</span>
+<span class="sd">    transforms: a PyTree of transformations that should be applied to the</span>
+<span class="sd">      saved tree in order to obtain a final structure. The `transforms` tree</span>
+<span class="sd">      structure should conceptually match that of `item`, but the use of</span>
+<span class="sd">      regexes and implicit keys means that it does not need to match</span>
+<span class="sd">      completely. See `transform_utils` for further information.</span>
+<span class="sd">    transforms_default_to_original: See transform_utils.apply_transformations.</span>
+<span class="sd">    legacy_transform_fn: WARNING: NOT GENERALLY SUPPORTED. A function which</span>
+<span class="sd">      accepts the `item` argument, a PyTree checkpoint structure and a PyTree</span>
+<span class="sd">      of ParamInfos based on the checkpoint. Returns a transformed PyTree</span>
+<span class="sd">      matching the desired return tree structure, and a matching ParamInfo</span>
+<span class="sd">      tree.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">restore_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PyTree</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">transforms_default_to_original</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+  <span class="n">legacy_transform_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">LegacyTransformFn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/pytree_checkpoint_handler.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

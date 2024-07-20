@@ -1,0 +1,2414 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  
+<!-- Mirrored from docs.kidger.site/equinox/api/transformations/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 11:53:49 GMT -->
+<head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for the Equinox software library.">
+      
+      
+      
+        <meta name="author" content="Patrick Kidger">
+      
+      
+        <link rel="canonical" href="index.html">
+      
+      <link rel="icon" href="../../_static/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Transformations - Equinox</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../_static/custom_css.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="amber">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transformations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Equinox" class="md-header__button md-logo" aria-label="Equinox" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 10V8h2v2h-2m0 2v-2h-2v2h2m0-4V6h-2v2h2m-2-5.16V4h2c-.63-.46-1.29-.85-2-1.16M18 4v2h2c-.58-.75-1.25-1.42-2-2m2 2v2h1.16c-.31-.71-.7-1.37-1.16-2m2 6c0-.68-.07-1.35-.2-2H20v2h2m-6-6V4h-2v2h2m0 10h2v-2h-2v2m2 2h2v-2h-2v2m-2 2h2v-2h-2v2m-2 1.8c.7-.14 1.36-.36 2-.64V20h-2v1.8m4-7.8h2v-2h-2v2m-2-6h-2v2h2V8m4 8h1.16c.28-.64.5-1.3.64-2H20v2m-4-4h-2v2h2v-2m-4 6v-2h2v-2h-2v-2h2v-2h-2V8h2V6h-2V4h2V2.2c-.65-.13-1.31-.2-2-.2C6.5 2 2 6.5 2 12s4.5 10 10 10v-2h2v-2h-2m2 0h2v-2h-2v2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Equinox
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transformations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/patrick-kidger/equinox" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    patrick-kidger/equinox
+  </div>
+</a>
+
+<a href="https://twitter.com/PatrickKidger" title="Go to Twitter" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    @PatrickKidger
+  </div>
+</a>
+
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Equinox" class="md-nav__button md-logo" aria-label="Equinox" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 10V8h2v2h-2m0 2v-2h-2v2h2m0-4V6h-2v2h2m-2-5.16V4h2c-.63-.46-1.29-.85-2-1.16M18 4v2h2c-.58-.75-1.25-1.42-2-2m2 2v2h1.16c-.31-.71-.7-1.37-1.16-2m2 6c0-.68-.07-1.35-.2-2H20v2h2m-6-6V4h-2v2h2m0 10h2v-2h-2v2m2 2h2v-2h-2v2m-2 2h2v-2h-2v2m-2 1.8c.7-.14 1.36-.36 2-.64V20h-2v1.8m4-7.8h2v-2h-2v2m-2-6h-2v2h2V8m4 8h1.16c.28-.64.5-1.3.64-2H20v2m-4-4h-2v2h2v-2m-4 6v-2h2v-2h-2v-2h2v-2h-2V8h2V6h-2V4h2V2.2c-.65-.13-1.31-.2-2-.2C6.5 2 2 6.5 2 12s4.5 10 10 10v-2h2v-2h-2m2 0h2v-2h-2v2z"/></svg>
+
+    </a>
+    Equinox
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/patrick-kidger/equinox" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    patrick-kidger/equinox
+  </div>
+</a>
+
+<a href="https://twitter.com/PatrickKidger" title="Go to Twitter" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    @PatrickKidger
+  </div>
+</a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../all-of-equinox/index.html" class="md-nav__link">
+        All of Equinox
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          Introductory
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introductory" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introductory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/mnist/index.html" class="md-nav__link">
+        CNN on MNIST
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/train_rnn/index.html" class="md-nav__link">
+        Train RNN
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Advanced
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/score_based_diffusion/index.html" class="md-nav__link">
+        Generative score-based diffusion
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/bert/index.html" class="md-nav__link">
+        BERT language model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/unet/index.html" class="md-nav__link">
+        U-Net implementation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/vision_transformer/index.html" class="md-nav__link">
+        Vision transformer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/deep_convolutional_gan/index.html" class="md-nav__link">
+        Image GAN
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/mistral_7b/index.html" class="md-nav__link">
+        Mistral 7B
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/frozen_layer/index.html" class="md-nav__link">
+        Freezing parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/init_apply/index.html" class="md-nav__link">
+        Compatibility with init-apply libraries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/stateful/index.html" class="md-nav__link">
+        Stateful operations (e.g. BatchNorm)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/parallelism/index.html" class="md-nav__link">
+        Autoparallelism (e.g. multi-GPU)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/serialisation/index.html" class="md-nav__link">
+        Serialisation (with hyperparameters)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Basic API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Basic API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Basic API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1">
+          Modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Modules" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../module/module/index.html" class="md-nav__link">
+        Module
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../module/advanced_fields/index.html" class="md-nav__link">
+        Extra features
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          Neural network layers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Neural network layers" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Neural network layers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/linear/index.html" class="md-nav__link">
+        Linear
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/conv/index.html" class="md-nav__link">
+        Convolutional
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/rnn/index.html" class="md-nav__link">
+        Recurrent
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/attention/index.html" class="md-nav__link">
+        Attention
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/activations/index.html" class="md-nav__link">
+        Activations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/pool/index.html" class="md-nav__link">
+        Pooling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/dropout/index.html" class="md-nav__link">
+        Dropout
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/normalisation/index.html" class="md-nav__link">
+        Normalisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/embedding/index.html" class="md-nav__link">
+        Embeddings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/mlp/index.html" class="md-nav__link">
+        Multi-layer perceptron
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/sequential/index.html" class="md-nav__link">
+        Sequential
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/inference/index.html" class="md-nav__link">
+        Training/Inference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/shared/index.html" class="md-nav__link">
+        Sharing layers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nn/stateful/index.html" class="md-nav__link">
+        Stateful operations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Transformations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="index.html" class="md-nav__link md-nav__link--active">
+        Transformations
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#just-in-time-compilation" class="md-nav__link">
+    Just-in-time compilation
+  </a>
+  
+    <nav class="md-nav" aria-label="Just-in-time compilation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_jit" class="md-nav__link">
+    filter_jit()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_make_jaxpr" class="md-nav__link">
+    filter_make_jaxpr()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_eval_shape" class="md-nav__link">
+    filter_eval_shape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_shard" class="md-nav__link">
+    filter_shard()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-differentiation" class="md-nav__link">
+    Automatic differentiation
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic differentiation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_grad" class="md-nav__link">
+    filter_grad()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_value_and_grad" class="md-nav__link">
+    filter_value_and_grad()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_jvp" class="md-nav__link">
+    filter_jvp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_vjp" class="md-nav__link">
+    filter_vjp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_jacfwd" class="md-nav__link">
+    filter_jacfwd()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_jacrev" class="md-nav__link">
+    filter_jacrev()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_hessian" class="md-nav__link">
+    filter_hessian()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_custom_jvp" class="md-nav__link">
+    filter_custom_jvp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_custom_vjp" class="md-nav__link">
+    filter_custom_vjp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_checkpoint" class="md-nav__link">
+    filter_checkpoint()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_closure_convert" class="md-nav__link">
+    filter_closure_convert()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vectorisation-and-parallelisation" class="md-nav__link">
+    Vectorisation and parallelisation
+  </a>
+  
+    <nav class="md-nav" aria-label="Vectorisation and parallelisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_vmap" class="md-nav__link">
+    filter_vmap()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_pmap" class="md-nav__link">
+    filter_pmap()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callbacks" class="md-nav__link">
+    Callbacks
+  </a>
+  
+    <nav class="md-nav" aria-label="Callbacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equinox.filter_pure_callback" class="md-nav__link">
+    filter_pure_callback()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manipulation/index.html" class="md-nav__link">
+        Manipulating PyTrees
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Advanced API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../caches/index.html" class="md-nav__link">
+        Clear caches
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../debug/index.html" class="md-nav__link">
+        Debugging tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enumerations/index.html" class="md-nav__link">
+        Enumerations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/index.html" class="md-nav__link">
+        Runtime errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pretty-printing/index.html" class="md-nav__link">
+        Pretty printing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serialisation/index.html" class="md-nav__link">
+        Serialisation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Misc" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/index.html" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tricks/index.html" class="md-nav__link">
+        Tricks (ensembles, surgery, custom initialisations, ...)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../citation/index.html" class="md-nav__link">
+        Citation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="transformations">Transformations<a class="headerlink" href="#transformations" title="Permanent link">¤</a></h1>
+<p>These offer an alternate (easier to use) API for JAX transformations.</p>
+<p>For example, JAX uses <code>jax.jit(..., static_argnums=...)</code> to manually indicate which arguments should be treated dynamically/statically. Meanwhile <code>equinox.filter_jit</code> automatically treats all JAX/NumPy arrays dynamically, and everything else statically. Moreover, this is done at the level of individual PyTree leaves, so that unlike <code>jax.jit</code>, one argment can have both dynamic (array-valued) and static leaves.</p>
+<p>Most users find that this is a simpler API when working with complicated PyTrees, such as are produced when using Equinox modules. But you can also still use Equinox with normal <code>jax.jit</code> etc. if you so prefer.</p>
+<h2 id="just-in-time-compilation">Just-in-time compilation<a class="headerlink" href="#just-in-time-compilation" title="Permanent link">¤</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_jit" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_jit</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">donate</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;all-except-first&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;warn-except-first&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_jit" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>An easier-to-use version of <code>jax.jit</code>. All JAX and NumPy arrays are traced, and
+all other types are held static.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code> is a pure function to JIT compile.</li>
+<li><code>donate</code> indicates whether the buffers of JAX arrays are donated or not. It
+    should either be:<ul>
+<li><code>'all'</code>: donate all arrays and suppress all warnings about unused buffers;</li>
+<li><code>'all-except-first'</code>: donate all arrays except for those in the first
+    argument, and suppress all warnings about unused buffers;</li>
+<li><code>'warn'</code>: as above, but don't suppress unused buffer warnings;</li>
+<li><code>'warn-except-first'</code>: as above, but don't suppress unused buffer warnings;</li>
+<li><code>'none'</code>: no buffer donation. (This the default.)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The JIT'd version of <code>fun</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic behaviour</span>
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>  <span class="c1"># both args traced if arrays, static if non-arrays</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># both args traced</span>
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># first arg traced, second arg static</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># both args static</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Donating arguments allows their underlying memory to be used in the
+computation. This can produce speed and memory improvements, but means that you
+cannot use any donated arguments again, as their underlying memory has been
+overwritten. (JAX will throw an error if you try to.)</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you want to trace Python <code>bool</code>/<code>int</code>/<code>float</code>/<code>complex</code> as well then you
+can do this by wrapping them into a JAX array: <code>jnp.asarray(x)</code>.</p>
+<p>If you want to donate only some arguments then this can be done by setting
+<code>filter_jit(donate="all-except-first")</code> and then passing all arguments that you
+don't want to donate through the first argument. (Packing multiple values into
+a tuple if necessary.)</p>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_make_jaxpr" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_make_jaxpr</span><span class="p">(</span><span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">jax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ClosedJaxpr</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">],</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">Any</span><span class="p">]]]</span></code>
+
+
+<a href="#equinox.filter_make_jaxpr" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>As <code>jax.make_jaxpr</code>, but accepts arbitrary PyTrees as input and output.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function <code>fun(*arg, **kwargs)</code> whose jaxpr is to be computed. Its
+    positional and keyword arguments may be anything, as can its return value.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A wrapped version of <code>fun</code>, that when applied to example arguments
+<code>*args, **kwargs</code>, will return a 3-tuple of:</p>
+<ul>
+<li>A <code>ClosedJaxpr</code> representing the evaluation of that function on those arguments.</li>
+<li>A <code>PyTree[jax.ShapeDtypeStruct]</code> representing the output shape and dtype of the
+    result.</li>
+<li>A <code>PyTree[Any]</code> representing any non-array outputs from <code>fun</code>.</li>
+</ul>
+<p>The example arguments to be traced may be anything with <code>.shape</code> and <code>.dtype</code>
+fields (typically JAX arrays, NumPy arrays, of <code>jax.ShapeDtypeStruct</code>s). All
+other argments are treated statically. In particular, Python builtins (<code>bool</code>,
+<code>int</code>, <code>float</code>, <code>complex</code>) are treated as static inputs; wrap them in JAX/NumPy
+arrays if you would like them to be traced.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_eval_shape" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_eval_shape</span><span class="p">(</span><span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]]</span></code>
+
+
+<a href="#equinox.filter_eval_shape" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>As <code>jax.eval_shape</code>, but allows any Python object as inputs and outputs.</p>
+<p>(<code>jax.eval_shape</code> is constrained to only work with JAX arrays, Python
+float/int/etc.)</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_shard" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_shard</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">device_or_shardings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">jaxlib</span><span class="o">.</span><span class="n">xla_extension</span><span class="o">.</span><span class="n">Device</span><span class="p">,</span> <span class="n">jaxlib</span><span class="o">.</span><span class="n">xla_extension</span><span class="o">.</span><span class="n">Sharding</span><span class="p">])</span></code>
+
+
+<a href="#equinox.filter_shard" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Filtered transform combining <code>jax.lax.with_sharding_constraint</code>
+and <code>jax.device_put</code>.</p>
+<p>Enforces sharding within a JIT'd computation (That is, how an array is
+split between multiple devices, i.e. multiple GPUs/TPUs.), or moves <code>x</code> to
+a device.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>x</code>: A PyTree, with potentially a mix of arrays and non-arrays on the leaves.
+    They will have their shardings constrained.</li>
+<li><code>device_or_shardings</code>: Either a singular device (e.g. CPU or GPU) or PyTree of
+    sharding specifications. The structure should be a prefix of <code>x</code>.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A copy of <code>x</code> with the specified sharding constraints.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>See also the <a href="../../examples/parallelism/index.html">autoparallelism example</a>.</p>
+</div>
+
+    </div>
+
+  </div>
+
+<h2 id="automatic-differentiation">Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Permanent link">¤</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_grad" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_grad</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_grad" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Creates a function that computes the gradient of <code>fun</code>.</p>
+<p>The gradient will be computed with respect to all floating-point JAX/NumPy arrays
+in the first argument. (Which should be a PyTree.)</p>
+<p>Any nondifferentiable leaves in the first argument will have <code>None</code> as the gradient.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code> is a pure function to differentiate.</li>
+<li><code>has_aux</code>: if <code>True</code> then <code>fun</code> should return a pair; the first element is the
+    output to be differentiated and the second element is auxiliary data.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A function with the same arguments as <code>fun</code>, that computes the derivative of <code>fun</code>
+with respect to its first input. Any nondifferentiable leaves will have <code>None</code> as
+the gradient.</p>
+<p>If <code>has_aux</code> is <code>True</code> then a pair <code>(gradient, aux)</code> is returned. If <code>has_aux</code> is
+<code>False</code> then just the <code>gradient</code> is returned.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you need to differentiate multiple objects, then put them together into a
+tuple and pass that through the first argument:
+<div class="highlight"><pre><span></span><code><span class="c1"># We want to differentiate `func` with respect to both `x` and `y`.</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="nd">@equinox</span><span class="o">.</span><span class="n">filter_grad</span>
+<span class="k">def</span> <span class="nf">grad_func</span><span class="p">(</span><span class="n">x__y</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x__y</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>See also <a class="autorefs autorefs-internal" href="../manipulation/index.html#equinox.apply_updates"><code>equinox.apply_updates</code></a> for a convenience function that applies
+non-<code>None</code> gradient updates to a model.</p>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_value_and_grad" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_value_and_grad</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span></code>
+
+
+<a href="#equinox.filter_value_and_grad" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Creates a function that evaluates both <code>fun</code> and the gradient of <code>fun</code>.</p>
+<p>The gradient will be computed with respect to all floating-point JAX/NumPy arrays
+in the first argument. (Which should be a PyTree.)</p>
+<p>Any nondifferentiable leaves in the first argument will have <code>None</code> as the gradient.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code> is a pure function to differentiate.</li>
+<li><code>has_aux</code>: if <code>True</code> then <code>fun</code> should return a pair; the first element is the
+    output to be differentiated and the second element is auxiliary data.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A function with the same arguments as <code>fun</code>, that evaluates both <code>fun</code> and computes
+the derivative of <code>fun</code> with respect to its first input. Any nondifferentiable
+leaves will have <code>None</code> as the gradient.</p>
+<p>If <code>has_aux</code> is <code>True</code> then a nested tuple <code>((value, aux), gradient)</code> is returned.
+If <code>has_aux</code> is <code>False</code> then the pair <code>(value, gradient)</code> is returned.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_jvp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_jvp</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="o">~</span><span class="n">_T</span><span class="p">],</span> <span class="n">primals</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">tangents</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="o">~</span><span class="n">_T</span><span class="p">,</span> <span class="n">PyTree</span><span class="p">]</span></code>
+
+
+<a href="#equinox.filter_jvp" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Like <code>jax.jvp</code>, but accepts arbitrary PyTrees. (Not just JAXable types.)</p>
+<p>In the following, an "inexact arraylike" refers to either a floating-point JAX
+array, or a complex JAX array, or a Python <code>float</code>, or a Python <code>complex</code>. These are
+the types which JAX considers to be differentiable.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fn</code>: Function to be differentiated. Its arguments can be Python objects, and
+    its return type can be any Python object.</li>
+<li><code>primals</code>: The primal values at which <code>fn</code> should be evaluated. Should be a
+    sequence of arguments, and its length should be equal to the number of
+    positional parameters of <code>fn</code>.</li>
+<li><code>tangents</code>: The tangent vector for which the Jacobian-vector product should be
+    calculated. Should be a PyTree with the same structure as <code>primals</code>. The leaves
+    of <code>tangents</code> must either be inexact arraylikes, or they can be <code>None</code>s. <code>None</code>s
+    are used to indicate (symbolic) zero tangents; in particular these must be
+    passed for all primals that are not inexact arraylikes. (And <code>None</code> can also be
+    passed for any inexact arraylike primals too.)</li>
+<li><code>**kwargs</code>: Any keyword arguments to pass to <code>fn</code>. These are not differentiated.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A pair <code>(primals_out, tangents_out)</code> is returned,
+where <code>primals_out = fn(*primals)</code> and <code>tangents_out</code> is the Jacobian-vector
+product of <code>fn</code> evaluated at <code>primals</code> with <code>tangents</code>.</p>
+<p>The <code>tangents_out</code> has the same structure as <code>primals_out</code>, but has <code>None</code> for
+any leaves with symbolic zero derivative. (Either because they're not
+differentiable -- i.e. they're not a floating-point JAX array or Python <code>float</code> --
+or because they have no dependence on any input with non-symbolic-zero tangent.)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Unlike <code>jax.jvp</code>, this function does not support a <code>has_aux</code> argument. It isn't
+needed, as unlike <code>jax.jvp</code> the output of this function can be of arbitrary
+type.</p>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_vjp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_vjp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="o">*</span><span class="n">primals</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_vjp" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Like <code>jax.vjp</code>, but accepts arbitrary PyTrees. (Not just JAXable types.)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function to be differentiated. Will be called as <code>fun(*primals)</code>. Can
+    return an arbitrary PyTree.</li>
+<li><code>primals</code>: The arguments at which <code>fun</code> will be evaluated and differentiated.
+    Can be arbitrary PyTrees.</li>
+<li><code>has_aux</code>: Indicates whether <code>fun</code> returns a pair, with the first element the
+    output to be differentiated, and the latter auxiliary data. Defaults to <code>False</code>.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>If <code>has_aux is False</code> then returns a <code>(primals_out, vjpfun)</code> pair, where
+<code>primals_out = fun(*primals)</code> and <code>vjpfun</code> is a function from a cotangent vector
+with the same shape as <code>primals_out</code> to a tuple of cotangent vectors with the same
+shape as <code>primals</code>, representing the vector-Jacobian product of <code>fun</code> evaluated at
+<code>primals</code>.</p>
+<p>If <code>has_aux is True</code> then returns a tuple <code>(primals_out, vjpfun, aux)</code>, where <code>aux</code>
+is the auxiliary data returned from <code>fun</code>.</p>
+<p>The cotangent passed to <code>vjpfun</code> should have arrays corresponding to all
+floating-point arrays in <code>primals_out</code>, and <code>None</code> for all other PyTree leaves. The
+cotangents returned from <code>vjpfun</code> will likewise have arrays for all <code>primals</code> that
+are floating-point arrays, and <code>None</code> for all other PyTree leaves.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_jacfwd" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_jacfwd</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_jacfwd" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Computes the Jacobian of <code>fun</code>, evaluated using forward-mode AD. The inputs and
+outputs may be arbitrary PyTrees.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function to be differentiated.</li>
+<li><code>has_aux</code>: Indicates whether <code>fun</code> returns a pair, with the first element the
+    output to be differentiated, and the latter auxiliary data. Defaults to <code>False</code>.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A function with the same arguments as <code>fun</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The outputs of <code>fun</code> must be jax types, the filtering is only applied
+to the input not the output.</p>
+</div>
+<p>If <code>has_aux is False</code> then this function returns just the Jacobian of <code>fun</code> with
+respect to its first argument.</p>
+<p>If <code>has_aux is True</code> then it returns a pair <code>(jacobian, aux)</code>, where <code>aux</code> is the
+auxiliary data returned from <code>fun</code>.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_jacrev" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_jacrev</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_jacrev" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Computes the Jacobian of <code>fun</code>, evaluated using reverse-mode AD. The inputs and
+outputs may be arbitrary PyTrees.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function to be differentiated.</li>
+<li><code>has_aux</code>: Indicates whether <code>fun</code> returns a pair, with the first element the
+    output to be differentiated, and the latter auxiliary data. Defaults to <code>False</code>.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A function with the same arguments as <code>fun</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The outputs of <code>fun</code> must be jax types, the filtering is only applied
+to the input not the output.</p>
+</div>
+<p>If <code>has_aux is False</code> then this function returns just the Jacobian of <code>fun</code> with
+respect to its first argument.</p>
+<p>If <code>has_aux is True</code> then it returns a pair <code>(jacobian, aux)</code>, where <code>aux</code> is the
+auxiliary data returned from <code>fun</code>.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_hessian" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_hessian</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">has_aux</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_hessian" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Computes the Hessian of <code>fun</code>. The inputs and outputs may be arbitrary PyTrees.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function to be differentiated.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A function with the same arguments as <code>fun</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The outputs of <code>fun</code> must be jax types, the filtering is only applied
+to the input not the output.</p>
+</div>
+<p>If <code>has_aux is False</code> then this function returns just the Hessian of <code>fun</code> with
+respect to its first argument.</p>
+<p>If <code>has_aux is True</code> then it returns a pair <code>(hessian, aux)</code>, where <code>aux</code> is the
+auxiliary data returned from <code>fun</code>.</p>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_custom_jvp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_custom_jvp</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_custom_jvp" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Filtered version of <code>jax.custom_jvp</code>.</p>
+<p>Works in the same way as <code>jax.custom_jvp</code>, except that you do not need to specify
+<code>nondiff_argnums</code>. Instead, arguments are automatically split into differentiable
+and nondifferentiable. (Everything that is not a floating-point array is necessarily
+nondifferentiable. In addition, some floating-point arrays may happen not to have
+been differentiated.)</p>
+<p>The tangents of the nondifferentiable arguments will be passed as <code>None</code>.</p>
+<p>The return types must still all be JAX types.</p>
+<p>Supports keyword arguments, which are always treated as nondifferentiable.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@equinox</span><span class="o">.</span><span class="n">filter_custom_jvp</span>
+<span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nd">@call</span><span class="o">.</span><span class="n">def_jvp</span>
+<span class="k">def</span> <span class="nf">call_jvp</span><span class="p">(</span><span class="n">primals</span><span class="p">,</span> <span class="n">tangents</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">primals</span>
+    <span class="n">tx</span><span class="p">,</span> <span class="n">ty</span> <span class="o">=</span> <span class="n">tangents</span>
+    <span class="c1"># `y` is not differentiated below, so it has a symbolic zero tangent,</span>
+    <span class="c1"># represented as a `None`.</span>
+    <span class="k">assert</span> <span class="n">ty</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="n">primal_out</span> <span class="o">=</span> <span class="n">call</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="n">fn</span><span class="p">)</span>
+    <span class="n">tangent_out</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tx</span>
+    <span class="k">return</span> <span class="n">primal_out</span><span class="p">,</span> <span class="n">tangent_out</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="c1"># This only computes gradients for the first argument `x`.</span>
+<span class="n">equinox</span><span class="o">.</span><span class="n">filter_grad</span><span class="p">(</span><span class="n">call</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">fn</span><span class="o">=</span><span class="n">fn</span><span class="p">)</span>
+</code></pre></div>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_custom_vjp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_custom_vjp</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_custom_vjp" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>As <code>jax.custom_vjp</code>, but with a nicer interface.</p>
+<p>Usage is:
+<div class="highlight"><pre><span></span><code><span class="nd">@equinox</span><span class="o">.</span><span class="n">filter_custom_vjp</span>
+<span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">vjp_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># `vjp_arg` is some PyTree of arbitrary Python objects.</span>
+    <span class="c1"># `args`, `kwargs` contain arbitrary Python objects.</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">out</span>  <span class="c1"># some PyTree of arbitrary Python objects.</span>
+
+<span class="nd">@fn</span><span class="o">.</span><span class="n">def_fwd</span>
+<span class="k">def</span> <span class="nf">fn_fwd</span><span class="p">(</span><span class="n">perturbed</span><span class="p">,</span> <span class="n">vjp_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># `perturbed` is a pytree with the same structure as `vjp_arg`. Every leaf is</span>
+    <span class="c1"># either `True` or `False`, indicating whether that leaf is being</span>
+    <span class="c1"># differentiated. (All leaves that are not floating-point arrays will</span>
+    <span class="c1"># necessarily have `False`. Some floating-point arrays might happen not to be</span>
+    <span class="c1"># differentiated either.)</span>
+    <span class="o">...</span>
+    <span class="c1"># Should return `out` as before. `residuals` can be any collection of JAX</span>
+    <span class="c1"># arrays you want to keep around for the backward pass.</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">residuals</span>
+
+<span class="nd">@fn</span><span class="o">.</span><span class="n">def_bwd</span>
+<span class="k">def</span> <span class="nf">fn_bwd</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">grad_obj</span><span class="p">,</span> <span class="n">perturbed</span><span class="p">,</span> <span class="n">vjp_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># `grad_obj` will have `None` as the gradient for any leaves of `out` that were</span>
+    <span class="c1"># not differentiated.</span>
+    <span class="o">...</span>
+    <span class="c1"># `grad_vjp_arg` should be a pytree with the same structure as `vjp_arg`.</span>
+    <span class="c1"># It can have `None` leaves to indicate that that argument has zero gradient.</span>
+    <span class="c1"># (E.g. if the leaf was not a JAX array.)</span>
+    <span class="k">return</span> <span class="n">grad_vjp_arg</span>
+</code></pre></div></p>
+<p>The key differences to <code>jax.custom_vjp</code> are that:</p>
+<ul>
+<li>Only the gradient of the first argument, <code>vjp_arg</code>, should be computed on the
+    backward pass. Everything else will automatically have zero gradient.</li>
+<li>You do not need to distinguish differentiable from nondifferentiable manually.
+    Instead you should return gradients for all perturbed arrays in the first
+    argument. (And just put <code>None</code> on every other leaf of the PyTree.)</li>
+<li>As a convenience, all of the inputs from the forward pass are additionally made
+    available to you on the backward pass.</li>
+<li>As a convenience, you can declare forward and backward passes using <code>def_fwd</code> and
+    <code>def_bwd</code>, rather than a single <code>defvjp</code> as in core JAX.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you need gradients with respect to multiple arguments, then just pack them
+together as a tuple via the first argument <code>vjp_arg</code>. (See also
+<a class="autorefs autorefs-internal" href="#equinox.filter_grad"><code>equinox.filter_grad</code></a> for a similar trick.)</p>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_checkpoint" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_checkpoint</span><span class="p">(</span><span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="o">~</span><span class="n">_T</span><span class="p">]</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">prevent_cse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="o">~</span><span class="n">_T</span><span class="p">]</span></code>
+
+
+<a href="#equinox.filter_checkpoint" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Filtered version of <code>jax.checkpoint</code>.</p>
+<p>Gradient checkpointing is a technique for reducing memory usage during
+backpropagation, especially when used with reverse mode automatic differentiation
+(e.g., <code>jax.grad</code> or <code>equinox.filter_grad</code>).</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fun</code>: The function to be checkpointed. Will be called as <code>fun(*args, **kwargs)</code>.
+    Can return an arbitrary PyTree.</li>
+<li><code>prevent_cse</code>: If <code>True</code> (the default), then JAX will not perform common
+subexpression elimination. Please see the documentation for <code>jax.checkpoint</code> for more details.</li>
+<li><code>policy</code>: Callable for controlling which intermediate values should be
+rematerialized. It should be one of the attributes of <code>jax.checkpoint_policies</code>.</li>
+</ul>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_closure_convert" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_closure_convert</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="o">~</span><span class="n">_T</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">~</span><span class="n">_P</span><span class="p">,</span> <span class="o">~</span><span class="n">_T</span><span class="p">]</span></code>
+
+
+<a href="#equinox.filter_closure_convert" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>As <code>jax.closure_convert</code>, but works on functions accepting and returning
+arbitrary PyTree objects. In addition, all JAX arrays are hoisted into constants
+(not just floating point arrays).</p>
+<p>This is useful for explicitly capturing any closed-over JAX tracers
+before crossing an API boundary, such as <code>jax.grad</code>, <code>jax.custom_vjp</code>, or the
+rule of a custom primitive.</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>fn</code>: The function to call. Will be called as <code>fun(*args, **kwargs)</code>.</li>
+<li><code>args</code>, <code>kwargs</code>: Example arguments at which to call the function. The function is
+    not actually evaluated on these arguments; all JAX arrays are subsituted for
+    tracers. Note that Python builtins (<code>bool</code>, <code>int</code>, <code>float</code>, <code>complex</code>) are
+    not substituted for tracers and are passed through as-is.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A new function, which can be called in the same way, using <code>*args</code> and <code>**kwargs</code>.
+Will contain all closed-over tracers of <code>fn</code> as part of its PyTree structure.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@jax</span><span class="o">.</span><span class="n">grad</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">z</span> <span class="o">+</span> <span class="n">a</span>  <span class="c1"># closes over z</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">filter_closure_convert</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">g2</span><span class="o">.</span><span class="n">consts</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">z</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">z</span>
+
+<span class="n">f</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+</code></pre></div>
+</div>
+
+    </div>
+
+  </div>
+
+<h2 id="vectorisation-and-parallelisation">Vectorisation and parallelisation<a class="headerlink" href="#vectorisation-and-parallelisation" title="Permanent link">¤</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_vmap" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_vmap</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">in_axes</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="n">if_array</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">out_axes</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="n">if_array</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis_name</span><span class="p">:</span> <span class="n">Hashable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">axis_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_vmap" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Vectorises a function. By default, all JAX/NumPy arrays are vectorised down their
+leading axis (i.e. axis index 0), and all other types are broadcast.</p>
+<p><strong>Arguments:</strong></p>
+<p>For both <code>in_axes</code> and <code>out_axes</code>, then <code>int</code> indicates an array axis to vectorise
+over, <code>None</code> indicates that an argument should be broadcast (not vectorised
+over), and callables <code>Leaf -&gt; Union[None, int]</code> are mapped and evaluated on every
+leaf of their subtree. <code>None</code> should be used for non-JAX-array arguments.</p>
+<ul>
+<li><code>fun</code> is a pure function to vectorise. Should be of the form <code>fun(*args)</code>; that
+    is to say it cannot accept keyword arguments.</li>
+<li><code>in_axes</code> indicates which axes of the input arrays should be vectorised over.
+    It should be a PyTree of <code>None</code>, <code>int</code>, or callables <code>Leaf -&gt; Union[None, int]</code>.
+    Its tree structure should either be:<ol>
+<li>a prefix of the input tuple of <code>args</code>.</li>
+<li>a dictionary, in which case the named argments will use the specified indices
+    to vectorise over, and all other arguments will have the default
+    <code>eqx.if_array(0)</code>.</li>
+</ol>
+</li>
+<li><code>out_axes</code> indicates which axis of the output arrays the mapped axis should appear
+    at. It should be a PyTree of <code>None</code>, <code>int</code>, or callables
+    <code>Leaf -&gt; Union[None, int]</code>, and its tree structure should be a prefix of the
+    output <code>fun(*args)</code>.</li>
+<li><code>axis_name</code> is an optional hashable Python object used to identify the mapped
+    axis so that parallel collectives (e.g. <code>jax.lax.psum</code>) can be applied.</li>
+<li><code>axis_size</code> is an optional <code>int</code> describing the size of the axis mapped. This
+    only needs to be passed if none of the input arguments are vectorised, as else
+    it can be deduced by looking at the argument shapes.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The vectorised version of <code>fun</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To vectorise all JAX/NumPy arrays down their <code>j</code>th axis, and broadcast all other
+types, then you can use <code>equinox.if_array(j)</code>, which returns a callable
+<code>leaf -&gt; j if is_array(leaf) else None</code>. For example: the default values of
+<code>in_axes</code> and <code>out_axes</code> are both <code>equinox.if_array(0)</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">equinox</span> <span class="k">as</span> <span class="nn">eqx</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_vmap</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_vmap</span><span class="p">(</span><span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>  <span class="c1"># both args vectorised down axis 0</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>                  <span class="c1"># first arg vectorised down axis 0</span>
+                                         <span class="c1"># second arg broadcasted</span>
+
+<span class="n">g</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]))</span>     <span class="c1"># first arg broadcasted</span>
+                                         <span class="c1"># second arg vectorised down axis 1</span>
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><code>filter_vmap</code> can be used to easily create ensembles of models. For example,
+here's an ensemble of eight MLPs:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">equinox</span> <span class="k">as</span> <span class="nn">eqx</span>
+<span class="kn">import</span> <span class="nn">jax.random</span> <span class="k">as</span> <span class="nn">jr</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="n">jr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Create an ensemble of models</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_vmap</span>
+<span class="k">def</span> <span class="nf">make_ensemble</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">eqx</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MLP</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+<span class="n">mlp_ensemble</span> <span class="o">=</span> <span class="n">make_ensemble</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+
+<span class="c1"># Evaluate each member of the ensemble on the same data</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_vmap</span><span class="p">(</span><span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="n">eqx</span><span class="o">.</span><span class="n">if_array</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="kc">None</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">evaluate_ensemble</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">evaluate_ensemble</span><span class="p">(</span><span class="n">mlp_ensemble</span><span class="p">,</span> <span class="n">jr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)))</span>
+
+<span class="c1"># Evaluate each member of the ensemble on different data</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_vmap</span>
+<span class="k">def</span> <span class="nf">evaluate_per_ensemble</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">evaluate_per_ensemble</span><span class="p">(</span><span class="n">mlp_ensemble</span><span class="p">,</span> <span class="n">jr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+</code></pre></div>
+<p>Here, <code>make_ensemble</code> works because <a class="autorefs autorefs-internal" href="../nn/mlp/index.html#equinox.nn.MLP"><code>equinox.nn.MLP</code></a> is a PyTree, and so it
+is a valid output from a <code>filter_vmap</code>. This PyTree includes some JAX arrays
+(the weights and biases) and some non-JAX-arrays (e.g. activation functions).
+<code>filter_vmap</code> will vectorise the JAX arrays (with separate weights for each
+member of the ensemble) whilst leaving the non-JAX-arrays alone.</p>
+<p>Note that as the weights in <code>mlp_ensemble</code> now have a leading batch dimension
+-- that the weights of <code>eqx.nn.MLP</code> instances do not typically have -- then it
+cannot be called directly. It must instead be passed back into a vectorised
+region to be called.</p>
+</div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_pmap" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_pmap</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">in_axes</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="n">if_array</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">out_axes</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="n">if_array</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis_name</span><span class="p">:</span> <span class="n">Hashable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">axis_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">donate</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_pmap" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>JAX has now added more powerful parallelism APIs directly to the JIT interface.
+As such, using <a class="autorefs autorefs-internal" href="#equinox.filter_jit"><code>equinox.filter_jit</code></a> with sharded inputs is now recommended
+over <code>filter_pmap</code>. See also the
+<a href="../../examples/parallelism/index.html">parallelism example</a>.</p>
+</div>
+<p>Parallelises a function. By default, all JAX/NumPy arrays are parallelised down
+their leading axis (i.e. axis index 0), and all other types are broadcast.</p>
+<p><code>jax.pmap</code>, and thus <code>equinox.filter_pmap</code>, also compiles their function in the same
+way as <code>jax.jit</code>. By default, all JAX arrays are traced, and all other arguments are
+treated as static inputs.</p>
+<p><strong>Arguments:</strong></p>
+<p>For both <code>in_axes</code> and <code>out_axes</code>, then <code>int</code> indicates an array axis to parallelise
+over, <code>None</code> indicates that an argument should be broadcast (not parallelise
+over), and callables <code>Leaf -&gt; Union[None, int]</code> are mapped and evaluated on every
+leaf of their subtree. <code>None</code> should be used for non-JAX-array arguments.</p>
+<ul>
+<li><code>fun</code> is a pure function to parallelise. Should be of the form <code>fun(*args)</code>; that
+    is to say it cannot accept keyword arguments.</li>
+<li><code>in_axes</code> indicates which axes of the input arrays should be parallelised over.
+    It should be a PyTree of <code>None</code>, <code>int</code>, or callables <code>Leaf -&gt; Union[None, int]</code>.
+    Its tree structure should either be:<ol>
+<li>a prefix of the input tuple of <code>args</code>.</li>
+<li>a dictionary, in which case the named argments will use the specified indices
+    to parallelise over, and all other arguments will have the default
+    <code>eqx.if_array(0)</code>.</li>
+</ol>
+</li>
+<li><code>out_axes</code> indicates which axis of the output arrays the mapped axis should appear
+    at. It should be a PyTree of <code>None</code>, <code>int</code>, or callables
+    <code>Leaf -&gt; Union[None, int]</code>, and its tree structure should be a prefix of the
+    output <code>fun(*args)</code>.</li>
+<li><code>axis_name</code> is an optional hashable Python object used to identify the mapped
+    axis so that parallel collectives (e.g. <code>jax.lax.psum</code>) can be applied.</li>
+<li><code>axis_size</code> is an optional <code>int</code> describing the size of the axis mapped. This
+    only needs to be passed if none of the input arguments are vectorised, as else
+    it can be deduced by looking at the argument shapes.</li>
+<li><code>donate</code> indicates whether the buffers of JAX arrays are donated or not, it
+    should either be:<ul>
+<li><code>'all'</code>: donate all arrays and suppress all warnings about
+    unused buffers;</li>
+<li><code>'warn'</code>: as above, but don't suppress unused buffer warnings;</li>
+<li><code>'none'</code>: the default, disables buffer donation.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The parallelised version of <code>fun</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To parallelise all JAX/NumPy arrays down their <code>j</code>th axis, and broadcast all
+other types, then you can use <code>equinox.if_array(j)</code>, which returns a callable
+<code>leaf -&gt; j if is_array(leaf) else None</code>. For example: the default values of
+<code>in_axes</code> and <code>out_axes</code> are both <code>equinox.if_array(0)</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">equinox</span> <span class="k">as</span> <span class="nn">eqx</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_pmap</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="nd">@eqx</span><span class="o">.</span><span class="n">filter_pmap</span><span class="p">(</span><span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>  <span class="c1"># both args parallelised down axis 0</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>                  <span class="c1"># first arg parallelised down axis 0</span>
+                                         <span class="c1"># second arg broadcasted (as it&#39;s not</span>
+                                         <span class="c1"># a JAX array)</span>
+
+<span class="n">g</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]))</span>     <span class="c1"># first arg broadcasted</span>
+                                         <span class="c1"># second arg parallelised down axis 1</span>
+</code></pre></div>
+</div>
+
+    </div>
+
+  </div>
+
+<h2 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">¤</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="equinox.filter_pure_callback" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">equinox</span><span class="o">.</span><span class="n">filter_pure_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">result_shape_dtypes</span><span class="p">,</span> <span class="n">vectorized</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#equinox.filter_pure_callback" class="headerlink" title="Permanent link">¤</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Calls a Python function inside a JIT region. As <code>jax.pure_callback</code> but accepts
+arbitrary Python objects as inputs and outputs. (Not just JAXable types.)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><code>callback</code>: The Python function to call.</li>
+<li><code>args</code>, <code>kwargs</code>: The function will be called as <code>callback(*args, **kwargs)</code>.
+    These may be arbitrary Python objects.</li>
+<li><code>result_shape_dtypes</code>: A PyTree specifying the output of <code>callback</code>. It should
+    have a <code>jax.ShapeDtypeStruct</code> in place of any JAX arrays.</li>
+<li><code>vectorized</code>: If <code>True</code> then <code>callback</code> is batched(when transformed by <code>vmap</code>)
+    by calling it directly on the batched arrays. If <code>False</code> then <code>callback</code> is
+    called on each batch element individually.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The result of <code>callback(*args, **kwargs)</code>, valid for use under JIT.</p>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../nn/stateful/index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Stateful operations" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Stateful operations
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../manipulation/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Manipulating PyTrees" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Manipulating PyTrees
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "toc.integrate", "header.autohide"], "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+        <script src="../../_static/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+
+<!-- Mirrored from docs.kidger.site/equinox/api/transformations/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 11:53:50 GMT -->
+</html>

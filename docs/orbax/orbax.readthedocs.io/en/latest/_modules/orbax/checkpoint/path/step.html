@@ -1,0 +1,1124 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/path/step.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.checkpoint.path.step &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../../_static/katex.min.js"></script>
+    <script src="../../../../_static/auto-render.min.js"></script>
+    <script src="../../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/checkpoint/path/step';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/checkpoint/path/step", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.checkpoint.path.step</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Orbax step storage entities.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">import</span> <span class="nn">concurrent</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span> <span class="nn">etils</span> <span class="kn">import</span> <span class="n">epath</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint</span> <span class="kn">import</span> <span class="n">multihost</span>
+<span class="kn">from</span> <span class="nn">orbax.checkpoint.metadata</span> <span class="kn">import</span> <span class="n">checkpoint</span>
+
+
+<span class="n">_GCS_PATH_PREFIX</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;gs://&#39;</span><span class="p">,)</span>
+<span class="n">_COMMIT_SUCCESS_FILE</span> <span class="o">=</span> <span class="s1">&#39;commit_success.txt&#39;</span>
+<span class="n">TMP_DIR_SUFFIX</span> <span class="o">=</span> <span class="s1">&#39;.orbax-checkpoint-tmp-&#39;</span>
+<span class="c1"># prefix_1000.orbax-checkpoint-tmp-1010101</span>
+<span class="c1"># OR</span>
+<span class="c1"># 1000.orbax-checkpoint-tmp-1010101</span>
+<span class="n">TMP_DIR_STEP_PATTERN</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;.*?_*?(\d+)\.orbax-checkpoint-tmp-\d+&#39;</span>
+<span class="n">_LAST_CHECKPOINT_WRITE_TIME</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># This file mode gives full permissions to OWNER, GROUP and OTHER.</span>
+<span class="n">WORLD_READABLE_MODE</span> <span class="o">=</span> <span class="mo">0o777</span>
+
+<span class="n">MetadataT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;MetadataT&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;Metadata&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Metadata"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.Metadata">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Metadata of a step.</span>
+
+<span class="sd">  Attributes:</span>
+<span class="sd">    step: step number of the checkpoint.</span>
+<span class="sd">    path: path to the checkpoint.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">step</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span>
+
+  <span class="nd">@functools</span><span class="o">.</span><span class="n">cached_property</span>
+  <span class="k">def</span> <span class="nf">_checkpoint_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">checkpoint</span><span class="o">.</span><span class="n">CheckpointMetadata</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns checkpoint metadata of this step.&quot;&quot;&quot;</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="n">checkpoint</span><span class="o">.</span><span class="n">checkpoint_metadata_store</span><span class="p">(</span><span class="n">enable_write</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">store</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">init_timestamp_nsecs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns init timestamp of uncommitted checkpoint of this step.</span>
+
+<span class="sd">    It is specified as nano seconds since epoch.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">init_timestamp_nsecs</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">commit_timestamp_nsecs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns commit timestamp of the checkpoint of this step.</span>
+
+<span class="sd">    It is specified as nano seconds since epoch.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checkpoint_metadata</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">commit_timestamp_nsecs</span>
+
+  <span class="nd">@property</span>
+  <span class="k">def</span> <span class="nf">commit_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns commit timestamp of the checkpoint of this step.</span>
+
+<span class="sd">    It is specified as datetime in UTC timezone.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">commit_timestamp_nsecs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit_timestamp_nsecs</span>
+    <span class="k">if</span> <span class="n">commit_timestamp_nsecs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">timestamp_sec</span> <span class="o">=</span> <span class="n">commit_timestamp_nsecs</span> <span class="o">/</span> <span class="mf">1e9</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">timestamp_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">mtime</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span>
+        <span class="n">timestamp_sec</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NameFormat"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat">[docs]</a><span class="k">class</span> <span class="nc">NameFormat</span><span class="p">(</span><span class="n">Protocol</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Protocol responsible for naming and querying steps.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NameFormat.build_name"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat.build_name">[docs]</a>  <span class="k">def</span> <span class="nf">build_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns `step` name.</span>
+
+<span class="sd">    *Implementation hint:* Implement it to build a name for the given step using</span>
+<span class="sd">    the class&#39;s custom formatting attributes. Since it is mainly meant for</span>
+<span class="sd">    building names to save checkpoints, it can raise error if this NameFormat is</span>
+<span class="sd">    just meant for finding already existing step paths.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      step: Step number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span></div>
+
+<div class="viewcode-block" id="NameFormat.find_all"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat.find_all">[docs]</a>  <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+  <span class="k">def</span> <span class="nf">find_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata of all steps.</span>
+
+<span class="sd">    NOTE: Ignores uncommitted checkpoints.</span>
+
+<span class="sd">    *Implementation hint:* Implement it to find all step folders under</span>
+<span class="sd">    `base_path` performing IO operations if needed. Use</span>
+<span class="sd">    `build_step_metadatas(...)` helper function to build all the `MetadataT`</span>
+<span class="sd">    using the found step paths.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      base_path: *root* Path under which Step folders are placed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span></div>
+
+<div class="viewcode-block" id="NameFormat.find_step"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.NameFormat.find_step">[docs]</a>  <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+  <span class="k">def</span> <span class="nf">find_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetadataT</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the metadata for `step` or raises ValueError.</span>
+
+<span class="sd">    NOTE: Ignores uncommitted checkpoints.</span>
+
+<span class="sd">    *Implementation hint:* Implement it to find the step folder under</span>
+<span class="sd">    `base_path` performing IO operations if needed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      base_path: *root* Path under which Step folders are placed.</span>
+<span class="sd">      step: Step number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="build_step_path"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.build_step_path">[docs]</a><span class="k">def</span> <span class="nf">build_step_path</span><span class="p">(</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">],</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns `step` path under `base_path` for step `name_format`.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span> <span class="o">/</span> <span class="n">name_format</span><span class="o">.</span><span class="n">build_name</span><span class="p">(</span><span class="n">step</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="build_step_metadatas"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.build_step_metadatas">[docs]</a><span class="k">def</span> <span class="nf">build_step_metadatas</span><span class="p">(</span>
+    <span class="n">step_paths</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">build_metadata</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Yields filtered metadata mapped with `step_paths`.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    step_paths: Iterator of step paths.</span>
+<span class="sd">    build_metadata: Callable to match and build step metadata from `step_paths`</span>
+<span class="sd">      elements. If a `step_paths` element doesn&#39;t match then it returns None.</span>
+
+<span class="sd">  Yields:</span>
+<span class="sd">    Step metadata.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">for</span> <span class="n">step_path</span> <span class="ow">in</span> <span class="n">step_paths</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">step_metadata</span> <span class="o">:=</span> <span class="n">build_metadata</span><span class="p">(</span><span class="n">step_path</span><span class="p">):</span>
+      <span class="k">yield</span> <span class="n">step_metadata</span></div>
+
+
+<div class="viewcode-block" id="step_prefix_with_underscore"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.step_prefix_with_underscore">[docs]</a><span class="k">def</span> <span class="nf">step_prefix_with_underscore</span><span class="p">(</span><span class="n">step_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns `step_prefix` appended with `underscore` or &lt;empty&gt; if None.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">step_prefix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_prefix</span><span class="si">}</span><span class="s1">_&#39;</span></div>
+
+
+<div class="viewcode-block" id="latest_step_metadata"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.latest_step_metadata">[docs]</a><span class="k">def</span> <span class="nf">latest_step_metadata</span><span class="p">(</span>
+    <span class="n">root_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns step.MetadataT of the latest step in `root_path`.&quot;&quot;&quot;</span>
+  <span class="n">root_path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nb">max</span><span class="p">(</span>
+      <span class="n">name_format</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">root_path</span><span class="p">),</span>
+      <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+      <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">metadata</span><span class="o">.</span><span class="n">step</span><span class="p">,</span>
+  <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="step_metadata_of_checkpoint_path"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.step_metadata_of_checkpoint_path">[docs]</a><span class="k">def</span> <span class="nf">step_metadata_of_checkpoint_path</span><span class="p">(</span>
+    <span class="n">checkpoint_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">MetadataT</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetadataT</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns step.MetadataT of given `checkpoint_path`.&quot;&quot;&quot;</span>
+  <span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">)</span>
+  <span class="n">all_step_metadata</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">name_format</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">step_metadata</span> <span class="ow">in</span> <span class="n">all_step_metadata</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">step_metadata</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">checkpoint_path</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">step_metadata</span>
+  <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+      <span class="s1">&#39;Failed to resolve step metadata of checkpoint path with&#39;</span>
+      <span class="sa">f</span><span class="s1">&#39; NameFormat=</span><span class="si">{</span><span class="n">name_format</span><span class="si">}</span><span class="s1">, checkpoint path=</span><span class="si">{</span><span class="n">checkpoint_path</span><span class="si">}</span><span class="s1">, path&#39;</span>
+      <span class="sa">f</span><span class="s1">&#39; name(</span><span class="si">{</span><span class="n">checkpoint_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">) did not match with available step names:&#39;</span>
+      <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="p">[</span><span class="n">step_metadata</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">step_metadata</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">all_step_metadata</span><span class="p">]</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="s1">&#39; Please check if the given path is really a checkpoint path.&#39;</span>
+  <span class="p">)</span></div>
+
+
+<span class="c1"># TODO(b/337858698): Works with CompositeNameFormat.write_name_format only. Also</span>
+<span class="c1"># support read_name_formats.</span>
+<div class="viewcode-block" id="find_step_path"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.find_step_path">[docs]</a><span class="k">def</span> <span class="nf">find_step_path</span><span class="p">(</span>
+    <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>
+    <span class="n">name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">include_uncommitted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns `step` path under `base_path` for step `name_format`.</span>
+
+<span class="sd">  NOTE: Experimental function, subject to change.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    base_path: directory path containing step subdirs.</span>
+<span class="sd">    name_format: NameFormat of the target `step`.</span>
+<span class="sd">    step: target step number.</span>
+<span class="sd">    include_uncommitted: if True then uncommitted steps are considered in search</span>
+<span class="sd">      too, otherwise only committed steps are looked up.</span>
+
+<span class="sd">  Raises:</span>
+<span class="sd">    ValueError if the target step path does not exist.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">base_path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">include_uncommitted</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">name_format</span><span class="o">.</span><span class="n">find_step</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
+
+  <span class="c1"># First try finding uncommitted step.</span>
+  <span class="k">if</span> <span class="n">is_gcs_path</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
+    <span class="n">uncommitted_step_path</span> <span class="o">=</span> <span class="n">build_step_path</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">name_format</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">step_name</span> <span class="o">=</span> <span class="n">name_format</span><span class="o">.</span><span class="n">build_name</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">uncommitted_step_path</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">uncommited_name</span> <span class="ow">in</span> <span class="n">tmp_checkpoints</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">uncommited_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_name</span><span class="si">}{</span><span class="n">TMP_DIR_SUFFIX</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="n">uncommitted_step_path</span> <span class="o">=</span> <span class="n">base_path</span> <span class="o">/</span> <span class="n">uncommited_name</span>
+        <span class="k">break</span>
+  <span class="k">if</span> <span class="n">uncommitted_step_path</span> <span class="ow">and</span> <span class="n">uncommitted_step_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uncommitted_step_path</span>
+  <span class="c1"># Uncommitted step not found, return committed one or raise error.</span>
+  <span class="k">return</span> <span class="n">name_format</span><span class="o">.</span><span class="n">find_step</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">path</span></div>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">_StandardNameFormat</span><span class="p">(</span><span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;NameFormat for &#39;standard&#39; steps for common Orbax use cases.</span>
+
+<span class="sd">  NOTE: Ignores uncommitted checkpoints.</span>
+
+<span class="sd">  Naming examples:</span>
+<span class="sd">   * step_prefix=None    step_format_fixed_length=None  -&gt;  23</span>
+<span class="sd">   * step_prefix=None    step_format_fixed_length=4     -&gt;  0023</span>
+<span class="sd">   * step_prefix=step    step_format_fixed_length=None  -&gt;  step_23</span>
+<span class="sd">   * step_prefix=step    step_format_fixed_length=4     -&gt;  step_0023</span>
+
+<span class="sd">  Attributes:</span>
+<span class="sd">    step_prefix: Optional fixed string prefixed to step. Note an *underscore* is</span>
+<span class="sd">      appended before applying it.</span>
+<span class="sd">    step_format_fixed_length: Optional length of the zero padded step. e.g. 6</span>
+<span class="sd">      for 000123.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">step_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">step_format_fixed_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+  <span class="k">def</span> <span class="nf">build_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns `(prefix_)?(zero padding)?step` name.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">step_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s1">0</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span><span class="si">}</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">step_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="c1"># [prefix]step</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_prefix_with_underscore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_prefix</span><span class="p">)</span><span class="si">}{</span><span class="n">step_str</span><span class="si">}</span><span class="s1">&#39;</span>
+
+  <span class="k">def</span> <span class="nf">_build_metadata</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> <span class="n">step_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata for given `step_path` if it is valid or None.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">step_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+      <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_checkpoint_finalized</span><span class="p">(</span><span class="n">step_path</span><span class="p">):</span>
+      <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="c1"># step already known, just check exists.</span>
+      <span class="k">if</span> <span class="n">step_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">Metadata</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">step_path</span><span class="p">)</span>
+
+    <span class="c1"># Regex: [prefix]*(step)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">zero_present</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;0\d</span><span class="se">{{</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="se">}}</span><span class="s1">&#39;</span>
+      <span class="n">zero_not_present</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;[1-9]\d</span><span class="se">{{</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">step_format_fixed_length</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="se">}}</span><span class="s1">\d*&#39;</span>
+      <span class="n">zero_padded_step_group</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">zero_present</span><span class="si">}</span><span class="s1">|</span><span class="si">{</span><span class="n">zero_not_present</span><span class="si">}</span><span class="s1">)&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">zero_padded_step_group</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(0|[1-9]\d*)&#39;</span>
+    <span class="n">name_regex</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;^</span><span class="si">{</span><span class="n">step_prefix_with_underscore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_prefix</span><span class="p">)</span><span class="si">}{</span><span class="n">zero_padded_step_group</span><span class="si">}</span><span class="s1">$&#39;</span>
+
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name_regex</span><span class="p">,</span> <span class="n">step_path</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">None</span>
+    <span class="p">(</span><span class="n">step_</span><span class="p">,)</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+    <span class="n">step_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">step_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Metadata</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="n">step_</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">step_path</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">find_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata of all steps matching with name_format attributes.&quot;&quot;&quot;</span>
+    <span class="c1"># &lt;step_prefix&gt;_?&lt;0 padding&gt;?*</span>
+    <span class="n">step_paths</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">base_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">step_prefix_with_underscore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_prefix</span><span class="p">)</span><span class="si">}</span><span class="s1">*&#39;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">build_step_metadatas</span><span class="p">(</span><span class="n">step_paths</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_metadata</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">find_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the metadata for `step` or raises ValueError.&quot;&quot;&quot;</span>
+    <span class="n">step_path</span> <span class="o">=</span> <span class="n">build_step_path</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_metadata</span><span class="p">(</span><span class="n">step_path</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">metadata</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">metadata</span>
+
+    <span class="c1"># Raise detailed error message.</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;No step path found with name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">build_name</span><span class="p">(</span><span class="n">step</span><span class="p">)</span><span class="si">}</span><span class="s1">,&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39; NameFormat=</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s1"> for step=</span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1"> under </span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="standard_name_format"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.standard_name_format">[docs]</a><span class="k">def</span> <span class="nf">standard_name_format</span><span class="p">(</span>
+    <span class="n">step_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">step_format_fixed_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns NameFormat for &#39;standard&#39; steps for common Orbax use cases.</span>
+
+<span class="sd">  NOTE: Ignores uncommitted checkpoints.</span>
+
+<span class="sd">  Naming examples:</span>
+<span class="sd">   * step_prefix=None    step_format_fixed_length=None  -&gt;  23</span>
+<span class="sd">   * step_prefix=None    step_format_fixed_length=4     -&gt;  0023</span>
+<span class="sd">   * step_prefix=step    step_format_fixed_length=None  -&gt;  step_23</span>
+<span class="sd">   * step_prefix=step    step_format_fixed_length=4     -&gt;  step_0023</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    step_prefix: Optional fixed string prefixed to step. Note an *underscore* is</span>
+<span class="sd">      appended before applying it.</span>
+<span class="sd">    step_format_fixed_length: Optional length of the zero padded step. e.g. 6</span>
+<span class="sd">      for 000123.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">_StandardNameFormat</span><span class="p">(</span>
+      <span class="n">step_prefix</span><span class="o">=</span><span class="n">step_prefix</span><span class="p">,</span>
+      <span class="n">step_format_fixed_length</span><span class="o">=</span><span class="n">step_format_fixed_length</span><span class="p">,</span>
+  <span class="p">)</span></div>
+
+
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">_CompositeNameFormat</span><span class="p">(</span><span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Supports reading multiple step namings, but just one format to write.</span>
+
+<span class="sd">  Attributes:</span>
+<span class="sd">    write_name_format: NameFormat used to build step names meant for writing</span>
+<span class="sd">      checkpoints. Must be present in `read_name_formats` at a preferred</span>
+<span class="sd">      priority position.</span>
+<span class="sd">    read_name_formats: Sequence (ordered) of NameFormats used to find steps for</span>
+<span class="sd">      reading checkpoints. It acts like an *or*, where the first one to match is</span>
+<span class="sd">      returned.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">write_name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]</span>
+  <span class="n">read_name_formats</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]]</span>
+
+  <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_name_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_name_formats</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;write_name_format: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">write_name_format</span><span class="si">}</span><span class="s1"> must be present in&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39; read_name_formats: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">read_name_formats</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">build_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns `step` name using `write_name_format`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_name_format</span><span class="o">.</span><span class="n">build_name</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">find_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns metadata of all steps.&quot;&quot;&quot;</span>
+    <span class="n">found_paths</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">read_name_format</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_name_formats</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">step_metadata</span> <span class="ow">in</span> <span class="n">read_name_format</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">step_metadata</span><span class="o">.</span><span class="n">path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">found_paths</span><span class="p">:</span>
+          <span class="n">found_paths</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">step_metadata</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+          <span class="k">yield</span> <span class="n">step_metadata</span>
+
+  <span class="k">def</span> <span class="nf">find_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Metadata</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the metadata for `step` or raises ValueError.&quot;&quot;&quot;</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Used to raise the final collated error if needed.</span>
+    <span class="k">for</span> <span class="n">read_name_format</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_name_formats</span><span class="p">:</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">read_name_format</span><span class="o">.</span><span class="n">find_step</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+      <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-exception-caught</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s1">&#39;Failed to find step=</span><span class="si">%s</span><span class="s1"> with NameFormat=</span><span class="si">%s</span><span class="s1"> under </span><span class="si">%s</span><span class="s1">. Error: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">step</span><span class="p">,</span>
+            <span class="n">read_name_format</span><span class="p">,</span>
+            <span class="n">base_path</span><span class="p">,</span>
+            <span class="n">e</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1"># Raise the concatenated errors.</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">]</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">messages</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="composite_name_format"><a class="viewcode-back" href="../../../../api_reference/checkpoint.path.step.html#orbax.checkpoint.path.step.composite_name_format">[docs]</a><span class="k">def</span> <span class="nf">composite_name_format</span><span class="p">(</span>
+    <span class="n">write_name_format</span><span class="p">:</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">],</span>
+    <span class="n">read_name_formats</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns *composite* NameFormat supporting multiple read/single write formats.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    write_name_format: NameFormat used to build step names meant for writing</span>
+<span class="sd">      checkpoints. Must be present in `read_name_formats` at a preferred</span>
+<span class="sd">      priority position.</span>
+<span class="sd">    read_name_formats: Sequence (ordered) of NameFormats used to find steps for</span>
+<span class="sd">      reading checkpoints. Please note that to resolve conflicts (and avoid</span>
+<span class="sd">      raising errors) in case of multiple NameFormats matching a given step, the</span>
+<span class="sd">      sequence should be provided in highest to lowest priority order:</span>
+<span class="sd">      NameFormat appearing earlier in the sequence is preferred.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">_CompositeNameFormat</span><span class="p">(</span><span class="n">write_name_format</span><span class="p">,</span> <span class="n">read_name_formats</span><span class="p">)</span></div>
+
+
+<span class="c1"># TODO(b/337137764) Can&#39;t move it to path/utils due to cyclic dependency.</span>
+<span class="c1"># Explore other options.</span>
+<div class="viewcode-block" id="is_gcs_path"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.is_gcs_path">[docs]</a><span class="k">def</span> <span class="nf">is_gcs_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+  <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_GCS_PATH_PREFIX</span><span class="p">)</span></div>
+
+
+<span class="c1"># TODO(b/337137764) Can&#39;t move it to path/utils due to cyclic dependency.</span>
+<span class="c1"># Explore other options.</span>
+<div class="viewcode-block" id="get_save_directory"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.get_save_directory">[docs]</a><span class="k">def</span> <span class="nf">get_save_directory</span><span class="p">(</span>
+    <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">step_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">override_directory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">step_format_fixed_length</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">step_name_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NameFormat</span><span class="p">[</span><span class="n">Metadata</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns the standardized path to a save directory for a single item.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    step: Step number.</span>
+<span class="sd">    directory: Top level checkpoint directory.</span>
+<span class="sd">    name: Item name (&#39;params&#39;, &#39;state&#39;, &#39;dataset&#39;, etc.).</span>
+<span class="sd">    step_prefix: Prefix applied to `step` (e.g. &#39;checkpoint&#39;).</span>
+<span class="sd">    override_directory: If provided, step, directory, and step_prefix are</span>
+<span class="sd">      ignored.</span>
+<span class="sd">    step_format_fixed_length: Uses a fixed number of digits with leading zeros</span>
+<span class="sd">      to represent the step number. If None, there are no leading zeros.</span>
+<span class="sd">    step_name_format: NameFormat used to define step name for step and under</span>
+<span class="sd">      given root directory. If provided, `step_prefix` and</span>
+<span class="sd">      `step_format_fixed_length` are ignored.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A directory.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Directory cannot be None.&#39;</span><span class="p">)</span>
+  <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">override_directory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">override_directory</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">step_name_format</span> <span class="o">=</span> <span class="n">step_name_format</span> <span class="ow">or</span> <span class="n">standard_name_format</span><span class="p">(</span>
+        <span class="n">step_prefix</span><span class="o">=</span><span class="n">step_prefix</span><span class="p">,</span>
+        <span class="n">step_format_fixed_length</span><span class="o">=</span><span class="n">step_format_fixed_length</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">build_step_path</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">step_name_format</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">/=</span> <span class="n">name</span>
+  <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="is_tmp_checkpoint"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.is_tmp_checkpoint">[docs]</a><span class="k">def</span> <span class="nf">is_tmp_checkpoint</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Determines whether a directory is a tmp checkpoint path.&quot;&quot;&quot;</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> does not exist.&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">False</span>
+  <span class="k">if</span> <span class="n">is_gcs_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="n">_COMMIT_SUCCESS_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="k">if</span> <span class="n">TMP_DIR_SUFFIX</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="is_checkpoint_finalized"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.is_checkpoint_finalized">[docs]</a><span class="k">def</span> <span class="nf">is_checkpoint_finalized</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Determines if the given path represents a finalized checkpoint.</span>
+
+<span class="sd">  Path takes the form::</span>
+
+<span class="sd">    path/to/my/dir/&lt;name&gt;.orbax-checkpoint-tmp-&lt;timestamp&gt;/  # not finalized</span>
+<span class="sd">    path/to/my/dir/&lt;name&gt;/  # finalized</span>
+
+<span class="sd">  Alternatively::</span>
+
+<span class="sd">    gs://path/to/my/dir/&lt;name&gt;/  # finalized</span>
+<span class="sd">      commit_success.txt</span>
+<span class="sd">      ...</span>
+<span class="sd">    gs://&lt;path/to/my/dir/&lt;name&gt;/  # not finalized</span>
+<span class="sd">      ...</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    path: Directory.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    True if the checkpoint is finalized.</span>
+
+<span class="sd">  Raises:</span>
+<span class="sd">    ValueError if the provided path is not a directory. Valid checkpoint paths</span>
+<span class="sd">    must be a directory.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> does not exist.&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> is not a directory. Not a valid checkpoint&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">is_gcs_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="n">_COMMIT_SUCCESS_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">return</span> <span class="kc">False</span>
+  <span class="k">if</span> <span class="n">TMP_DIR_SUFFIX</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">False</span>
+  <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="tmp_checkpoints"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.tmp_checkpoints">[docs]</a><span class="k">def</span> <span class="nf">tmp_checkpoints</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns a list of tmp checkpoint dir names in `checkpoint_dir`.&quot;&quot;&quot;</span>
+  <span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">checkpoint_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">is_tmp_checkpoint</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="cleanup_tmp_directories"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.cleanup_tmp_directories">[docs]</a><span class="k">def</span> <span class="nf">cleanup_tmp_directories</span><span class="p">(</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>
+    <span class="n">primary_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">active_processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">barrier_sync_key_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Cleanup steps in `directory` with tmp files, as these are not finalized.&quot;&quot;&quot;</span>
+  <span class="n">directory</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">multihost</span><span class="o">.</span><span class="n">is_primary_host</span><span class="p">(</span><span class="n">primary_host</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning up existing temporary directories at </span><span class="si">%s</span><span class="s1">.&#39;</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
+    <span class="n">tmp_files</span> <span class="o">=</span> <span class="n">tmp_checkpoints</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tmp_file</span> <span class="ow">in</span> <span class="n">tmp_files</span><span class="p">:</span>
+      <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">tmp_file</span><span class="p">)</span><span class="o">.</span><span class="n">rmtree</span><span class="p">()</span>
+  <span class="n">multihost</span><span class="o">.</span><span class="n">sync_global_processes</span><span class="p">(</span>
+      <span class="n">multihost</span><span class="o">.</span><span class="n">unique_barrier_key</span><span class="p">(</span>
+          <span class="s1">&#39;cleanup_tmp_dirs&#39;</span><span class="p">,</span>
+          <span class="n">prefix</span><span class="o">=</span><span class="n">barrier_sync_key_prefix</span><span class="p">,</span>
+          <span class="n">suffix</span><span class="o">=</span><span class="n">directory</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="n">timeout</span><span class="o">=</span><span class="n">multihost</span><span class="o">.</span><span class="n">DIRECTORY_DELETION_TIMEOUT</span><span class="p">,</span>
+      <span class="n">processes</span><span class="o">=</span><span class="n">active_processes</span><span class="p">,</span>
+  <span class="p">)</span></div>
+
+
+<span class="c1"># TODO(b/337137764) Close to checkpoint finalization, but explore other options.</span>
+<div class="viewcode-block" id="record_saved_duration"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.record_saved_duration">[docs]</a><span class="k">def</span> <span class="nf">record_saved_duration</span><span class="p">(</span><span class="n">checkpoint_start_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Record program duration that is accounted for by this checkpoint.</span>
+
+<span class="sd">  For the very first checkpoint, this is the interval between program init and</span>
+<span class="sd">  current checkpoint start time.</span>
+
+<span class="sd">  Note that we use the checkpoint start time instead of end time. The saved</span>
+<span class="sd">  duration should not include prallel training duration while the async</span>
+<span class="sd">  checkpoint is being written in the background.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    checkpoint_start_time: Start time of current checkpoint.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">global</span> <span class="n">_LAST_CHECKPOINT_WRITE_TIME</span>
+  <span class="c1"># Note: for the very first checkpoint, this is the interval between program</span>
+  <span class="c1"># init and the current checkpoint start time.</span>
+  <span class="n">duration_since_last_checkpoint</span> <span class="o">=</span> <span class="p">(</span>
+      <span class="n">checkpoint_start_time</span> <span class="o">-</span> <span class="n">_LAST_CHECKPOINT_WRITE_TIME</span>
+  <span class="p">)</span>
+  <span class="c1"># TODO(hanyangtay): Remove version guard.</span>
+  <span class="k">if</span> <span class="n">jax</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">__version_info__</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">monitoring</span><span class="o">.</span><span class="n">record_event_duration_secs</span><span class="p">(</span>
+        <span class="s1">&#39;/jax/checkpoint/write/duration_since_last_checkpoint_secs&#39;</span><span class="p">,</span>
+        <span class="n">duration_since_last_checkpoint</span><span class="p">,</span>
+    <span class="p">)</span>
+  <span class="n">_LAST_CHECKPOINT_WRITE_TIME</span> <span class="o">=</span> <span class="n">checkpoint_start_time</span></div>
+
+
+<span class="k">def</span> <span class="nf">_is_step_checkpoint</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Determines if the path resembles an Orbax step directory.</span>
+
+<span class="sd">  Note that this is not foolproof, and users should not add extra files to the</span>
+<span class="sd">  checkpoint directory beyond what is done by CheckpointManager.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    path: path to check.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    bool indicating whether the path resembles an Orbax step directory.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+  <span class="c1"># Path must be a directory and either a digit, or end in &#39;_&#39; + digit.</span>
+  <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="ow">or</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+
+
+<div class="viewcode-block" id="step_from_checkpoint_name"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.step_from_checkpoint_name">[docs]</a><span class="k">def</span> <span class="nf">step_from_checkpoint_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns the step from a checkpoint name. Also works for tmp checkpoints.&quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+  <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+      <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">split</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+  <span class="k">elif</span> <span class="n">tmp_match</span> <span class="o">:=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">TMP_DIR_STEP_PATTERN</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">tmp_match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unrecognized name format: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="checkpoint_steps_paths"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.checkpoint_steps_paths">[docs]</a><span class="k">def</span> <span class="nf">checkpoint_steps_paths</span><span class="p">(</span>
+    <span class="n">checkpoint_dir</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns a list of finalized checkpoint paths in the directory.&quot;&quot;&quot;</span>
+  <span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">)</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">checkpoint_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Path </span><span class="si">{</span><span class="n">checkpoint_dir</span><span class="si">}</span><span class="s1"> does not exist.&#39;</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">check_step_dir</span><span class="p">(</span><span class="n">step_dir</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># This block allows catching errors in which the checkpoint was deleted</span>
+    <span class="c1"># between checking _is_step_checkpoint and is_checkpoint_finalized.</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">_is_step_checkpoint</span><span class="p">(</span><span class="n">step_dir</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_checkpoint_finalized</span><span class="p">(</span>
+          <span class="n">step_dir</span>
+      <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+      <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+  <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">futures</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">step_dir</span><span class="p">:</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">check_step_dir</span><span class="p">,</span> <span class="n">step_dir</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">step_dir</span> <span class="ow">in</span> <span class="n">checkpoint_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">step_dir</span> <span class="k">for</span> <span class="n">step_dir</span><span class="p">,</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="checkpoint_steps"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.checkpoint_steps">[docs]</a><span class="k">def</span> <span class="nf">checkpoint_steps</span><span class="p">(</span>
+    <span class="n">checkpoint_dir</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">single_host_load_and_broadcast</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns a list of finalized checkpoint steps in the directory.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">_checkpoint_steps</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">step_from_checkpoint_name</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">checkpoint_steps_paths</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="p">]</span>
+
+  <span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">single_host_load_and_broadcast</span><span class="p">:</span>
+    <span class="n">max_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()))</span>
+    <span class="c1"># Read the step list only from host 0, and then broadcast the list.</span>
+    <span class="c1"># This minimizes queries on non-leader processes.</span>
+    <span class="n">padded_step_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">max_steps</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">multihost</span><span class="o">.</span><span class="n">process_index</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_checkpoint_steps</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">))</span>
+      <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_steps</span>
+      <span class="n">padded_step_list</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)]</span> <span class="o">=</span> <span class="n">steps</span>
+    <span class="n">padded_step_list</span> <span class="o">=</span> <span class="n">multihost</span><span class="o">.</span><span class="n">broadcast_one_to_all</span><span class="p">(</span><span class="n">padded_step_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">step</span> <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">padded_step_list</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">_checkpoint_steps</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="any_checkpoint_step"><a class="viewcode-back" href="../../../../api_reference/checkpoint.utils.html#orbax.checkpoint.path.step.any_checkpoint_step">[docs]</a><span class="k">def</span> <span class="nf">any_checkpoint_step</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">:</span> <span class="n">epath</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Returns any finalized checkpoint step in the directory or None.</span>
+
+<span class="sd">  This avoids iterating over the entire directory.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    checkpoint_dir: Checkpoint directory.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    Any finalized checkpoint step in the directory or None.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="n">epath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">checkpoint_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">_is_step_checkpoint</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_checkpoint_finalized</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">step_from_checkpoint_name</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+  <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/checkpoint/path/step.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>

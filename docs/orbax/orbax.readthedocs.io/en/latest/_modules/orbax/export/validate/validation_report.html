@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/export/validate/validation_report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orbax.export.validate.validation_report &#8212; Orbax  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrape6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-themee6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.mine6c2.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/katex-math.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://orbax.readthedocs.io/_/static/css/badge_only.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.mine6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script src="../../../../_static/katex.min.js"></script>
+    <script src="../../../../_static/auto-render.min.js"></script>
+    <script src="../../../../_static/katex_autorenderer.js"></script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-doc-embed.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/orbax/export/validate/validation_report';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  
+<!-- RTD Extra Head -->
+
+<link rel="stylesheet" href="https://orbax.readthedocs.io/_/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "_modules/orbax/export/validate/validation_report", "programming_language": "py", "project": "orbax", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_book_theme", "user_analytics_code": "", "version": "latest"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+<script type="text/javascript" src="https://orbax.readthedocs.io/_/static/javascript/readthedocs-analytics.js" async="async"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="https://orbax.readthedocs.io/en/latest/search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index-2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Orbax  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Checkpointing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_announcements.html">Announcements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_101.html">Checkpointing with Orbax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_checkpoint_api_overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_refactor.html">Using the Refactored CheckpointManager API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpointing_pytrees.html">Checkpointing PyTrees of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../checkpoint_format.html">Checkpoint Format Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../optimized_checkpointing.html">Optimized Checkpointing with Tensorstore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../custom_handlers.html">Customizing Checkpointing Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../transformations.html">Transformations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preemption_checkpointing.html">Preemption Tolerance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../async_checkpointing.html">Asynchronous Checkpointing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/checkpoint.html">orbax.checkpoint API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.abstract_checkpoint_manager.html">AbstractCheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_manager.html">CheckpointManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpointers.html">Checkpointers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_handlers.html">CheckpointHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.args.html">CheckpointArgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.type_handlers.html">TypeHandlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.atomicity.html">Atomicity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.step.html">Step entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.path.deleter.html">Checkpoint Deleter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.checkpoint_utils.html">Checkpointing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.transform_utils.html">PyTree Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.msgpack_utils.html">Msgpack utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.multihost.html">Multi-host Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.tree.html">Tree Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.metadata.html">Metadata Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/checkpoint.logging.html">Checkpoint logging</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exporting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../orbax_export_101.html">Exporting with Orbax</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../api_reference/export.html">orbax.export API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.dtensor_utils.html">DTensor utilities for multi-device/host export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager.html">ExportManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.export_manager_base.html">ExportManagerBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.jax_module.html">JaxModule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.serving_config.html">ServingConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.utils.html">General Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_manager.html">ValidationManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api_reference/export.validate.validation_report.html">ValidationReport</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributors.html">Contributors</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+
+  <div id="ethical-ad-placement"
+       class="flat"
+       data-ea-publisher="readthedocs"
+       data-ea-type="readthedocs-sidebar"
+       data-ea-manual="true">
+  </div>
+</div>
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for orbax.export.validate.validation_report</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Orbax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Define ValidationReport class here.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">dataclasses</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">import</span> <span class="nn">dataclasses_json</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">orbax.export.validate.validation_job</span> <span class="kn">import</span> <span class="n">ValidationSingleJobResult</span>
+<span class="kn">from</span> <span class="nn">orbax.export.validate.validation_utils</span> <span class="kn">import</span> <span class="n">get_latency_stat</span>
+<span class="kn">from</span> <span class="nn">orbax.export.validate.validation_utils</span> <span class="kn">import</span> <span class="n">split_tf_floating_and_discrete_groups</span>
+<span class="kn">from</span> <span class="nn">orbax.export.validate.validation_utils</span> <span class="kn">import</span> <span class="n">Status</span>
+
+<span class="n">XprofURL</span> <span class="o">=</span> <span class="nb">str</span>
+<span class="n">MetaData</span> <span class="o">=</span> <span class="n">Any</span>
+
+
+<div class="viewcode-block" id="ValidationReportOption"><a class="viewcode-back" href="../../../../api_reference/export.validate.validation_report.html#orbax.export.validate.validation_report.ValidationReportOption">[docs]</a><span class="nd">@dataclasses_json</span><span class="o">.</span><span class="n">dataclass_json</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">ValidationReportOption</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Option for ValidationReport class.&quot;&quot;&quot;</span>
+  <span class="n">floating_atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-7</span>
+  <span class="n">floating_rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-7</span>
+  <span class="n">max_non_floating_mismatch_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-2</span>
+  <span class="n">output_report_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">print_debug_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="ValidationReportOption.__post_init__"><a class="viewcode-back" href="../../../../api_reference/export.validate.validation_report.html#orbax.export.validate.validation_report.ValidationReportOption.__post_init__">[docs]</a>  <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;check if option value is legal.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">      OverflowError: raise if floating_atol &lt; 0 or floating_rtol &lt; 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">floating_atol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">OverflowError</span><span class="p">(</span><span class="s1">&#39;floating_atol should be larger than zero.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">floating_rtol</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">OverflowError</span><span class="p">(</span><span class="s1">&#39;floating_rtol should be larger than zero.&#39;</span><span class="p">)</span></div></div>
+
+
+<span class="nd">@dataclasses_json</span><span class="o">.</span><span class="n">dataclass_json</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">LatencyStat</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;The latency indicator of ML job.&quot;&quot;&quot;</span>
+  <span class="n">num_batches</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">avg_in_ms</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">p90_in_ms</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">p99_in_ms</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<span class="nd">@dataclasses_json</span><span class="o">.</span><span class="n">dataclass_json</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">FloatingPointDiffReport</span><span class="p">:</span>
+  <span class="n">total</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">max_diff</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">max_rel_diff</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">all_close</span><span class="p">:</span> <span class="nb">bool</span>
+  <span class="n">all_close_absolute_tolerance</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">all_close_relative_tolerance</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<span class="nd">@dataclasses_json</span><span class="o">.</span><span class="n">dataclass_json</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">NonFloatingPointDiffReport</span><span class="p">:</span>
+  <span class="n">total_flattened_tensors</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">mismatches</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">mismatch_ratio</span><span class="p">:</span> <span class="nb">float</span>
+  <span class="n">max_non_floating_mismatch_ratio</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<div class="viewcode-block" id="ValidationReport"><a class="viewcode-back" href="../../../../api_reference/export.validate.validation_report.html#orbax.export.validate.validation_report.ValidationReport">[docs]</a><span class="nd">@dataclasses_json</span><span class="o">.</span><span class="n">dataclass_json</span>
+<span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ValidationReport</span><span class="p">:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Generate validation report based on ValidationSingleJobResult.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">outputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">FloatingPointDiffReport</span><span class="p">,</span> <span class="n">NonFloatingPointDiffReport</span><span class="p">]]</span>
+  <span class="n">latency</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LatencyStat</span><span class="p">]</span>
+  <span class="n">xprof_url</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">XprofURL</span><span class="p">]</span>
+  <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MetaData</span><span class="p">]</span>
+  <span class="n">status</span><span class="p">:</span> <span class="n">Status</span>
+
+<div class="viewcode-block" id="ValidationReport.__init__"><a class="viewcode-back" href="../../../../api_reference/export.validate.validation_report.html#orbax.export.validate.validation_report.ValidationReport.__init__">[docs]</a>  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+               <span class="n">baseline</span><span class="p">:</span> <span class="n">ValidationSingleJobResult</span><span class="p">,</span>
+               <span class="n">candidate</span><span class="p">:</span> <span class="n">ValidationSingleJobResult</span><span class="p">,</span>
+               <span class="n">option</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ValidationReportOption</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate validation result report with users config options.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      baseline:  The baseline ValidationSingleJobResult.</span>
+<span class="sd">      candidate:  The candidate ValidationSingleJobResult. The comparing</span>
+<span class="sd">        criterions will be apply on candidate.</span>
+<span class="sd">      option: ValidationReport options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">option</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_option</span> <span class="o">=</span> <span class="n">ValidationReportOption</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">_option</span> <span class="o">=</span> <span class="n">option</span>
+
+    <span class="n">floating_atol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_option</span><span class="o">.</span><span class="n">floating_atol</span>
+    <span class="n">floating_rtol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_option</span><span class="o">.</span><span class="n">floating_rtol</span>
+    <span class="n">max_non_floating_mismatch_ratio</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_option</span><span class="o">.</span><span class="n">max_non_floating_mismatch_ratio</span><span class="p">)</span>
+
+    <span class="n">baseline_latencies</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">latencies</span>
+    <span class="n">baseline_outputs</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">outputs</span>
+    <span class="n">baseline_url</span> <span class="o">=</span> <span class="n">baseline</span><span class="o">.</span><span class="n">xprof_url</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">Pass</span>
+
+    <span class="n">candidate_latencies</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">latencies</span>
+    <span class="n">candidate_outputs</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">outputs</span>
+    <span class="c1"># TODO(b/251969924): check baseline and candidate have same structure.</span>
+    <span class="n">candidate_url</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">xprof_url</span>
+
+    <span class="n">num_batches</span><span class="p">,</span> <span class="n">avg_in_ms</span><span class="p">,</span> <span class="n">p90_in_ms</span><span class="p">,</span> <span class="n">p99_in_ms</span> <span class="o">=</span> <span class="n">get_latency_stat</span><span class="p">(</span>
+        <span class="n">baseline_latencies</span><span class="p">)</span>
+    <span class="n">baseline_latency_stat</span> <span class="o">=</span> <span class="n">LatencyStat</span><span class="p">(</span><span class="n">num_batches</span><span class="p">,</span> <span class="n">avg_in_ms</span><span class="p">,</span> <span class="n">p90_in_ms</span><span class="p">,</span>
+                                        <span class="n">p99_in_ms</span><span class="p">)</span>
+    <span class="n">num_batches</span><span class="p">,</span> <span class="n">avg_in_ms</span><span class="p">,</span> <span class="n">p90_in_ms</span><span class="p">,</span> <span class="n">p99_in_ms</span> <span class="o">=</span> <span class="n">get_latency_stat</span><span class="p">(</span>
+        <span class="n">candidate_latencies</span><span class="p">)</span>
+    <span class="n">candidate_latency_stat</span> <span class="o">=</span> <span class="n">LatencyStat</span><span class="p">(</span><span class="n">num_batches</span><span class="p">,</span> <span class="n">avg_in_ms</span><span class="p">,</span> <span class="n">p90_in_ms</span><span class="p">,</span>
+                                         <span class="n">p99_in_ms</span><span class="p">)</span>
+
+    <span class="n">baseline_outputs_tree_def</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_structure</span><span class="p">(</span><span class="n">baseline_outputs</span><span class="p">)</span>
+    <span class="n">candidate_outputs_tree_def</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_structure</span><span class="p">(</span><span class="n">candidate_outputs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">baseline_outputs_tree_def</span> <span class="o">!=</span> <span class="n">candidate_outputs_tree_def</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;baseline and candidate result have diff tree_def.&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39;baseline tree_def = </span><span class="si">{</span><span class="n">baseline_outputs_tree_def</span><span class="si">}</span><span class="s1">&#39;</span>
+          <span class="sa">f</span><span class="s1">&#39;candidate tree_def = </span><span class="si">{</span><span class="n">candidate_outputs_tree_def</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+
+    <span class="n">baseline_floatings</span><span class="p">,</span> <span class="n">baseline_non_floatings</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">split_tf_floating_and_discrete_groups</span><span class="p">(</span><span class="n">baseline_outputs</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">candidate_floatings</span><span class="p">,</span> <span class="n">candidate_non_floatings</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">split_tf_floating_and_discrete_groups</span><span class="p">(</span><span class="n">candidate_outputs</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">baseline_floatings</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">candidate_floatings</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;baseline and candidate floating result have different length. &#39;</span>
+          <span class="sa">f</span><span class="s1">&#39;baseline = </span><span class="si">{</span><span class="n">baseline_floatings</span><span class="si">}</span><span class="s1">, candidate = </span><span class="si">{</span><span class="n">candidate_floatings</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">baseline_non_floatings</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidate_non_floatings</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;baseline and candidate non-floating result have different length. &#39;</span>
+          <span class="sa">f</span><span class="s1">&#39;baseline = </span><span class="si">{</span><span class="n">baseline_floatings</span><span class="si">}</span><span class="s1">, candidate = </span><span class="si">{</span><span class="n">candidate_floatings</span><span class="si">}</span><span class="s1">&#39;</span>
+      <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">baseline_floatings</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;No floating-point outputs.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">max_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">candidate_floatings</span> <span class="o">-</span> <span class="n">baseline_floatings</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+      <span class="n">max_rel_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">candidate_floatings</span> <span class="o">-</span> <span class="n">baseline_floatings</span><span class="p">)</span> <span class="o">/</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">baseline_floatings</span><span class="p">),</span> <span class="mf">1e-6</span><span class="p">))</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+      <span class="n">all_close</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">candidate_floatings</span><span class="p">,</span> <span class="n">baseline_floatings</span><span class="p">,</span>
+                              <span class="n">floating_atol</span><span class="p">,</span> <span class="n">floating_rtol</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">all_close</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s1">&#39;Baseline and candidate floating-point results are all close &#39;</span>
+            <span class="s1">&#39;(atol=</span><span class="si">%f</span><span class="s1">, rtol=</span><span class="si">%f</span><span class="s1">). max_diff=</span><span class="si">%f</span><span class="s1">, max_rel_diff=</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">floating_atol</span><span class="p">,</span>
+            <span class="n">floating_rtol</span><span class="p">,</span> <span class="n">max_diff</span><span class="p">,</span> <span class="n">max_rel_diff</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s1">&#39;Baseline and candidate floating-point results are not all close. &#39;</span>
+            <span class="s1">&#39;max_diff=</span><span class="si">%f</span><span class="s1">, max_rel_diff=</span><span class="si">%f</span><span class="s1">.&#39;</span><span class="p">,</span> <span class="n">max_diff</span><span class="p">,</span> <span class="n">max_rel_diff</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_option</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">:</span>
+          <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;baseline_floatings = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">baseline_floatings</span><span class="p">)</span>
+          <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;candidate_floatings = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">candidate_floatings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">Fail</span>
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;FloatingPointDiffReport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FloatingPointDiffReport</span><span class="p">(</span>
+          <span class="n">total</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">baseline_floatings</span><span class="o">.</span><span class="n">size</span><span class="p">),</span>
+          <span class="n">max_diff</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">max_diff</span><span class="p">),</span>
+          <span class="n">max_rel_diff</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">max_rel_diff</span><span class="p">),</span>
+          <span class="n">all_close</span><span class="o">=</span><span class="n">all_close</span><span class="p">,</span>
+          <span class="n">all_close_absolute_tolerance</span><span class="o">=</span><span class="n">floating_atol</span><span class="p">,</span>
+          <span class="n">all_close_relative_tolerance</span><span class="o">=</span><span class="n">floating_rtol</span><span class="p">,</span>
+      <span class="p">)</span>
+
+    <span class="n">mismatches</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">t</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">baseline_non_floatings</span><span class="p">,</span> <span class="n">candidate_non_floatings</span><span class="p">))</span>
+    <span class="n">total_non_floatings</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">baseline_non_floatings</span><span class="p">)</span>
+    <span class="n">mismatch_ratio</span> <span class="o">=</span> <span class="mf">.0</span>
+    <span class="k">if</span> <span class="n">total_non_floatings</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">mismatch_ratio</span> <span class="o">=</span> <span class="n">mismatches</span> <span class="o">/</span> <span class="n">total_non_floatings</span>
+    <span class="k">if</span> <span class="n">mismatch_ratio</span> <span class="o">&lt;=</span> <span class="n">max_non_floating_mismatch_ratio</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+          <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> Baseline/Candidate mismatches over </span><span class="si">%d</span><span class="s1"> non-floating-point results.&#39;</span>
+          <span class="s1">&#39;Mismatch ratio is </span><span class="si">%f</span><span class="s1"> (&lt;= </span><span class="si">%f</span><span class="s1"> threshold).&#39;</span><span class="p">,</span> <span class="n">mismatches</span><span class="p">,</span>
+          <span class="n">total_non_floatings</span><span class="p">,</span> <span class="n">mismatch_ratio</span><span class="p">,</span> <span class="n">max_non_floating_mismatch_ratio</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+          <span class="p">(</span>
+              <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> Baseline/Candidate mismatches over </span><span class="si">%d</span><span class="s1"> non-floating-point&#39;</span>
+              <span class="s1">&#39; results.Mismatch ratio is </span><span class="si">%f</span><span class="s1"> (&gt; </span><span class="si">%f</span><span class="s1"> threshold).&#39;</span>
+          <span class="p">),</span>
+          <span class="n">mismatches</span><span class="p">,</span>
+          <span class="n">total_non_floatings</span><span class="p">,</span>
+          <span class="n">mismatch_ratio</span><span class="p">,</span>
+          <span class="n">max_non_floating_mismatch_ratio</span><span class="p">,</span>
+      <span class="p">)</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_option</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;baseline_non_floatings = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">baseline_non_floatings</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;candidate_non_floatings = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">candidate_non_floatings</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">Fail</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;NonFloatingPointDiffReport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NonFloatingPointDiffReport</span><span class="p">(</span>
+        <span class="n">total_flattened_tensors</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">total_non_floatings</span><span class="p">),</span>
+        <span class="n">mismatches</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">mismatches</span><span class="p">),</span>
+        <span class="n">mismatch_ratio</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mismatch_ratio</span><span class="p">),</span>
+        <span class="n">max_non_floating_mismatch_ratio</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">max_non_floating_mismatch_ratio</span><span class="p">))</span>
+
+    <span class="c1"># Create the result python dict.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">latency</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;baseline&#39;</span><span class="p">:</span> <span class="n">baseline_latency_stat</span><span class="p">,</span>
+        <span class="s1">&#39;candidate&#39;</span><span class="p">:</span> <span class="n">candidate_latency_stat</span>
+    <span class="p">}</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">xprof_url</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;baseline&#39;</span><span class="p">:</span> <span class="n">baseline_url</span><span class="p">,</span> <span class="s1">&#39;candidate&#39;</span><span class="p">:</span> <span class="n">candidate_url</span><span class="p">}</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;baseline&#39;</span><span class="p">:</span> <span class="n">baseline</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
+        <span class="s1">&#39;candidate&#39;</span><span class="p">:</span> <span class="n">candidate</span><span class="o">.</span><span class="n">metadata</span>
+    <span class="p">}</span></div></div>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Orbax Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Google.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrape6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-themee6c2.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+
+<!-- Mirrored from orbax.readthedocs.io/en/latest/_modules/orbax/export/validate/validation_report.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 19 Jul 2024 12:12:01 GMT -->
+</html>
