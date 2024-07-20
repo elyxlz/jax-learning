@@ -42,7 +42,7 @@ class FeedForward(eqx.Module):
     def __init__(
         self,
         config: GPTConfig,
-        key: jax.random.PRNGKey,
+        key: jax.Array,
         dtype: jnp.dtype = jnp.bfloat16,
     ) -> None:
         self.config = config
@@ -87,7 +87,7 @@ class CausalSelfAttention(eqx.Module):
     def __init__(
         self,
         config: GPTConfig,
-        key: jax.random.PRNGKey,
+        key: jax.Array,
         dtype: jnp.dtype = jnp.bfloat16,
     ) -> None:
         self.config = config
@@ -139,17 +139,17 @@ class GPTLayer(eqx.Module):
     def __init__(
         self,
         config: GPTConfig,
-        key: jax.random.PRNGKey,
+        key: jax.Array,
         dtype: jnp.dtype = jnp.bfloat16,
     ) -> None:
         self.config = config
 
         k1, k2 = jax.random.split(key, 2)
-        self.attn = CausalSelfAttention(config, key=key, dtype=dtype)
-        self.ff = FeedForward(config, key=key, dtype=dtype)
+        self.attn = CausalSelfAttention(config, key=k1, dtype=dtype)
+        self.ff = FeedForward(config, key=k2, dtype=dtype)
 
     def __call__(self, x: jax.Array, mask: jax.Array | None = None) -> jax.Array:
-        x = self.attn(x) + x
+        x = self.attn(x, mask) + x
         return self.ff(x) + x
 
 
@@ -163,7 +163,7 @@ class GPTModel(eqx.Module):
     def __init__(
         self,
         config: GPTConfig,
-        key: jax.random.PRNGKey,
+        key: jax.Array,
         dtype: jnp.dtype = jnp.bfloat16,
     ) -> None:
         keys = jax.random.split(key, config.n_layer + 2)
@@ -172,7 +172,7 @@ class GPTModel(eqx.Module):
             config.vocab_size, config.hidden_size, key=embedding_key, dtype=dtype
         )
 
-        make_layers = lambda k: GPTLayer(config, key=k, dtype=dtype)
+        make_layers = lambda k: GPTLayer(config, key=k, dtype=dtype)  # noqa
         self.layers = eqx.filter_vmap(make_layers)(layer_keys)
         del make_layers
 
@@ -183,6 +183,13 @@ class GPTModel(eqx.Module):
             use_bias=False,
             key=head_key,
             dtype=dtype,
+        )
+
+        self.mask = jnp.tril(
+            jnp.full(
+                (config.block_size, config.block_size), dtype=jnp.bfloat16, fill_value=1
+            ),
+            k=0,
         )
 
     def __call__(self, x: jax.Array) -> jax.Array:
