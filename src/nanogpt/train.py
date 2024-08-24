@@ -4,7 +4,6 @@ from optax import adamw
 
 from .model import GPTModel, GPTConfig
 
-
 @dataclass
 class TrainConfig:
     model_config: GPTConfig
@@ -15,3 +14,4 @@ class TrainConfig:
 @dataclass
 class TrainState:
     model: GPTModel
+    opt_s
