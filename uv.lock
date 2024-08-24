@@ -58,7 +58,7 @@ dependencies = [
 requires-dist = [
     { name = "equinox", specifier = ">=0.11.5" },
     { name = "jax", specifier = ">=0.4.31" },
-    { name = "tqdm" },
+    { name = "tqdm", specifier = ">=4.66.5" },
 ]
 
 [[package]]
