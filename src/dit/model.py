@@ -1,7 +1,7 @@
 """a modern 1d rectified flow dit in pure functional jax"""
 
-from functools import partial
 import typing
+from functools import partial
 
 import jax
 import jax.numpy as jnp
