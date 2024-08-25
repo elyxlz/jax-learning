@@ -13,6 +13,7 @@ class DiTConfig:
     in_dim: int = 16
     patch_size: int = 2
     hidden_dim: int = 64
+    time_dim: int = 64
     num_layers: int = 4
     num_heads: int = 4
 
@@ -41,30 +42,40 @@ def linear(x: jax.Array, params: jax.Array) -> jax.Array:
 
 class MlpParams(NamedTuple):
     norm: jax.Array
+    modulation: jax.Array
     fc1: jax.Array
     fc2: jax.Array
     fc3: jax.Array
 
 
-def init_mlp(dim: int, inner_dim: int, key: jax.typing.ArrayLike) -> MlpParams:
-    k1, k2, k3 = jax.random.split(key, num=3)
+def init_mlp(
+    dim: int, inner_dim: int, modulation_dim: int, key: jax.typing.ArrayLike
+) -> MlpParams:
+    k1, k2, k3, k4 = jax.random.split(key, num=4)
     return MlpParams(
         norm=init_layernorm(dim),
-        fc1=init_linear(dim, out_dim=inner_dim, key=k1),
-        fc2=init_linear(dim, out_dim=inner_dim, key=k2),
-        fc3=init_linear(inner_dim, out_dim=dim, key=k3, zero=True),
+        modulation=init_linear(modulation_dim, out_dim=dim * 3, key=k1, zero=True),
+        fc1=init_linear(dim, out_dim=inner_dim, key=k2),
+        fc2=init_linear(dim, out_dim=inner_dim, key=k3),
+        fc3=init_linear(inner_dim, out_dim=dim, key=k4),
     )
 
 
-def mlp(x: jax.Array, params: MlpParams) -> jax.Array:
+def mlp(x: jax.Array, modulation: jax.Array, params: MlpParams) -> jax.Array:
+    x = layernorm(x, params=params.norm)
+    shift, scale, gate = jnp.split(
+        linear(modulation, params=params.modulation), 3, axis=-1
+    )
+    x = jnp.multiply(x + shift, scale + 1)
     h = jax.nn.silu(linear(x, params=params.fc1))
-    gate = linear(x, params=params.fc2)
-    x = jnp.multiply(h, gate)
-    return linear(x, params=params.fc3)
+    mlp_gate = linear(x, params=params.fc2)
+    x = jnp.multiply(h, mlp_gate)
+    return jnp.multiply(linear(x, params=params.fc3), gate)
 
 
 class AttentionParams(NamedTuple):
     norm: jax.Array
+    modulation: jax.Array
     qkv: jax.Array
     qnorm: jax.Array
     knorm: jax.Array
@@ -72,21 +83,29 @@ class AttentionParams(NamedTuple):
 
 
 def init_attention(
-    dim: int, head_dim: int, key: jax.typing.ArrayLike
+    dim: int, head_dim: int, modulation_dim: int, key: jax.typing.ArrayLike
 ) -> AttentionParams:
-    k1, k2 = jax.random.split(key, num=2)
+    k1, k2, k3 = jax.random.split(key, num=3)
     return AttentionParams(
         norm=init_layernorm(dim),
-        qkv=init_linear(dim, out_dim=dim * 3, key=k1),
+        modulation=init_linear(modulation_dim, out_dim=dim * 3, key=k1, zero=True),
+        qkv=init_linear(dim, out_dim=dim * 3, key=k2),
         qnorm=init_layernorm(head_dim),
         knorm=init_layernorm(head_dim),
-        o=init_linear(dim, out_dim=dim, key=k2, zero=True),
+        o=init_linear(dim, out_dim=dim, key=k3),
     )
 
 
 # TODO: rope
-def attention(x: jax.Array, params: AttentionParams, num_heads: int) -> jax.Array:
+def attention(
+    x: jax.Array, modulation: jax.Array, params: AttentionParams, num_heads: int
+) -> jax.Array:
     s, d = x.shape
+    x = layernorm(x, params=params.norm)
+    shift, scale, gate = jnp.split(
+        linear(modulation, params=params.modulation), 3, axis=-1
+    )
+    x = jnp.multiply(x + shift, scale + 1)
     qkv = linear(x, params=params.qkv)
     qkv = jnp.reshape(qkv, shape=(1, s, num_heads, d * 3 // num_heads))
     q, k, v = jnp.split(qkv, 3, axis=-1)
@@ -94,7 +113,7 @@ def attention(x: jax.Array, params: AttentionParams, num_heads: int) -> jax.Arra
     k = layernorm(k, params=params.knorm)
     x = jnp.reshape(jax.nn.dot_product_attention(q, k, v), shape=(s, d))
     x = linear(x, params=params.o)
-    return layernorm(x, params.norm)
+    return jnp.multiply(x, gate)
 
 
 class TransformerLayerParams(NamedTuple):
@@ -103,21 +122,45 @@ class TransformerLayerParams(NamedTuple):
 
 
 def init_transformer_layer(
-    config: DiTConfig, key: jax.typing.ArrayLike
+    dim: int,
+    modulation_dim: int,
+    num_heads: int,
+    key: jax.typing.ArrayLike,
 ) -> TransformerLayerParams:
     k1, k2 = jax.random.split(key)
     inner_dim = int(128 * max(1, int(config.hidden_dim * 8 / 3) // 128))
     return TransformerLayerParams(
-        mlp=init_mlp(config.hidden_dim, inner_dim=inner_dim, key=k1),
+        mlp=init_mlp(
+            dim,
+            inner_dim=inner_dim,
+            modulation_dim=modulation_dim,
+            key=k1,
+        ),
         attention=init_attention(
-            config.hidden_dim, head_dim=config.hidden_dim // config.num_heads, key=k2
+            dim,
+            head_dim=dim // num_heads,
+            modulation_dim=modulation_dim,
+            key=k2,
         ),
     )
 
 
-def transformer_layer(x: jax.Array, params: TransformerLayerParams, config: DiTConfig):
-    x = attention(x, params=params.attention, num_heads=config.num_heads) + x
-    return mlp(x, params=params.mlp) + x
+def transformer_layer(
+    x: jax.Array,
+    modulation: jax.Array,
+    params: TransformerLayerParams,
+    config: DiTConfig,
+):
+    x = (
+        attention(
+            x,
+            modulation=modulation,
+            params=params.attention,
+            num_heads=config.num_heads,
+        )
+        + x
+    )
+    return mlp(x, modulation=modulation, params=params.mlp) + x
 
 
 class DiTParams(NamedTuple):
@@ -133,7 +176,15 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
         proj_in=init_linear(
             config.in_dim, out_dim=config.hidden_dim // config.patch_size, key=keys[0]
         ),
-        layers=[init_transformer_layer(config, key=k) for k in keys[1:-1]],
+        layers=[
+            init_transformer_layer(
+                config.hidden_dim,
+                modulation_dim=config.time_dim,
+                num_heads=config.num_heads,
+                key=k,
+            )
+            for k in keys[1:-1]
+        ],
         norm=init_layernorm(config.hidden_dim),
         proj_out=init_linear(
             config.hidden_dim // config.patch_size,
@@ -144,13 +195,17 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
     )
 
 
-def dit(x: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
+def dit(
+    x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig
+) -> jax.Array:
     seq_len = x.shape[0]
     x = linear(x, params=params.proj_in)
     x = jnp.reshape(x, shape=(seq_len // config.patch_size, config.hidden_dim))
 
     def scan_fn(carry, layer):
-        return transformer_layer(carry, params=layer, config=config), None
+        return transformer_layer(
+            carry, modulation=time, params=layer, config=config
+        ), None
 
     layers_stacked = jax.tree_util.tree_map(
         lambda *args: jnp.stack(args), *params.layers
@@ -180,7 +235,8 @@ if __name__ == "__main__":
     key = jax.random.key(42)
     shape = (8, 100, 16)
     arr = jax.random.normal(key, shape)
+    mod = jax.random.normal(key, (8, 1, 64))
     config = DiTConfig()
     dit_params = init_dit(config, key)
-    out = jax.vmap(partial(dit, params=dit_params, config=config))(arr)
+    out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=mod)
     print(out.shape)
