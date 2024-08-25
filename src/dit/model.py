@@ -1,35 +1,11 @@
-"""a rectified flow dit in pure functional jax"""
+"""a 1d rectified flow dit in pure functional jax"""
 
 from dataclasses import dataclass
-from typing import NamedTuple, Callable
+from typing import NamedTuple
 from tqdm import trange
 from functools import partial
 import jax
 import jax.numpy as jnp
-
-
-def build_rope_cache(seq_len: int, n_elem: int, base: int = 10000) -> jax.Array:
-    freqs = 1.0 / (
-        base ** (jnp.arange(0, n_elem, 2)[: (n_elem // 2)].astype(jnp.float32) / n_elem)
-    )
-    t = jnp.arange(seq_len)
-    freqs = jnp.outer(t, freqs)
-    freqs_cis = jnp.exp(1j * freqs)
-    return jnp.stack([jnp.real(freqs_cis), jnp.imag(freqs_cis)], axis=-1)
-
-
-def apply_rope(x: jax.Array, freqs: jax.Array) -> jax.Array:
-    freqs = freqs[: x.shape[2]]
-    xshaped = x.astype(jnp.float32).reshape(*x.shape[:-1], -1, 2)
-    freqs = freqs.reshape(1, 1, xshaped.shape[2], xshaped.shape[3], 2)
-    x_out = jnp.stack(
-        [
-            xshaped[..., 0] * freqs[..., 0] - xshaped[..., 1] * freqs[..., 1],
-            xshaped[..., 1] * freqs[..., 0] + xshaped[..., 0] * freqs[..., 1],
-        ],
-        -1,
-    )
-    return x_out.reshape(*x.shape[:-1], -1).astype(x.dtype)
 
 
 @dataclass
@@ -40,6 +16,8 @@ class DiTConfig:
     time_dim: int = 64
     num_layers: int = 4
     num_heads: int = 4
+    seq_len: int = 100
+    rope_base: int = 10_000
 
 
 def init_layernorm(dim: int) -> jax.Array:
@@ -63,6 +41,34 @@ def init_linear(
 
 def linear(x: jax.Array, params: jax.Array) -> jax.Array:
     return jnp.matmul(x, params)
+
+
+def init_rope(seq_len: int, num_elem: int, base: int = 10000) -> jax.Array:
+    freqs = 1.0 / (
+        base
+        ** (
+            jnp.arange(0, num_elem, 2)[: (num_elem // 2)].astype(jnp.float32) / num_elem
+        )
+    )
+    t = jnp.arange(seq_len)
+    freqs = jnp.outer(t, freqs)
+    freqs_cis = jnp.exp(1j * freqs)
+    return jnp.stack([jnp.real(freqs_cis), jnp.imag(freqs_cis)], axis=-1)
+
+
+def rope(x: jax.Array, params: jax.Array) -> jax.Array:
+    x = jax.lax.stop_gradient(x)
+    freqs = params[: x.shape[2]]
+    xshaped = x.astype(jnp.float32).reshape(*x.shape[:-1], -1, 2)
+    freqs = freqs.reshape(1, 1, xshaped.shape[2], xshaped.shape[3], 2)
+    x_out = jnp.stack(
+        [
+            xshaped[..., 0] * freqs[..., 0] - xshaped[..., 1] * freqs[..., 1],
+            xshaped[..., 1] * freqs[..., 0] + xshaped[..., 0] * freqs[..., 1],
+        ],
+        -1,
+    )
+    return x_out.reshape(*x.shape[:-1], -1).astype(x.dtype)
 
 
 class MlpParams(NamedTuple):
@@ -102,26 +108,30 @@ class AttentionParams(NamedTuple):
     norm: jax.Array
     modulation: jax.Array
     qkv: jax.Array
-    qnorm: jax.Array
-    knorm: jax.Array
+    qk_norm: tuple[jax.Array, jax.Array]
+    rope_cache: jax.Array
     o: jax.Array
 
 
 def init_attention(
-    dim: int, head_dim: int, modulation_dim: int, key: jax.typing.ArrayLike
+    dim: int,
+    head_dim: int,
+    modulation_dim: int,
+    seq_len: int,
+    rope_base: int,
+    key: jax.typing.ArrayLike,
 ) -> AttentionParams:
     k1, k2, k3 = jax.random.split(key, num=3)
     return AttentionParams(
         norm=init_layernorm(dim),
         modulation=init_linear(modulation_dim, out_dim=dim * 3, key=k1, zero=True),
         qkv=init_linear(dim, out_dim=dim * 3, key=k2),
-        qnorm=init_layernorm(head_dim),
-        knorm=init_layernorm(head_dim),
+        qk_norm=(init_layernorm(head_dim), init_layernorm(head_dim)),
+        rope_cache=init_rope(seq_len, num_elem=head_dim, base=rope_base),
         o=init_linear(dim, out_dim=dim, key=k3),
     )
 
 
-# TODO: rope
 def attention(
     x: jax.Array, modulation: jax.Array, params: AttentionParams, num_heads: int
 ) -> jax.Array:
@@ -134,8 +144,10 @@ def attention(
     qkv = linear(x, params=params.qkv)
     qkv = jnp.reshape(qkv, shape=(1, s, num_heads, d * 3 // num_heads))
     q, k, v = jnp.split(qkv, 3, axis=-1)
-    q = layernorm(q, params=params.qnorm)
-    k = layernorm(k, params=params.knorm)
+    q = layernorm(q, params=params.qk_norm[0])
+    k = layernorm(k, params=params.qk_norm[1])
+    q = rope(q, params.rope_cache)
+    k = rope(k, params.rope_cache)
     x = jnp.reshape(jax.nn.dot_product_attention(q, k, v), shape=(s, d))
     x = linear(x, params=params.o)
     return jnp.multiply(x, gate)
@@ -150,6 +162,8 @@ def init_transformer_layer(
     dim: int,
     modulation_dim: int,
     num_heads: int,
+    seq_len: int,
+    rope_base: int,
     key: jax.typing.ArrayLike,
 ) -> TransformerLayerParams:
     k1, k2 = jax.random.split(key)
@@ -165,6 +179,8 @@ def init_transformer_layer(
             dim,
             head_dim=dim // num_heads,
             modulation_dim=modulation_dim,
+            seq_len=seq_len,
+            rope_base=rope_base,
             key=k2,
         ),
     )
@@ -174,7 +190,7 @@ def transformer_layer(
     x: jax.Array,
     modulation: jax.Array,
     params: TransformerLayerParams,
-    config: DiTConfig,
+    num_heads: int,
 ):
     x = (
         attention(
@@ -206,6 +222,8 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
                 config.hidden_dim,
                 modulation_dim=config.time_dim,
                 num_heads=config.num_heads,
+                seq_len=config.seq_len,
+                rope_base=config.rope_base,
                 key=k,
             )
             for k in keys[1:-1]
@@ -229,7 +247,7 @@ def dit(
 
     def scan_fn(carry, layer):
         return transformer_layer(
-            carry, modulation=time, params=layer, config=config
+            carry, modulation=time, params=layer, num_heads=config.num_heads
         ), None
 
     layers_stacked = jax.tree_util.tree_map(
@@ -245,12 +263,11 @@ def dit(
 def generate(
     dit_params: DiTParams,
     bs: int,
-    seq_len: int,
     steps: int,
     key: jax.typing.ArrayLike,
     config: DiTConfig,
 ) -> jax.Array:
-    noise = jax.random.normal(key, shape(bs, seq_len, config.in_dim))
+    noise = jax.random.normal(key, shape(bs, config.seq_len, config.in_dim))
     dt = 1.0 / steps
     for t in trange(steps):
         raise NotImplementedError
