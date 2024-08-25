@@ -277,10 +277,14 @@ def generate(
     key: jax.typing.ArrayLike,
     progress: bool = True,
 ) -> jax.Array:
-    noise = jax.random.normal(key, shape=(bs, config.seq_len, config.in_dim))
+    noise = jax.random.normal(
+        key,
+        shape=(bs, config.seq_len, config.in_dim),
+        dtype=jax.tree_util.tree_leaves(dit_params)[0].dtype,
+    )
 
     for i in trange(steps, 0, -1, disable=not progress):
-        t = jnp.full((bs, 1, 1), fill_value=i / steps)  # TODO: fourier features
+        t = jnp.full((bs, 1, 1), fill_value=i / steps, dtype=noise.dtype)
         v = jax.vmap(partial(dit, params=dit_params, config=config))(noise, time=t)
         noise = noise - (1.0 / steps) * v
 
@@ -290,10 +294,11 @@ def generate(
 if __name__ == "__main__":
     key = jax.random.key(42)
     shape = (8, 100, 16)
-    arr = jax.random.normal(key, shape)
-    mod = jax.random.normal(key, (8, 1, 1))
+    arr = jax.random.normal(key, shape, dtype=jnp.bfloat16)
+    time = jax.random.normal(key, (8, 1, 1), dtype=jnp.bfloat16)
     config = DiTConfig()
     dit_params = init_dit(config, key)
-    out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=mod)
+    dit_params = jax.tree.map(lambda x: jnp.astype(x, jnp.bfloat16), dit_params)
+    out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=time)
     generated = generate(dit_params, bs=4, steps=2, config=config, key=key)
     print(out.shape)
