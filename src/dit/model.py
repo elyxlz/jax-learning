@@ -8,6 +8,30 @@ import jax
 import jax.numpy as jnp
 
 
+def build_rope_cache(seq_len: int, n_elem: int, base: int = 10000) -> jax.Array:
+    freqs = 1.0 / (
+        base ** (jnp.arange(0, n_elem, 2)[: (n_elem // 2)].astype(jnp.float32) / n_elem)
+    )
+    t = jnp.arange(seq_len)
+    freqs = jnp.outer(t, freqs)
+    freqs_cis = jnp.exp(1j * freqs)
+    return jnp.stack([jnp.real(freqs_cis), jnp.imag(freqs_cis)], axis=-1)
+
+
+def apply_rope(x: jax.Array, freqs: jax.Array) -> jax.Array:
+    freqs = freqs[: x.shape[2]]
+    xshaped = x.astype(jnp.float32).reshape(*x.shape[:-1], -1, 2)
+    freqs = freqs.reshape(1, 1, xshaped.shape[2], xshaped.shape[3], 2)
+    x_out = jnp.stack(
+        [
+            xshaped[..., 0] * freqs[..., 0] - xshaped[..., 1] * freqs[..., 1],
+            xshaped[..., 1] * freqs[..., 0] + xshaped[..., 0] * freqs[..., 1],
+        ],
+        -1,
+    )
+    return x_out.reshape(*x.shape[:-1], -1).astype(x.dtype)
+
+
 @dataclass
 class DiTConfig:
     in_dim: int = 16
@@ -23,10 +47,11 @@ def init_layernorm(dim: int) -> jax.Array:
 
 
 def layernorm(x: jax.Array, params: jax.Array, eps: float = 1e-5) -> jax.Array:
-    mean = jnp.mean(x, axis=-1, keepdims=True)
-    var = jnp.var(x, axis=-1, keepdims=True)
-    x = (x - mean) / jnp.sqrt(var + eps)
-    return jnp.multiply(x, params)
+    x_32 = x.astype(jnp.float32)
+    mean = jnp.mean(x_32, axis=-1, keepdims=True)
+    var = jnp.var(x_32, axis=-1, keepdims=True)
+    x_32 = (x_32 - mean) / jnp.sqrt(var + eps)
+    return jnp.multiply(x_32, params).astype(x.dtype)
 
 
 def init_linear(
@@ -209,7 +234,7 @@ def dit(
 
     layers_stacked = jax.tree_util.tree_map(
         lambda *args: jnp.stack(args), *params.layers
-    )
+    )  # does this cause a slow down?
     x, _ = jax.lax.scan(scan_fn, x, layers_stacked)
 
     x = layernorm(x, params=params.norm)
