@@ -1,16 +1,13 @@
 """a modern 1d rectified flow dit in pure functional jax"""
 
-from dataclasses import dataclass
 from functools import partial
-from typing import NamedTuple
+import typing
 
 import jax
 import jax.numpy as jnp
-from tqdm import trange
 
 
-@dataclass
-class DiTConfig:
+class DiTConfig(typing.NamedTuple):
     in_dim: int = 16
     patch_size: int = 2
     hidden_dim: int = 64
@@ -68,7 +65,7 @@ def rope(x: jax.Array, params: jax.Array) -> jax.Array:
     return x_out.reshape(*x.shape[:-1], -1).astype(x.dtype)
 
 
-class FourierFeaturesParams(NamedTuple):
+class FourierFeaturesParams(typing.NamedTuple):
     scales: jax.Array
     to_out: jax.Array
 
@@ -87,7 +84,7 @@ def fourier_features(x: jax.Array, params: FourierFeaturesParams) -> jax.Array:
     return linear(fouriered, params.to_out)
 
 
-class MlpParams(NamedTuple):
+class MlpParams(typing.NamedTuple):
     norm: jax.Array
     modulation: jax.Array
     fc1: jax.Array
@@ -118,7 +115,7 @@ def mlp(x: jax.Array, modulation: jax.Array, params: MlpParams) -> jax.Array:
     return jnp.multiply(linear(x, params=params.fc3), gate)
 
 
-class AttentionParams(NamedTuple):
+class AttentionParams(typing.NamedTuple):
     norm: jax.Array
     modulation: jax.Array
     qkv: jax.Array
@@ -164,7 +161,7 @@ def attention(x: jax.Array, modulation: jax.Array, params: AttentionParams) -> j
     return jnp.multiply(x, gate)
 
 
-class TransformerLayerParams(NamedTuple):
+class TransformerLayerParams(typing.NamedTuple):
     mlp: MlpParams
     attention: AttentionParams
 
@@ -213,7 +210,7 @@ def transformer_layer(
     return mlp(x, modulation=modulation, params=params.mlp) + x
 
 
-class DiTParams(NamedTuple):
+class DiTParams(typing.NamedTuple):
     proj_in: jax.Array
     fourier_features: FourierFeaturesParams
     layers: list[TransformerLayerParams]
@@ -256,39 +253,40 @@ def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> 
 
     modulation = fourier_features(time, params.fourier_features)
 
-    def scan_fn(carry, layer):
+    def scan_fn(carry: jax.Array, layer: typing.Any) -> tuple[jax.Array, None]:
         return transformer_layer(carry, modulation=modulation, params=layer), None
 
     layers_stacked = jax.tree_util.tree_map(
         lambda *args: jnp.stack(args), *params.layers
     )  # TODO: does this cause a slow down?
-    x, _ = jax.lax.scan(scan_fn, x, layers_stacked)
+    x = jax.lax.scan(scan_fn, x, layers_stacked)[0]
 
     x = layernorm(x, params=params.norm)
     x = jnp.reshape(x, (seq_len, -1))
     return linear(x, params=params.proj_out)
 
 
+@partial(jax.jit, static_argnums=(1, 2, 3))
 def generate(
     dit_params: DiTParams,
     bs: int,
     steps: int,
     config: DiTConfig,
     key: jax.typing.ArrayLike,
-    progress: bool = True,
 ) -> jax.Array:
     noise = jax.random.normal(
         key,
         shape=(bs, config.seq_len, config.in_dim),
-        dtype=jax.tree_util.tree_leaves(dit_params)[0].dtype,
+        dtype=jax.tree.leaves(dit_params)[0].dtype,
     )
 
-    for i in trange(steps, 0, -1, disable=not progress):
+    def scan_fn(noise: jax.Array, i: jax.Array) -> tuple[jax.Array, None]:
         t = jnp.full((bs, 1, 1), fill_value=i / steps, dtype=noise.dtype)
         v = jax.vmap(partial(dit, params=dit_params, config=config))(noise, time=t)
         noise = noise - (1.0 / steps) * v
+        return noise, None
 
-    return noise
+    return jax.lax.scan(scan_fn, noise, jnp.arange(steps, 0, -1))[0]
 
 
 if __name__ == "__main__":
@@ -296,9 +294,10 @@ if __name__ == "__main__":
     shape = (8, 100, 16)
     arr = jax.random.normal(key, shape, dtype=jnp.bfloat16)
     time = jax.random.normal(key, (8, 1, 1), dtype=jnp.bfloat16)
+
     config = DiTConfig()
     dit_params = init_dit(config, key)
     dit_params = jax.tree.map(lambda x: jnp.astype(x, jnp.bfloat16), dit_params)
     out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=time)
-    generated = generate(dit_params, bs=4, steps=2, config=config, key=key)
+    generated = generate(dit_params, bs=4, steps=4, config=config, key=key)
     print(out.shape)
