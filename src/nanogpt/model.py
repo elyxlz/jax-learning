@@ -1,8 +1,8 @@
-from dataclasses import dataclass
 import math
-from pdb import set_trace as st
-import jax
+from dataclasses import dataclass
+
 import equinox as eqx
+import jax
 import jax.numpy as jnp
 from tqdm import trange
 
@@ -75,9 +75,7 @@ class FeedForward(eqx.Module):
 
     def __call__(self, x: jax.Array) -> jax.Array:
         x = self.norm(x)
-        return jax.vmap(self.w2)(
-            jax.nn.silu(jax.vmap(self.w1)(x)) * jax.vmap(self.w3)(x)
-        )
+        return jax.vmap(self.w2)(jax.nn.silu(jax.vmap(self.w1)(x)) * jax.vmap(self.w3)(x))
 
 
 class Attention(eqx.Module):
@@ -111,9 +109,7 @@ class Attention(eqx.Module):
         )
 
         mask = jnp.tril(
-            jnp.full(
-                (config.block_size, config.block_size), dtype=jnp.bfloat16, fill_value=1
-            ),
+            jnp.full((config.block_size, config.block_size), dtype=jnp.bfloat16, fill_value=1),
             k=0,
         )
 
@@ -223,9 +219,7 @@ class GPTModel(eqx.Module):
             logits = output[:, -1]
             logits /= temperature
             next_token = jax.random.categorical(jax.random.PRNGKey(0), logits, axis=-1)
-            generated = jnp.concatenate(
-                [generated, jnp.expand_dims(next_token, 0)], axis=0
-            )
+            generated = jnp.concatenate([generated, jnp.expand_dims(next_token, 0)], axis=0)
         return generated
 
 

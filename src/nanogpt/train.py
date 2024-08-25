@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from optax import adamw
 
-from .model import GPTModel, GPTConfig
+from .model import GPTConfig, GPTModel
+
 
 @dataclass
 class TrainConfig:

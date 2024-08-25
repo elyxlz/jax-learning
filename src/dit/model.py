@@ -1,11 +1,12 @@
 """a modern 1d rectified flow dit in pure functional jax"""
 
 from dataclasses import dataclass
-from typing import NamedTuple
-from tqdm import trange
 from functools import partial
+from typing import NamedTuple
+
 import jax
 import jax.numpy as jnp
+from tqdm import trange
 
 
 @dataclass
