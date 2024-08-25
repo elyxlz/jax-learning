@@ -1,7 +1,8 @@
 """a rectified flow dit in pure functional jax"""
 
 from dataclasses import dataclass
-from typing import NamedTuple
+from typing import NamedTuple, Callable
+from tqdm import trange
 from functools import partial
 import jax
 import jax.numpy as jnp
@@ -149,6 +150,22 @@ def dit(x: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
     x = layernorm(x, params=params.norm)
     x = jnp.reshape(x, (seq_len, config.hidden_dim // config.patch_size))
     return linear(x, params=params.proj_out)
+
+
+def generate(
+    dit: Callable,
+    dit_params: DiTParams,
+    bs: int,
+    seq_len: int,
+    steps: int,
+    key: jax.typing.ArrayLike,
+    config: DiTConfig,
+) -> jax.Array:
+    noise = jax.random.normal(key, shape(bs, seq_len, config.in_dim))
+    dt = 1.0 / steps
+    for t in trange(steps):
+        
+
 
 
 if __name__ == "__main__":
