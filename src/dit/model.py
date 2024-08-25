@@ -1,4 +1,4 @@
-"""a 1d rectified flow dit in pure functional jax"""
+"""a modern 1d rectified flow dit in pure functional jax"""
 
 from dataclasses import dataclass
 from typing import NamedTuple
@@ -133,7 +133,7 @@ def init_attention(
 
 
 def attention(
-    x: jax.Array, modulation: jax.Array, params: AttentionParams, num_heads: int
+    x: jax.Array, modulation: jax.Array, params: AttentionParams
 ) -> jax.Array:
     s, d = x.shape
     x = layernorm(x, params=params.norm)
@@ -142,6 +142,7 @@ def attention(
     )
     x = jnp.multiply(x + shift, scale + 1)
     qkv = linear(x, params=params.qkv)
+    num_heads = x.shape[-1] // params.qk_norm[0].shape[0]
     qkv = jnp.reshape(qkv, shape=(1, s, num_heads, d * 3 // num_heads))
     q, k, v = jnp.split(qkv, 3, axis=-1)
     q = layernorm(q, params=params.qk_norm[0])
@@ -190,14 +191,12 @@ def transformer_layer(
     x: jax.Array,
     modulation: jax.Array,
     params: TransformerLayerParams,
-    num_heads: int,
 ):
     x = (
         attention(
             x,
             modulation=modulation,
             params=params.attention,
-            num_heads=config.num_heads,
         )
         + x
     )
@@ -246,13 +245,11 @@ def dit(
     x = jnp.reshape(x, shape=(seq_len // config.patch_size, config.hidden_dim))
 
     def scan_fn(carry, layer):
-        return transformer_layer(
-            carry, modulation=time, params=layer, num_heads=config.num_heads
-        ), None
+        return transformer_layer(carry, modulation=time, params=layer), None
 
     layers_stacked = jax.tree_util.tree_map(
         lambda *args: jnp.stack(args), *params.layers
-    )  # does this cause a slow down?
+    )  # TODO: does this cause a slow down?
     x, _ = jax.lax.scan(scan_fn, x, layers_stacked)
 
     x = layernorm(x, params=params.norm)
