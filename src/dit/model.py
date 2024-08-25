@@ -28,8 +28,10 @@ def layernorm(x: jax.Array, params: jax.Array, eps: float = 1e-5) -> jax.Array:
     return jnp.multiply(x, params)
 
 
-def init_linear(in_dim: int, out_dim: int, key: jax.typing.ArrayLike) -> jax.Array:
-    k = 1 / (in_dim**0.5)
+def init_linear(
+    in_dim: int, out_dim: int, key: jax.typing.ArrayLike, zero: bool = False
+) -> jax.Array:
+    k = 1 / (in_dim**0.5) if not zero else 0
     return jax.random.uniform(key, (in_dim, out_dim), minval=-k, maxval=k)
 
 
@@ -50,7 +52,7 @@ def init_mlp(dim: int, inner_dim: int, key: jax.typing.ArrayLike) -> MlpParams:
         norm=init_layernorm(dim),
         fc1=init_linear(dim, out_dim=inner_dim, key=k1),
         fc2=init_linear(dim, out_dim=inner_dim, key=k2),
-        fc3=init_linear(inner_dim, out_dim=dim, key=k3),
+        fc3=init_linear(inner_dim, out_dim=dim, key=k3, zero=True),
     )
 
 
@@ -78,7 +80,7 @@ def init_attention(
         qkv=init_linear(dim, out_dim=dim * 3, key=k1),
         qnorm=init_layernorm(head_dim),
         knorm=init_layernorm(head_dim),
-        o=init_linear(dim, out_dim=dim, key=k2),
+        o=init_linear(dim, out_dim=dim, key=k2, zero=True),
     )
 
 
@@ -134,7 +136,10 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
         layers=[init_transformer_layer(config, key=k) for k in keys[1:-1]],
         norm=init_layernorm(config.hidden_dim),
         proj_out=init_linear(
-            config.hidden_dim // config.patch_size, out_dim=config.in_dim, key=keys[-1]
+            config.hidden_dim // config.patch_size,
+            out_dim=config.in_dim,
+            key=keys[-1],
+            zero=True,
         ),
     )
 
@@ -144,11 +149,16 @@ def dit(x: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
     x = linear(x, params=params.proj_in)
     x = jnp.reshape(x, shape=(seq_len // config.patch_size, config.hidden_dim))
 
-    for layer in params.layers:
-        x = transformer_layer(x, params=layer, config=config)
+    def scan_fn(carry, layer):
+        return transformer_layer(carry, params=layer, config=config), None
+
+    layers_stacked = jax.tree_util.tree_map(
+        lambda *args: jnp.stack(args), *params.layers
+    )
+    x, _ = jax.lax.scan(scan_fn, x, layers_stacked)
 
     x = layernorm(x, params=params.norm)
-    x = jnp.reshape(x, (seq_len, config.hidden_dim // config.patch_size))
+    x = jnp.reshape(x, (seq_len, -1))
     return linear(x, params=params.proj_out)
 
 
