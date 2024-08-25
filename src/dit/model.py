@@ -153,7 +153,6 @@ def dit(x: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
 
 
 def generate(
-    dit: Callable,
     dit_params: DiTParams,
     bs: int,
     seq_len: int,
@@ -164,8 +163,7 @@ def generate(
     noise = jax.random.normal(key, shape(bs, seq_len, config.in_dim))
     dt = 1.0 / steps
     for t in trange(steps):
-        
-
+        raise NotImplementedError
 
 
 if __name__ == "__main__":
