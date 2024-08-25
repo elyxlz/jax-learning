@@ -162,8 +162,8 @@ def attention(x: jax.Array, modulation: jax.Array, params: AttentionParams) -> j
 
 
 class TransformerLayerParams(typing.NamedTuple):
-    mlp: MlpParams
     attention: AttentionParams
+    mlp: MlpParams
 
 
 def init_transformer_layer(
@@ -177,12 +177,6 @@ def init_transformer_layer(
     k1, k2 = jax.random.split(key)
     inner_dim = int(128 * max(1, int(config.hidden_dim * 8 / 3) // 128))
     return TransformerLayerParams(
-        mlp=init_mlp(
-            dim,
-            inner_dim=inner_dim,
-            modulation_dim=modulation_dim,
-            key=k1,
-        ),
         attention=init_attention(
             dim,
             head_dim=dim // num_heads,
@@ -191,6 +185,7 @@ def init_transformer_layer(
             rope_base=rope_base,
             key=k2,
         ),
+        mlp=init_mlp(dim, inner_dim=inner_dim, modulation_dim=modulation_dim, key=k1),
     )
 
 
@@ -199,14 +194,7 @@ def transformer_layer(
     modulation: jax.Array,
     params: TransformerLayerParams,
 ):
-    x = (
-        attention(
-            x,
-            modulation=modulation,
-            params=params.attention,
-        )
-        + x
-    )
+    x = attention(x, modulation=modulation, params=params.attention) + x
     return mlp(x, modulation=modulation, params=params.mlp) + x
 
 
@@ -268,11 +256,7 @@ def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> 
 
 @partial(jax.jit, static_argnums=(1, 2, 3))
 def generate(
-    dit_params: DiTParams,
-    bs: int,
-    steps: int,
-    config: DiTConfig,
-    key: jax.typing.ArrayLike,
+    dit_params: DiTParams, bs: int, steps: int, config: DiTConfig, key: jax.typing.ArrayLike
 ) -> jax.Array:
     noise = jax.random.normal(
         key,
