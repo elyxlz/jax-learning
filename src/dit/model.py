@@ -45,10 +45,7 @@ def linear(x: jax.Array, params: jax.Array) -> jax.Array:
 
 def init_rope(seq_len: int, num_elem: int, base: int = 10000) -> jax.Array:
     freqs = 1.0 / (
-        base
-        ** (
-            jnp.arange(0, num_elem, 2)[: (num_elem // 2)].astype(jnp.float32) / num_elem
-        )
+        base ** (jnp.arange(0, num_elem, 2)[: (num_elem // 2)].astype(jnp.float32) / num_elem)
     )
     t = jnp.arange(seq_len)
     freqs = jnp.outer(t, freqs)
@@ -57,8 +54,7 @@ def init_rope(seq_len: int, num_elem: int, base: int = 10000) -> jax.Array:
 
 
 def rope(x: jax.Array, params: jax.Array) -> jax.Array:
-    x = jax.lax.stop_gradient(x)
-    freqs = params[: x.shape[2]]
+    freqs = jax.lax.stop_gradient(params)[: x.shape[2]]
     xshaped = x.astype(jnp.float32).reshape(*x.shape[:-1], -1, 2)
     freqs = freqs.reshape(1, 1, xshaped.shape[2], xshaped.shape[3], 2)
     x_out = jnp.stack(
@@ -69,6 +65,25 @@ def rope(x: jax.Array, params: jax.Array) -> jax.Array:
         -1,
     )
     return x_out.reshape(*x.shape[:-1], -1).astype(x.dtype)
+
+
+class FourierFeaturesParams(NamedTuple):
+    scales: jax.Array
+    to_out: jax.Array
+
+
+def init_fourier_features(time_dim: int, key: jax.typing.ArrayLike) -> FourierFeaturesParams:
+    k1, k2 = jax.random.split(key)
+    assert time_dim % 2 == 0
+    scales = jax.random.normal(k1, (time_dim // 2, 1)) * 1.0
+    to_out = init_linear(time_dim, time_dim, k2)
+    return FourierFeaturesParams(scales=scales, to_out=to_out)
+
+
+def fourier_features(x: jax.Array, params: FourierFeaturesParams) -> jax.Array:
+    f = 2 * jnp.pi * jnp.matmul(x, jax.lax.stop_gradient(params.scales).T)
+    fouriered = jnp.concatenate([jnp.cos(f), jnp.sin(f)], axis=-1)
+    return linear(fouriered, params.to_out)
 
 
 class MlpParams(NamedTuple):
@@ -94,9 +109,7 @@ def init_mlp(
 
 def mlp(x: jax.Array, modulation: jax.Array, params: MlpParams) -> jax.Array:
     x = layernorm(x, params=params.norm)
-    shift, scale, gate = jnp.split(
-        linear(modulation, params=params.modulation), 3, axis=-1
-    )
+    shift, scale, gate = jnp.split(linear(modulation, params=params.modulation), 3, axis=-1)
     x = jnp.multiply(x + shift, scale + 1)
     h = jax.nn.silu(linear(x, params=params.fc1))
     mlp_gate = linear(x, params=params.fc2)
@@ -132,14 +145,10 @@ def init_attention(
     )
 
 
-def attention(
-    x: jax.Array, modulation: jax.Array, params: AttentionParams
-) -> jax.Array:
+def attention(x: jax.Array, modulation: jax.Array, params: AttentionParams) -> jax.Array:
     s, d = x.shape
     x = layernorm(x, params=params.norm)
-    shift, scale, gate = jnp.split(
-        linear(modulation, params=params.modulation), 3, axis=-1
-    )
+    shift, scale, gate = jnp.split(linear(modulation, params=params.modulation), 3, axis=-1)
     x = jnp.multiply(x + shift, scale + 1)
     qkv = linear(x, params=params.qkv)
     num_heads = x.shape[-1] // params.qk_norm[0].shape[0]
@@ -205,17 +214,19 @@ def transformer_layer(
 
 class DiTParams(NamedTuple):
     proj_in: jax.Array
+    fourier_features: FourierFeaturesParams
     layers: list[TransformerLayerParams]
     norm: jax.Array
     proj_out: jax.Array
 
 
 def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
-    keys = jax.random.split(key, config.num_layers + 2)
+    keys = jax.random.split(key, config.num_layers + 3)
     return DiTParams(
         proj_in=init_linear(
             config.in_dim, out_dim=config.hidden_dim // config.patch_size, key=keys[0]
         ),
+        fourier_features=init_fourier_features(config.time_dim, key=keys[1]),
         layers=[
             init_transformer_layer(
                 config.hidden_dim,
@@ -225,7 +236,7 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
                 rope_base=config.rope_base,
                 key=k,
             )
-            for k in keys[1:-1]
+            for k in keys[2:-1]
         ],
         norm=init_layernorm(config.hidden_dim),
         proj_out=init_linear(
@@ -237,15 +248,15 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
     )
 
 
-def dit(
-    x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig
-) -> jax.Array:
+def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
     seq_len = x.shape[0]
     x = linear(x, params=params.proj_in)
     x = jnp.reshape(x, shape=(seq_len // config.patch_size, config.hidden_dim))
 
+    modulation = fourier_features(time, params.fourier_features)
+
     def scan_fn(carry, layer):
-        return transformer_layer(carry, modulation=time, params=layer), None
+        return transformer_layer(carry, modulation=modulation, params=layer), None
 
     layers_stacked = jax.tree_util.tree_map(
         lambda *args: jnp.stack(args), *params.layers
@@ -261,21 +272,27 @@ def generate(
     dit_params: DiTParams,
     bs: int,
     steps: int,
-    key: jax.typing.ArrayLike,
     config: DiTConfig,
+    key: jax.typing.ArrayLike,
+    progress: bool = True,
 ) -> jax.Array:
-    noise = jax.random.normal(key, shape(bs, config.seq_len, config.in_dim))
-    dt = 1.0 / steps
-    for t in trange(steps):
-        raise NotImplementedError
+    noise = jax.random.normal(key, shape=(bs, config.seq_len, config.in_dim))
+
+    for i in trange(steps, 0, -1, disable=not progress):
+        t = jnp.full((bs, 1, 1), fill_value=i / steps)  # TODO: fourier features
+        v = jax.vmap(partial(dit, params=dit_params, config=config))(noise, time=t)
+        noise = noise - (1.0 / steps) * v
+
+    return noise
 
 
 if __name__ == "__main__":
     key = jax.random.key(42)
     shape = (8, 100, 16)
     arr = jax.random.normal(key, shape)
-    mod = jax.random.normal(key, (8, 1, 64))
+    mod = jax.random.normal(key, (8, 1, 1))
     config = DiTConfig()
     dit_params = init_dit(config, key)
     out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=mod)
+    generated = generate(dit_params, bs=4, steps=2, config=config, key=key)
     print(out.shape)
