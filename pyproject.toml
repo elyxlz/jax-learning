@@ -8,6 +8,7 @@ dependencies = [
     "tqdm>=4.66.5",
     "jax>=0.4.31",
     "optax",
+    "rich",
 ]
 
 [build-system]
