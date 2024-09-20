@@ -1,7 +1,7 @@
 """a modern 1d rectified flow dit in pure functional jax"""
 
 import typing
-from functools import partial
+import functools
 
 import jax
 import jax.numpy as jnp
@@ -254,7 +254,7 @@ def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> 
     return linear(x, params=params.proj_out)
 
 
-@partial(jax.jit, static_argnums=(1, 2, 3))
+@functools.partial(jax.jit, static_argnums=(1, 2, 3))
 def generate(
     dit_params: DiTParams, bs: int, steps: int, config: DiTConfig, key: jax.typing.ArrayLike
 ) -> jax.Array:
@@ -266,7 +266,7 @@ def generate(
 
     def scan_fn(noise: jax.Array, i: jax.Array) -> tuple[jax.Array, None]:
         t = jnp.full((bs, 1, 1), fill_value=i / steps, dtype=noise.dtype)
-        v = jax.vmap(partial(dit, params=dit_params, config=config))(noise, time=t)
+        v = jax.vmap(functools.partial(dit, params=dit_params, config=config))(noise, time=t)
         noise = noise - (1.0 / steps) * v
         return noise, None
 
@@ -282,6 +282,6 @@ if __name__ == "__main__":
     config = DiTConfig()
     dit_params = init_dit(config, key)
     dit_params = jax.tree.map(lambda x: jnp.astype(x, jnp.bfloat16), dit_params)
-    out = jax.vmap(partial(dit, params=dit_params, config=config))(arr, time=time)
+    out = jax.vmap(functools.partial(dit, params=dit_params, config=config))(arr, time=time)
     generated = generate(dit_params, bs=4, steps=4, config=config, key=key)
     print(out.shape)
