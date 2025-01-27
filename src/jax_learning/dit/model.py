@@ -9,7 +9,6 @@ import jax.numpy as jnp
 
 class DiTConfig(typing.NamedTuple):
     in_dim: int = 16
-    patch_size: int = 2
     hidden_dim: int = 64
     time_dim: int = 64
     num_layers: int = 4
@@ -152,10 +151,8 @@ def attention(x: jax.Array, modulation: jax.Array, params: AttentionParams) -> j
     num_heads = x.shape[-1] // params.qk_norm[0].shape[0]
     qkv = jnp.reshape(qkv, shape=(1, s, num_heads, d * 3 // num_heads))
     q, k, v = jnp.split(qkv, 3, axis=-1)
-    q = layernorm(q, params=params.qk_norm[0])
-    k = layernorm(k, params=params.qk_norm[1])
-    q = rope(q, params.rope_cache)
-    k = rope(k, params.rope_cache)
+    q = rope(layernorm(q, params=params.qk_norm[0]), params=params.rope_cache)
+    k = rope(layernorm(k, params=params.qk_norm[1]), params=params.rope_cache)
     x = jnp.reshape(jax.nn.dot_product_attention(q, k, v), shape=(s, d))
     x = linear(x, params=params.o)
     return jnp.multiply(x, gate)
@@ -189,13 +186,9 @@ def init_transformer_layer(
     )
 
 
-def transformer_layer(
-    x: jax.Array,
-    modulation: jax.Array,
-    params: TransformerLayerParams,
-):
-    x = attention(x, modulation=modulation, params=params.attention) + x
-    return mlp(x, modulation=modulation, params=params.mlp) + x
+def transformer_layer(x: jax.Array, modulation: jax.Array, params: TransformerLayerParams):
+    x = x + attention(x, modulation=modulation, params=params.attention)
+    return x + mlp(x, modulation=modulation, params=params.mlp)
 
 
 class DiTParams(typing.NamedTuple):
@@ -209,9 +202,7 @@ class DiTParams(typing.NamedTuple):
 def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
     keys = jax.random.split(key, config.num_layers + 3)
     return DiTParams(
-        proj_in=init_linear(
-            config.in_dim, out_dim=config.hidden_dim // config.patch_size, key=keys[0]
-        ),
+        proj_in=init_linear(config.in_dim, out_dim=config.hidden_dim, key=keys[0]),
         fourier_features=init_fourier_features(config.time_dim, key=keys[1]),
         layers=[
             init_transformer_layer(
@@ -225,20 +216,13 @@ def init_dit(config: DiTConfig, key: jax.typing.ArrayLike) -> DiTParams:
             for k in keys[2:-1]
         ],
         norm=init_layernorm(config.hidden_dim),
-        proj_out=init_linear(
-            config.hidden_dim // config.patch_size,
-            out_dim=config.in_dim,
-            key=keys[-1],
-            zero=True,
-        ),
+        proj_out=init_linear(config.hidden_dim, out_dim=config.in_dim, key=keys[-1], zero=True),
     )
 
 
 def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> jax.Array:
-    seq_len = x.shape[0]
+    assert x.shape[0] == config.seq_len
     x = linear(x, params=params.proj_in)
-    x = jnp.reshape(x, shape=(seq_len // config.patch_size, config.hidden_dim))
-
     modulation = fourier_features(time, params.fourier_features)
 
     def scan_fn(carry: jax.Array, layer: typing.Any) -> tuple[jax.Array, None]:
@@ -250,7 +234,7 @@ def dit(x: jax.Array, time: jax.Array, params: DiTParams, config: DiTConfig) -> 
     x = jax.lax.scan(scan_fn, x, layers_stacked)[0]
 
     x = layernorm(x, params=params.norm)
-    x = jnp.reshape(x, (seq_len, -1))
+    x = jnp.reshape(x, (config.seq_len, -1))
     return linear(x, params=params.proj_out)
 
 

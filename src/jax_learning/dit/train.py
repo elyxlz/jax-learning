@@ -1,6 +1,5 @@
 import functools
 import typing
-import rich
 import time
 
 import jax
@@ -21,7 +20,6 @@ class TrainConfig(typing.NamedTuple):
     weight_decay: float = 0.1
     grad_norm: float = 0.3
     max_steps: int = 1_000
-
     save_every: int = 5_000
 
 
@@ -29,19 +27,6 @@ class TrainState(typing.NamedTuple):
     step: int
     dit_params: DiTParams
     opt_state: optax.OptState
-
-
-console = rich.console.Console()
-
-
-def pprint(
-    item: str | dict, *args, color: str | None = None, json: bool = False, **kwargs
-) -> None:
-    if json:
-        console.print_json(data=item, *args, **kwargs)
-    else:
-        item = f"[{color}]{item}[/{color}]" if color else item
-        console.print(item, *args, **kwargs)
 
 
 def init_train_state(config: TrainConfig) -> TrainState:
@@ -147,10 +132,10 @@ def train(config: TrainConfig) -> None:
                 test(c.name, ema_model=state.ema, step=state.step, config=config)
 
         if state.step >= config.max_steps:
-            utils.pprint("\nmax steps reached, exiting...", color="bold red")
+            print("\nmax steps reached, exiting...")
             break
 
-        utils.distributed_only(dist.barrier)()  # type: ignore
+        barrier
 
 
 if __name__ == "__main__":
